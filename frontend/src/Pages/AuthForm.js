@@ -171,7 +171,7 @@ const AuthForm = (props) => {
               <input type="text" name="email" placeholder="Please Enter email" onChange={handleChange} />
               <input type="password" name="password" placeholder="Please Enter Password" onChange={handleChange} />
               <div className='submit-button'>
-                  <input type="submit" value="Log-in Now" />
+              <input type="submit" value="Log-in Now"/>
               </div>
               <a href="#" className="forget">Forget Password</a>
             </form>
@@ -186,7 +186,7 @@ const AuthForm = (props) => {
               <input type="password" name="password" placeholder="Password" onChange={handleChange} />
               <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} />
               <div className='submit-button'>
-                <input type="submit" value="Register Now" />
+                <input type="submit" value="Register Now"/>
               </div>
             </form>
           </div>

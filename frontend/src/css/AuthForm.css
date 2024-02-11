@@ -66,6 +66,11 @@ body.active {
   margin-bottom: 10px;
 }
 
+.form-box .form form input[type="submit"]:hover{
+  background-color: white;
+  color: black;
+}
+
 .signInUp .box.signin button:hover {
   background: #333;
   color: #fff;
@@ -288,4 +293,10 @@ body.active {
     left: 0;
     top: 150px;
   }
+}
+
+
+
+.ayush:hover{
+  background-color: white;
 }
