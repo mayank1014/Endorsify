@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const { GridFSBucket } = require('mongodb');
 
 const universitySchema = new mongoose.Schema({
-  //universityId: { type: String, required: true, unique: true },
+  universityId: { type: String, required: true, unique: true },
   email: { type: String, ref: 'User', required: true },
-  docxFile: { data: Buffer, contentType: String }, 
+  // docxFile: { data: Buffer, contentType: String }, 
   name: { type: String, required: true },
   location: String,
-  logo: { data: Buffer, contentType: String },
+  // logo: { data: Buffer, contentType: String },
   websiteURL: String,
 });
 

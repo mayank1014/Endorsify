@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 function connectDB() {
   mongoose.connect(
-    "mongodb+srv://shivam:shivam123@cluster0.luggqwt.mongodb.net//Endorsify"
+    "mongodb+srv://shivam:shivam123@cluster0.luggqwt.mongodb.net//Endorsify",
   );
 
   const connection = mongoose.connection;

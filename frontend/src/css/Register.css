@@ -1,0 +1,57 @@
+.register-container {
+    max-width: 400px;
+    margin: 30px auto; /* Adjust the top margin */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .register-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .register-button {
+    width: 100%;
+    max-width: 200px; /* Set a maximum width for the buttons */
+    height: 30px; /* Set the height to make it a slimmer button */
+    padding: 8px 15px; /* Adjust padding for a slimmer appearance */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px; /* Decrease font size for a slimmer button */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    text-decoration: none;
+    display: block; /* Ensure the buttons are displayed as block-level elements */
+    margin: 0 auto; /* Center the buttons horizontally */
+    margin-top: 15px;
+  }
+  
+  .register-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .register-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 600px) {
+    .register-container {
+      width: 90%;
+    }
+  }
+  
