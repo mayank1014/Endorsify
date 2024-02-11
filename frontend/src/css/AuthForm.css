@@ -66,7 +66,7 @@ body.active {
   margin-bottom: 10px;
 }
 
-.form-box .form form input[type="submit"]:hover{
+.form-box .form form input[type="submit"]:hover {
   background-color: white;
   color: black;
 }
@@ -80,8 +80,6 @@ body.active {
   background: #333;
   color: #fff;
 }
-
-
 
 .signInUp .box p {
   color: rgb(36, 36, 36);
@@ -184,7 +182,6 @@ body.active {
   font-size: 16px;
   background: #db4437;
 }
-
 
 .form-box .form form .facebook {
   color: #fff;
@@ -295,8 +292,6 @@ body.active {
   }
 }
 
-
-
-.ayush:hover{
+.ayush:hover {
   background-color: white;
 }

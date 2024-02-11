@@ -6,11 +6,15 @@ const app = express();
 const port = process.env.PORT || 5000;
 const dbConnection = require("./db");
 
+const userRouter = require('./routers/userRouter')
+
 app.use(bodyParser.json());
 app.use(cors());
 
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({ extended: false }));
+
+app.use('/api/users/', userRouter)
 
 app.listen(port, () => console.log(`Node JS server started on port ${port}`));

@@ -72,15 +72,19 @@
 // };
 
 // export default AuthForm;
-// Import React and any other necessary dependencies
 
-// Import React and any other necessary dependencies
 import React, { useState } from 'react';
-import '../css/AuthForm.css'; // Make sure to import your CSS file
+import '../css/AuthForm.css'; 
 import Logo from "../img/logo.png"
-// Create the React component
+import axios from "axios";
+import { message } from "antd";
+import { useNavigate } from 'react-router-dom';
+
 const AuthForm = (props) => {
+  const navigate = useNavigate();
+
   const [formActive, setFormActive] = useState(false);
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -106,38 +110,64 @@ const AuthForm = (props) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (formActive && formData.password !== formData.confirmPassword) {
-      console.error('Password and Confirm Password must match');
-      // You may want to handle the password mismatch error here
-      return;
-    }
+    if(formActive) {
+      try {
+        const response = await axios.post("http://localhost:5000/api/users/register", formData);
+    
+        if (response.data.error === 1) {
+          message.error("Password and Confirm Password are not same");
+        } else if (response.data.error === 2) {
+          message.error("User already exist");
 
-    const url = formActive ? 'http://localhost:5000/register' : 'http://localhost:5000/login';
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 500);
+        } else if (response.data.error === 0) {
+          // localStorage.setItem("user", JSON.stringify(response.data.user));
+          message.success("Registration Successfull");
+          
+          setTimeout(() => {
+            window.location.href = "/register";
+          }, 500);
+        }    
+      } catch (error) {
+        message.error("Something went wrong");
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        console.log("Hello")
-        const errorData = await response.json();
-        console.error(`Server error: ${response.status} - ${errorData.message}`);
-        // You may want to handle authentication failure here (e.g., show an error message)
-        return;
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 500);
       }
 
-      const data = await response.json();
-  
-      window.location.href="/home"
-      console.log('Authentication successful:', data);
-      // You may want to handle successful authentication here (e.g., redirect the user)
-    } catch (error) {
-      console.error('Error during authentication:', error.message);
+      // navigate('/register', {state : formData})
+    }
+    else {
+      try {
+        delete formData.confirmPassword;
+
+        const response = await axios.post("http://localhost:5000/api/users/login", formData);
+
+        // localStorage.setItem("user", JSON.stringify(response.data));
+
+        message.success("Login Successfull");
+
+        setTimeout(() => {
+          if (response.data.role === "student") {
+            window.location.href = "/student/home";
+          }
+          else if (response.data.role === "professor") {
+            window.location.href = "/professor/home";
+          }
+          else if (response.data.role === "university") {
+            window.location.href = "/university/home";
+          }
+        }, 500);
+      } catch (error) {
+        message.error("Invalid username or password");
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 500);
+      }
     }
   };
 

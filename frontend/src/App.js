@@ -6,6 +6,9 @@ import Register from './Pages/Register';
 import StudentRegister from './Pages/StudentRegister';
 import ProfessorRegister from './Pages/ProfessorRegister';
 import UniversityRegister from './Pages/UniversityRegister';
+import StudentHomePage from './Pages/StudentHomePage';
+import ProfessorHomePage from './Pages/ProfessorHomePage';
+import UniversityHomePage from './Pages/UniversityHomePage';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <Route path="register/student" element={<StudentRegister />} />
           <Route path="register/professor" element={<ProfessorRegister />} />
           <Route path="register/university" element={<UniversityRegister />} />
+          <Route path="student/home" element={<StudentHomePage />} />
+          <Route path="professor/home" element={<ProfessorHomePage />} />
+          <Route path="university/home" element={<UniversityHomePage />} />
         </Routes>
       </BrowserRouter>
     </div>
