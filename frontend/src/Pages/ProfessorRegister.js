@@ -798,6 +798,7 @@ const Professor = () => {
           <div className="form-row">
             <div className="column">
               <label htmlFor="profilePhoto">Profile Photo:</label>
+              <br></br>
               <input
                 type="file"
                 name="profilePhoto"
@@ -883,27 +884,31 @@ const Professor = () => {
                 </div>
               ))}
               </div>
-              <div>
+              {/* <div> */}
                 <button className='btn3' onClick={handleAddSubjectField}>
                   <FontAwesomeIcon icon={faPlus} />
                 </button>
-              </div>
+              {/* </div> */}
             </div>
-            <label htmlFor="signPhoto">Sign Photo:</label>
-<br />
-<input
-  type="file"
-  name="signPhoto"
-  style={{ display: 'none' }}
-  onChange={(e) => handleFileInputChange(e, 'signPhoto')}
-  ref={signPhotoInputRef}
-/>
-<div className='square-box' onClick={() => handleFileInputClick(signPhotoInputRef)}>
-  {formData.signPhoto ? (
-    <img src={formData.signPhoto} alt="Sign Photo" />
-  ) : (
-    <span>Add Sign Photo</span>
-  )}
+<div className='form-row'>
+  <div className='column'>
+    <label htmlFor='signPhoto'>Sign Photo:</label>
+    <br />
+    <input
+      type='file'
+      name='signPhoto'
+      style={{ display: 'none' }}
+      onChange={(e) => handleFileInputChange(e, 'signPhoto')}
+      ref={signPhotoInputRef}
+    />
+    <div className='square-box' onClick={() => handleFileInputClick(signPhotoInputRef)}>
+      {formData.signPhoto ? (
+        <img src={formData.signPhoto} alt='Sign Photo' />
+      ) : (
+        <span>Add Sign Photo</span>
+      )}
+    </div>
+  </div>
 </div>
 
 
