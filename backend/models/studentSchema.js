@@ -4,6 +4,7 @@ const studentSchema = new mongoose.Schema({
   universityId: { type: String, ref: 'User', required: true },
   email: { type: String, ref: 'User', required: true },
   name: { type: String, required: true },
+  Gender: {type: String, required:true},
   profilePhoto: { data: Buffer, contentType: String },
   transcriptPhoto: { data: Buffer, contentType: String },
   passingYear: Number,
