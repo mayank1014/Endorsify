@@ -98,6 +98,7 @@ input[name='portfolioURL'] {
   width: calc(100% - 20px); /* Adjusted width for responsiveness */
   max-width: 600px; /* Increased maximum width for the input field */
 }
+
 textarea {
   width: calc(100% - 20px); /* Adjusted width for responsiveness */
   padding: 8px;

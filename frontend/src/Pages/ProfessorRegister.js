@@ -8,6 +8,7 @@ const Professor = () => {
     universityId: '',
     email: '',
     teacherId: '',
+    gender:'',
     name: '',
     signPhoto: null,
     profilePhoto: null,
@@ -127,12 +128,12 @@ const Professor = () => {
                 value={formData.name}
                 onChange={(e) => handleChange(e, 'name')}
               />
-              <label htmlFor="experience">Experience:</label>
+              <label htmlFor="teacherId">Professor ID:</label>
               <input
                 type="text"
-                name="experience"
-                value={formData.experience}
-                onChange={(e) => handleChange(e, 'experience')}
+                name="teacherId"
+                value={formData.teacherId}
+                onChange={(e) => handleChange(e, 'teacherId')}
               />
               <label htmlFor="university">University:</label>
               <input
@@ -141,6 +142,32 @@ const Professor = () => {
                 value={formData.university}
                 onChange={(e) => handleChange(e, 'university')}
               />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="column">
+            <label htmlFor="experience">Experience:</label>
+              <input
+                type="text"
+                name="experience"
+                value={formData.experience}
+                onChange={(e) => handleChange(e, 'experience')}
+              />
+            </div>
+
+            <div className="column">
+            <label htmlFor="Gender">Gender:</label>
+              <select
+                name="Gender"
+                value={formData.Gender}
+                onChange={(e) => handleChange(e, 'Gender')}
+              >
+                <option value="">Select</option>
+                <option value="He">He</option>
+                <option value="She">She</option>
+                <option value="They">They</option>
+              </select>
             </div>
           </div>
 
