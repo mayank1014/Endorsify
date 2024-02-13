@@ -1,20 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const professorSchema = new mongoose.Schema({
-  universityId: { type: String, ref: 'University', required: true },
-  email: { type: String, ref: 'User', required: true },
-  Gender: {type: String, required:true},
-  teacherId: { type: String, required: true, unique: true },
+  universityId: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  gender: { type: String, required: true },
+  teacherId: { type: String, required: true },
   name: { type: String, required: true },
-  signPhoto: { data: Buffer, contentType: String },
-  profilePhoto: { data: Buffer, contentType: String },
-  qualification: String,
-  expertise: [String],
-  experience: Number,
-  portfolioURL: String,
-  students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
+  signPhoto: { type: String, required: true },
+  profilePhoto: { type: String, required: true },
+  qualification: { type: String, required: true },
+  expertise: [{ type: String, required: true }],
+  experience: { type: String, required: true },
+  portfolioURL: { type: String, required: true },
+  students: [{ type: String }],
 });
 
-const Professor = mongoose.model('Professor', professorSchema);
+const Professor = mongoose.model("Professor", professorSchema);
 
 module.exports = Professor;

@@ -77,8 +77,9 @@ const UniversityRegistration = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log(formData)
     try {
-      const response = await axios.post("http://localhost:8000/submitUniversityProfile", formData);
+      const response = await axios.post("http://localhost:8000/api/universities/register", formData);
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error);

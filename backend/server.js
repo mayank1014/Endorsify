@@ -7,8 +7,10 @@ const port = process.env.PORT || 8000;
 const dbConnection = require("./db");
 
 const userRouter = require('./routers/userRouter')
+const universityRouter = require('./routers/universityRouter')
+const professorRouter = require('./routers/professorRouter')
 
-app.use(bodyParser.json());
+app.use(bodyParser({limit: '50mb'}));
 app.use(cors());
 
 app.use(express.json());
@@ -16,5 +18,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/users/', userRouter)
+app.use('/api/universities/', universityRouter)
+app.use('/api/professors/', professorRouter)
 
 app.listen(port, () => console.log(`Node JS server started on port ${port}`));

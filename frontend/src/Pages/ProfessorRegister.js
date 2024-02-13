@@ -1,23 +1,42 @@
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus, faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import '../css/ProfessorRegistration.css';
-const Professor = () => {
+import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { message } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import "../css/ProfessorRegistration.css";
+
+const ProfessorRegister = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    universityId: '',
-    email: '',
-    teacherId: '',
-    gender:'',
-    name: '',
-    signPhoto: null,
-    profilePhoto: null,
-    qualification: '',
-    subjectFields: [{ value: '' }],
-    experience: '',
-    portfolioURL: '',
+    university: "",
+    email: "",
+    teacherId: "",
+    gender: "",
+    name: "",
+    profilePhoto: "",
+    signPhoto: "",
+    qualification: "",
+    expertise: [""],
+    experience: "",
+    portfolioURL: "",
     students: [],
   });
+
+  const [allUniversities, setAllUniversities] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/universities/getAllUniversities")
+      .then((response) => {
+        setAllUniversities(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching universities:", error);
+      });
+  }, []);
 
   const signPhotoInputRef = useRef(null);
   const profilePhotoInputRef = useRef(null);
@@ -27,9 +46,10 @@ const Professor = () => {
     const reader = new FileReader();
 
     reader.onload = (event) => {
+      const base64String = event.target.result;
       setFormData({
         ...formData,
-        [fieldName]: event.target.result,
+        [fieldName]: base64String,
       });
     };
 
@@ -47,71 +67,131 @@ const Professor = () => {
     inputRef.current.click();
   };
 
-  const handleSubjectChange = (index, event) => {
-    const values = [...formData.subjectFields];
-    values[index].value = event.target.value;
+  const handleExpertiseChange = (index, event) => {
+    const values = [...formData.expertise];
+    values[index] = event.target.value;
     setFormData({
       ...formData,
-      subjectFields: values,
+      expertise: values,
     });
   };
 
-  const handleAddSubjectField = () => {
+  const handleAddExpertiseField = () => {
     setFormData({
       ...formData,
-      subjectFields: [...formData.subjectFields, { value: '' }],
+      expertise: [...formData.expertise, ""],
     });
   };
 
-  const handleRemoveSubjectField = (index) => {
-    const values = [...formData.subjectFields];
+  const handleRemoveExpertiseField = (index) => {
+    const values = [...formData.expertise];
     values.splice(index, 1);
     setFormData({
       ...formData,
-      subjectFields: values,
+      expertise: values,
     });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formDataObject = new FormData();
-    for (const key in formData) {
-      if (key === 'subjectFields') {
-        formData[key].forEach((field, index) => {
-          formDataObject.append(`subjectFields[${index}]`, field.value);
-        });
-      } else {
-        formDataObject.append(key, formData[key]);
-      }
-    }
-
     try {
-      const response = await axios.post("http://localhost:8000/submitProfessorProfile", formDataObject);
-      console.log(response.data);
+      const user = {
+        email: location.state.email,
+        password: location.state.password,
+        confirmPassword: location.state.confirmPassword,
+        role: "professor",
+      };
+
+      formData.email = location.state.email;
+
+      for (var i = 0; i < allUniversities.length; i++) {
+        if (allUniversities[i].name === formData.university) {
+          formData.universityId = allUniversities[i].universityId;
+          break;
+        }
+      }
+
+      formData.email = location.state.email;
+
+      const profilePhotoBase64 = formData.profilePhoto.split(",")[1];
+      const signPhotoBase64 = formData.signPhoto.split(",")[1];
+
+      const formDataWithBase64 = {
+        ...formData,
+        profilePhoto: profilePhotoBase64,
+        signPhoto: signPhotoBase64,
+      };
+
+      console.log(user)
+      console.log(formDataWithBase64)
+
+      await axios.post("http://localhost:8000/api/users/register", user);
+
+      try {
+        const response = await axios.post("http://localhost:8000/api/professors/register", formDataWithBase64);
+
+        // localStorage.setItem("user", JSON.stringify(response.data.user));
+
+        if (response.data.error === 1) {
+          await axios.post("http://localhost:8000/api/users/deleteUser", user);
+          
+          message.error("User with same College Id already exist");
+
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 500);
+        } else if (response.data.error === 0) {
+          // localStorage.setItem("user", JSON.stringify(response.data.user));
+          
+          message.success("Registration Successfull");
+
+          setTimeout(() => {
+            navigate("/professor/home");
+          }, 500);
+        }
+      } catch (error) {
+        await axios.post("http://localhost:8000/api/users/deleteUser", user);
+
+        message.error("Something went wrong");
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 500);
+      }
     } catch (error) {
-      console.error('Error:', error);
+      message.error("Something went wrong");
+
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 500);
     }
   };
 
   return (
-    <div className='ProfessorBox'>
-      <div className='Professor'>
-        <form className="professor-profile-form" onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className='header'>Professor Profile</div>
-
+    <div className="ProfessorBox">
+      <div className="Professor">
+        <form
+          className="professor-profile-form"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          <div className="header">Professor Profile</div>
           <div className="form-row">
             <div className="column">
               <label htmlFor="profilePhoto">Profile Photo:</label>
-              <br></br>
+              <br />
               <input
                 type="file"
                 name="profilePhoto"
-                style={{ display: 'none' }}
-                onChange={(e) => handleFileInputChange(e, 'profilePhoto')}
+                style={{ display: "none" }}
+                onChange={(e) => handleFileInputChange(e, "profilePhoto")}
                 ref={profilePhotoInputRef}
               />
-              <div className='circle' onClick={() => handleFileInputClick(profilePhotoInputRef)}>
+              <div
+                className="circle"
+                onClick={() => handleFileInputClick(profilePhotoInputRef)}
+              >
                 {formData.profilePhoto ? (
                   <img src={formData.profilePhoto} alt="Profile Photo" />
                 ) : (
@@ -126,42 +206,48 @@ const Professor = () => {
                 type="text"
                 name="name"
                 value={formData.name}
-                onChange={(e) => handleChange(e, 'name')}
+                onChange={(e) => handleChange(e, "name")}
               />
               <label htmlFor="teacherId">Professor ID:</label>
               <input
                 type="text"
                 name="teacherId"
                 value={formData.teacherId}
-                onChange={(e) => handleChange(e, 'teacherId')}
+                onChange={(e) => handleChange(e, "teacherId")}
               />
               <label htmlFor="university">University:</label>
-              <input
-                type="text"
+              <select
                 name="university"
                 value={formData.university}
-                onChange={(e) => handleChange(e, 'university')}
-              />
+                onChange={(e) => handleChange(e, "university")}
+              >
+                <option value="">Select University</option>
+                {allUniversities.map((university) => (
+                  <option key={university.id} value={university.name}>
+                    {university.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
           <div className="form-row">
             <div className="column">
-            <label htmlFor="experience">Experience:</label>
+              <label htmlFor="experience">Experience:</label>
               <input
                 type="text"
                 name="experience"
                 value={formData.experience}
-                onChange={(e) => handleChange(e, 'experience')}
+                onChange={(e) => handleChange(e, "experience")}
               />
             </div>
 
             <div className="column">
-            <label htmlFor="Gender">Gender:</label>
+              <label htmlFor="gender">Gender:</label>
               <select
-                name="Gender"
-                value={formData.Gender}
-                onChange={(e) => handleChange(e, 'Gender')}
+                name="gender"
+                value={formData.gender}
+                onChange={(e) => handleChange(e, "gender")}
               >
                 <option value="">Select</option>
                 <option value="He">He</option>
@@ -177,7 +263,7 @@ const Professor = () => {
               <textarea
                 name="qualification"
                 value={formData.qualification}
-                onChange={(e) => handleChange(e, 'qualification')}
+                onChange={(e) => handleChange(e, "qualification")}
               />
             </div>
           </div>
@@ -189,65 +275,70 @@ const Professor = () => {
                 type="text"
                 name="portfolioURL"
                 value={formData.portfolioURL}
-                onChange={(e) => handleChange(e, 'portfolioURL')}
+                onChange={(e) => handleChange(e, "portfolioURL")}
               />
             </div>
           </div>
 
           <div className="form-row">
             <div className="column">
-              <label htmlFor="subjectFields">Subject Expertise:</label>
+              <label htmlFor="expertise">Subject Expertise:</label>
               <div className="alignment">
-                {formData.subjectFields.map((field, index) => (
+                {formData.expertise.map((field, index) => (
                   <div key={index} className="form-demo">
                     <input
                       type="text"
-                      name={`subjectFields[${index}]`}
+                      name={`expertise[${index}]`}
                       value={field.value}
-                      onChange={(e) => handleSubjectChange(index, e)}
+                      onChange={(e) => handleExpertiseChange(index, e)}
                       required
                     />
                     {index > 0 && (
-                      <button className='btn3' onClick={() => handleRemoveSubjectField(index)}>
+                      <button
+                        className="btn3"
+                        onClick={() => handleRemoveExpertiseField(index)}
+                      >
                         <FontAwesomeIcon icon={faMinus} />
                       </button>
                     )}
                   </div>
                 ))}
               </div>
-              <button className='btn3' onClick={handleAddSubjectField}>
+              <button className="btn3" onClick={handleAddExpertiseField}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
-            <div className='form-row'>
-              <div className='column'>
-                <label htmlFor='signPhoto'>Sign Photo:</label>
-                <br />
-                <input
-                  type='file'
-                  name='signPhoto'
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleFileInputChange(e, 'signPhoto')}
-                  ref={signPhotoInputRef}
-                />
-                <div className='square-box' onClick={() => handleFileInputClick(signPhotoInputRef)}>
-                  {formData.signPhoto ? (
-                    <img src={formData.signPhoto} alt='Sign Photo' />
-                  ) : (
-                    <span>Add Sign Photo</span>
-                  )}
-                </div>
+
+            <div className="column">
+              <label htmlFor="signPhoto">Sign Photo:</label>
+              <br />
+              <input
+                type="file"
+                name="signPhoto"
+                style={{ display: "none" }}
+                onChange={(e) => handleFileInputChange(e, "signPhoto")}
+                ref={signPhotoInputRef}
+              />
+              <div
+                className="square-box"
+                onClick={() => handleFileInputClick(signPhotoInputRef)}
+              >
+                {formData.signPhoto ? (
+                  <img src={formData.signPhoto} alt="Sign Photo" />
+                ) : (
+                  <span>Add Sign Photo</span>
+                )}
               </div>
             </div>
-
-
           </div>
 
-          <button className='psubmitbtn' type="submit">Submit</button>
+          <button className="psubmitbtn" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default Professor;
+export default ProfessorRegister;

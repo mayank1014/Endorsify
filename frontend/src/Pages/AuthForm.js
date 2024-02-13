@@ -1,78 +1,3 @@
-// import React, { useState } from 'react';
-// import '../css/AuthForm.css'; // Import your custom CSS file
-// import { useNavigate } from 'react-router-dom';
-
-// const AuthForm = () => {
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState('');
-//   const [error, setError] = useState('');
-//   const navigate = useNavigate()
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (password !== confirmPassword) {
-//         setError('Passwords do not match.');
-//         return;
-//     }
-//     else {
-//         navigate('/register', {state : {
-//           email : email, 
-//           password : password
-//         }})
-//     }
-//   };
-
-//   return (
-//     <form className="auth-form" onSubmit={handleSubmit}>
-//       <h2>{'Sign Up'}</h2>
-
-//       <div className="form-group">
-//         <label htmlFor="email">Email:</label>
-//         <input
-//           type="email"
-//           id="email"
-//           name="email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//           required
-//         />
-//       </div>
-
-//       <div className="form-group">
-//         <label htmlFor="password">Password:</label>
-//         <input
-//           type="password"
-//           id="password"
-//           name="password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//           required
-//         />
-//       </div>
-
-//         <div className="form-group">
-//           <label htmlFor="confirm-password">Confirm Password:</label>
-//           <input
-//             type="password"
-//             id="confirm-password"
-//             name="confirm-password"
-//             value={confirmPassword}
-//             onChange={(e) => setConfirmPassword(e.target.value)}
-//             required
-//           />
-//         </div>
-
-//       {error && <div className="error-message">{error}</div>}
-
-//       <button type="submit">{'Sign Up'}</button>
-//     </form>
-//   );
-// };
-
-// export default AuthForm;
-
 import React, { useState } from 'react';
 import '../css/AuthForm.css'; 
 import Logo from "../img/logo.png"
@@ -80,8 +5,9 @@ import axios from "axios";
 import { message } from "antd";
 import { useNavigate } from 'react-router-dom';
 
-const AuthForm = (props) => {
-  const navigate = useNavigate();
+const AuthForm = () => {
+
+  const navigate = useNavigate()
 
   const [formActive, setFormActive] = useState(false);
 
@@ -112,8 +38,7 @@ const AuthForm = (props) => {
 
     if(formActive) {
       try {
-        const response = await axios.post("http://localhost:5000/api/users/register", formData);
-    
+        const response = await axios.post("http://localhost:8000/api/users/checkUser", formData);
         if (response.data.error === 1) {
           message.error("Password and Confirm Password are not same");
         } else if (response.data.error === 2) {
@@ -122,14 +47,9 @@ const AuthForm = (props) => {
           setTimeout(() => {
             window.location.href = "/";
           }, 500);
-        } else if (response.data.error === 0) {
-          // localStorage.setItem("user", JSON.stringify(response.data.user));
-          message.success("Registration Successfull");
-          
-          setTimeout(() => {
-            window.location.href = "/register";
-          }, 500);
-        }    
+        } else if (response.data.error === 0){
+          navigate('/register', {state : formData})
+        }
       } catch (error) {
         message.error("Something went wrong");
 
@@ -137,14 +57,12 @@ const AuthForm = (props) => {
           window.location.href = "/";
         }, 500);
       }
-
-      // navigate('/register', {state : formData})
     }
     else {
       try {
         delete formData.confirmPassword;
 
-        const response = await axios.post("http://localhost:5000/api/users/login", formData);
+        const response = await axios.post("http://localhost:8000/api/users/login", formData);
 
         // localStorage.setItem("user", JSON.stringify(response.data));
 

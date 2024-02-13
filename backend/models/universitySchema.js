@@ -3,12 +3,12 @@ const { GridFSBucket } = require('mongodb');
 
 const universitySchema = new mongoose.Schema({
   universityId: { type: String, required: true, unique: true },
-  email: { type: String, ref: 'User', required: true },
-  // docxFile: { data: Buffer, contentType: String }, 
+  email: { type: String, required: true, unique: true },
+  // docxFile: { type: String, required: true }, 
   name: { type: String, required: true },
-  location: String,
-  // logo: { data: Buffer, contentType: String },
-  websiteURL: String,
+  location: { type: String, required: true, unique: true },
+  // logo: { type: String, required: true },
+  websiteURL: { type: String, required: true, unique: true },
 });
 
 // universitySchema.virtual('docxTemplate').get(function () {
