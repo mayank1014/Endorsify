@@ -321,10 +321,7 @@ const ProfessorRegister = () => {
                 onChange={(e) => handleFileInputChange(e, "signPhoto")}
                 ref={signPhotoInputRef}
               />
-              <div
-                className="square-box"
-                onClick={() => handleFileInputClick(signPhotoInputRef)}
-              >
+              <div className="square-box" onClick={() => handleFileInputClick(signPhotoInputRef)}>
                 {formData.signPhoto ? (
                   <img src={formData.signPhoto} alt="Sign Photo" />
                 ) : (
