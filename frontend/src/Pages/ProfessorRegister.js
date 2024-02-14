@@ -135,7 +135,7 @@ const ProfessorRegister = () => {
         // localStorage.setItem("user", JSON.stringify(response.data.user));
 
         if (response.data.error == 1) {
-          await axios.post("http://localhost:8000/api/users/deleteUser", user);
+          await axios.post("http://localhost:8000/api/users/deleteuser", user);
 
           message.error("User with same College Id already exists");
 
@@ -152,7 +152,7 @@ const ProfessorRegister = () => {
           }, 500);
         }
       } catch (error) {
-        await axios.post("http://localhost:8000/api/users/deleteUser", user);
+        await axios.post("http://localhost:8000/api/users/deleteuser", user);
         console.log(1)
         message.error("Something went wrong, Please try again");
 

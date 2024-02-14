@@ -38,7 +38,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/checkUser", async (req, res) => {
+router.post("/checkuser", async (req, res) => {
   const { email, password, confirmPassword } = req.body;
 
   try {
@@ -54,7 +54,7 @@ router.post("/checkUser", async (req, res) => {
   }
 });
 
-router.post("/deleteUser", async (req, res) => {
+router.post("/deleteuser", async (req, res) => {
   try {
     await User.findOneAndDelete({ email: req.body.email });
     res.send("User deleted successfully");
