@@ -19,7 +19,7 @@ const ProfessorRegister = () => {
     profilePhoto: "",
     signPhoto: "",
     qualification: "",
-    expertise: [""],
+    expertise: [""], // At least one expertise field is mandatory
     experience: "",
     portfolioURL: "",
     students: [],
@@ -95,6 +95,12 @@ const ProfessorRegister = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Check if at least one expertise field is filled
+    if (formData.expertise.length === 0 || formData.expertise.some(field => field.trim() === "")) {
+      message.error("Please fill at least one expertise field");
+      return;
+    }
+
     try {
       const user = {
         email: location.state.email,
@@ -107,12 +113,10 @@ const ProfessorRegister = () => {
 
       for (var i = 0; i < allUniversities.length; i++) {
         if (allUniversities[i].name === formData.university) {
-          formData.universityId = allUniversities[i].universityId;
+          formData.universityId = allUniversities[i]._id;
           break;
         }
       }
-
-      formData.email = location.state.email;
 
       const profilePhotoBase64 = formData.profilePhoto.split(",")[1];
       const signPhotoBase64 = formData.signPhoto.split(",")[1];
@@ -123,9 +127,6 @@ const ProfessorRegister = () => {
         signPhoto: signPhotoBase64,
       };
 
-      console.log(user)
-      console.log(formDataWithBase64)
-
       await axios.post("http://localhost:8000/api/users/register", user);
 
       try {
@@ -133,33 +134,34 @@ const ProfessorRegister = () => {
 
         // localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        if (response.data.error === 1) {
+        if (response.data.error == 1) {
           await axios.post("http://localhost:8000/api/users/deleteUser", user);
-          
-          message.error("User with same College Id already exist");
+
+          message.error("User with same College Id already exists");
 
           setTimeout(() => {
-            window.location.href = "/";
+            window.location.href = "/register/professor";
           }, 500);
-        } else if (response.data.error === 0) {
+        } else if (response.data.error == 0) {
           // localStorage.setItem("user", JSON.stringify(response.data.user));
-          
-          message.success("Registration Successfull");
+
+          message.success("Registration Successful");
 
           setTimeout(() => {
-            navigate("/professor/home");
+            // navigate("/professor/home");
           }, 500);
         }
       } catch (error) {
         await axios.post("http://localhost:8000/api/users/deleteUser", user);
-
-        message.error("Something went wrong");
+        console.log(1)
+        message.error("Something went wrong, Please try again");
 
         setTimeout(() => {
-          window.location.href = "/";
+          window.location.href = "/register/professor";
         }, 500);
       }
     } catch (error) {
+      console.log(2)
       message.error("Something went wrong");
 
       setTimeout(() => {
@@ -289,7 +291,7 @@ const ProfessorRegister = () => {
                     <input
                       type="text"
                       name={`expertise[${index}]`}
-                      value={field.value}
+                      value={field}
                       onChange={(e) => handleExpertiseChange(index, e)}
                       required
                     />

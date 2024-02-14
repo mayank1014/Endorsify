@@ -10,7 +10,7 @@ const userRouter = require('./routers/userRouter')
 const universityRouter = require('./routers/universityRouter')
 const professorRouter = require('./routers/professorRouter')
 
-app.use(bodyParser({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors());
 
 app.use(express.json());

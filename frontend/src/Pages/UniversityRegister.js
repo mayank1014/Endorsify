@@ -54,13 +54,13 @@
 // };
 
 // export default UniversityRegister;
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../css/UniversityRegistration.css';
 
 const UniversityRegistration = () => {
   const [formData, setFormData] = useState({
-    universityId: '',
+    uniId: '',
     email: '',
     name: '',
     location: '',
@@ -97,9 +97,9 @@ const UniversityRegistration = () => {
             <label htmlFor="universityId">University ID:</label>
             <input
               type="text"
-              name="universityId"
-              value={formData.universityId}
-              onChange={(e) => handleInputChange(e, 'universityId')}
+              name="uniId"
+              value={formData.uniId}
+              onChange={(e) => handleInputChange(e, 'uniId')}
               required
             />
           </div>

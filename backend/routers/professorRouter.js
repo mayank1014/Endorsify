@@ -14,7 +14,12 @@ router.get("/getAllProfessors", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    if (await Professor.findOne({ teacherId: req.body.teacherId })) {
+    const professor = await Professor.findOne({ teacherId: req.body.teacherId, universityId: req.body.universityId }).exec()
+
+    console.log(professor)
+
+    if (professor) {
+      console.log(professor)
       return res.json({ error: 1 });
     } else {
       const newProfessor = new Professor(req.body);

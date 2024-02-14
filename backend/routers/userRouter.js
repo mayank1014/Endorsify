@@ -17,7 +17,7 @@ router.post("/login", async (req, res) => {
 
   try {
     const user = await User.findOne({ email: email, password: password });
-
+    
     if (user) {
       res.send(user);
     } else {
@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
   try {
     const newUser = new User(req.body);
     await newUser.save();
-    return res.send(newUser);
+    return res.send("Successfully Registered");
   } catch (error) {
     return res.status(400).json(error);
   }
