@@ -12,23 +12,24 @@ router.get("/getAllUniversities", async (req, res) => {
     }
   });
 
-router.post("/register", async (req, res) => {
-    // const { username, password, confirmPassword } = req.body;
-  
+  router.post("/register", async (req, res) => {
     try {
-    //   if (password !== confirmPassword) {
-    //     return res.json({ error: 1 });
-    //   } else if (await User.findOne({ username , password })) {
-    //     return res.json({ error: 2 });
-    //   } else {
-    //     req.body.role = "student";
+      const existingUniversity = await University.findOne({ uniId: req.body.uniId });
+  
+      if (existingUniversity) {
+        console.log(existingUniversity);
+        return res.json({ error: 1 });
+      } else {
         const newUniversity = new University(req.body);
+        console.log(newUniversity);
         await newUniversity.save();
-        return res.json(newUniversity);
-    //   }
+        return res.json({ error: 0 });
+      }
     } catch (error) {
-      return res.status(400).json(error);
+      console.error("Error:", error);
+      return res.status(400).json({ error: error.message });
     }
   });
+  
 
 module.exports = router;
