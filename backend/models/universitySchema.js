@@ -6,9 +6,9 @@ const universitySchema = new mongoose.Schema({
   email: { type: String, required: true },
   name: { type: String, required: true },
   location: {
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    postalCode: { type: String, required: true }
+    city: { type: String},
+    state: { type: String },
+    postalCode: { type: String },
   },
   websiteURL: { type: String, required: true },
   docxFile: { type: String, required: true }, 

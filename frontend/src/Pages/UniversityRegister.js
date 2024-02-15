@@ -3,7 +3,7 @@ import defaultLogo from '../img/default-logo.jpg';
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from 'antd';
-
+import "../css/UniversityRegistration.css";
 
 const UniversityForm = () => {
   const location = useLocation();
@@ -15,6 +15,7 @@ const UniversityForm = () => {
     docxFile: null,
     name: '',
     location: {
+      locId: '',
       city: '',
       state: '',
       postalCode: ''
@@ -23,8 +24,6 @@ const UniversityForm = () => {
     websiteURL: ''
   });
   const [formErrors, setFormErrors] = useState({});
-  const [submissionMessage, setSubmissionMessage] = useState('');
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -110,11 +109,11 @@ const UniversityForm = () => {
       const user = {
         email : location.state.email,
         password : location.state.password,
-        confirmpassword : location.state.password,
+        confirmpassword : location.state.confirmpasswordpassword,
         role : "university",
       };
       formData.email = location.state.email;
-
+      
       const uniLogo = formData.logo.split(",")[1];
       const docx = formData.docxFile.split(",")[1];
       
@@ -128,7 +127,6 @@ const UniversityForm = () => {
       
       try{
         const response = await axios.post("http://localhost:8000/api/universities/register", formDataWithBase64);
-        console.log("111");
         if(response.data.error === 1){
           await axios.post("http://localhost:8000/api/users/deleteuser",user);
 
@@ -142,7 +140,7 @@ const UniversityForm = () => {
           message.success("Registration Successful");
           
           setTimeout(() => {
-            window.location.href = "/university/home";
+            navigate("/university/home");
           }, 500);
         }
       }catch(error){
@@ -150,7 +148,7 @@ const UniversityForm = () => {
         message.error("Something went wrong, Please try again");
 
         setTimeout(() => {
-          // window.location.href = "/register/university";
+          window.location.href = "/register/university";
         }, 500);
       }
       setFormData({
@@ -179,47 +177,60 @@ const UniversityForm = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-md-8">
+        <div className="col-md-12">
           <div className="card">
             <div className="card-body">
               <h2 className="card-title mb-4">University Details Form</h2>
-              {submissionMessage && <div className="alert alert-success">{submissionMessage}</div>}
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="uniId">University ID:</label>
-                  <input type="text" className="form-control" id="uniId" name="uniId" value={formData.uniId} onChange={handleChange} required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="name">University Name:</label>
-                  <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} required />
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-4">
-                    <label htmlFor="city">City:</label>
-                    <input type="text" className="form-control" id="city" name="city" value={formData.location.city} onChange={handleLocationChange} required />
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label htmlFor="uniId">University ID:</label>
+                      <input type="text" className="form-control" id="uniId" name="uniId" value={formData.uniId} onChange={handleChange} required />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="name">University Name:</label>
+                      <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} required />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="websiteURL">Website URL:</label>
+                      <input type="text" className="form-control" id="websiteURL" name="websiteURL" value={formData.websiteURL} onChange={handleChange} required />
+                    </div>
                   </div>
-                  <div className="form-group col-md-4">
-                    <label htmlFor="state">State:</label>
-                    <input type="text" className="form-control" id="state" name="state" value={formData.location.state} onChange={handleLocationChange} required />
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="form-row">
+                        <div className="form-group col-md-4">
+                          <label htmlFor="state">State:</label>
+                          <input type="text" className="form-control" id="state" name="state" value={formData.location.state} onChange={handleLocationChange} required />
+                        </div>
+                        <div className="form-group col-md-4">
+                          <label htmlFor="postalCode">Postal Code:</label>
+                          <input type="text" className="form-control" id="postalCode" name="postalCode" value={formData.location.postalCode} onChange={handleLocationChange} required />
+                        </div>
+                        <div className="form-group col-md-4">
+                          <label htmlFor="city">City:</label>
+                          <input type="text" className="form-control" id="city" name="city" value={formData.location.city} onChange={handleLocationChange} required />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="form-group col-md-4">
-                    <label htmlFor="postalCode">Postal Code:</label>
-                    <input type="text" className="form-control" id="postalCode" name="postalCode" value={formData.location.postalCode} onChange={handleLocationChange} required />
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label htmlFor="docxFile">Document File (.docx):</label>
+                      <input type="file" className="form-control-file" id="docxFile" name="docxFile" onChange={handleFileChange} accept=".docx" required />
+                      <label htmlFor="logo">University Logo:</label>
+                      <input type="file" className="form-control-file" id="logo" name="logo" onChange={handleLogoChange} accept="image/*" />
+                    </div>
                   </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="websiteURL">Website URL:</label>
-                  <input type="url" className="form-control" id="websiteURL" name="websiteURL" value={formData.websiteURL} onChange={handleChange} required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="docxFile">Document File (.docx):</label>
-                  <input type="file" className="form-control-file" id="docxFile" name="docxFile" onChange={handleFileChange} accept=".docx" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="logo">University Logo:</label>
-                  <input type="file" className="form-control-file" id="logo" name="logo" onChange={handleLogoChange} accept="image/*" />
-                  {formData.logo && <img src={formData.logo} alt="University Logo" className="img-fluid mt-2" />}
-                  {!formData.logo && <img src={defaultLogo} alt="Default Logo" className="img-fluid mt-2" />}
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      {formData.logo && <img src={formData.logo} alt="University Logo" className="img-fluid mt-2" />}
+                      {!formData.logo && <img src={defaultLogo} alt="Default Logo" className="img-fluid mt-2" />}
+                    </div>
+                  </div>
                 </div>
                 <div className="text-center">
                   <button type="submit" className="btn btn-primary">Submit</button>
@@ -231,6 +242,7 @@ const UniversityForm = () => {
       </div>
     </div>
   );
+  
 }
 
 export default UniversityForm;
