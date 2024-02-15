@@ -11,11 +11,6 @@ const universitySchema = new mongoose.Schema({
   websiteURL: { type: String, required: true },
 });
 
-// universitySchema.virtual('docxTemplate').get(function () {
-//   const bucket = new GridFSBucket(mongoose.connection.db, { bucketName: 'documents' });
-//   return bucket.openDownloadStream(this._id);
-// });
-
 const University = mongoose.model('University', universitySchema);
 
 module.exports = University;

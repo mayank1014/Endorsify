@@ -1,0 +1,28 @@
+.professors-container {
+    background-color: aliceblue;
+    padding: 20px;
+}
+
+.professor-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.professor-img {
+    width: 120px; 
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px; 
+}
+
+.professor-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}

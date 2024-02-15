@@ -11,6 +11,9 @@
 }
 
 .registration-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 25%;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -25,16 +28,17 @@
 
 .registration-option p {
   color: #666;
+  margin-bottom: 20px;
   margin-top: 10px;
 }
 
 .register-button {
+  margin-top: auto; 
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  margin-top: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

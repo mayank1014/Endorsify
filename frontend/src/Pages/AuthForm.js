@@ -116,8 +116,8 @@ const AuthForm = () => {
             <img src={Logo} alt="Logo" />
             <form onSubmit={handleFormSubmit}>
               <a href="#" className="google"><i className="fab fa-google-plus-g"></i>Login with Google</a>
-              <input type="text" name="email" placeholder="Please Enter email" onChange={handleChange} />
-              <input type="password" name="password" placeholder="Please Enter Password" onChange={handleChange} />
+              <input type="text" name="email" placeholder="Please Enter email" onChange={handleChange} required/>
+              <input type="password" name="password" placeholder="Please Enter Password" onChange={handleChange} required/>
               <div className='submit-button'>
               <input type="submit" value="Log-in Now"/>
               </div>
@@ -130,9 +130,9 @@ const AuthForm = () => {
             <img src={Logo} alt="Logo" />
             <form onSubmit={handleFormSubmit}>
               <a href="#" className="facebook"><i className="fab fa-facebook-f"></i>SignUp with Google</a>
-              <input type="text" name="email" placeholder="Email Address" onChange={handleChange} />
-              <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-              <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} />
+              <input type="text" name="email" placeholder="Email Address" onChange={handleChange} required/>
+              <input type="password" name="password" placeholder="Password" onChange={handleChange} required/>
+              <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required/>
               <div className='submit-button'>
                 <input type="submit" value="Register Now"/>
               </div>
