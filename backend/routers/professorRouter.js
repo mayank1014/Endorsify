@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Professor = require("../models/professorSchema");
 
-router.get("/getAllProfessors", async (req, res) => {
+router.get("/getallprofessors", async (req, res) => {
   try {
     const professors = await Professor.find();
     res.send(professors);
