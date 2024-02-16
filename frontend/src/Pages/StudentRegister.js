@@ -1,10 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef , useEffect} from 'react';
 import axios from 'axios';
+import { message } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import '../css/StudentRegistration.css';
 
 const StudentRegistration = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     universityId: '',
     email: '',
@@ -18,6 +22,18 @@ const StudentRegistration = () => {
     university: '',
     teachers: [],
   });
+  const [allUniversities, setAllUniversities] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/universities/getAllUniversities")
+      .then((response) => {
+        setAllUniversities(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching universities:", error);
+      });
+  }, []);
 
   const profilePhotoInputRef = useRef(null);
   const transcriptPhotoInputRef = useRef(null);
@@ -54,14 +70,73 @@ const StudentRegistration = () => {
     for (const key in formData) {
       formDataObject.append(key, formData[key]);
     }
+    
 
     try {
-      const response = await axios.post("http://localhost:8000/submitStudentProfile", formDataObject);
-      console.log(response.data);
+      const user = {
+        email: location.state.email,
+        password: location.state.password,
+        confirmPassword: location.state.confirmPassword,
+        role: "student",
+      };
+
+      formData.email = location.state.email;
+
+      for (var i = 0; i < allUniversities.length; i++) {
+        if (allUniversities[i].name === formData.university) {
+          formData.universityId = allUniversities[i]._id;
+          break;
+        }
+      }
+
+      const profilePhotoBase64 = formData.profilePhoto.split(",")[1];
+      const transcriptPhotoBase64 = formData.transcriptPhoto.split(",")[1];
+
+      const formDataWithBase64 = {
+        ...formData,
+        profilePhoto: profilePhotoBase64,
+        transcriptPhoto: transcriptPhotoBase64,
+      };
+
+      await axios.post("http://localhost:8000/api/users/register", user);
+      try {
+        const response = await axios.post("http://localhost:8000/api/student/register", formDataWithBase64);
+      if (response.data.error == 1) {
+        await axios.post("http://localhost:8000/api/users/deleteuser", user);
+
+        message.error("User with same College Id already exists");
+
+        setTimeout(() => {
+          window.location.href = "/register/student";
+        }, 500);
+      } else if (response.data.error == 0) {
+        // localStorage.setItem("user", JSON.stringify(response.data.user));
+
+        message.success("Registration Successful");
+
+        setTimeout(() => {
+          // navigate("/professor/home");
+        }, 500);
+      }
     } catch (error) {
-      console.error('Error:', error);
+      await axios.post("http://localhost:8000/api/users/deleteuser", user);
+      console.log(1)
+      message.error("Something went wrong, Please try again");
+
+      setTimeout(() => {
+        window.location.href = "/register/student";
+      }, 500);
     }
-  };
+  } catch (error) {
+    console.log(2)
+    message.error("Something went wrong");
+    console.log(error);
+
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 500);
+  }
+};
 
   return (
     <div className='StudentBox'>
@@ -104,13 +179,19 @@ const StudentRegistration = () => {
                 value={formData.passingYear}
                 onChange={(e) => handleChange(e, 'passingYear')}
               />
-              <label htmlFor="university">University:</label>
-              <input
-                type="text"
-                name="university"
-                value={formData.university}
-                onChange={(e) => handleChange(e, 'university')}
-              />
+               <label htmlFor="university">University:</label>
+               <select
+  name="university"
+  value={formData.university}
+  onChange={(e) => handleChange(e, "university")}
+>
+  <option value="">Select University</option>
+  {allUniversities.map((university) => (
+    <option key={university._id} value={university.name}>
+      {university.name}
+    </option>
+  ))}
+</select>
             </div>
           </div>
 
