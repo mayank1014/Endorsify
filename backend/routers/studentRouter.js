@@ -15,7 +15,7 @@ router.get("/getAllStudent", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    const student = await Student.findOne({ teacherId: req.body.teacherId, universityId: req.body.universityId }).exec()
+    const student = await Student.findOne({ collegeID: req.body.collegeID, universityId: req.body.universityId }).exec()
 
     console.log(student)
 

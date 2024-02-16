@@ -2,8 +2,6 @@ import React, { useState, useRef , useEffect} from 'react';
 import axios from 'axios';
 import { message } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import '../css/StudentRegistration.css';
 
 const StudentRegistration = () => {
