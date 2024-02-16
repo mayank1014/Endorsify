@@ -3,7 +3,7 @@ const router = express.Router();
 
 const User = require("../models/userSchema");
 
-router.get("/getAllUsers", async (req, res) => {
+router.get("/getallusers", async (req, res) => {
   try {
     const users = await User.find();
     res.send(users);

@@ -4,7 +4,7 @@ const router = express.Router();
 const Professor = require("../models/studentSchema");
 const Student = require("../models/studentSchema");
 
-router.get("/getAllStudent", async (req, res) => {
+router.get("/getallstudents", async (req, res) => {
   try {
     const student = await Student.find();
     res.send(student);
