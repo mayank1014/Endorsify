@@ -17,7 +17,7 @@ const StudentHomePage = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/api/student/getstudent/${JSON.parse(user).email}`
+        `http://localhost:8000/api/students/getstudent/${JSON.parse(user).email}`
       )
       .then((response) => {
         setStudent(response.data);
@@ -39,7 +39,7 @@ const StudentHomePage = () => {
   }, []);
 
   const handleProfessorClick = (professorId) => {
-    navigate(`/student/professor/${professorId}`);
+    navigate(`/students/professor/${professorId}`);
   };
 
   const handleHomeClick = () => {

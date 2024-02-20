@@ -90,7 +90,7 @@ const StudentRegistration = () => {
 
       await axios.post("http://localhost:8000/api/users/register", user);
       try {
-        const response = await axios.post("http://localhost:8000/api/student/register", formData);
+        const response = await axios.post("http://localhost:8000/api/students/register", formData);
         if (response.data.error === 1) {
           await axios.post("http://localhost:8000/api/users/deleteuser", user);
 
