@@ -54,6 +54,19 @@ router.post("/checkuser", async (req, res) => {
   }
 });
 
+router.post("/changepassword", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.body._id });
+    user.password = req.body.password;
+
+    await user.save();
+
+    res.send("Password updated successfully");
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 router.post("/deleteuser", async (req, res) => {
   try {
     await User.findOneAndDelete({ email: req.body.email });
