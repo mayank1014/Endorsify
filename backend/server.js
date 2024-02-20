@@ -21,6 +21,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/users/', userRouter)
 app.use('/api/universities/', universityRouter)
 app.use('/api/professors/', professorRouter)
-app.use('/api/student/', StudentRouter)
+app.use('/api/students/', StudentRouter)
 
 app.listen(port, () => console.log(`Node JS server started on port ${port}`));

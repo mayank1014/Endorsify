@@ -3,7 +3,7 @@ const router = express.Router();
 
 const User = require("../models/userSchema");
 
-router.get("/getAllUsers", async (req, res) => {
+router.get("/getallusers", async (req, res) => {
   try {
     const users = await User.find();
     res.send(users);
@@ -49,6 +49,19 @@ router.post("/checkuser", async (req, res) => {
     } else {
       return res.json({ error: 0 });
     }
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.post("/changepassword", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.body._id });
+    user.password = req.body.password;
+
+    await user.save();
+
+    res.send("Password updated successfully");
   } catch (error) {
     return res.status(400).json(error);
   }

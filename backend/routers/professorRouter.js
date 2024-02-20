@@ -12,6 +12,28 @@ router.get("/getallprofessors", async (req, res) => {
   }
 });
 
+router.get("/getallprofessors/:universityId", async (req, res) => {
+  const universityId = req.params.universityId;
+
+  try {
+    const professors = await Professor.find({universityId: universityId}).exec();
+    res.send(professors);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.get("/getprofessor/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const professor = await Professor.findOne({_id: id}).exec();
+    res.send(professor);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 router.post("/register", async (req, res) => {
   try {
     const professor = await Professor.findOne({ teacherId: req.body.teacherId, universityId: req.body.universityId }).exec()
