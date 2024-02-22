@@ -12,6 +12,28 @@ router.get("/getalluniversities", async (req, res) => {
     }
   });
 
+  router.get('/getuniversity/:universityEmail', async (req, res) => {
+    const universityEmail = req.params.universityEmail;
+  
+    try {
+      // Assuming your University model has a field named 'email'
+      const university = await University.findOne({ email: universityEmail });
+  
+      console.log('University:', university); // Log the university object
+  
+      if (university) {
+        // Assuming your University model has a field named 'uniid'
+        res.json(university);
+      } else {
+        res.status(404).json({ error: 'University not found' });
+      }
+    } catch (error) {
+      console.error('Error fetching uniid:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+
   router.post("/register", async (req, res) => {
     try {
       const existingUniversity = await University.findOne({ uniId: req.body.uniId });

@@ -35,8 +35,19 @@ router.get("/getstudent/:email", async (req, res) => {
   const email = req.params.email;
 
   try {
-    const student = await Student.findOne({ email: email }).exec();
+    const student = await Student.findOne({ email: email });
     res.send(student);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.get("/getallstudents/:universityId", async (req, res) => {
+  const universityId = req.params.universityId;
+
+  try {
+    const students = await Student.find({universityId: universityId});
+    res.send(students);
   } catch (error) {
     return res.status(400).json(error);
   }

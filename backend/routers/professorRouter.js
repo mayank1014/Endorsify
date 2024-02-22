@@ -16,7 +16,7 @@ router.get("/getallprofessors/:universityId", async (req, res) => {
   const universityId = req.params.universityId;
 
   try {
-    const professors = await Professor.find({universityId: universityId}).exec();
+    const professors = await Professor.find({universityId: universityId});
     res.send(professors);
   } catch (error) {
     return res.status(400).json(error);
