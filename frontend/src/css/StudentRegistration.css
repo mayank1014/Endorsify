@@ -6,12 +6,12 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
+    align-items: center;
   }
   
   .form-row {
     display: flex;
-    flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
+    flex-wrap: wrap;
     margin-bottom: 20px;
   }
   
@@ -89,27 +89,27 @@
   
   input,
   select {
-    width: 19vw; /* Adjusted width for responsiveness */
+    width: 19vw;
     padding: 8px;
     box-sizing: border-box;
     margin-bottom: 10px;
   }
   
   select {
-    width: calc(20vw - 16px); /* Adjusted width for responsiveness */
+    width: calc(20vw - 16px); 
   }
   
   input[name='university'] {
-    width: calc(20vw - 16px); /* Adjusted width for responsiveness */
+    width: calc(20vw - 16px);
   }
   
   input[name='passingYear'] {
-    width: calc(20vw - 16px); /* Adjusted width for responsiveness */
+    width: calc(20vw - 16px); 
   }
   
   input[name='branch'],
   input[name='collegeID'] {
-    width: calc(20vw - 16px); /* Adjusted width for responsiveness */
+    width: calc(20vw - 16px); 
   }
   
   .btn3 {
@@ -165,17 +165,17 @@
     }
   
     select {
-      width: calc(100% - 16px); /* Adjusted width for responsiveness */
+      width: calc(100% - 16px); 
     }
   
     input[name='university'],
     input[name='passingYear'] {
-      width: calc(100% - 16px); /* Adjusted width for responsiveness */
+      width: calc(100% - 16px); 
     }
   
     input[name='branch'],
     input[name='collegeID'] {
-      width: calc(100% - 16px); /* Adjusted width for responsiveness */
+      width: calc(100% - 16px);
     }
   }
   

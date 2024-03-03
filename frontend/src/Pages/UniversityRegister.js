@@ -3,7 +3,6 @@ import defaultLogo from '../img/default-logo.jpg';
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from 'antd';
-import "../css/UniversityRegistration.css";
 
 const UniversityForm = () => {
   const location = useLocation();

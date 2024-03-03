@@ -54,4 +54,40 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/studentrequest", async (req, res) => {
+  
+  try {
+    console.log(req.body)
+
+    const professor = await Professor.findOne({ _id: req.body.professorId }).exec()
+
+    // console.log(professor)
+
+    if (professor) {
+
+      var student = {};
+      student.studentId = req.body.studentId;
+
+      delete req.body.studentId;
+      delete req.body.professorId;
+
+      professor.students.push({
+        studentId: student["studentId"],
+        lorStatus: "pending",
+        studentData: req.body
+      })
+
+      // professor.save();
+
+      res.send("Applied Successfully")
+    } else {
+      console.log(error)
+      return res.status(400).json(error);
+    }  
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error);
+  }
+});
+
 module.exports = router;

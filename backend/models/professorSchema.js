@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const professorSchema = new mongoose.Schema({
-  universityId: { type: mongoose.Schema.Types.ObjectId, ref: 'University', required: true },
+  universityId: { type: String, required: true },
   email: { type: String, required: true },
   gender: { type: String, required: true },
   teacherId: { type: String, required: true },
@@ -12,7 +12,13 @@ const professorSchema = new mongoose.Schema({
   expertise: [{ type: String, required: true }],
   experience: { type: String, required: true },
   portfolioURL: { type: String, required: true },
-  students: [{ type: String }],
+  students: [
+    {
+      studentId: { type: String, required: true },
+      lorStatus: { type: String, required: true },
+      studentData: {},
+    },
+  ],
 });
 
 const Professor = mongoose.model("Professor", professorSchema);

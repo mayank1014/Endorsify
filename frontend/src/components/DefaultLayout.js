@@ -38,12 +38,12 @@ function DefaultLayout(props) {
       <div className="content" style={{ padding: "20px", flex: "1" }}>
         {props.children}
       </div>
-      <footer
+      {/* <footer
         className="footer text-center"
         style={{
           backgroundColor: "#DCDCDA",
           color: "#343a40",
-          padding: "10px",
+          padding: "5px",
           position: "fixed", // Fixed position to stick it at the bottom
           bottom: "0", // Stick it at the bottom of the viewport
           width: "100%", // Ensure it spans the entire width
@@ -53,7 +53,7 @@ function DefaultLayout(props) {
         <Link to="/terms-and-conditions" style={{ color: "#343a40" }}>
           Terms and Conditions
         </Link>
-      </footer>
+      </footer> */}
     </div>
   );
 }

@@ -76,4 +76,8 @@ router.post("/deleteuser", async (req, res) => {
   }
 });
 
+router.post("/hello", async (req, res) => {
+  res.send("Hello");
+});
+
 module.exports = router;

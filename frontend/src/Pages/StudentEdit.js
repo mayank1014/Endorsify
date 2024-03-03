@@ -17,7 +17,7 @@ function StudentEdit() {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/api/student/getstudent/${JSON.parse(user).email}`
+        `http://localhost:8000/api/students/getstudent/${JSON.parse(user).email}`
       )
       .then((response) => {
         setStudent(response.data);
@@ -58,18 +58,18 @@ function StudentEdit() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formDataObject = new FormData();
+    const formDataObject = {};
+
     for (const key in student) {
-      formDataObject.append(key, student[key]);
+      formDataObject[key] = student[key];
     }
 
-    // Append profilePhoto and transcriptPhoto directly from the form
-    formDataObject.append("profilePhoto", student.profilePhoto);
-    formDataObject.append("transcriptPhoto", student.transcriptPhoto);
+    formDataObject["profilePhoto"] = student.profilePhoto;
+    formDataObject["transcriptPhoto"] = student.transcriptPhoto ? student.transcriptPhoto : "";
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/student/edit",
+        "http://localhost:8000/api/students/edit",
         formDataObject
       );
 
