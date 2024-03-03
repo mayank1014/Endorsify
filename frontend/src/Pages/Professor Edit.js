@@ -1,64 +1,75 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import "../css/ProfessorRegistration.css";
 
-const ProfessorRegister = () => {
-  const location = useLocation();
+const ProfessorEdit = () => {
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    university: "",
-    email: "",
-    teacherId: "",
-    gender: "",
-    name: "",
-    profilePhoto: "",
-    signPhoto: "",
-    qualification: "",
-    expertise: [""], // At least one expertise field is mandatory
-    experience: "",
-    portfolioURL: "",
-    students: [],
+  const user = localStorage.getItem("user");
+  const [professor, setProfessor] = useState({
+    profilePhoto: "", // Set default value for profilePhoto
+    signPhoto: "", // Set default value for transcriptPhoto
+    expertise: [], // Set default value for expertise
   });
-
-  const [allUniversities, setAllUniversities] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/universities/getAllUniversities")
+      .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
       .then((response) => {
-        setAllUniversities(response.data);
+        console.log(response.data);
+        setProfessor(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching universities:", error);
-      });
+        console.error("Error fetching professor details:", error);
+      })
   }, []);
-
-  const signPhotoInputRef = useRef(null);
   const profilePhotoInputRef = useRef(null);
+  const signPhotoInputRef = useRef(null);
 
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (event) => {
-      const base64String = event.target.result;
-      setFormData({
-        ...formData,
-        [fieldName]: base64String,
+      setProfessor({
+        ...professor,
+        [fieldName]: event.target.result,
       });
     };
 
     reader.readAsDataURL(file);
   };
 
+  const handleExpertiseChange = (index, event) => {
+    const values = [...professor.expertise];
+    values[index] = event.target.value;
+    setProfessor({
+      ...professor,
+      expertise: values,
+    });
+  };
+
+  const handleAddExpertiseField = () => {
+    setProfessor({
+      ...professor,
+      expertise: [...professor.expertise, ""],
+    });
+  };
+
+  const handleRemoveExpertiseField = (index) => {
+    const values = [...professor.expertise];
+    values.splice(index, 1);
+    setProfessor({
+      ...professor,
+      expertise: values,
+    });
+  };
+
   const handleChange = (event, fieldName) => {
-    setFormData({
-      ...formData,
+    setProfessor({
+      ...professor,
       [fieldName]: event.target.value,
     });
   };
@@ -67,106 +78,27 @@ const ProfessorRegister = () => {
     inputRef.current.click();
   };
 
-  const handleExpertiseChange = (index, event) => {
-    const values = [...formData.expertise];
-    values[index] = event.target.value;
-    setFormData({
-      ...formData,
-      expertise: values,
-    });
-  };
-
-  const handleAddExpertiseField = () => {
-    setFormData({
-      ...formData,
-      expertise: [...formData.expertise, ""],
-    });
-  };
-
-  const handleRemoveExpertiseField = (index) => {
-    const values = [...formData.expertise];
-    values.splice(index, 1);
-    setFormData({
-      ...formData,
-      expertise: values,
-    });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Check if at least one expertise field is filled
-    if (formData.expertise.length === 0 || formData.expertise.some(field => field.trim() === "")) {
-      message.error("Please fill at least one expertise field");
-      return;
+    const formDataObject = {};
+    for (const key in professor) {
+      formDataObject[key] = professor[key];
     }
-
+    formDataObject["profilePhoto"] = professor.profilePhoto;
+    formDataObject["signPhoto"] = professor.signPhoto;
     try {
-      const user = {
-        email: location.state.email,
-        password: location.state.password,
-        confirmPassword: location.state.confirmPassword,
-        role: "professor",
-      };
+      const response = await axios.post(
+        "http://localhost:8000/api/professors/edit",
+        formDataObject
+      );
 
-      formData.email = location.state.email;
-
-      for (var i = 0; i < allUniversities.length; i++) {
-        if (allUniversities[i].name === formData.university) {
-          formData.universityId = allUniversities[i]._id;
-          break;
-        }
-      }
-
-      const profilePhotoBase64 = formData.profilePhoto.split(",")[1];
-      const signPhotoBase64 = formData.signPhoto.split(",")[1];
-
-      const formDataWithBase64 = {
-        ...formData,
-        profilePhoto: profilePhotoBase64,
-        signPhoto: signPhotoBase64,
-      };
-
-      await axios.post("http://localhost:8000/api/users/register", user);
-
-      try {
-        const response = await axios.post("http://localhost:8000/api/professors/register", formDataWithBase64);
-
-        // localStorage.setItem("user", JSON.stringify(response.data.user));
-
-        if (response.data.error == 1) {
-          await axios.post("http://localhost:8000/api/users/deleteuser", user);
-
-          message.error("User with same College Id already exists");
-
-          setTimeout(() => {
-            window.location.href = "/register/professor";
-          }, 500);
-        } else if (response.data.error == 0) {
-          // localStorage.setItem("user", JSON.stringify(response.data.user));
-
-          message.success("Registration Successful");
-
-          setTimeout(() => {
-            navigate("/professor/home");
-          }, 500);
-        }
-      } catch (error) {
-        await axios.post("http://localhost:8000/api/users/deleteuser", user);
-        console.log(1)
-        message.error("Something went wrong, Please try again");
-
-        setTimeout(() => {
-          window.location.href = "/register/professor";
-        }, 500);
-      }
-    } catch (error) {
-      console.log(2)
-      message.error("Something went wrong");
+      message.success("Profile updated successfully");
 
       setTimeout(() => {
-        window.location.href = "/";
+        navigate("/professor/home");
       }, 500);
+    } catch (error) {
+      message.error("Something went wrong");
     }
   };
 
@@ -194,8 +126,8 @@ const ProfessorRegister = () => {
                 className="circle"
                 onClick={() => handleFileInputClick(profilePhotoInputRef)}
               >
-                {formData.profilePhoto ? (
-                  <img src={formData.profilePhoto} alt="Profile Photo" />
+                {professor.profilePhoto ? (
+                  <img src={`data:image/jpeg;base64,${professor.profilePhoto}`} alt="Profile Photo" />
                 ) : (
                   <span>Add Profile Photo</span>
                 )}
@@ -207,29 +139,22 @@ const ProfessorRegister = () => {
               <input
                 type="text"
                 name="name"
-                value={formData.name}
+                value={professor.name || ""}
                 onChange={(e) => handleChange(e, "name")}
               />
               <label htmlFor="teacherId">Professor ID:</label>
               <input
                 type="text"
                 name="teacherId"
-                value={formData.teacherId}
-                onChange={(e) => handleChange(e, "teacherId")}
+                value={professor.teacherId || ""}
+                disabled
               />
               <label htmlFor="university">University:</label>
-              <select
+              <input
                 name="university"
-                value={formData.university}
-                onChange={(e) => handleChange(e, "university")}
-              >
-                <option value="">Select University</option>
-                {allUniversities.map((university) => (
-                  <option key={university.id} value={university.name}>
-                    {university.name}
-                  </option>
-                ))}
-              </select>
+                value={professor.university || ""}
+                disabled
+              />
             </div>
           </div>
 
@@ -239,23 +164,18 @@ const ProfessorRegister = () => {
               <input
                 type="text"
                 name="experience"
-                value={formData.experience}
+                value={professor.experience || ""}
                 onChange={(e) => handleChange(e, "experience")}
               />
             </div>
 
             <div className="column">
               <label htmlFor="gender">Gender:</label>
-              <select
+              <input
                 name="gender"
-                value={formData.gender}
-                onChange={(e) => handleChange(e, "gender")}
-              >
-                <option value="">Select</option>
-                <option value="He">He</option>
-                <option value="She">She</option>
-                <option value="They">They</option>
-              </select>
+                value={professor.gender}
+                disabled
+              />
             </div>
           </div>
 
@@ -264,7 +184,7 @@ const ProfessorRegister = () => {
               <label htmlFor="qualification">Qualification:</label>
               <textarea
                 name="qualification"
-                value={formData.qualification}
+                value={professor.qualification}
                 onChange={(e) => handleChange(e, "qualification")}
               />
             </div>
@@ -276,7 +196,7 @@ const ProfessorRegister = () => {
               <input
                 type="text"
                 name="portfolioURL"
-                value={formData.portfolioURL}
+                value={professor.portfolioURL}
                 onChange={(e) => handleChange(e, "portfolioURL")}
               />
             </div>
@@ -286,7 +206,7 @@ const ProfessorRegister = () => {
             <div className="column">
               <label htmlFor="expertise">Subject Expertise:</label>
               <div className="alignment">
-                {formData.expertise.map((field, index) => (
+                {professor.expertise.map((field, index) => (
                   <div key={index} className="form-demo">
                     <input
                       type="text"
@@ -322,8 +242,8 @@ const ProfessorRegister = () => {
                 ref={signPhotoInputRef}
               />
               <div className="square-box" onClick={() => handleFileInputClick(signPhotoInputRef)}>
-                {formData.signPhoto ? (
-                  <img src={formData.signPhoto} alt="Sign Photo" />
+                {professor.signPhoto ? (
+                  <img src={professor.signPhoto} alt="Sign Photo" />
                 ) : (
                   <span>Add Sign Photo</span>
                 )}
@@ -340,4 +260,4 @@ const ProfessorRegister = () => {
   );
 };
 
-export default ProfessorRegister;
+export default ProfessorEdit;
