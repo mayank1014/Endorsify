@@ -3,6 +3,45 @@ const router = express.Router();
 
 const Professor = require("../models/professorSchema");
 
+
+router.post("/edit", async (req, res) => {
+  try {
+    var professor = await Professor.findOne({ email: req.body.email }).exec();
+
+    professor.universityId = req.body.universityId;
+    professor.email = req.body.email;
+    professor.gender = req.body.gender;
+    professor.teacherId= req.body.teacherId;
+    professor.name = req.body.name;
+    professor.signPhoto = req.body.signPhoto;
+    professor.profilePhoto = req.body.profilePhoto;
+    professor.qualification = req.body.qualification;
+    professor.expertise = req.body.expertise;
+    professor.experience = req.body.experience;
+    professor.portfolioURL = req.body.portfolioURL;
+    professor.university = req.body.university;
+    professor.students = req.body.students;
+
+    await professor.save();
+
+    res.send("Profile updated successfully");
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error);
+  }
+});
+
+router.get("/getprofessors/:email", async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const professor = await Professor.findOne({ email: email }).exec();
+    res.send(professor);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 router.get("/getallprofessors", async (req, res) => {
   try {
     const professors = await Professor.find();
@@ -12,11 +51,43 @@ router.get("/getallprofessors", async (req, res) => {
   }
 });
 
+router.get("/getStudentsByProfessor/:professorId", async (req, res) => {
+  const professorId = req.params.professorId;
+  try {
+    // Assuming professors have an array of student IDs stored in the 'students' field
+    const professor = await Professor.findById(professorId).exec();
+    if (!professor) {
+      return res.status(404).json({ message: "Professor not found" });
+    }
+
+    // Fetch students using their IDs stored in the professor's array
+    const studentIds = professor.students;
+    const students = await Student.find({ _id: { $in: studentIds } }).exec();
+
+    // Extract names from student objects
+    const studentNames = students;
+    console.log(studentNames);
+    res.send(studentNames);
+  } catch (error) {
+    console.error("Error fetching students:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 router.get("/getallprofessors/:universityId", async (req, res) => {
   const universityId = req.params.universityId;
 
   try {
     const professors = await Professor.find({universityId: universityId}).exec();
+    res.send(professors);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.get("/getallprofessors", async (req, res) => {
+  try {
+    const professors = await Professor.find();
     res.send(professors);
   } catch (error) {
     return res.status(400).json(error);

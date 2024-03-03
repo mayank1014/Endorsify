@@ -32,9 +32,11 @@ function ChangePassword({ match }) {
         setTimeout(() => {
           message.success("Password updated successfully");
   
-          if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com")
+          if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com" && JSON.parse(localStorage.getItem("user")).role !== "professor")
               navigate("/student/home");
-          else 
+          else if(JSON.parse(localStorage.getItem("user")).role === "professor")
+              navigate("/professor/home");
+              else 
               navigate("/admin");
         }, 500);
       } catch (error) {
@@ -77,12 +79,7 @@ function ChangePassword({ match }) {
             </Form.Item>
 
             <div className="text-right">
-              <button style={{ backgroundColor: '#1890ff', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}
-                onMouseOver={e => e.target.style.backgroundColor = '#40a9ff'}
-                onMouseOut={e => e.target.style.backgroundColor = '#1890ff'}
-              >
-                Change Password
-              </button>
+              <button className="btn1">Change Password</button>
             </div>
           </Form>
         </Col>
