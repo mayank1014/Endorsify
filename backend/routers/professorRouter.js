@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Professor = require("../models/professorSchema");
-
+const Student = require("../models/studentSchema");
 
 router.post("/edit", async (req, res) => {
   try {
@@ -54,23 +54,41 @@ router.get("/getallprofessors", async (req, res) => {
 router.get("/getStudentsByProfessor/:professorId", async (req, res) => {
   const professorId = req.params.professorId;
   try {
-    // Assuming professors have an array of student IDs stored in the 'students' field
     const professor = await Professor.findById(professorId).exec();
     if (!professor) {
       return res.status(404).json({ message: "Professor not found" });
     }
 
-    // Fetch students using their IDs stored in the professor's array
-    const studentIds = professor.students;
+    const studentIds = professor.students.map(student => student.studentId);
+
     const students = await Student.find({ _id: { $in: studentIds } }).exec();
 
-    // Extract names from student objects
-    const studentNames = students;
-    console.log(studentNames);
+
+    const studentNames = students.map(student => student.name);
+
     res.send(studentNames);
   } catch (error) {
     console.error("Error fetching students:", error);
     return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get('/getstudent/:id', async (req, res) => {
+  const studentId = req.params.id;
+  
+  try {
+    // Fetch student details from the database by ID
+    const student = await Student.findById(studentId);
+    
+    if (!student) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+    
+    // Send student details as a response
+    res.json(student);
+  } catch (error) {
+    console.error('Error fetching student:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 

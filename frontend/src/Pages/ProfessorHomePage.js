@@ -13,13 +13,38 @@ const ProfessorHomePage = () => {
   const [professor, setProfessor] = useState();
   const [allstudents, setAllStudents] = useState([]);
 
-  useEffect(() => {
+//   useEffect(() => {
+//     axios
+//       .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
+//       .then((professorResponse) => {
+//         const professorId = professorResponse.data._id;
+//         axios
+//           .get(`http://localhost:8000/api/professors/getStudentsByProfessor/${professorId}`)
+//           .then((studentsResponse) => {
+//             setProfessor(professorResponse.data);
+//             setAllStudents(studentsResponse.data);
+//           })
+//           .catch((error) => {
+//             console.error("Error fetching students: ", error);
+//           });
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching professor: ", error);
+//       });
+
+//   }, []);
+useEffect(() => {
     axios
       .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
       .then((professorResponse) => {
         const professorId = professorResponse.data._id;
+        const professorStudents = professorResponse.data.students.map(student => student.studentId);
         axios
-          .get(`http://localhost:8000/api/professors/getStudentsByProfessor/${professorId}`)
+          .get(`http://localhost:8000/api/professors/getStudentsByProfessor/${professorId}`, {
+            params: {
+              studentIds: professorStudents.join(',') // Comma-separated list of student ids
+            }
+          })
           .then((studentsResponse) => {
             setProfessor(professorResponse.data);
             setAllStudents(studentsResponse.data);
@@ -31,7 +56,6 @@ const ProfessorHomePage = () => {
       .catch((error) => {
         console.error("Error fetching professor: ", error);
       });
-
   }, []);
 
   const handleStudentClick = (studentId) => {
