@@ -156,7 +156,7 @@ const StudentHomePage = () => {
                       }
                     >
                       <img
-                        src={`data:image/jpeg;base64,${professor.profilePhoto}`}
+                        src={professor.profilePhoto}
                         alt="Professor Profile"
                         style={{
                           width: "120px",

@@ -28,17 +28,31 @@ const ProfessorEdit = () => {
   const profilePhotoInputRef = useRef(null);
   const signPhotoInputRef = useRef(null);
 
+  // const handleFileInputChange = (event, fieldName) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+
+  //   reader.onload = (event) => {
+  //     setProfessor({
+  //       ...professor,
+  //       [fieldName]: event.target.result,
+  //     });
+  //   };
+
+  //   reader.readAsDataURL(file);
+  // };
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-
+  
     reader.onload = (event) => {
       setProfessor({
         ...professor,
-        [fieldName]: event.target.result,
+        [fieldName]: event.target.result, // This assumes event.target.result is Base64 string, which might not be always true
       });
     };
-
+  
+    // Read the file as Data URL (Base64 encoded string)
     reader.readAsDataURL(file);
   };
 
@@ -127,7 +141,7 @@ const ProfessorEdit = () => {
                 onClick={() => handleFileInputClick(profilePhotoInputRef)}
               >
                 {professor.profilePhoto ? (
-                  <img src={`data:image/jpeg;base64,${professor.profilePhoto}`} alt="Profile Photo" />
+                  <img src={professor.profilePhoto} alt="Profile Photo" />
                 ) : (
                   <span>Add Profile Photo</span>
                 )}

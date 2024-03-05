@@ -10,6 +10,7 @@ import StudentHomePage from './Pages/StudentHomePage';
 import ProfessorHomePage from './Pages/ProfessorHomePage';
 import UniversityHomePage from './Pages/UniversityHomePage';
 import StudentHomeProfessorProfile from './Pages/StudentHomeProfessorProfile';
+import ProfessorHomeStudentProfile from './Pages/ProfessorHomeStudentProfile';
 import StudentApplyLOR from './Pages/StudentAppyLOR';
 import ChangePassword from './Pages/ChangePassword';
 import StudentEdit from './Pages/StudentEdit';
@@ -35,6 +36,7 @@ function App() {
           {isAuthenticatedUser && <Route path="/changepassword" element={<ChangePassword />} />}
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
+          {isAuthenticatedUser && <Route path="professor/accepted" element={<ProfessorHomeStudentProfile />} />}
           <Route path="university/home" element={<UniversityHomePage />} />
         </Routes>
       </BrowserRouter>

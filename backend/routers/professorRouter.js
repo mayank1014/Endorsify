@@ -63,10 +63,7 @@ router.get("/getStudentsByProfessor/:professorId", async (req, res) => {
 
     const students = await Student.find({ _id: { $in: studentIds } }).exec();
 
-
-    const studentNames = students.map(student => student.name);
-
-    res.send(studentNames);
+    res.send(students);
   } catch (error) {
     console.error("Error fetching students:", error);
     return res.status(500).json({ message: "Internal server error" });

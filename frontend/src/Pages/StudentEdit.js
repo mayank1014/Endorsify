@@ -110,7 +110,7 @@ function StudentEdit() {
               >
                 {student.profilePhoto ? (
                   <img
-                    src={`data:image/jpeg;base64,${student.profilePhoto}`}
+                    src={student.profilePhoto}
                     alt="Profile Photo"
                   />
                 ) : (
@@ -193,7 +193,7 @@ function StudentEdit() {
               >
                 {student.transcriptPhoto ? (
                   <img
-                    src={`data:image/jpeg;base64,${student.transcriptPhoto}`}
+                    src={student.transcriptPhoto}
                     alt="Transcript Photo"
                   />
                 ) : (
