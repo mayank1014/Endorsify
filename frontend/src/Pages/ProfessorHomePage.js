@@ -241,30 +241,30 @@ const ProfessorHomePage = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
-            .then((professorResponse) => {
-                const professorName = professorResponse.data.name;
-                setProfessor(professorName);
-            })
-            .catch((error) => {
-                console.error("Error fetching professor details:", error);
-            });
-    }, [user]); // Add user to the dependency array
+    // useEffect(() => {
+    //     axios
+    //         .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
+    //         .then((professorResponse) => {
+    //             const professorName = professorResponse.data.name;
+    //             console.log(professorName);
+    //             setProfessor(professorName);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching professor details:", error);
+    //         });
+    // }, [user]); // Add user to the dependency array
 
-    const handleChange = (arg) => {
-        if(arg === 'accepted') {
-            navigate('/professor/accepted', { state : location.state })
-        }
-        else if(arg === 'pending') {
-            navigate('/professor/pending', { state : location.state })
-        }
-        else if(arg === 'rejected') {
-            navigate('/professor/rejected', { state : location.state })
-        }
-    }
-
+    // const handleChange = (arg) => {
+    //     if(arg === 'accepted') {
+    //         navigate('/professor/accepted', { state : location.state })
+    //     }
+    //     else if(arg === 'pending') {
+    //         navigate('/professor/pending', { state : location.state })
+    //     }
+    //     else if(arg === 'rejected') {
+    //         navigate('/professor/rejected', { state : location.state })
+    //     }
+    // }
     const handleHomeClick = () => {
         navigate("/professor/home");
     };
@@ -283,10 +283,10 @@ const ProfessorHomePage = () => {
     };
 
     // Render spinner until professor data is fetched
-    if (professor === null) {
-        return <Spinner />;
-    }
-
+    // if (professor === null) {
+    //     return <Spinner />;
+    // }
+    var stats;
     return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", marginTop: "60px" }}>
             <Navbar expand="lg" fixed="top" style={{ backgroundColor: "#DCDCDA" }}>
@@ -385,24 +385,24 @@ const ProfessorHomePage = () => {
 
             <div className="home-page">
                 <div className="welcome-section">
-                    <h1>Welcome {professor}</h1>
+                    <h1>Welcome </h1>
                     <p className='p1'>Endorsify is an online platform for issuing and managing Letters of Recommendation.</p>
                 </div>
                 <div className="registration-options">
                     <div className="registration-option">
                         <h2>Pending Requests</h2>
                         <p>View and manage pending requests for letters of recommendation.</p>
-                        <button className="register-button" onClick={ () => {handleChange("pending")}}>Click Here</button>
+                        <button className="register-button" stats="pending" onClick={() => navigate("/professor/home/student" ,{ state: { lorStatus: "pending" } })}>Click Here</button>
                     </div>
                     <div className="registration-option">
                         <h2>Approved Requests</h2>
                         <p>View approved requests for letters of recommendation.</p>
-                        <button className="register-button" onClick={ () => {handleChange("accepted")}}>Click Here</button>
+                        <button className="register-button" stats="accepted" onClick={() => navigate("/professor/home/student",{ state: { lorStatus: "accepted" } })}>Click Here</button>
                     </div>
                     <div className="registration-option">
                         <h2>Rejected Requests</h2>
                         <p>View rejected requests for letters of recommendation.</p>
-                        <button className="register-button" onClick={ () => {handleChange("rejected")}}>Click Here</button>
+                        <button className="register-button" stats="rejected" onClick={() => navigate("/professor/home/student",{ state: { lorStatus: "rejected" } })}>Click Here</button>
                     </div>
                 </div>
             </div>

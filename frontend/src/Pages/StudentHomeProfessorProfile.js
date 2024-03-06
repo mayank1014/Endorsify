@@ -83,7 +83,7 @@ const StudentHomeProfessorProfile = () => {
               <Card
                 style={styles.professorCard}
                 hoverable
-                cover={<img alt="profile" src={convertBase64ToImage(professor.profilePhoto)} style={styles.profilePic} />}
+                cover={<img alt="profile" src={professor.profilePhoto} style={styles.profilePic} />}
                 className="professor-card"
               >
                 <div style={{ padding: "16px" }}>

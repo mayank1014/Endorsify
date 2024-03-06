@@ -33,7 +33,7 @@ router.post("/edit", async (req, res) => {
 
 router.get("/getprofessors/:email", async (req, res) => {
   const email = req.params.email;
-
+  //console.log(email);
   try {
     const professor = await Professor.findOne({ email: email }).exec();
     res.send(professor);
@@ -51,24 +51,47 @@ router.get("/getallprofessors", async (req, res) => {
   }
 });
 
-router.get("/getStudentsByProfessor/:professorId", async (req, res) => {
+router.get("/getStudentsByProfessor/:professorId/:lorstatus", async (req, res) => {
   const professorId = req.params.professorId;
+  const lorstatus=req.params.lorstatus;
+  console.log(lorstatus);
   try {
     const professor = await Professor.findById(professorId).exec();
     if (!professor) {
       return res.status(404).json({ message: "Professor not found" });
     }
 
-    const studentIds = professor.students.map(student => student.studentId);
+    const studentIds = professor.students
+      .filter(student => student.lorStatus === lorstatus)
+      .map(student => student.studentId);
 
-    const students = await Student.find({ _id: { $in: studentIds } }).exec();
-
+    // Fetch students whose IDs are in the studentIds array and have the specified lorstatus
+    const students = await Student.find({ _id: { $in: studentIds }}).exec();
+    console.log(students);
     res.send(students);
   } catch (error) {
     console.error("Error fetching students:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// router.get("/getStudentsByProfessor/:professorId", async (req, res) => {
+//   const professorId = req.params.professorId;
+//   try {
+//     const professor = await Professor.findById(professorId).exec();
+//     if (!professor) {
+//       return res.status(404).json({ message: "Professor not found" });
+//     }
+
+//     const studentIds = professor.students.map(student => student.studentId);
+
+//     const students = await Student.find({ _id: { $in: studentIds } }).exec();
+//     res.send(students);
+//   } catch (error) {
+//     console.error("Error fetching students:", error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// });
 
 router.get('/getstudent/:id', async (req, res) => {
   const studentId = req.params.id;

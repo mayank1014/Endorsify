@@ -36,7 +36,7 @@ function App() {
           {isAuthenticatedUser && <Route path="/changepassword" element={<ChangePassword />} />}
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
-          {isAuthenticatedUser && <Route path="professor/accepted" element={<ProfessorHomeStudentProfile />} />}
+          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentProfile />} />}
           <Route path="university/home" element={<UniversityHomePage />} />
         </Routes>
       </BrowserRouter>

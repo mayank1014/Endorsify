@@ -18,7 +18,7 @@ const ProfessorEdit = () => {
     axios
       .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setProfessor(response.data);
       })
       .catch((error) => {
