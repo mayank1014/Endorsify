@@ -12,7 +12,14 @@ const professorSchema = new mongoose.Schema({
   expertise: [{ type: String, required: true }],
   experience: { type: String, required: true },
   portfolioURL: { type: String, required: true },
-  students: [{ type: String }],
+  university: {type: String, required:true},
+  students: [
+    {
+      studentId: { type: String, required: true },
+      lorStatus: { type: String, required: true },
+      studentData: {},
+    },
+  ],
 });
 
 const Professor = mongoose.model("Professor", professorSchema);

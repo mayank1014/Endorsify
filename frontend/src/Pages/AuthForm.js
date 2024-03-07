@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import "../css/AuthForm.css";
 import axios from "axios";
-import Logo from "../img/logo.png";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import Logo from "../img/logo.png";
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -81,7 +80,7 @@ const AuthForm = () => {
           }
         }, 750);
       } catch (error) {
-        message.error("Invalid username or password");
+        message.error("Invalid email or password");
 
         setTimeout(() => {
           window.location.href = "/";
@@ -91,7 +90,295 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="auth-container">
+    <>
+      <style>
+        {`
+          /* YourComponent.css */
+
+          /** Google font **/
+          @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap");
+          
+          .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url("../img/bg.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: 0.5s;
+          }
+          
+          .container {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            margin: 20px;
+          }
+          
+          .signInUp {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            height: 420px;
+            background: rgba(255, 255, 255, 0.671);
+            box-shadow: 0 5px 45px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          .signInUp .box {
+            position: relative;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
+          
+          .signInUp .box h1 {
+            color: rgb(36, 36, 36);
+            font-size: 30px;
+            font-weight: 800 !important;
+            font-family: sans-serif;
+            margin-bottom: 10px;
+          }
+          
+          .form-box .form form input[type="submit"]:hover {
+            background-color: white;
+            color: black;
+          }
+          
+          .signInUp .box.signin button:hover {
+            background: #333;
+            color: #fff;
+          }
+          
+          .signInUp .box.signup button:hover {
+            background: #333;
+            color: #fff;
+          }
+          
+          .signInUp .box p {
+            color: rgb(36, 36, 36);
+            font-size: 14px;
+            font-weight: 500 !important;
+            text-align: center;
+            padding: 0px 25px;
+            margin-bottom: 10px;
+          }
+          
+          .signInUp .box h2 {
+            color: rgb(36, 36, 36);
+            font-size: 1.2em;
+            font-weight: 500;
+            margin-bottom: 10px;
+          }
+          
+          .signInUp .box button {
+            cursor: pointer;
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid #333;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+          }
+          
+          .form-box {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: rgb(26, 26, 26);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
+            transition: 0.5s ease-in-out;
+          }
+          
+          .form-box .signinForm {
+            transition-delay: 0.25s;
+          }
+          
+          .form-box.active .signinForm {
+            transition-delay: 0s;
+            left: -100%;
+          }
+          
+          .form-box .signupForm {
+            left: 100% !important;
+            transition-delay: 0s;
+          }
+          
+          .form-box.active .signupForm {
+            left: 0 !important;
+            transition-delay: 0.25s;
+          }
+          
+          .form-box.active {
+            left: 50%;
+          }
+          
+          .form-box .form {
+            position: absolute;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            padding: 50px;
+            transition: 0.5s;
+          }
+          
+          .form-box .form img {
+            width: 50%;
+            margin-bottom: 15px;
+          }
+          
+          .form-box .form form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+          }
+          
+          .form-box .form form h3 {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 500;
+          }
+          
+          .form-box .form form .google {
+            color: #fff;
+            text-decoration: none;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            outline: none;
+            font-size: 16px;
+            background: #db4437;
+          }
+          
+          .form-box .form form .facebook {
+            color: #fff;
+            text-decoration: none;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            outline: none;
+            font-size: 16px;
+            background: #3b5998;
+          }
+          
+          .form-box .form form i {
+            margin-right: 10px;
+          }
+          
+          .form-box .form form input {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            outline: none;
+            font-size: 16px;
+            border: 1px solid #333;
+          }
+          
+          .form-box .form form input::placeholder {
+            text-align: center;
+          }
+          
+          .form-box .form form input[type="submit"] {
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            max-width: 130px;
+            cursor: pointer;
+          }
+          
+          .form-box.active .signupForm input[type="submit"] {
+            background: transparent;
+            border: 1px solid #fff;
+          }
+          
+          .form-box .form form .forget {
+            color: #fff;
+          }
+          
+          /** responsive **/
+          @media (max-width: 768px) {
+            .container {
+              max-width: 400px;
+              height: 650px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          
+            .container .signInUp {
+              top: 0;
+              height: 100%;
+            }
+          
+            .form-box {
+              width: 100%;
+              height: 500px;
+              top: 0;
+              box-shadow: none;
+            }
+          
+            .signInUp .box h1 {
+              font-size: 16px;
+              margin-bottom: 5px;
+              font-weight: 500;
+              margin-top: 40px;
+            }
+          
+            .signInUp .box p {
+              font-size: 10px;
+              margin-bottom: 5px;
+            }
+          
+            .signInUp .box h2 {
+              font-size: 15px;
+              margin-bottom: 5px;
+            }
+          
+            .signInUp .box button {
+              padding: 5px 20px;
+              color: #333;
+              font-size: 12px;
+              margin-bottom: 30px;
+            }
+          
+            .signInUp .box {
+              position: absolute;
+              width: 100%;
+              height: 180px;
+              bottom: 0;
+              padding: 10px 0px 40px 0px;
+            }
+          
+            .box.signin {
+              top: 0;
+            }
+          
+            .form-box.active {
+              left: 0;
+              top: 150px;
+            }
+          }
+          
+          .ayush:hover {
+            background-color: white;
+          }          
+        `}
+      </style>
+      <div className="auth-container">
       <div className="container">
         <div className="signInUp">
           {/* Sign-in Part */}
@@ -188,6 +475,7 @@ const AuthForm = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

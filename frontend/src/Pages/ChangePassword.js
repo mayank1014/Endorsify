@@ -32,9 +32,11 @@ function ChangePassword({ match }) {
         setTimeout(() => {
           message.success("Password updated successfully");
   
-          if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com")
+          if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com" && JSON.parse(localStorage.getItem("user")).role !== "professor")
               navigate("/student/home");
-          else 
+          else if(JSON.parse(localStorage.getItem("user")).role === "professor")
+              navigate("/professor/home");
+              else 
               navigate("/admin");
         }, 500);
       } catch (error) {
