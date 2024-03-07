@@ -12,6 +12,20 @@ const PricingComponent = () => {
         </Card.Text>
         <Button variant="primary">Get Started</Button>
       </Card.Body>
+      <Card.Body>
+        <Card.Title>Basic Plan</Card.Title>
+        <Card.Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </Card.Text>
+        <Button variant="primary">Get Started</Button>
+      </Card.Body>
+      <Card.Body>
+        <Card.Title>Basic Plan</Card.Title>
+        <Card.Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </Card.Text>
+        <Button variant="primary">Get Started</Button>
+      </Card.Body>
     </Card>
   );
 };

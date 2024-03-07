@@ -5,17 +5,23 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@syncfusion/ej2-react-documenteditor": "^24.2.8",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.14.1",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.2",
+    "html-docx-js": "^0.3.1",
+    "mammoth": "^1.7.0",
     "path-browserify": "^1.0.1",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.22.0",
     "react-scripts": "^5.0.1",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

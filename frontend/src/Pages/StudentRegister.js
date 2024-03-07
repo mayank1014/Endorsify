@@ -103,7 +103,7 @@ const StudentRegistration = () => {
           message.success("Registration Successful");
 
           setTimeout(() => {
-            // navigate("/professor/home");
+            navigate("/professor/home");
           }, 500);
         }
       } catch (error) {
