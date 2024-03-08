@@ -1,0 +1,711 @@
+:root {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 103, 80, 164;
+  --color-sf-primary-container: 234, 221, 255;
+  --color-sf-secondary: 98, 91, 113;
+  --color-sf-secondary-container: 232, 222, 248;
+  --color-sf-tertiary: 125, 82, 96;
+  --color-sf-tertiary-container: 255, 216, 228;
+  --color-sf-surface: 255, 255, 255;
+  --color-sf-surface-variant: 231, 224, 236;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 255, 255, 255;
+  --color-sf-on-primary-container: 33, 0, 94;
+  --color-sf-on-secondary: 255, 255, 255;
+  --color-sf-on-secondary-container: 30, 25, 43;
+  --color-sf-on-tertiary: 255, 255, 255;
+  --color-sf-on-tertiary-containe: 55, 11, 30;
+  --color-sf-on-surface: 28, 27, 31;
+  --color-sf-on-surface-variant: 73, 69, 78;
+  --color-sf-on-background: 28, 27, 31;
+  --color-sf-outline: 121, 116, 126;
+  --color-sf-outline-variant: 196, 199, 197;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 103, 80, 164;
+  --color-sf-inverse-surface: 49, 48, 51;
+  --color-sf-inverse-on-surface: 244, 239, 244;
+  --color-sf-inverse-primary: 208, 188, 255;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 179, 38, 30;
+  --color-sf-error-container: 249, 222, 220;
+  --color-sf-on-error: 255, 250, 250;
+  --color-sf-on-error-container: 65, 14, 11;
+  --color-sf-success: 32, 81, 7;
+  --color-sf-success-container: 209, 255, 186;
+  --color-sf-on-success: 244, 255, 239;
+  --color-sf-on-success-container: 13, 39, 0;
+  --color-sf-info: 1, 87, 155;
+  --color-sf-info-container: 233, 245, 255;
+  --color-sf-on-info: 250, 253, 255;
+  --color-sf-on-info-container: 0, 51, 91;
+  --color-sf-warning: 145, 76, 0;
+  --color-sf-warning-container: 254, 236, 222;
+  --color-sf-on-warning: 255, 255, 255;
+  --color-sf-on-warning-container: 47, 21, 0;
+  --color-sf-spreadsheet-gridline: var(--color-sf-surface-variant);
+  --color-sf-shadow-focus-ring1: 0 0 0 1px rgb(255, 255, 255), 0 0 0 3px rgb(0, 0, 0);
+  --color-sf-diagram-palette-background: --color-sf-white;
+  --color-sf-success-text: 255, 255, 255;
+  --color-sf-warning-text: 255, 255, 255;
+  --color-sf-danger-text: 255, 255, 255;
+  --color-sf-info-text: 255, 255, 255;
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary-container);
+  --color-sf-secondary-bg-color: var(--color-sf-surface);
+}
+
+.e-dark-mode {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 208, 188, 255;
+  --color-sf-primary-container: 79, 55, 139;
+  --color-sf-secondary: 204, 194, 220;
+  --color-sf-secondary-container: 74, 68, 88;
+  --color-sf-tertiary: 239, 184, 200;
+  --color-sf-tertiary-container: 99, 59, 72;
+  --color-sf-surface: 28, 27, 31;
+  --color-sf-surface-variant: 28, 27, 31;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 55, 30, 115;
+  --color-sf-on-primary-container: 234, 221, 255;
+  --color-sf-on-secondary: 51, 45, 65;
+  --color-sf-on-secondary-container: 232, 222, 248;
+  --color-sf-on-tertiary: 73, 37, 50;
+  --color-sf-on-tertiary-containe: 255, 216, 228;
+  --color-sf-on-surface: 230, 225, 229;
+  --color-sf-on-surface-variant: 202, 196, 208;
+  --color-sf-on-background: 230, 225, 229;
+  --color-sf-outline: 147, 143, 153;
+  --color-sf-outline-variant: 68, 71, 70;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 208, 188, 255;
+  --color-sf-inverse-surface: 230, 225, 229;
+  --color-sf-inverse-on-surface: 49, 48, 51;
+  --color-sf-inverse-primary: 103, 80, 164;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 242, 184, 181;
+  --color-sf-error-container: 140, 29, 24;
+  --color-sf-on-error: 96, 20, 16;
+  --color-sf-on-error-container: 249, 222, 220;
+  --color-sf-success: 83, 202, 23;
+  --color-sf-success-container: 22, 62, 2;
+  --color-sf-on-success: 13, 39, 0;
+  --color-sf-on-success-container: 183, 250, 150;
+  --color-sf-info: 71, 172, 251;
+  --color-sf-info-container: 0, 67, 120;
+  --color-sf-on-info: 0, 51, 91;
+  --color-sf-on-info-container: 173, 219, 255;
+  --color-sf-warning: 245, 180, 130;
+  --color-sf-warning-container: 123, 65, 0;
+  --color-sf-on-warning: 99, 52, 0;
+  --color-sf-on-warning-container: 255, 220, 193;
+  --color-sf-spreadsheet-gridline: 231, 224, 236;
+  --color-sf-shadow-focus-ring1: 0 0 0 1px #000000, 0 0 0 3px #ffffff;
+  --color-sf-success-text: 0, 0, 0;
+  --color-sf-warning-text: 0, 0, 0;
+  --color-sf-info-text: 0, 0, 0;
+  --color-sf-danger-text: 0, 0, 0;
+  --color-sf-diagram-palette-background: var(--color-sf-inverse-surface);
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary);
+}
+
+.e-checkbox-wrapper .e-check::before,
+.e-css.e-checkbox-wrapper .e-check::before {
+  content: "\e727";
+}
+
+.e-checkbox-wrapper .e-stop::before,
+.e-css.e-checkbox-wrapper .e-stop::before {
+  content: "\e87f";
+}
+
+/*! checkbox layout */
+.e-checkbox-wrapper,
+.e-css.e-checkbox-wrapper {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  outline: none;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.e-checkbox-wrapper label,
+.e-css.e-checkbox-wrapper label {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 0;
+  margin: 0;
+  position: relative;
+  white-space: nowrap;
+}
+
+.e-checkbox-wrapper:focus .e-frame, .e-checkbox-wrapper.e-focus .e-frame,
+.e-css.e-checkbox-wrapper:focus .e-frame,
+.e-css.e-checkbox-wrapper.e-focus .e-frame {
+  box-shadow: none;
+}
+
+.e-checkbox-wrapper .e-ripple-container,
+.e-css.e-checkbox-wrapper .e-ripple-container {
+  border-radius: 50%;
+  bottom: -9.5px;
+  height: 32px;
+  left: -9.5px;
+  pointer-events: none;
+  position: absolute;
+  right: -9.5px;
+  top: -9.5px;
+  width: 32px;
+  z-index: 1;
+}
+.e-checkbox-wrapper .e-ripple-container .e-ripple-element,
+.e-css.e-checkbox-wrapper .e-ripple-container .e-ripple-element {
+  border-radius: 50%;
+}
+
+.e-checkbox-wrapper .e-label,
+.e-css.e-checkbox-wrapper .e-label {
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 14px;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  vertical-align: middle;
+  white-space: normal;
+}
+
+.e-checkbox-wrapper .e-checkbox,
+.e-css.e-checkbox-wrapper .e-checkbox {
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+.e-checkbox-wrapper .e-checkbox + .e-label,
+.e-css.e-checkbox-wrapper .e-checkbox + .e-label {
+  margin-right: 8px;
+}
+
+.e-checkbox-wrapper .e-frame,
+.e-css.e-checkbox-wrapper .e-frame {
+  border: 2px solid;
+  border-radius: 2px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "e-icons";
+  height: 14px;
+  line-height: 11px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  width: 14px;
+}
+.e-checkbox-wrapper .e-frame + .e-label,
+.e-css.e-checkbox-wrapper .e-frame + .e-label {
+  margin-left: 8px;
+}
+.e-checkbox-wrapper .e-frame + .e-ripple-container,
+.e-css.e-checkbox-wrapper .e-frame + .e-ripple-container {
+  left: auto;
+}
+
+.e-checkbox-wrapper .e-check,
+.e-css.e-checkbox-wrapper .e-check {
+  font-size: 10px;
+}
+
+.e-checkbox-wrapper .e-stop,
+.e-css.e-checkbox-wrapper .e-stop {
+  font-size: 10px;
+  line-height: 11px;
+}
+
+.e-checkbox-wrapper.e-checkbox-disabled,
+.e-css.e-checkbox-wrapper.e-checkbox-disabled {
+  cursor: default;
+  pointer-events: none;
+}
+.e-checkbox-wrapper.e-checkbox-disabled .e-frame,
+.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame {
+  cursor: default;
+}
+.e-checkbox-wrapper.e-checkbox-disabled .e-label,
+.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-label {
+  cursor: default;
+}
+
+.e-checkbox-wrapper.e-rtl .e-ripple-container,
+.e-css.e-checkbox-wrapper.e-rtl .e-ripple-container {
+  right: -9.5px;
+}
+.e-checkbox-wrapper.e-rtl .e-frame,
+.e-css.e-checkbox-wrapper.e-rtl .e-frame {
+  margin: 0;
+}
+.e-checkbox-wrapper.e-rtl .e-frame:hover,
+.e-css.e-checkbox-wrapper.e-rtl .e-frame:hover {
+  background-color: transparent;
+  border-color: rgba(var(--color-sf-on-surface));
+}
+.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container,
+.e-css.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container {
+  left: -9.5px;
+  right: auto;
+}
+.e-checkbox-wrapper.e-rtl .e-label,
+.e-css.e-checkbox-wrapper.e-rtl .e-label {
+  margin-left: 0;
+  margin-right: 8px;
+}
+.e-checkbox-wrapper.e-rtl .e-label + .e-frame,
+.e-css.e-checkbox-wrapper.e-rtl .e-label + .e-frame {
+  margin: 0;
+}
+.e-checkbox-wrapper.e-rtl .e-checkbox + .e-label,
+.e-css.e-checkbox-wrapper.e-rtl .e-checkbox + .e-label {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+.e-checkbox-wrapper.e-small .e-frame,
+.e-css.e-checkbox-wrapper.e-small .e-frame {
+  height: 14px;
+  line-height: 11px;
+  width: 14px;
+}
+.e-checkbox-wrapper.e-small .e-check,
+.e-css.e-checkbox-wrapper.e-small .e-check {
+  font-size: 8px;
+}
+.e-checkbox-wrapper.e-small .e-stop,
+.e-css.e-checkbox-wrapper.e-small .e-stop {
+  font-size: 8px;
+  line-height: 11px;
+}
+.e-checkbox-wrapper.e-small .e-label,
+.e-css.e-checkbox-wrapper.e-small .e-label {
+  font-size: 10px;
+  line-height: 14px;
+}
+.e-checkbox-wrapper.e-small .e-ripple-container,
+.e-css.e-checkbox-wrapper.e-small .e-ripple-container {
+  bottom: -5px;
+  height: 24px;
+  left: -5px;
+  right: -5px;
+  top: -5px;
+  width: 24px;
+}
+
+.e-checkbox-wrapper[readonly] {
+  pointer-events: none;
+}
+
+.e-small .e-checkbox-wrapper .e-frame,
+.e-small.e-checkbox-wrapper .e-frame,
+.e-small .e-css.e-checkbox-wrapper .e-frame,
+.e-small.e-css.e-checkbox-wrapper .e-frame {
+  height: 14px;
+  line-height: 11px;
+  width: 14px;
+}
+.e-small .e-checkbox-wrapper .e-frame:hover,
+.e-small.e-checkbox-wrapper .e-frame:hover,
+.e-small .e-css.e-checkbox-wrapper .e-frame:hover,
+.e-small.e-css.e-checkbox-wrapper .e-frame:hover {
+  background-color: transparent;
+  border-color: rgba(var(--color-sf-on-surface));
+}
+.e-small .e-checkbox-wrapper .e-check,
+.e-small.e-checkbox-wrapper .e-check,
+.e-small .e-css.e-checkbox-wrapper .e-check,
+.e-small.e-css.e-checkbox-wrapper .e-check {
+  font-size: 8px;
+}
+.e-small .e-checkbox-wrapper .e-stop,
+.e-small.e-checkbox-wrapper .e-stop,
+.e-small .e-css.e-checkbox-wrapper .e-stop,
+.e-small.e-css.e-checkbox-wrapper .e-stop {
+  font-size: 8px;
+  line-height: 11px;
+}
+.e-small .e-checkbox-wrapper .e-label,
+.e-small.e-checkbox-wrapper .e-label,
+.e-small .e-css.e-checkbox-wrapper .e-label,
+.e-small.e-css.e-checkbox-wrapper .e-label {
+  font-size: 10px;
+  line-height: 14px;
+}
+.e-small .e-checkbox-wrapper .e-ripple-container,
+.e-small.e-checkbox-wrapper .e-ripple-container,
+.e-small .e-css.e-checkbox-wrapper .e-ripple-container,
+.e-small.e-css.e-checkbox-wrapper .e-ripple-container {
+  bottom: -5px;
+  height: 24px;
+  left: -5px;
+  right: -5px;
+  top: -5px;
+  width: 24px;
+}
+
+.e-bigger.e-small .e-checkbox-wrapper .e-frame,
+.e-bigger.e-small.e-checkbox-wrapper .e-frame,
+.e-bigger.e-small .e-css.e-checkbox-wrapper .e-frame,
+.e-bigger.e-small.e-css.e-checkbox-wrapper .e-frame {
+  height: 16px;
+  line-height: 12px;
+  width: 16px;
+}
+.e-bigger.e-small .e-checkbox-wrapper .e-frame:hover.e-check,
+.e-bigger.e-small.e-checkbox-wrapper .e-frame:hover.e-check,
+.e-bigger.e-small .e-css.e-checkbox-wrapper .e-frame:hover.e-check,
+.e-bigger.e-small.e-css.e-checkbox-wrapper .e-frame:hover.e-check {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+}
+.e-bigger.e-small .e-checkbox-wrapper .e-check,
+.e-bigger.e-small.e-checkbox-wrapper .e-check,
+.e-bigger.e-small .e-css.e-checkbox-wrapper .e-check,
+.e-bigger.e-small.e-css.e-checkbox-wrapper .e-check {
+  font-size: 12px;
+}
+.e-bigger.e-small .e-checkbox-wrapper .e-stop,
+.e-bigger.e-small.e-checkbox-wrapper .e-stop,
+.e-bigger.e-small .e-css.e-checkbox-wrapper .e-stop,
+.e-bigger.e-small.e-css.e-checkbox-wrapper .e-stop {
+  font-size: 10px;
+  line-height: 12px;
+}
+.e-bigger.e-small .e-checkbox-wrapper .e-label,
+.e-bigger.e-small.e-checkbox-wrapper .e-label,
+.e-bigger.e-small .e-css.e-checkbox-wrapper .e-label,
+.e-bigger.e-small.e-css.e-checkbox-wrapper .e-label {
+  font-size: 15px;
+  line-height: 16px;
+}
+.e-bigger.e-small .e-checkbox-wrapper .e-ripple-container,
+.e-bigger.e-small.e-checkbox-wrapper .e-ripple-container,
+.e-bigger.e-small .e-css.e-checkbox-wrapper .e-ripple-container,
+.e-bigger.e-small.e-css.e-checkbox-wrapper .e-ripple-container {
+  bottom: -10px;
+  height: 36px;
+  left: -10px;
+  right: -10px;
+  top: -10px;
+  width: 36px;
+}
+
+.e-bigger .e-checkbox-wrapper .e-frame,
+.e-bigger.e-checkbox-wrapper .e-frame,
+.e-bigger .e-css.e-checkbox-wrapper .e-frame,
+.e-bigger.e-css.e-checkbox-wrapper .e-frame {
+  height: 18px;
+  line-height: 14px;
+  width: 18px;
+}
+.e-bigger .e-checkbox-wrapper .e-frame:hover,
+.e-bigger.e-checkbox-wrapper .e-frame:hover,
+.e-bigger .e-css.e-checkbox-wrapper .e-frame:hover,
+.e-bigger.e-css.e-checkbox-wrapper .e-frame:hover {
+  background-color: transparent;
+  border-color: rgba(var(--color-sf-on-surface));
+}
+.e-bigger .e-checkbox-wrapper .e-frame + .e-label,
+.e-bigger.e-checkbox-wrapper .e-frame + .e-label,
+.e-bigger .e-css.e-checkbox-wrapper .e-frame + .e-label,
+.e-bigger.e-css.e-checkbox-wrapper .e-frame + .e-label {
+  font-size: 14px;
+  line-height: 18px;
+  margin-left: 12px;
+}
+.e-bigger .e-checkbox-wrapper .e-frame + .e-ripple-container,
+.e-bigger.e-checkbox-wrapper .e-frame + .e-ripple-container,
+.e-bigger .e-css.e-checkbox-wrapper .e-frame + .e-ripple-container,
+.e-bigger.e-css.e-checkbox-wrapper .e-frame + .e-ripple-container {
+  left: auto;
+}
+.e-bigger .e-checkbox-wrapper .e-check,
+.e-bigger.e-checkbox-wrapper .e-check,
+.e-bigger .e-css.e-checkbox-wrapper .e-check,
+.e-bigger.e-css.e-checkbox-wrapper .e-check {
+  font-size: 14px;
+}
+.e-bigger .e-checkbox-wrapper .e-stop,
+.e-bigger.e-checkbox-wrapper .e-stop,
+.e-bigger .e-css.e-checkbox-wrapper .e-stop,
+.e-bigger.e-css.e-checkbox-wrapper .e-stop {
+  font-size: 14px;
+  line-height: 14px;
+}
+.e-bigger .e-checkbox-wrapper .e-label,
+.e-bigger.e-checkbox-wrapper .e-label,
+.e-bigger .e-css.e-checkbox-wrapper .e-label,
+.e-bigger.e-css.e-checkbox-wrapper .e-label {
+  font-size: 14px;
+}
+.e-bigger .e-checkbox-wrapper .e-ripple-container,
+.e-bigger.e-checkbox-wrapper .e-ripple-container,
+.e-bigger .e-css.e-checkbox-wrapper .e-ripple-container,
+.e-bigger.e-css.e-checkbox-wrapper .e-ripple-container {
+  bottom: -11px;
+  height: 40px;
+  left: -11px;
+  right: -11px;
+  top: -11px;
+  width: 40px;
+}
+.e-bigger .e-checkbox-wrapper.e-rtl .e-frame,
+.e-bigger.e-checkbox-wrapper.e-rtl .e-frame,
+.e-bigger .e-css.e-checkbox-wrapper.e-rtl .e-frame,
+.e-bigger.e-css.e-checkbox-wrapper.e-rtl .e-frame {
+  margin: 0;
+}
+.e-bigger .e-checkbox-wrapper.e-rtl .e-frame:hover.e-check,
+.e-bigger.e-checkbox-wrapper.e-rtl .e-frame:hover.e-check,
+.e-bigger .e-css.e-checkbox-wrapper.e-rtl .e-frame:hover.e-check,
+.e-bigger.e-css.e-checkbox-wrapper.e-rtl .e-frame:hover.e-check {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+}
+.e-bigger .e-checkbox-wrapper.e-rtl .e-frame + .e-label,
+.e-bigger.e-checkbox-wrapper.e-rtl .e-frame + .e-label,
+.e-bigger .e-css.e-checkbox-wrapper.e-rtl .e-frame + .e-label,
+.e-bigger.e-css.e-checkbox-wrapper.e-rtl .e-frame + .e-label {
+  margin-left: 0;
+  margin-right: 12px;
+}
+.e-bigger .e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container,
+.e-bigger.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container,
+.e-bigger .e-css.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container,
+.e-bigger.e-css.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container {
+  left: auto;
+}
+.e-bigger .e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container,
+.e-bigger.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container,
+.e-bigger .e-css.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container,
+.e-bigger.e-css.e-checkbox-wrapper.e-rtl .e-frame + .e-ripple-container {
+  right: auto;
+}
+.e-bigger .e-checkbox-wrapper.e-small .e-frame,
+.e-bigger.e-checkbox-wrapper.e-small .e-frame,
+.e-bigger .e-css.e-checkbox-wrapper.e-small .e-frame,
+.e-bigger.e-css.e-checkbox-wrapper.e-small .e-frame {
+  height: 16px;
+  line-height: 12px;
+  width: 16px;
+}
+.e-bigger .e-checkbox-wrapper.e-small .e-check,
+.e-bigger.e-checkbox-wrapper.e-small .e-check,
+.e-bigger .e-css.e-checkbox-wrapper.e-small .e-check,
+.e-bigger.e-css.e-checkbox-wrapper.e-small .e-check {
+  font-size: 12px;
+}
+.e-bigger .e-checkbox-wrapper.e-small .e-stop,
+.e-bigger.e-checkbox-wrapper.e-small .e-stop,
+.e-bigger .e-css.e-checkbox-wrapper.e-small .e-stop,
+.e-bigger.e-css.e-checkbox-wrapper.e-small .e-stop {
+  font-size: 10px;
+  line-height: 12px;
+}
+.e-bigger .e-checkbox-wrapper.e-small .e-label,
+.e-bigger.e-checkbox-wrapper.e-small .e-label,
+.e-bigger .e-css.e-checkbox-wrapper.e-small .e-label,
+.e-bigger.e-css.e-checkbox-wrapper.e-small .e-label {
+  font-size: 15px;
+  line-height: 16px;
+}
+.e-bigger .e-checkbox-wrapper.e-small .e-ripple-container,
+.e-bigger.e-checkbox-wrapper.e-small .e-ripple-container,
+.e-bigger .e-css.e-checkbox-wrapper.e-small .e-ripple-container,
+.e-bigger.e-css.e-checkbox-wrapper.e-small .e-ripple-container {
+  bottom: -10px;
+  height: 36px;
+  left: -10px;
+  right: -10px;
+  top: -10px;
+  width: 36px;
+}
+
+/*! checkbox theme */
+.e-checkbox-wrapper,
+.e-css.e-checkbox-wrapper {
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-tap-highlight-color: transparent;
+}
+.e-checkbox-wrapper .e-frame,
+.e-css.e-checkbox-wrapper .e-frame {
+  background-color: transparent;
+  border-color: rgba(var(--color-sf-on-surface));
+}
+.e-checkbox-wrapper .e-frame.e-check,
+.e-css.e-checkbox-wrapper .e-frame.e-check {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+  color: rgba(var(--color-sf-on-primary));
+}
+.e-checkbox-wrapper .e-frame.e-stop,
+.e-css.e-checkbox-wrapper .e-frame.e-stop {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+  color: rgba(var(--color-sf-on-primary));
+}
+
+.e-checkbox-wrapper .e-ripple-element,
+.e-css.e-checkbox-wrapper .e-ripple-element {
+  background: rgba(var(--color-sf-primary), 0.08);
+}
+
+.e-checkbox-wrapper .e-ripple-check .e-ripple-element,
+.e-css.e-checkbox-wrapper .e-ripple-check .e-ripple-element {
+  background: rgba(var(--color-sf-on-surface), 0.08);
+}
+
+.e-checkbox-wrapper:active .e-ripple-element,
+.e-css.e-checkbox-wrapper:active .e-ripple-element {
+  background: rgba(var(--color-sf-on-surface), 0.08);
+}
+.e-checkbox-wrapper:active .e-ripple-check .e-ripple-element,
+.e-css.e-checkbox-wrapper:active .e-ripple-check .e-ripple-element {
+  background: rgba(var(--color-sf-primary), 0.08);
+}
+
+.e-checkbox-wrapper .e-label,
+.e-css.e-checkbox-wrapper .e-label {
+  color: rgba(var(--color-sf-on-surface));
+}
+
+.e-checkbox-wrapper .e-checkbox:focus + .e-frame,
+.e-css.e-checkbox-wrapper .e-checkbox:focus + .e-frame {
+  background-color: transparent;
+  border-color: linear-gradient(0deg, rgba(var(--color-sf-on-primary), 0.12), rgba(var(--color-sf-on-primary), 0.12)), rgba(var(--color-sf-primary));
+  box-shadow: none;
+}
+.e-checkbox-wrapper .e-checkbox:focus + .e-frame.e-check,
+.e-css.e-checkbox-wrapper .e-checkbox:focus + .e-frame.e-check {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+  box-shadow: none;
+  color: rgba(var(--color-sf-on-primary));
+}
+.e-checkbox-wrapper .e-checkbox:focus + .e-frame.e-stop,
+.e-css.e-checkbox-wrapper .e-checkbox:focus + .e-frame.e-stop {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+  box-shadow: none;
+  color: rgba(var(--color-sf-on-primary));
+}
+
+.e-checkbox-wrapper .e-checkbox:active + .e-frame,
+.e-css.e-checkbox-wrapper .e-checkbox:active + .e-frame {
+  background-color: transparent;
+  border-color: linear-gradient(0deg, rgba(var(--color-sf-on-primary), 0.12), rgba(var(--color-sf-on-primary), 0.12)), rgba(var(--color-sf-primary));
+  box-shadow: none;
+}
+.e-checkbox-wrapper .e-checkbox:active + .e-frame.e-check,
+.e-css.e-checkbox-wrapper .e-checkbox:active + .e-frame.e-check {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+  box-shadow: none;
+  color: rgba(var(--color-sf-on-primary));
+}
+.e-checkbox-wrapper .e-checkbox:active + .e-frame.e-stop,
+.e-css.e-checkbox-wrapper .e-checkbox:active + .e-frame.e-stop {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+  box-shadow: none;
+  color: rgba(var(--color-sf-on-primary));
+}
+
+.e-checkbox-wrapper:hover .e-ripple-container,
+.e-css.e-checkbox-wrapper:hover .e-ripple-container {
+  background: rgba(var(--color-sf-on-surface), 0.08);
+}
+.e-checkbox-wrapper:hover .e-ripple-container.e-ripple-check,
+.e-css.e-checkbox-wrapper:hover .e-ripple-container.e-ripple-check {
+  background: rgba(var(--color-sf-primary), 0.08);
+}
+.e-checkbox-wrapper:hover .e-frame,
+.e-css.e-checkbox-wrapper:hover .e-frame {
+  background-color: transparent;
+  border-color: rgba(var(--color-sf-on-surface));
+}
+.e-checkbox-wrapper:hover .e-frame.e-check,
+.e-css.e-checkbox-wrapper:hover .e-frame.e-check {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+  color: rgba(var(--color-sf-on-primary));
+}
+.e-checkbox-wrapper:hover .e-frame.e-stop,
+.e-css.e-checkbox-wrapper:hover .e-frame.e-stop {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+}
+.e-checkbox-wrapper:hover .e-label,
+.e-css.e-checkbox-wrapper:hover .e-label {
+  color: rgba(var(--color-sf-on-surface));
+}
+
+.e-checkbox-wrapper.e-checkbox-disabled .e-frame,
+.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame {
+  background-color: transparent;
+  border: 2px solid rgba(var(--color-sf-on-surface), 0.38);
+  color: rgba(var(--color-sf-on-surface), 0.38);
+}
+.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-check,
+.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-check {
+  background-color: rgba(var(--color-sf-on-surface), 0.38);
+  border: none;
+  border-color: rgba(var(--color-sf-on-surface), 0.38);
+  line-height: 14px;
+  color: rgba(var(--color-sf-on-primary));
+}
+.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-stop,
+.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-stop {
+  background-color: rgba(var(--color-sf-on-surface), 0.38);
+  border: none;
+  border: rgba(var(--color-sf-on-surface), 0.38);
+  line-height: 14px;
+  color: rgba(var(--color-sf-on-primary));
+}
+.e-checkbox-wrapper.e-checkbox-disabled .e-label,
+.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-label {
+  color: rgba(var(--color-sf-on-surface), 0.38);
+}
+
+.e-checkbox-wrapper.e-focus .e-ripple-container,
+.e-css.e-checkbox-wrapper.e-focus .e-ripple-container {
+  background-color: rgba(var(--color-sf-on-surface), 0.12);
+}
+.e-checkbox-wrapper.e-focus .e-ripple-container.e-ripple-check,
+.e-css.e-checkbox-wrapper.e-focus .e-ripple-container.e-ripple-check {
+  background-color: rgba(var(--color-sf-primary), 0.08);
+}
+.e-checkbox-wrapper.e-focus .e-frame,
+.e-css.e-checkbox-wrapper.e-focus .e-frame {
+  outline: rgba(var(--color-sf-primary), 0.25);
+  outline-offset: 0;
+}
+.e-checkbox-wrapper.e-focus .e-frame.e-check,
+.e-css.e-checkbox-wrapper.e-focus .e-frame.e-check {
+  outline: rgba(var(--color-sf-primary), 0.25);
+  outline-offset: 0;
+}
+
+.e-bigger .e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-check,
+.e-bigger.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-check,
+.e-bigger .e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-check,
+.e-bigger.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-check {
+  line-height: 18px;
+}
+.e-bigger .e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-stop,
+.e-bigger.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-stop,
+.e-bigger .e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-stop,
+.e-bigger.e-css.e-checkbox-wrapper.e-checkbox-disabled .e-frame.e-stop {
+  line-height: 18px;
+}

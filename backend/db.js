@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 function connectDB() {
-  mongoose.connect("mongodb://localhost:27017/endorsify", {
+  mongoose.connect("mongodb+srv://shivam:shivam123@cluster0.jksp5cl.mongodb.net/Endorsify", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

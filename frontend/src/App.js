@@ -40,11 +40,11 @@ function App() {
             <Route path="professor/:id" element={<StudentProfessorProfile />} />
           </Route>
 
-          {/* {isAuthenticatedUser && <Route path="student/home" element={<StudentHomePage />} />}
+          {/* {/* {isAuthenticatedUser && <Route path="student/home" element={<StudentHomePage />} />}
           {isAuthenticatedUser && <Route path="student/edit" element={<StudentEdit />} />}
           {isAuthenticatedUser && <Route path="student/apply" element={<StudentApplyLOR />} />}
-          {isAuthenticatedUser && <Route path="student/professor/:id" element={<StudentHomeProfessorProfile />} />}
-          {isAuthenticatedUser && <Route path="/changepassword" element={<ChangePassword />} />} */}
+          {isAuthenticatedUser && <Route path="student/professor/:id" element={<StudentHomeProfessorProfile />} />} */}
+          {isAuthenticatedUser && <Route path="/changepassword" element={<ChangePassword />}/>}
 
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}

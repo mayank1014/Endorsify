@@ -1,0 +1,16 @@
+/* stylelint-disable property-no-vendor-prefix */
+@keyframes e-input-ripple {
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+@keyframes slideTopUp {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+/* stylelint-disable-line no-empty-source */ /* stylelint-disable-line no-empty-source */

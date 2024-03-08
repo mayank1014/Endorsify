@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@syncfusion/ej2-react-documenteditor": "^24.2.9",
+    "react-icons": "^5.0.1"
+  }
+}

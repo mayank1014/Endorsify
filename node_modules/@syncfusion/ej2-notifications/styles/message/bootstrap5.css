@@ -1,0 +1,421 @@
+.e-message .e-msg-icon::before,
+.e-message .e-msg-close-icon::before {
+  font-family: "e-icons";
+}
+.e-message .e-msg-icon::before {
+  content: "\e800";
+}
+.e-message .e-msg-close-icon::before {
+  content: "\e7e7";
+}
+.e-message.e-success .e-msg-icon::before {
+  content: "\e72b";
+}
+.e-message.e-error .e-msg-icon::before {
+  content: "\e878";
+}
+.e-message.e-info .e-msg-icon::before {
+  content: "\e800";
+}
+.e-message.e-warning .e-msg-icon::before {
+  content: "\e88b";
+}
+
+.e-message {
+  border: 1px solid;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 400;
+  font-style: normal;
+  padding: 11px 7px;
+  display: -ms-flexbox;
+  display: flex;
+}
+.e-message.e-hidden {
+  display: none;
+}
+.e-message .e-msg-icon,
+.e-message .e-msg-close-icon {
+  box-sizing: border-box;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 16px;
+}
+.e-message .e-msg-icon {
+  font-size: 16px;
+  height: 16px;
+  margin: 3px 4px;
+}
+.e-message .e-msg-close-icon {
+  border-width: 0;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 1px 2px 1px auto;
+  padding: 2px;
+  height: 20px;
+}
+.e-message .e-msg-content {
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 0 4px;
+  vertical-align: top;
+}
+.e-message.e-content-right {
+  -ms-flex-pack: end;
+      justify-content: flex-end;
+}
+.e-message.e-content-center .e-msg-content-wrap {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 1;
+      flex: 1;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+.e-message.e-content-right .e-msg-close-icon, .e-message.e-content-center .e-msg-close-icon {
+  margin: 3px 4px;
+}
+.e-message.e-rtl .e-msg-close-icon {
+  margin: 1px auto 1px 2px;
+}
+
+.e-bigger .e-message,
+.e-message.e-bigger {
+  padding: 16px 9px;
+}
+.e-bigger .e-message .e-msg-icon,
+.e-bigger .e-message .e-msg-close-icon,
+.e-message.e-bigger .e-msg-icon,
+.e-message.e-bigger .e-msg-close-icon {
+  line-height: 18px;
+}
+.e-bigger .e-message .e-msg-icon,
+.e-message.e-bigger .e-msg-icon {
+  font-size: 18px;
+  height: 18px;
+  margin: 3px 6px;
+}
+.e-bigger .e-message .e-msg-close-icon,
+.e-message.e-bigger .e-msg-close-icon {
+  font-size: 18px;
+  margin: 0 3px 0 auto;
+  padding: 3px;
+  height: 24px;
+}
+.e-bigger .e-message .e-msg-content,
+.e-message.e-bigger .e-msg-content {
+  line-height: 24px;
+  font-size: 16px;
+  padding: 0 6px;
+}
+.e-bigger .e-message.e-content-right .e-msg-close-icon, .e-bigger .e-message.e-content-center .e-msg-close-icon,
+.e-message.e-bigger.e-content-right .e-msg-close-icon,
+.e-message.e-bigger.e-content-center .e-msg-close-icon {
+  margin: 3px 6px;
+}
+.e-bigger .e-message.e-rtl .e-msg-close-icon,
+.e-message.e-bigger.e-rtl .e-msg-close-icon {
+  margin: 0 auto 0 3px;
+}
+
+.e-message {
+  background: #e2e3e5;
+  border-color: #d3d6d8;
+  color: #41464b;
+}
+.e-message .e-msg-icon {
+  color: #212529;
+}
+.e-message .e-msg-close-icon {
+  background: transparent;
+  color: #6c757d;
+}
+.e-message .e-msg-close-icon:hover, .e-message .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+  border-radius: 50%;
+}
+.e-message.e-success {
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+  color: #0f5132;
+}
+.e-message.e-success .e-msg-icon {
+  color: #115c39;
+}
+.e-message.e-success .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-success .e-msg-close-icon:hover, .e-message.e-success .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-warning {
+  background-color: #fff3cd;
+  border-color: #ffecb5;
+  color: #664d03;
+}
+.e-message.e-warning .e-msg-icon {
+  color: #866500;
+}
+.e-message.e-warning .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-warning .e-msg-close-icon:hover, .e-message.e-warning .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-info {
+  background-color: #cff4fc;
+  border-color: #b5effb;
+  color: #055160;
+}
+.e-message.e-info .e-msg-icon {
+  color: #066477;
+}
+.e-message.e-info .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-info .e-msg-close-icon:hover, .e-message.e-info .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-error {
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  color: #842029;
+}
+.e-message.e-error .e-msg-icon {
+  color: #842029;
+}
+.e-message.e-error .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-error .e-msg-close-icon:hover, .e-message.e-error .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-outlined {
+  background: transparent;
+  border-color: #9ca3af;
+  color: #212529;
+}
+.e-message.e-outlined .e-msg-icon {
+  color: #212529;
+}
+.e-message.e-outlined .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-outlined .e-msg-close-icon:hover, .e-message.e-outlined .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-outlined.e-success {
+  border-color: #198754;
+  color: #115c39;
+}
+.e-message.e-outlined.e-success .e-msg-icon {
+  color: #115c39;
+}
+.e-message.e-outlined.e-success .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-outlined.e-success .e-msg-close-icon:hover, .e-message.e-outlined.e-success .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-outlined.e-warning {
+  border-color: #866500;
+  color: #866500;
+}
+.e-message.e-outlined.e-warning .e-msg-icon {
+  color: #876500;
+}
+.e-message.e-outlined.e-warning .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-outlined.e-warning .e-msg-close-icon:hover, .e-message.e-outlined.e-warning .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-outlined.e-info {
+  border-color: #066477;
+  color: #066477;
+}
+.e-message.e-outlined.e-info .e-msg-icon {
+  color: #066477;
+}
+.e-message.e-outlined.e-info .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-outlined.e-info .e-msg-close-icon:hover, .e-message.e-outlined.e-info .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-outlined.e-error {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+.e-message.e-outlined.e-error .e-msg-icon {
+  color: #dc3545;
+}
+.e-message.e-outlined.e-error .e-msg-close-icon {
+  color: #6c757d;
+}
+.e-message.e-outlined.e-error .e-msg-close-icon:hover, .e-message.e-outlined.e-error .e-msg-close-icon:focus {
+  background-color: rgba(108, 117, 125, 0.12);
+  box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.12);
+}
+.e-message.e-filled {
+  background: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+}
+.e-message.e-filled .e-msg-icon {
+  color: #fff;
+}
+.e-message.e-filled .e-msg-close-icon {
+  color: #fff;
+}
+.e-message.e-filled .e-msg-close-icon:hover, .e-message.e-filled .e-msg-close-icon:focus {
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+.e-message.e-filled.e-success {
+  background-color: #198754;
+  border-color: #198754;
+  color: #fff;
+}
+.e-message.e-filled.e-success .e-msg-icon {
+  color: #fff;
+}
+.e-message.e-filled.e-success .e-msg-close-icon {
+  color: #fff;
+}
+.e-message.e-filled.e-success .e-msg-close-icon:hover, .e-message.e-filled.e-success .e-msg-close-icon:focus {
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+.e-message.e-filled.e-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+.e-message.e-filled.e-warning .e-msg-icon {
+  color: #212529;
+}
+.e-message.e-filled.e-warning .e-msg-close-icon {
+  color: #212529;
+}
+.e-message.e-filled.e-warning .e-msg-close-icon:hover, .e-message.e-filled.e-warning .e-msg-close-icon:focus {
+  background-color: rgba(33, 37, 41, 0.12);
+  box-shadow: 0 0 0 2px rgba(33, 37, 41, 0.12);
+}
+.e-message.e-filled.e-info {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+  color: #212529;
+}
+.e-message.e-filled.e-info .e-msg-icon {
+  color: #212529;
+}
+.e-message.e-filled.e-info .e-msg-close-icon {
+  color: #212529;
+}
+.e-message.e-filled.e-info .e-msg-close-icon:hover, .e-message.e-filled.e-info .e-msg-close-icon:focus {
+  background-color: rgba(33, 37, 41, 0.12);
+  box-shadow: 0 0 0 2px rgba(33, 37, 41, 0.12);
+}
+.e-message.e-filled.e-error {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #fff;
+}
+.e-message.e-filled.e-error .e-msg-icon {
+  color: #fff;
+}
+.e-message.e-filled.e-error .e-msg-close-icon {
+  color: #fff;
+}
+.e-message.e-filled.e-error .e-msg-close-icon:hover, .e-message.e-filled.e-error .e-msg-close-icon:focus {
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+.e-bigger .e-message .e-msg-close-icon:hover, .e-bigger .e-message .e-msg-close-icon:focus,
+.e-message.e-bigger .e-msg-close-icon:hover,
+.e-message.e-bigger .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-success .e-msg-close-icon:hover, .e-bigger .e-message.e-success .e-msg-close-icon:focus,
+.e-message.e-bigger.e-success .e-msg-close-icon:hover,
+.e-message.e-bigger.e-success .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-warning .e-msg-close-icon:hover, .e-bigger .e-message.e-warning .e-msg-close-icon:focus,
+.e-message.e-bigger.e-warning .e-msg-close-icon:hover,
+.e-message.e-bigger.e-warning .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-info .e-msg-close-icon:hover, .e-bigger .e-message.e-info .e-msg-close-icon:focus,
+.e-message.e-bigger.e-info .e-msg-close-icon:hover,
+.e-message.e-bigger.e-info .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-error .e-msg-close-icon:hover, .e-bigger .e-message.e-error .e-msg-close-icon:focus,
+.e-message.e-bigger.e-error .e-msg-close-icon:hover,
+.e-message.e-bigger.e-error .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-outlined .e-msg-close-icon:hover, .e-bigger .e-message.e-outlined .e-msg-close-icon:focus,
+.e-message.e-bigger.e-outlined .e-msg-close-icon:hover,
+.e-message.e-bigger.e-outlined .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-outlined.e-success .e-msg-close-icon:hover, .e-bigger .e-message.e-outlined.e-success .e-msg-close-icon:focus,
+.e-message.e-bigger.e-outlined.e-success .e-msg-close-icon:hover,
+.e-message.e-bigger.e-outlined.e-success .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-outlined.e-warning .e-msg-close-icon:hover, .e-bigger .e-message.e-outlined.e-warning .e-msg-close-icon:focus,
+.e-message.e-bigger.e-outlined.e-warning .e-msg-close-icon:hover,
+.e-message.e-bigger.e-outlined.e-warning .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-outlined.e-info .e-msg-close-icon:hover, .e-bigger .e-message.e-outlined.e-info .e-msg-close-icon:focus,
+.e-message.e-bigger.e-outlined.e-info .e-msg-close-icon:hover,
+.e-message.e-bigger.e-outlined.e-info .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-outlined.e-error .e-msg-close-icon:hover, .e-bigger .e-message.e-outlined.e-error .e-msg-close-icon:focus,
+.e-message.e-bigger.e-outlined.e-error .e-msg-close-icon:hover,
+.e-message.e-bigger.e-outlined.e-error .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(108, 117, 125, 0.12);
+}
+.e-bigger .e-message.e-filled .e-msg-close-icon:hover, .e-bigger .e-message.e-filled .e-msg-close-icon:focus,
+.e-message.e-bigger.e-filled .e-msg-close-icon:hover,
+.e-message.e-bigger.e-filled .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
+}
+.e-bigger .e-message.e-filled.e-success .e-msg-close-icon:hover, .e-bigger .e-message.e-filled.e-success .e-msg-close-icon:focus,
+.e-message.e-bigger.e-filled.e-success .e-msg-close-icon:hover,
+.e-message.e-bigger.e-filled.e-success .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
+}
+.e-bigger .e-message.e-filled.e-warning .e-msg-close-icon:hover, .e-bigger .e-message.e-filled.e-warning .e-msg-close-icon:focus,
+.e-message.e-bigger.e-filled.e-warning .e-msg-close-icon:hover,
+.e-message.e-bigger.e-filled.e-warning .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(33, 37, 41, 0.12);
+}
+.e-bigger .e-message.e-filled.e-info .e-msg-close-icon:hover, .e-bigger .e-message.e-filled.e-info .e-msg-close-icon:focus,
+.e-message.e-bigger.e-filled.e-info .e-msg-close-icon:hover,
+.e-message.e-bigger.e-filled.e-info .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(33, 37, 41, 0.12);
+}
+.e-bigger .e-message.e-filled.e-error .e-msg-close-icon:hover, .e-bigger .e-message.e-filled.e-error .e-msg-close-icon:focus,
+.e-message.e-bigger.e-filled.e-error .e-msg-close-icon:hover,
+.e-message.e-bigger.e-filled.e-error .e-msg-close-icon:focus {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.12);
+}

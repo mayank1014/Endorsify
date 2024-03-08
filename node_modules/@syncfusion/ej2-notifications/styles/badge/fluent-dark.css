@@ -1,0 +1,275 @@
+.e-badge {
+  background: #201f1e;
+  border-color: transparent;
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px transparent;
+  box-sizing: border-box;
+  color: #d2d0ce;
+  display: inline-block;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  height: 20px;
+  overflow: hidden;
+  padding: 4px;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0;
+  vertical-align: middle;
+}
+.e-badge:hover {
+  text-decoration: none;
+}
+.e-badge.e-badge-pill {
+  border-radius: 10px;
+  padding: 3px 9px 3px 9px;
+}
+.e-badge.e-badge-ghost {
+  line-height: 1;
+  padding: 3px 10px 3px 10px;
+}
+.e-badge.e-badge-notification {
+  border-radius: 10px;
+  font-size: 12px;
+  height: 18px;
+  left: 100%;
+  line-height: 1;
+  min-width: 32px;
+  padding: 3px 10px;
+  position: absolute;
+  top: -10px;
+  width: auto;
+}
+.e-badge.e-badge-notification.e-badge-ghost {
+  line-height: 1;
+}
+.e-badge.e-badge-circle {
+  border-radius: 10px;
+  height: 20px;
+  line-height: 1;
+  min-width: 0;
+  padding: 3px 3px 4px 3px;
+  width: 20px;
+}
+.e-badge.e-badge-circle.e-badge-ghost {
+  line-height: 1;
+  padding: 3px;
+}
+.e-badge.e-badge-overlap {
+  position: absolute;
+  top: -10px;
+  transform: translateX(-50%);
+}
+.e-badge.e-badge-dot {
+  border-radius: 10px;
+  box-shadow: none;
+  height: 10px;
+  left: 100%;
+  line-height: 1;
+  margin: 0;
+  min-width: 0;
+  overflow: visible;
+  padding: 0;
+  position: absolute;
+  top: -3px;
+  width: 10px;
+}
+.e-badge.e-badge-bottom.e-badge-dot {
+  bottom: 3px;
+  position: absolute;
+  top: auto;
+}
+.e-badge.e-badge-bottom.e-badge-notification {
+  bottom: -3px;
+  position: absolute;
+  top: auto;
+}
+button .e-badge {
+  line-height: 1;
+  position: relative;
+  top: -2px;
+}
+button .e-badge.e-badge-circle {
+  height: 18px;
+  line-height: 1;
+  width: 18px;
+}
+button .e-badge.e-badge-circle.e-badge-ghost {
+  line-height: 1;
+}
+
+.e-bigger .e-badge,
+.e-badge.e-bigger {
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  height: 22px;
+  line-height: 1;
+  padding: 4px;
+}
+.e-bigger .e-badge.e-badge-pill,
+.e-badge.e-bigger.e-badge-pill {
+  border-radius: 10px;
+  padding: 3px 8px;
+}
+.e-bigger .e-badge.e-badge-ghost,
+.e-badge.e-bigger.e-badge-ghost {
+  padding: 3px;
+}
+.e-bigger .e-badge.e-badge-ghost.e-badge-circle,
+.e-badge.e-bigger.e-badge-ghost.e-badge-circle {
+  padding: 3px;
+}
+.e-bigger .e-badge.e-badge-ghost.e-badge-notification,
+.e-badge.e-bigger.e-badge-ghost.e-badge-notification {
+  padding: 3px 10px;
+}
+.e-bigger .e-badge.e-badge-notification,
+.e-badge.e-bigger.e-badge-notification {
+  border-radius: 10px;
+  min-width: 30px;
+  padding: 3px 8px;
+}
+.e-bigger .e-badge.e-badge-circle,
+.e-badge.e-bigger.e-badge-circle {
+  border-radius: 10px;
+  min-width: 0;
+  padding: 4px 3px;
+  width: 22px;
+}
+.e-bigger .e-badge.e-badge-dot,
+.e-badge.e-bigger.e-badge-dot {
+  border-radius: 10px;
+  height: 12px;
+  width: 12px;
+}
+
+.e-badge.e-badge-primary:not(.e-badge-ghost):not([href]), .e-badge.e-badge-primary[href]:not(.e-badge-ghost) {
+  background-color: #0078d4;
+  color: #1b1a19;
+}
+.e-badge.e-badge-secondary:not(.e-badge-ghost):not([href]), .e-badge.e-badge-secondary[href]:not(.e-badge-ghost) {
+  background-color: #201f1e;
+  color: #d2d0ce;
+}
+.e-badge.e-badge-success:not(.e-badge-ghost):not([href]), .e-badge.e-badge-success[href]:not(.e-badge-ghost) {
+  background-color: #0b6a0b;
+  color: #fff;
+}
+.e-badge.e-badge-danger:not(.e-badge-ghost):not([href]), .e-badge.e-badge-danger[href]:not(.e-badge-ghost) {
+  background-color: #d13438;
+  color: #fff;
+}
+.e-badge.e-badge-warning:not(.e-badge-ghost):not([href]), .e-badge.e-badge-warning[href]:not(.e-badge-ghost) {
+  background-color: #ca5010;
+  color: #fff;
+}
+.e-badge.e-badge-info:not(.e-badge-ghost):not([href]), .e-badge.e-badge-info[href]:not(.e-badge-ghost) {
+  background-color: #038387;
+  color: #fff;
+}
+.e-badge.e-badge-light:not(.e-badge-ghost):not([href]), .e-badge.e-badge-light[href]:not(.e-badge-ghost) {
+  background-color: #252423;
+  color: #d2d0ce;
+}
+.e-badge.e-badge-dark:not(.e-badge-ghost):not([href]), .e-badge.e-badge-dark[href]:not(.e-badge-ghost) {
+  background-color: #c8c6c4;
+  color: #fff;
+}
+.e-badge.e-badge-primary[href]:not(.e-badge-ghost):hover {
+  background-color: #005ba1;
+}
+.e-badge.e-badge-secondary[href]:not(.e-badge-ghost):hover {
+  background-color: #060605;
+}
+.e-badge.e-badge-success[href]:not(.e-badge-ghost):hover {
+  background-color: #063c06;
+}
+.e-badge.e-badge-danger[href]:not(.e-badge-ghost):hover {
+  background-color: #ab272a;
+}
+.e-badge.e-badge-warning[href]:not(.e-badge-ghost):hover {
+  background-color: #9b3d0c;
+}
+.e-badge.e-badge-info[href]:not(.e-badge-ghost):hover {
+  background-color: #025355;
+}
+.e-badge.e-badge-light[href]:not(.e-badge-ghost):hover {
+  background-color: #0b0b0a;
+}
+.e-badge.e-badge-dark[href]:not(.e-badge-ghost):hover {
+  background-color: #afadaa;
+}
+.e-badge.e-badge-primary[href].e-badge-ghost:hover {
+  border-color: #004d88;
+  color: #004d88;
+}
+.e-badge.e-badge-secondary[href].e-badge-ghost:hover {
+  border-color: black;
+  color: black;
+}
+.e-badge.e-badge-success[href].e-badge-ghost:hover {
+  border-color: #042504;
+  color: #042504;
+}
+.e-badge.e-badge-danger[href].e-badge-ghost:hover {
+  border-color: #962225;
+  color: #962225;
+}
+.e-badge.e-badge-warning[href].e-badge-ghost:hover {
+  border-color: #83340a;
+  color: #83340a;
+}
+.e-badge.e-badge-info[href].e-badge-ghost:hover {
+  border-color: #013a3c;
+  color: #013a3c;
+}
+.e-badge.e-badge-light[href].e-badge-ghost:hover {
+  border-color: black;
+  color: black;
+}
+.e-badge.e-badge-dark[href].e-badge-ghost:hover {
+  border-color: #a3a09c;
+  color: #a3a09c;
+}
+.e-badge.e-badge-ghost.e-badge-primary {
+  background-color: transparent;
+  border: 1px solid #0078d4;
+  color: #0078d4;
+}
+.e-badge.e-badge-ghost.e-badge-secondary {
+  background-color: transparent;
+  border: 1px solid #d2d0ce;
+  color: #d2d0ce;
+}
+.e-badge.e-badge-ghost.e-badge-success {
+  background-color: transparent;
+  border: 1px solid #0b6a0b;
+  color: #0b6a0b;
+}
+.e-badge.e-badge-ghost.e-badge-danger {
+  background-color: transparent;
+  border: 1px solid #d13438;
+  color: #d13438;
+}
+.e-badge.e-badge-ghost.e-badge-warning {
+  background-color: transparent;
+  border: 1px solid #ca5010;
+  color: #ca5010;
+}
+.e-badge.e-badge-ghost.e-badge-info {
+  background-color: transparent;
+  border: 1px solid #038387;
+  color: #038387;
+}
+.e-badge.e-badge-ghost.e-badge-light {
+  background-color: transparent;
+  border: 1px solid #d2d0ce;
+  color: #d2d0ce;
+}
+.e-badge.e-badge-ghost.e-badge-dark {
+  background-color: transparent;
+  border: 1px solid #c8c6c4;
+  color: #c8c6c4;
+}

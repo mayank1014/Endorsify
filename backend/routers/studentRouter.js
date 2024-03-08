@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Student = require("../models/studentSchema");
 
-router.get("/getstudent/:id", async (req, res) => {
+router.get("/getstudentbyId/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const student = await Student.findOne({_id: id}).exec();

@@ -1,0 +1,91 @@
+import { Chart } from '../chart';
+import { AxisModel } from '../axis/axis-model';
+import { ZoomMode } from '../utils/enum';
+import { IZoomCompleteEventArgs } from '../../chart/model/chart-interface';
+/**
+ * Zooming Toolkit created here
+ *
+ * @private
+ */
+export declare class Toolkit {
+    private chart;
+    private selectionColor;
+    private fillColor;
+    private elementOpacity;
+    private elementId;
+    private zoomInElements;
+    private zoomOutElements;
+    private zoomElements;
+    private panElements;
+    private iconRect;
+    private enableZoomButton;
+    private hoveredID;
+    private selectedID;
+    private iconRectOverFill;
+    private iconRectSelectionFill;
+    /** @private */
+    zoomCompleteEvtCollection: IZoomCompleteEventArgs[];
+    /** @private */
+    constructor(chart: Chart);
+    /**
+     * To create the pan button.
+     *
+     * @returns {void}
+     * @private
+     */
+    createPanButton(childElement: Element, parentElement: Element): void;
+    /**
+     * To create the zoom button.
+     *
+     * @returns {void}
+     * @private
+     */
+    createZoomButton(childElement: Element, parentElement: Element): void;
+    /**
+     * To create the ZoomIn button.
+     *
+     * @returns {void}
+     * @private
+     */
+    createZoomInButton(childElement: Element, parentElement: Element, chart: Chart): void;
+    /**
+     * To create the ZoomOut button.
+     *
+     * @returns {void}
+     * @private
+     */
+    createZoomOutButton(childElement: Element, parentElement: Element, chart: Chart): void;
+    /**
+     * To create the Reset button.
+     *
+     * @returns {void}
+     * @private
+     */
+    createResetButton(childElement: Element, parentElement: Element, chart: Chart, isDevice: Boolean): void;
+    /**
+     * To bind events.
+     *
+     * @returns {void}
+     * @private
+     */
+    wireEvents(element: Element, process: Function): void;
+    /**
+     * To show tooltip.
+     *
+     * @returns {void}
+     * @private
+     */
+    private showTooltip;
+    /** @private */
+    removeTooltip(): void;
+    /** @private */
+    reset(event: PointerEvent | TouchEvent | KeyboardEvent): boolean;
+    private setDefferedZoom;
+    private zoomIn;
+    private zoomOut;
+    private zoom;
+    /** @private */
+    pan(): boolean;
+    zoomInOutCalculation(scale: number, chart: Chart, axes: AxisModel[], mode: ZoomMode): void;
+    private applySelection;
+}

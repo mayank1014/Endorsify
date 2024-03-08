@@ -1,0 +1,8 @@
+/* stylelint-disable property-no-vendor-prefix */
+@keyframes e-input-ripple {
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+/* stylelint-disable-line no-empty-source */ /* stylelint-disable-line no-empty-source */

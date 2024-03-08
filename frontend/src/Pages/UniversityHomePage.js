@@ -16,7 +16,8 @@ const Dashboard = () => {
   const [docxContent, setDocxContent] = useState("");
 
   useEffect(() => {
-    const universityEmail = location.state.user.email;
+    const user = JSON.parse(localStorage.getItem("user"));
+    const universityEmail = user.email;
 
     if (1) {
       axios

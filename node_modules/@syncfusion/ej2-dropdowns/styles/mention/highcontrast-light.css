@@ -1,0 +1,43 @@
+/* stylelint-disable property-no-vendor-prefix */
+@keyframes material-spinner-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fabric-spinner-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.e-dropdownbase .e-list-item .e-list-icon {
+  padding: 0 10px 0 0;
+}
+.e-bigger .e-dropdownbase .e-list-item .e-list-icon {
+  padding: 0 12px 0 0;
+}
+.e-dropdownbase .e-list-item:not(.e-active).e-hover {
+  border: 2px solid #000;
+}
+.e-dropdownbase .e-list-item:not(.e-active):not(.e-hover):not(.e-item-focus) {
+  border: 2px solid #fff;
+}
+.e-dropdownbase .e-list-item.e-active {
+  border: 2px solid #400074;
+}
+.e-dropdownbase .e-list-item.e-item-focus {
+  border: 2px solid #ecf;
+}
+
+.e-small .e-dropdownbase .e-list-item .e-list-icon {
+  padding: 0 8px 0 0;
+}
+
+.e-bigger.e-small .e-dropdownbase .e-list-item .e-list-icon {
+  padding: 0 12px 0 0;
+}

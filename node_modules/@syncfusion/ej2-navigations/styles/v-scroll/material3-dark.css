@@ -1,0 +1,257 @@
+:root {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 208, 188, 255;
+  --color-sf-primary-container: 79, 55, 139;
+  --color-sf-secondary: 204, 194, 220;
+  --color-sf-secondary-container: 74, 68, 88;
+  --color-sf-tertiary: 239, 184, 200;
+  --color-sf-tertiary-container: 99, 59, 72;
+  --color-sf-surface: 28, 27, 31;
+  --color-sf-surface-variant: 73, 69, 79;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 55, 30, 115;
+  --color-sf-on-primary-container: 234, 221, 255;
+  --color-sf-on-secondary: 51, 45, 65;
+  --color-sf-on-secondary-container: 232, 222, 248;
+  --color-sf-on-tertiary: 73, 37, 50;
+  --color-sf-on-tertiary-containe: 255, 216, 228;
+  --color-sf-on-surface: 230, 225, 229;
+  --color-sf-on-surface-variant: 202, 196, 208;
+  --color-sf-on-background: 230, 225, 229;
+  --color-sf-outline: 147, 143, 153;
+  --color-sf-outline-variant: 68, 71, 70;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 208, 188, 255;
+  --color-sf-inverse-surface: 230, 225, 229;
+  --color-sf-inverse-on-surface: 49, 48, 51;
+  --color-sf-inverse-primary: 103, 80, 164;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 242, 184, 181;
+  --color-sf-error-container: 140, 29, 24;
+  --color-sf-on-error: 96, 20, 16;
+  --color-sf-on-error-container: 249, 222, 220;
+  --color-sf-success: 83, 202, 23;
+  --color-sf-success-container: 22, 62, 2;
+  --color-sf-on-success: 13, 39, 0;
+  --color-sf-on-success-container: 183, 250, 150;
+  --color-sf-info: 71, 172, 251;
+  --color-sf-info-container: 0, 67, 120;
+  --color-sf-on-info: 0, 51, 91;
+  --color-sf-on-info-container: 173, 219, 255;
+  --color-sf-warning: 245, 180, 130;
+  --color-sf-warning-container: 123, 65, 0;
+  --color-sf-on-warning: 99, 52, 0;
+  --color-sf-on-warning-container: 255, 220, 193;
+  --color-sf-spreadsheet-gridline: 231, 224, 236;
+  --color-sf-shadow-focus-ring1: 0 0 0 1px #000000, 0 0 0 3px #ffffff;
+  --color-sf-success-text: 0, 0, 0;
+  --color-sf-warning-text: 0, 0, 0;
+  --color-sf-info-text: 0, 0, 0;
+  --color-sf-danger-text: 0, 0, 0;
+  --color-sf-diagram-palette-background: var(--color-sf-inverse-surface);
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary);
+}
+
+/*! component's theme wise override definitions and variables */
+/*! vscroll icons */
+.e-vscroll.e-scroll-device .e-nav-up-arrow::before {
+  content: "\e7dd";
+}
+.e-vscroll.e-scroll-device .e-nav-down-arrow::before {
+  content: "\e734";
+}
+.e-vscroll .e-nav-up-arrow::before {
+  content: "\e776";
+  line-height: normal;
+}
+.e-vscroll .e-nav-down-arrow::before {
+  content: "\e729";
+  line-height: normal;
+}
+
+/*! v-scroll layout */
+.e-bigger .e-vscroll:not(.e-scroll-device),
+.e-vscroll.e-bigger:not(.e-scroll-device) {
+  padding: 46px 0;
+}
+.e-bigger .e-vscroll .e-icons,
+.e-vscroll.e-bigger .e-icons {
+  font-size: 18px;
+}
+.e-bigger .e-vscroll.e-rtl .e-scroll-overlay.e-scroll-down-overlay,
+.e-vscroll.e-bigger.e-rtl .e-scroll-overlay.e-scroll-down-overlay {
+  left: 46px;
+}
+.e-bigger .e-vscroll .e-scroll-overlay.e-scroll-down-overlay,
+.e-vscroll.e-bigger .e-scroll-overlay.e-scroll-down-overlay {
+  right: 46px;
+}
+.e-bigger .e-vscroll .e-scroll-nav,
+.e-vscroll.e-bigger .e-scroll-nav {
+  height: 46px;
+}
+
+.e-vscroll {
+  display: block;
+  position: relative;
+  width: inherit;
+}
+.e-vscroll.e-rtl.e-scroll-device .e-scroll-nav {
+  transform: skewX(-16deg) translateX(-6px);
+}
+.e-vscroll.e-rtl.e-scroll-device .e-scroll-overlay.e-scroll-down-overlay {
+  left: 48px;
+  right: auto;
+  transform: skewX(-16deg) translateX(-6px);
+}
+.e-vscroll.e-rtl.e-scroll-device .e-scroll-overlay.e-scroll-up-overlay {
+  left: auto;
+  right: 0;
+}
+.e-vscroll:not(.e-scroll-device) {
+  padding: 0 40px;
+}
+.e-vscroll.e-scroll-device .e-scroll-nav {
+  transform: skewX(-16deg) translateX(6px);
+  width: 48px;
+  z-index: 1001;
+}
+.e-vscroll.e-scroll-device .e-scroll-nav .e-nav-arrow {
+  font-size: 14px;
+  transform: skewX(16deg);
+}
+.e-vscroll.e-scroll-device .e-scroll-overlay {
+  opacity: 0.5;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 100;
+}
+.e-vscroll.e-scroll-device .e-scroll-overlay.e-scroll-down-overlay {
+  left: auto;
+  right: 48px;
+  transform: skewX(-16deg) translateX(6px);
+}
+.e-vscroll.e-scroll-device .e-scroll-overlay.e-scroll-up-overlay {
+  left: 0;
+  right: auto;
+}
+.e-vscroll > * {
+  height: inherit;
+}
+.e-vscroll .e-vscroll-content {
+  display: inline-block;
+  height: auto;
+  position: relative;
+  width: 100%;
+}
+.e-vscroll .e-vscroll-content > * {
+  pointer-events: auto;
+}
+.e-vscroll.e-rtl .e-scroll-nav.e-scroll-up-nav {
+  left: auto;
+  right: 0;
+}
+.e-vscroll.e-rtl .e-scroll-nav.e-scroll-down-nav {
+  left: 0;
+  right: auto;
+}
+.e-vscroll .e-scroll-nav {
+  -ms-flex-align: center;
+      align-items: center;
+  cursor: pointer;
+  display: -ms-flexbox;
+  display: flex;
+  height: 48px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+.e-vscroll .e-scroll-nav.e-scroll-up-nav {
+  top: 0;
+}
+.e-vscroll .e-scroll-nav.e-scroll-down-nav {
+  bottom: 0;
+}
+.e-vscroll .e-scroll-nav.e-ie-align {
+  display: table;
+}
+.e-vscroll .e-nav-arrow {
+  position: relative;
+}
+.e-vscroll .e-nav-arrow.e-icons {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/*! v-scroll theme */
+.e-vscroll .e-icons {
+  color: rgba(var(--color-sf-on-surface-variant));
+}
+.e-vscroll.e-rtl.e-scroll-device .e-scroll-nav.e-scroll-right-nav {
+  border-color: rgba(var(--color-sf-on-surface-variant));
+  box-shadow: rgba(var(--color-sf-shadow));
+}
+.e-vscroll.e-scroll-device .e-scroll-nav.e-scroll-right-nav {
+  background-color: linear-gradient(0deg, rgba(103, 80, 164, 0.08), rgba(103, 80, 164, 0.08)), linear-gradient(0deg, rgba(var(--color-sf-primary), 0.05), rgba(var(--color-sf-primary), 0.05)), rgba(var(--color-sf-surface));
+  border-color: rgba(var(--color-sf-on-surface-variant));
+  border-width: 1px;
+  box-shadow: rgba(var(--color-sf-shadow));
+}
+.e-vscroll.e-scroll-device .e-scroll-nav.e-scroll-right-nav .e-nav-arrow {
+  color: rgba(var(--color-sf-on-surface-variant));
+}
+.e-vscroll .e-scroll-overlay {
+  background-color: transparent;
+  background-repeat: repeat-x;
+}
+.e-vscroll .e-scroll-overlay.e-scroll-up-overlay {
+  background-image: linear-gradient(-270deg, rgba(var(--color-sf-surface)), 1 0%, rgba(var(--color-sf-surface)), 0 100%);
+}
+.e-vscroll .e-scroll-overlay.e-scroll-down-overlay {
+  background-image: linear-gradient(-270deg, rgba(var(--color-sf-surface)), 0 0%, rgba(var(--color-sf-surface)), 1 100%);
+}
+.e-vscroll.e-rtl .e-scroll-nav {
+  background: linear-gradient(0deg, rgba(103, 80, 164, 0.08), rgba(103, 80, 164, 0.08)), linear-gradient(0deg, rgba(var(--color-sf-primary), 0.05), rgba(var(--color-sf-primary), 0.05)), rgba(var(--color-sf-surface));
+}
+.e-vscroll.e-rtl .e-scroll-nav:hover {
+  background: rgba(var(--color-sf-on-surface), 0.05);
+  border: 0;
+  border-color: transparent;
+  color: rgba(var(--color-sf-on-surface), 0.05);
+}
+.e-vscroll:not(.e-scroll-device) .e-scroll-nav:hover {
+  background: rgba(var(--color-sf-on-surface), 0.05);
+  border: 0;
+  color: rgba(var(--color-sf-on-surface), 0.05);
+}
+.e-vscroll:not(.e-scroll-device) .e-scroll-nav:focus {
+  background: rgba(var(--color-sf-on-surface), 0.05);
+  border: 0;
+  border-color: transparent;
+  color: rgba(var(--color-sf-on-surface), 0.05);
+}
+.e-vscroll:not(.e-scroll-device) .e-scroll-nav:active {
+  background: rgba(var(--color-sf-on-surface), 0.08);
+  border: 0;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  color: rgba(var(--color-sf-primary-container));
+}
+.e-vscroll .e-scroll-nav {
+  background: linear-gradient(0deg, rgba(103, 80, 164, 0.08), rgba(103, 80, 164, 0.08)), linear-gradient(0deg, rgba(var(--color-sf-primary), 0.05), rgba(var(--color-sf-primary), 0.05)), rgba(var(--color-sf-surface));
+}
+.e-vscroll .e-scroll-nav.e-scroll-up-nav {
+  border-bottom: 1px solid rgba(var(--color-sf-outline-variant));
+}
+.e-vscroll .e-scroll-nav.e-scroll-down-nav {
+  border-top: 1px solid rgba(var(--color-sf-outline-variant));
+}
+.e-vscroll .e-scroll-nav::after {
+  content: "";
+}
+.e-vscroll .e-scroll-nav:active::after {
+  content: "";
+}

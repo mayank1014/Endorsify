@@ -158,7 +158,7 @@ const ProfessorHomeStudentProfile = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/students/getstudent/${id}`)
+      .get(`http://localhost:8000/api/students/getstudentbyid/${id}`)
       .then((response) => {
         setStudent(response.data);
         axios

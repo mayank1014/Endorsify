@@ -156,14 +156,7 @@ function StudentEdit() {
                 onClick={() => handleFileInputClick(profilePhotoInputRef)}
               >
                 {student.profilePhoto ? (
-<<<<<<< Updated upstream
-                  <img
-                    src={student.profilePhoto}
-                    alt="Profile Photo"
-                  />
-=======
                   <img src={student.profilePhoto} alt="Profile Photo" />
->>>>>>> Stashed changes
                 ) : (
                   <span>Add Profile Photo</span>
                 )}
@@ -243,14 +236,7 @@ function StudentEdit() {
                 onClick={() => handleFileInputClick(transcriptPhotoInputRef)}
               >
                 {student.transcriptPhoto ? (
-<<<<<<< Updated upstream
-                  <img
-                    src={student.transcriptPhoto}
-                    alt="Transcript Photo"
-                  />
-=======
                   <img src={student.transcriptPhoto} alt="Transcript Photo" />
->>>>>>> Stashed changes
                 ) : (
                   <span>Add Transcript Photo</span>
                 )}

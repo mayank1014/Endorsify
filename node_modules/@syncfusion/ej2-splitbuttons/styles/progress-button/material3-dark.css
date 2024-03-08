@@ -1,0 +1,570 @@
+:root {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 208, 188, 255;
+  --color-sf-primary-container: 79, 55, 139;
+  --color-sf-secondary: 204, 194, 220;
+  --color-sf-secondary-container: 74, 68, 88;
+  --color-sf-tertiary: 239, 184, 200;
+  --color-sf-tertiary-container: 99, 59, 72;
+  --color-sf-surface: 28, 27, 31;
+  --color-sf-surface-variant: 73, 69, 79;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 55, 30, 115;
+  --color-sf-on-primary-container: 234, 221, 255;
+  --color-sf-on-secondary: 51, 45, 65;
+  --color-sf-on-secondary-container: 232, 222, 248;
+  --color-sf-on-tertiary: 73, 37, 50;
+  --color-sf-on-tertiary-containe: 255, 216, 228;
+  --color-sf-on-surface: 230, 225, 229;
+  --color-sf-on-surface-variant: 202, 196, 208;
+  --color-sf-on-background: 230, 225, 229;
+  --color-sf-outline: 147, 143, 153;
+  --color-sf-outline-variant: 68, 71, 70;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 208, 188, 255;
+  --color-sf-inverse-surface: 230, 225, 229;
+  --color-sf-inverse-on-surface: 49, 48, 51;
+  --color-sf-inverse-primary: 103, 80, 164;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 242, 184, 181;
+  --color-sf-error-container: 140, 29, 24;
+  --color-sf-on-error: 96, 20, 16;
+  --color-sf-on-error-container: 249, 222, 220;
+  --color-sf-success: 83, 202, 23;
+  --color-sf-success-container: 22, 62, 2;
+  --color-sf-on-success: 13, 39, 0;
+  --color-sf-on-success-container: 183, 250, 150;
+  --color-sf-info: 71, 172, 251;
+  --color-sf-info-container: 0, 67, 120;
+  --color-sf-on-info: 0, 51, 91;
+  --color-sf-on-info-container: 173, 219, 255;
+  --color-sf-warning: 245, 180, 130;
+  --color-sf-warning-container: 123, 65, 0;
+  --color-sf-on-warning: 99, 52, 0;
+  --color-sf-on-warning-container: 255, 220, 193;
+  --color-sf-spreadsheet-gridline: 231, 224, 236;
+  --color-sf-shadow-focus-ring1: 0 0 0 1px #000000, 0 0 0 3px #ffffff;
+  --color-sf-success-text: 0, 0, 0;
+  --color-sf-warning-text: 0, 0, 0;
+  --color-sf-info-text: 0, 0, 0;
+  --color-sf-danger-text: 0, 0, 0;
+  --color-sf-diagram-palette-background: var(--color-sf-inverse-surface);
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary);
+}
+
+/* stylelint-disable property-no-vendor-prefix */
+@keyframes material-spinner-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fabric-spinner-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/*! Progress Button Layout */
+.e-progress-btn {
+  position: relative;
+}
+.e-progress-btn .e-progress {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.3s linear;
+}
+.e-progress-btn .e-spinner {
+  transition: all 0.3s linear;
+}
+.e-progress-btn .e-btn-content {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+.e-progress-btn.e-vertical .e-progress {
+  bottom: 0;
+  height: 0%;
+  top: auto;
+  width: 100%;
+}
+.e-progress-btn.e-progress-top .e-progress {
+  height: 10%;
+}
+.e-progress-btn.e-progress-bottom .e-progress {
+  bottom: -1px;
+  height: 10%;
+  top: auto;
+}
+.e-progress-btn.e-progress-active {
+  overflow: hidden;
+  pointer-events: none;
+}
+.e-progress-btn.e-progress-active .e-progress {
+  opacity: 1;
+}
+.e-progress-btn.e-progress-active .e-animate-end {
+  opacity: 0;
+}
+.e-progress-btn.e-spin-top, .e-progress-btn.e-spin-bottom {
+  transition: padding 0.3s linear;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top .e-btn-content,
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top .e-spinner, .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom .e-btn-content,
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom .e-spinner {
+  display: block;
+  line-height: 1;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-center .e-spinner {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-left:not(.e-round) .e-spinner {
+  padding-right: 12px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-left:not(.e-round) .e-spinner .e-spinner-inner {
+  top: -1px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-left:not(.e-round).e-rtl .e-spinner {
+  padding-left: 12px;
+  padding-right: 0;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-right:not(.e-round) .e-spinner {
+  padding-left: 12px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-right:not(.e-round) .e-spinner .e-spinner-inner {
+  top: -1px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-right:not(.e-round).e-rtl .e-spinner {
+  padding-left: 0;
+  padding-right: 12px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top {
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top .e-spinner {
+  padding-bottom: 12px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom {
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom .e-spinner {
+  padding-top: 12px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-left:not(.e-round) .e-spinner {
+  padding-right: 10px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-left:not(.e-round).e-rtl .e-spinner {
+  padding-left: 10px;
+  padding-right: 0;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-right:not(.e-round) .e-spinner {
+  padding-left: 10px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-right:not(.e-round).e-rtl .e-spinner {
+  padding-left: 0;
+  padding-right: 10px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-top {
+  padding-bottom: 14px;
+  padding-top: 14px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-top .e-spinner {
+  padding-bottom: 10px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-bottom {
+  padding-bottom: 14px;
+  padding-top: 14px;
+}
+.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-bottom .e-spinner {
+  padding-top: 10px;
+}
+.e-progress-btn.e-round-corner {
+  border-radius: 5em;
+  outline: none;
+  overflow: hidden;
+}
+.e-progress-btn.e-rtl .e-progress {
+  left: auto;
+  right: 0;
+}
+.e-progress-btn.e-rtl.e-vertical .e-progress {
+  bottom: auto;
+  top: 0;
+}
+.e-progress-btn .e-spinner-pane {
+  height: auto;
+  position: relative;
+  width: auto;
+}
+.e-progress-btn .e-spinner-pane .e-spinner-inner {
+  left: auto;
+  position: relative;
+  top: auto;
+  transform: none;
+}
+.e-progress-btn .e-cont-animate {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  height: 100%;
+  -ms-flex-pack: center;
+      justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+@keyframes ProgressSlideLeft {
+  from {
+    left: 0%;
+    opacity: 1;
+  }
+  to {
+    left: -100%;
+    opacity: 0;
+  }
+}
+@keyframes ProgressSlideRight {
+  from {
+    left: 0%;
+    opacity: 1;
+  }
+  to {
+    left: 100%;
+    opacity: 0;
+  }
+}
+@keyframes ProgressSlideUp {
+  from {
+    height: auto;
+    opacity: 1;
+    top: 0;
+  }
+  to {
+    height: auto;
+    opacity: 0;
+    top: -100px;
+  }
+}
+@keyframes ProgressSlideDown {
+  from {
+    height: auto;
+    opacity: 1;
+    top: 0;
+  }
+  to {
+    height: auto;
+    opacity: 0;
+    top: 100px;
+  }
+}
+@keyframes ProgressZoomIn {
+  from {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, 0) scale(3);
+  }
+}
+@keyframes ProgressZoomOut {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(0, 0) scale(0);
+  }
+}
+
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-left:not(.e-round) .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-left:not(.e-round) .e-spinner {
+  padding-right: 14px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-left:not(.e-round).e-rtl .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-left:not(.e-round).e-rtl .e-spinner {
+  padding-left: 14px;
+  padding-right: 0;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-right:not(.e-round) .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-right:not(.e-round) .e-spinner {
+  padding-left: 14px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-right:not(.e-round).e-rtl .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-right:not(.e-round).e-rtl .e-spinner {
+  padding-left: 0;
+  padding-right: 14px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-top .e-spinner {
+  padding-bottom: 14px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-spin-bottom .e-spinner {
+  padding-top: 14px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-left:not(.e-round) .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-left:not(.e-round) .e-spinner {
+  padding-right: 12px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-left:not(.e-round).e-rtl .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-left:not(.e-round).e-rtl .e-spinner {
+  padding-left: 12px;
+  padding-right: 0;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-right:not(.e-round) .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-right:not(.e-round) .e-spinner {
+  padding-left: 12px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-right:not(.e-round).e-rtl .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-right:not(.e-round).e-rtl .e-spinner {
+  padding-left: 0;
+  padding-right: 12px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-top,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-top {
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-top .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-top .e-spinner {
+  padding-bottom: 12px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-bottom,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-bottom {
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+*.e-bigger .e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-bottom .e-spinner,
+*.e-bigger.e-progress-btn.e-progress-active:not(.e-hide-spinner).e-small.e-spin-bottom .e-spinner {
+  padding-top: 12px;
+}
+
+/*! Progress Button Theme */
+.e-progress-btn .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-on-surface));
+  stroke: rgba(var(--color-sf-on-surface));
+}
+.e-progress-btn .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-on-surface));
+}
+.e-progress-btn.e-primary .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-outline:focus .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-flat:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-flat:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-on-primary));
+  stroke: rgba(var(--color-sf-on-primary));
+}
+.e-progress-btn.e-primary .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-flat:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-flat:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-on-primary));
+}
+.e-progress-btn.e-primary.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-primary));
+  stroke: rgba(var(--color-sf-primary));
+}
+.e-progress-btn.e-primary.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-white));
+}
+.e-progress-btn.e-primary.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-primary.e-outline:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-primary));
+  stroke: rgba(var(--color-sf-primary));
+}
+.e-progress-btn.e-primary.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-primary.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-on-primary));
+}
+.e-progress-btn.e-success .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-outline:focus .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-flat:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-flat:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-success-text));
+  stroke: rgba(var(--color-sf-success-text));
+}
+.e-progress-btn.e-success .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-flat:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-flat:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-success-text));
+}
+.e-progress-btn.e-success.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-success));
+  stroke: rgba(var(--color-sf-success));
+}
+.e-progress-btn.e-success.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-success));
+}
+.e-progress-btn.e-success.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-success.e-outline:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-success));
+  stroke: rgba(var(--color-sf-success));
+}
+.e-progress-btn.e-success.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-success.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-success-text));
+}
+.e-progress-btn.e-info .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-outline:focus .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-flat:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-flat:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-info-text));
+  stroke: rgba(var(--color-sf-info-text));
+}
+.e-progress-btn.e-info .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-flat:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-flat:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-info-text));
+}
+.e-progress-btn.e-info.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-info));
+  stroke: rgba(var(--color-sf-info));
+}
+.e-progress-btn.e-info.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-info));
+}
+.e-progress-btn.e-info.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-info.e-outline:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-info));
+  stroke: rgba(var(--color-sf-info));
+}
+.e-progress-btn.e-info.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-info.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-info-text));
+}
+.e-progress-btn.e-warning .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-outline:focus .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-flat:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-flat:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-warning-text));
+  stroke: rgba(var(--color-sf-warning-text));
+}
+.e-progress-btn.e-warning .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-flat:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-flat:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-warning-text));
+}
+.e-progress-btn.e-warning.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-warning));
+  stroke: rgba(var(--color-sf-warning));
+}
+.e-progress-btn.e-warning.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-circle, .e-progress-btn.e-warning.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-circle, .e-progress-btn.e-warning.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-circle, .e-progress-btn.e-warning.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-circle, .e-progress-btn.e-warning.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-circle {
+  stroke: rgba(var(--color-sf-warning));
+}
+.e-progress-btn.e-warning.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-warning));
+}
+.e-progress-btn.e-warning.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-warning.e-outline:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-warning));
+  stroke: rgba(var(--color-sf-warning));
+}
+.e-progress-btn.e-warning.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-warning.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-warning-text));
+}
+.e-progress-btn.e-danger .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-outline:focus .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-flat:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-flat:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-danger-text));
+  stroke: rgba(var(--color-sf-danger-text));
+}
+.e-progress-btn.e-danger .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-flat:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-flat:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-danger-text));
+}
+.e-progress-btn.e-danger.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-error));
+  stroke: rgba(var(--color-sf-error));
+}
+.e-progress-btn.e-danger.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-outline:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-outline:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-flat:hover.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-flat:focus.e-flat .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-error));
+}
+.e-progress-btn.e-danger.e-outline:hover .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-danger.e-outline:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-error));
+  stroke: rgba(var(--color-sf-error));
+}
+.e-progress-btn.e-danger.e-outline:hover .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-danger.e-outline:focus .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-danger-text));
+}
+.e-progress-btn.e-outline.e-primary .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-flat.e-primary .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-primary));
+  stroke: rgba(var(--color-sf-primary));
+}
+.e-progress-btn.e-outline.e-primary .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-flat.e-primary .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-primary));
+}
+.e-progress-btn.e-outline.e-success .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-flat.e-success .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-success));
+  stroke: rgba(var(--color-sf-success));
+}
+.e-progress-btn.e-outline.e-success .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-flat.e-success .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-success));
+}
+.e-progress-btn.e-outline.e-info .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-flat.e-info .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-info));
+  stroke: rgba(var(--color-sf-info));
+}
+.e-progress-btn.e-outline.e-info .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-flat.e-info .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-info));
+}
+.e-progress-btn.e-outline.e-warning .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-flat.e-warning .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-warning));
+  stroke: rgba(var(--color-sf-warning));
+}
+.e-progress-btn.e-outline.e-warning .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-flat.e-warning .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-warning));
+}
+.e-progress-btn.e-outline.e-danger .e-spinner-pane .e-spinner-inner svg, .e-progress-btn.e-flat.e-danger .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-error));
+  stroke: rgba(var(--color-sf-error));
+}
+.e-progress-btn.e-outline.e-danger .e-spinner-pane .e-spinner-inner svg .e-path-arc, .e-progress-btn.e-flat.e-danger .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-error));
+}
+.e-progress-btn.e-link .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-info));
+  stroke: rgba(var(--color-sf-info));
+}
+.e-progress-btn.e-link .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-info));
+}
+
+.e-progress {
+  background: rgba(var(--color-sf-on-surface), 0.12);
+}
+
+*.e-primary .e-progress,
+*.e-success .e-progress,
+*.e-danger .e-progress,
+*.e-info .e-progress {
+  background: rgba(var(--color-sf-on-surface), 0.12);
+}
+
+*.e-flat.e-primary .e-progress,
+*.e-flat:not(:focus).e-primary .e-progress {
+  background: rgba(var(--color-sf-primary), 0.12);
+}
+*.e-flat.e-success .e-progress,
+*.e-flat:not(:focus).e-success .e-progress {
+  background: rgba(var(--color-sf-success), 0.12);
+}
+*.e-flat.e-info .e-progress,
+*.e-flat:not(:focus).e-info .e-progress {
+  background: rgba(var(--color-sf-info), 0.12);
+}
+*.e-flat.e-warning .e-progress,
+*.e-flat:not(:focus).e-warning .e-progress {
+  background: rgba(var(--color-sf-warning), 0.12);
+}
+*.e-flat.e-danger .e-progress,
+*.e-flat:not(:focus).e-danger .e-progress {
+  background: rgba(var(--color-sf-error), 0.12);
+}
+
+.e-progress-btn.e-outline .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-on-surface));
+  stroke: rgba(var(--color-sf-on-surface));
+}
+
+.e-progress-btn.e-outline:focus .e-spinner-pane .e-spinner-inner svg {
+  fill: rgba(var(--color-sf-on-surface));
+  stroke: rgba(var(--color-sf-on-surface));
+}
+
+.e-progress-btn.e-outline.e-success .e-spinner-pane .e-spinner-inner svg .e-path-arc {
+  stroke: rgba(var(--color-sf-on-surface));
+}

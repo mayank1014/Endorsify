@@ -1,0 +1,259 @@
+:root {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 103, 80, 164;
+  --color-sf-primary-container: 234, 221, 255;
+  --color-sf-secondary: 98, 91, 113;
+  --color-sf-secondary-container: 232, 222, 248;
+  --color-sf-tertiary: 125, 82, 96;
+  --color-sf-tertiary-container: 255, 216, 228;
+  --color-sf-surface: 255, 255, 255;
+  --color-sf-surface-variant: 231, 224, 236;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 255, 255, 255;
+  --color-sf-on-primary-container: 33, 0, 94;
+  --color-sf-on-secondary: 255, 255, 255;
+  --color-sf-on-secondary-container: 30, 25, 43;
+  --color-sf-on-tertiary: 255, 255, 255;
+  --color-sf-on-tertiary-containe: 55, 11, 30;
+  --color-sf-on-surface: 28, 27, 31;
+  --color-sf-on-surface-variant: 73, 69, 78;
+  --color-sf-on-background: 28, 27, 31;
+  --color-sf-outline: 121, 116, 126;
+  --color-sf-outline-variant: 196, 199, 197;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 103, 80, 164;
+  --color-sf-inverse-surface: 49, 48, 51;
+  --color-sf-inverse-on-surface: 244, 239, 244;
+  --color-sf-inverse-primary: 208, 188, 255;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 179, 38, 30;
+  --color-sf-error-container: 249, 222, 220;
+  --color-sf-on-error: 255, 250, 250;
+  --color-sf-on-error-container: 65, 14, 11;
+  --color-sf-success: 32, 81, 7;
+  --color-sf-success-container: 209, 255, 186;
+  --color-sf-on-success: 244, 255, 239;
+  --color-sf-on-success-container: 13, 39, 0;
+  --color-sf-info: 1, 87, 155;
+  --color-sf-info-container: 233, 245, 255;
+  --color-sf-on-info: 250, 253, 255;
+  --color-sf-on-info-container: 0, 51, 91;
+  --color-sf-warning: 145, 76, 0;
+  --color-sf-warning-container: 254, 236, 222;
+  --color-sf-on-warning: 255, 255, 255;
+  --color-sf-on-warning-container: 47, 21, 0;
+  --color-sf-spreadsheet-gridline: var(--color-sf-surface-variant);
+  --color-sf-shadow-focus-ring1: 0 0 0 1px rgb(255, 255, 255), 0 0 0 3px rgb(0, 0, 0);
+  --color-sf-diagram-palette-background: --color-sf-white;
+  --color-sf-success-text: 255, 255, 255;
+  --color-sf-warning-text: 255, 255, 255;
+  --color-sf-danger-text: 255, 255, 255;
+  --color-sf-info-text: 255, 255, 255;
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary-container);
+  --color-sf-secondary-bg-color: var(--color-sf-surface);
+}
+
+.e-dark-mode {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 208, 188, 255;
+  --color-sf-primary-container: 79, 55, 139;
+  --color-sf-secondary: 204, 194, 220;
+  --color-sf-secondary-container: 74, 68, 88;
+  --color-sf-tertiary: 239, 184, 200;
+  --color-sf-tertiary-container: 99, 59, 72;
+  --color-sf-surface: 28, 27, 31;
+  --color-sf-surface-variant: 28, 27, 31;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 55, 30, 115;
+  --color-sf-on-primary-container: 234, 221, 255;
+  --color-sf-on-secondary: 51, 45, 65;
+  --color-sf-on-secondary-container: 232, 222, 248;
+  --color-sf-on-tertiary: 73, 37, 50;
+  --color-sf-on-tertiary-containe: 255, 216, 228;
+  --color-sf-on-surface: 230, 225, 229;
+  --color-sf-on-surface-variant: 202, 196, 208;
+  --color-sf-on-background: 230, 225, 229;
+  --color-sf-outline: 147, 143, 153;
+  --color-sf-outline-variant: 68, 71, 70;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 208, 188, 255;
+  --color-sf-inverse-surface: 230, 225, 229;
+  --color-sf-inverse-on-surface: 49, 48, 51;
+  --color-sf-inverse-primary: 103, 80, 164;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 242, 184, 181;
+  --color-sf-error-container: 140, 29, 24;
+  --color-sf-on-error: 96, 20, 16;
+  --color-sf-on-error-container: 249, 222, 220;
+  --color-sf-success: 83, 202, 23;
+  --color-sf-success-container: 22, 62, 2;
+  --color-sf-on-success: 13, 39, 0;
+  --color-sf-on-success-container: 183, 250, 150;
+  --color-sf-info: 71, 172, 251;
+  --color-sf-info-container: 0, 67, 120;
+  --color-sf-on-info: 0, 51, 91;
+  --color-sf-on-info-container: 173, 219, 255;
+  --color-sf-warning: 245, 180, 130;
+  --color-sf-warning-container: 123, 65, 0;
+  --color-sf-on-warning: 99, 52, 0;
+  --color-sf-on-warning-container: 255, 220, 193;
+  --color-sf-spreadsheet-gridline: 231, 224, 236;
+  --color-sf-shadow-focus-ring1: 0 0 0 1px #000000, 0 0 0 3px #ffffff;
+  --color-sf-success-text: 0, 0, 0;
+  --color-sf-warning-text: 0, 0, 0;
+  --color-sf-info-text: 0, 0, 0;
+  --color-sf-danger-text: 0, 0, 0;
+  --color-sf-diagram-palette-background: var(--color-sf-inverse-surface);
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary);
+}
+
+/*! component's theme wise override material 3 definitions and variables */ /* stylelint-disable-line no-empty-source */ /* stylelint-disable-line no-empty-source */
+ejs-sidebar {
+  display: none;
+}
+
+.e-sidebar-display {
+  display: block;
+}
+
+.e-sidebar {
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(0deg, rgba(var(--color-sf-primary), 0.08), rgba(var(--color-sf-primary), 0.08)), rgba(var(--color-sf-surface));
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  transition: none;
+  vertical-align: middle;
+  visibility: hidden;
+  will-change: transform;
+}
+.e-sidebar.e-right.e-open {
+  transform: translateX(0%);
+  transition: transform 0.5s ease;
+  visibility: visible;
+}
+.e-sidebar.e-right.e-close {
+  box-shadow: none;
+  transform: translateX(100%);
+  transition: transform 0.5s ease, visibility 500ms;
+  visibility: hidden;
+}
+.e-sidebar.e-left.e-open {
+  transform: translateX(0%);
+  transition: transform 0.5s ease;
+  visibility: visible;
+}
+.e-sidebar.e-left.e-transition.e-close, .e-sidebar.e-right.e-transition.e-close {
+  transition: transform 0.5s ease, visibility 500ms;
+}
+.e-sidebar.e-left.e-close {
+  box-shadow: none;
+  transform: translateX(-100%);
+  visibility: hidden;
+}
+.e-sidebar.e-right.e-close {
+  box-shadow: none;
+  transform: translateX(100%);
+  transition: transform 0.5s ease, visibility 500ms;
+  visibility: hidden;
+}
+.e-sidebar.e-right {
+  border-left: 1px solid transparent;
+  left: auto;
+  right: 0;
+  top: 0;
+}
+.e-sidebar.e-left {
+  border-right: 1px solid transparent;
+  left: 0;
+  right: auto;
+  top: 0;
+}
+.e-sidebar.e-left.e-close.e-dock {
+  transform: translateX(0%);
+  transition: width 0.5s ease, visibility 500ms;
+  visibility: visible;
+}
+.e-sidebar.e-right.e-close.e-dock {
+  transform: translateX(0%);
+  transition: width 0.5s ease, visibility 500ms;
+  visibility: visible;
+}
+.e-sidebar.e-left.e-open.e-dock.e-blazor-dock, .e-sidebar.e-right.e-open.e-dock.e-blazor-dock {
+  transition: width 0.5s ease, visibility 500ms;
+}
+.e-sidebar.e-left.e-open.e-disable-animation, .e-sidebar.e-right.e-open.e-disable-animation, .e-sidebar.e-right.e-close.e-disable-animation, .e-sidebar.e-left.e-close.e-disable-animation {
+  transition: none;
+}
+.e-sidebar.e-visibility {
+  visibility: hidden;
+}
+.e-sidebar.e-over {
+  box-shadow: rgba(var(--color-sf-shadow));
+}
+
+.e-sidebar-absolute {
+  position: absolute;
+}
+
+.e-sidebar-context {
+  overflow-x: hidden;
+  position: relative;
+}
+
+.e-backdrop {
+  background-color: rgba(var(--color-sf-scrim), 0.5);
+  height: 100%;
+  left: 0;
+  pointer-events: auto;
+  top: 0;
+  width: auto;
+  z-index: 999;
+}
+
+.e-content-animation {
+  transition: margin 0.5s ease, transform 0.5s ease;
+}
+.e-content-animation.e-overlay {
+  box-sizing: border-box;
+  overflow: auto;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.e-disable-interaction {
+  pointer-events: none;
+  -ms-touch-action: none;
+      touch-action: none;
+}
+
+/* stylelint-disable */
+.e-sidebar-overflow {
+  overflow-x: hidden !important;
+}
+
+/* stylelint-enable */
+.e-sidebar-overlay {
+  background-color: rgba(var(--color-sf-scrim), 0.5);
+  height: 100%;
+  left: 0;
+  opacity: 0.5;
+  pointer-events: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.e-content-placeholder.e-sidebar.e-placeholder-sidebar {
+  left: 0;
+  position: fixed;
+  right: auto;
+  top: 0;
+  visibility: visible;
+}

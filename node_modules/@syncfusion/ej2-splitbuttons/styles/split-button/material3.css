@@ -1,0 +1,462 @@
+:root {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 103, 80, 164;
+  --color-sf-primary-container: 234, 221, 255;
+  --color-sf-secondary: 98, 91, 113;
+  --color-sf-secondary-container: 232, 222, 248;
+  --color-sf-tertiary: 125, 82, 96;
+  --color-sf-tertiary-container: 255, 216, 228;
+  --color-sf-surface: 255, 255, 255;
+  --color-sf-surface-variant: 231, 224, 236;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 255, 255, 255;
+  --color-sf-on-primary-container: 33, 0, 94;
+  --color-sf-on-secondary: 255, 255, 255;
+  --color-sf-on-secondary-container: 30, 25, 43;
+  --color-sf-on-tertiary: 255, 255, 255;
+  --color-sf-on-tertiary-containe: 55, 11, 30;
+  --color-sf-on-surface: 28, 27, 31;
+  --color-sf-on-surface-variant: 73, 69, 78;
+  --color-sf-on-background: 28, 27, 31;
+  --color-sf-outline: 121, 116, 126;
+  --color-sf-outline-variant: 196, 199, 197;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 103, 80, 164;
+  --color-sf-inverse-surface: 49, 48, 51;
+  --color-sf-inverse-on-surface: 244, 239, 244;
+  --color-sf-inverse-primary: 208, 188, 255;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 179, 38, 30;
+  --color-sf-error-container: 249, 222, 220;
+  --color-sf-on-error: 255, 250, 250;
+  --color-sf-on-error-container: 65, 14, 11;
+  --color-sf-success: 32, 81, 7;
+  --color-sf-success-container: 209, 255, 186;
+  --color-sf-on-success: 244, 255, 239;
+  --color-sf-on-success-container: 13, 39, 0;
+  --color-sf-info: 1, 87, 155;
+  --color-sf-info-container: 233, 245, 255;
+  --color-sf-on-info: 250, 253, 255;
+  --color-sf-on-info-container: 0, 51, 91;
+  --color-sf-warning: 145, 76, 0;
+  --color-sf-warning-container: 254, 236, 222;
+  --color-sf-on-warning: 255, 255, 255;
+  --color-sf-on-warning-container: 47, 21, 0;
+  --color-sf-spreadsheet-gridline: var(--color-sf-surface-variant);
+  --color-sf-shadow-focus-ring1: 0 0 0 1px rgb(255, 255, 255), 0 0 0 3px rgb(0, 0, 0);
+  --color-sf-diagram-palette-background: --color-sf-white;
+  --color-sf-success-text: 255, 255, 255;
+  --color-sf-warning-text: 255, 255, 255;
+  --color-sf-danger-text: 255, 255, 255;
+  --color-sf-info-text: 255, 255, 255;
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary-container);
+  --color-sf-secondary-bg-color: var(--color-sf-surface);
+}
+
+.e-dark-mode {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 208, 188, 255;
+  --color-sf-primary-container: 79, 55, 139;
+  --color-sf-secondary: 204, 194, 220;
+  --color-sf-secondary-container: 74, 68, 88;
+  --color-sf-tertiary: 239, 184, 200;
+  --color-sf-tertiary-container: 99, 59, 72;
+  --color-sf-surface: 28, 27, 31;
+  --color-sf-surface-variant: 28, 27, 31;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 55, 30, 115;
+  --color-sf-on-primary-container: 234, 221, 255;
+  --color-sf-on-secondary: 51, 45, 65;
+  --color-sf-on-secondary-container: 232, 222, 248;
+  --color-sf-on-tertiary: 73, 37, 50;
+  --color-sf-on-tertiary-containe: 255, 216, 228;
+  --color-sf-on-surface: 230, 225, 229;
+  --color-sf-on-surface-variant: 202, 196, 208;
+  --color-sf-on-background: 230, 225, 229;
+  --color-sf-outline: 147, 143, 153;
+  --color-sf-outline-variant: 68, 71, 70;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 208, 188, 255;
+  --color-sf-inverse-surface: 230, 225, 229;
+  --color-sf-inverse-on-surface: 49, 48, 51;
+  --color-sf-inverse-primary: 103, 80, 164;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 242, 184, 181;
+  --color-sf-error-container: 140, 29, 24;
+  --color-sf-on-error: 96, 20, 16;
+  --color-sf-on-error-container: 249, 222, 220;
+  --color-sf-success: 83, 202, 23;
+  --color-sf-success-container: 22, 62, 2;
+  --color-sf-on-success: 13, 39, 0;
+  --color-sf-on-success-container: 183, 250, 150;
+  --color-sf-info: 71, 172, 251;
+  --color-sf-info-container: 0, 67, 120;
+  --color-sf-on-info: 0, 51, 91;
+  --color-sf-on-info-container: 173, 219, 255;
+  --color-sf-warning: 245, 180, 130;
+  --color-sf-warning-container: 123, 65, 0;
+  --color-sf-on-warning: 99, 52, 0;
+  --color-sf-on-warning-container: 255, 220, 193;
+  --color-sf-spreadsheet-gridline: 231, 224, 236;
+  --color-sf-shadow-focus-ring1: 0 0 0 1px #000000, 0 0 0 3px #ffffff;
+  --color-sf-success-text: 0, 0, 0;
+  --color-sf-warning-text: 0, 0, 0;
+  --color-sf-info-text: 0, 0, 0;
+  --color-sf-danger-text: 0, 0, 0;
+  --color-sf-diagram-palette-background: var(--color-sf-inverse-surface);
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary);
+}
+
+/* stylelint-disable-line no-empty-source */
+/*! splitbutton layout */
+.e-split-btn-wrapper {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  white-space: nowrap;
+  width: min-content;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+.e-split-btn-wrapper .e-split-btn {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  text-transform: none;
+  z-index: 1;
+  box-shadow: none;
+}
+.e-split-btn-wrapper .e-split-btn:focus {
+  outline-offset: 0;
+}
+.e-split-btn-wrapper .e-split-btn:hover {
+  box-shadow: none;
+}
+.e-split-btn-wrapper .e-split-btn:focus {
+  box-shadow: none;
+}
+.e-split-btn-wrapper .e-split-btn:focus-visible {
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #000000;
+}
+.e-split-btn-wrapper .e-split-btn:active {
+  box-shadow: none;
+  z-index: 2;
+}
+.e-split-btn-wrapper .e-split-btn.e-top-icon-btn {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.e-split-btn-wrapper .e-split-btn .e-btn-icon {
+  font-size: 16px;
+  margin-left: 0;
+  padding-right: 8px;
+  width: auto;
+  border-radius: 4px;
+}
+.e-split-btn-wrapper .e-split-btn .e-icon-top {
+  padding-bottom: 4px;
+  padding-right: 0;
+}
+.e-split-btn-wrapper .e-split-btn.e-icon-btn {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.e-split-btn-wrapper .e-split-btn.e-icon-btn .e-btn-icon {
+  padding-right: 0;
+}
+.e-split-btn-wrapper .e-dropdown-btn {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-left: -1px;
+  box-shadow: none;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.e-split-btn-wrapper .e-dropdown-btn:active {
+  box-shadow: none;
+  z-index: 2;
+}
+.e-split-btn-wrapper .e-dropdown-btn:disabled:focus, .e-split-btn-wrapper .e-dropdown-btn:disabled:hover, .e-split-btn-wrapper .e-dropdown-btn:disabled:active {
+  z-index: 0;
+}
+.e-split-btn-wrapper .e-dropdown-btn:focus {
+  outline-offset: 0;
+}
+.e-split-btn-wrapper .e-btn:hover {
+  box-shadow: none;
+}
+.e-split-btn-wrapper .e-btn:focus {
+  box-shadow: none;
+}
+.e-split-btn-wrapper .e-btn:focus-visible {
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 3px #000000;
+}
+.e-split-btn-wrapper .e-btn:active {
+  box-shadow: none;
+}
+.e-split-btn-wrapper .e-btn:disabled {
+  box-shadow: none;
+}
+.e-split-btn-wrapper .e-btn.e-inherit:focus, .e-split-btn-wrapper .e-btn.e-inherit:active {
+  box-shadow: none;
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 100px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 100px;
+  margin-left: -1px;
+  border-radius: 4px;
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn .e-btn-icon {
+  margin-right: 0;
+  padding-left: 8px;
+  padding-right: 0;
+  border-radius: 4px;
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn .e-icon-top {
+  padding-left: 0;
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn.e-icon-btn {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn.e-icon-btn .e-btn-icon {
+  padding-left: 0;
+}
+.e-split-btn-wrapper.e-rtl .e-dropdown-btn {
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 0;
+  margin-left: 0;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.e-split-btn-wrapper.e-vertical {
+  display: inline-block;
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn,
+.e-split-btn-wrapper.e-vertical .e-dropdown-btn {
+  display: block;
+  width: 100%;
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn {
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 100px;
+  line-height: 1;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn .e-icon-top {
+  padding-bottom: 4px;
+}
+.e-split-btn-wrapper.e-vertical .e-dropdown-btn {
+  border-bottom-left-radius: 100px;
+  border-top-right-radius: 0;
+  line-height: 0.334em;
+  margin-left: 0;
+  margin-top: -1px;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.e-split-btn-wrapper.e-vertical .e-dropdown-btn .e-icon-bottom {
+  padding-top: 0;
+}
+.e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn {
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 100px;
+  margin-left: 0;
+}
+.e-split-btn-wrapper.e-vertical.e-rtl .e-dropdown-btn {
+  border-bottom-right-radius: 100px;
+  border-top-left-radius: 0;
+}
+
+.e-bigger .e-split-btn-wrapper,
+.e-bigger.e-split-btn-wrapper {
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+.e-bigger .e-split-btn-wrapper .e-split-btn,
+.e-bigger.e-split-btn-wrapper .e-split-btn {
+  border-radius: 4px;
+  box-shadow: none;
+  padding-left: 12px;
+  padding-right: 6px;
+}
+.e-bigger .e-split-btn-wrapper .e-split-btn.e-top-icon-btn,
+.e-bigger.e-split-btn-wrapper .e-split-btn.e-top-icon-btn {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+.e-bigger .e-split-btn-wrapper .e-split-btn .e-btn-icon,
+.e-bigger.e-split-btn-wrapper .e-split-btn .e-btn-icon {
+  font-size: 18px;
+  margin-left: 0;
+  padding-right: 10px;
+  width: auto;
+  border-radius: 4px;
+}
+.e-bigger .e-split-btn-wrapper .e-split-btn .e-icon-top,
+.e-bigger.e-split-btn-wrapper .e-split-btn .e-icon-top {
+  padding-bottom: 6px;
+  padding-right: 0;
+}
+.e-bigger .e-split-btn-wrapper .e-split-btn.e-icon-btn,
+.e-bigger.e-split-btn-wrapper .e-split-btn.e-icon-btn {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.e-bigger .e-split-btn-wrapper .e-split-btn.e-icon-btn .e-btn-icon,
+.e-bigger.e-split-btn-wrapper .e-split-btn.e-icon-btn .e-btn-icon {
+  padding-right: 0;
+}
+.e-bigger .e-split-btn-wrapper .e-dropdown-btn,
+.e-bigger.e-split-btn-wrapper .e-dropdown-btn {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.e-bigger .e-split-btn-wrapper.e-rtl .e-split-btn,
+.e-bigger.e-split-btn-wrapper.e-rtl .e-split-btn {
+  padding-left: 6px;
+  padding-right: 12px;
+}
+.e-bigger .e-split-btn-wrapper.e-rtl .e-split-btn .e-btn-icon,
+.e-bigger.e-split-btn-wrapper.e-rtl .e-split-btn .e-btn-icon {
+  padding-left: 10px;
+  padding-right: 0;
+  border-radius: 4px;
+}
+.e-bigger .e-split-btn-wrapper.e-rtl .e-split-btn .e-icon-top,
+.e-bigger.e-split-btn-wrapper.e-rtl .e-split-btn .e-icon-top {
+  padding-left: 0;
+}
+.e-bigger .e-split-btn-wrapper.e-rtl .e-split-btn.e-icon-btn,
+.e-bigger.e-split-btn-wrapper.e-rtl .e-split-btn.e-icon-btn {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.e-bigger .e-split-btn-wrapper.e-rtl .e-split-btn.e-icon-btn .e-btn-icon,
+.e-bigger.e-split-btn-wrapper.e-rtl .e-split-btn.e-icon-btn .e-btn-icon {
+  padding-left: 0;
+}
+.e-bigger .e-split-btn-wrapper.e-vertical .e-split-btn,
+.e-bigger.e-split-btn-wrapper.e-vertical .e-split-btn {
+  padding-bottom: 6px;
+  padding-right: 12px;
+}
+.e-bigger .e-split-btn-wrapper.e-vertical .e-dropdown-btn,
+.e-bigger.e-split-btn-wrapper.e-vertical .e-dropdown-btn {
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+.e-bigger .e-split-btn-wrapper.e-vertical .e-dropdown-btn .e-icon-bottom,
+.e-bigger.e-split-btn-wrapper.e-vertical .e-dropdown-btn .e-icon-bottom {
+  padding-top: 0;
+}
+
+/*! splitbutton theme */
+.e-split-btn-wrapper .e-split-btn {
+  border-image: linear-gradient(to right, rgba(var(--color-sf-surface), 1) 25%, rgba(var(--color-sf-outline-variant), 1) 75%) 1;
+  border-width: 0 1px 0 0;
+}
+.e-split-btn-wrapper .e-split-btn:focus {
+  border-right-color: rgba(var(--color-sf-outline-variant));
+}
+.e-split-btn-wrapper .e-split-btn:active {
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-on-surface), 0.12), rgba(var(--color-sf-on-surface), 0.12)), rgba(var(--color-sf-surface));
+}
+.e-split-btn-wrapper .e-split-btn:disabled {
+  border-right-color: rgba(var(--color-sf-secondary), 0.12);
+}
+.e-split-btn-wrapper .e-split-btn.e-inherit {
+  border-color: transparent;
+}
+.e-split-btn-wrapper.e-splitbtn-disabled {
+  box-shadow: none;
+}
+.e-split-btn-wrapper:hover :not(e-active) .e-split-btn {
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper:hover :not(e-active) .e-split-btn:disabled {
+  border-right-color: rgba(var(--color-sf-secondary), 0);
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn {
+  border-image: linear-gradient(to left, rgba(var(--color-sf-surface), 1) 25%, rgba(var(--color-sf-outline-variant), 1) 75%) 1;
+  border-width: 0 0 0 1px;
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn:focus {
+  border-left-color: rgba(var(--color-sf-outline-variant));
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn:active {
+  border-left-color: linear-gradient(0deg, rgba(var(--color-sf-on-surface), 0.12), rgba(var(--color-sf-on-surface), 0.12)), rgba(var(--color-sf-surface));
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-on-surface), 0.12), rgba(var(--color-sf-on-surface), 0.12)), rgba(var(--color-sf-surface));
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn:disabled {
+  border-left-color: rgba(var(--color-sf-secondary), 0);
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-rtl .e-split-btn.e-inherit {
+  border-color: transparent;
+}
+.e-split-btn-wrapper.e-rtl:hover .e-split-btn :not(e-active) {
+  border-left-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-rtl:hover .e-split-btn :not(e-active):disabled {
+  border-left-color: rgba(var(--color-sf-secondary), 0);
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn {
+  border-image: linear-gradient(to bottom, rgba(var(--color-sf-surface), 1) 25%, rgba(var(--color-sf-outline-variant), 1) 75%) 1;
+  border-width: 0 0 2px;
+  border-bottom-color: rgba(var(--color-sf-outline-variant));
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn.e-inherit, .e-split-btn-wrapper.e-vertical .e-split-btn.e-inherit:focus, .e-split-btn-wrapper.e-vertical .e-split-btn.e-inherit:active, .e-split-btn-wrapper.e-vertical .e-split-btn.e-inherit:disabled {
+  border-color: transparent;
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn:focus {
+  border-bottom-color: rgba(var(--color-sf-outline-variant));
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn:active {
+  border-bottom-color: linear-gradient(0deg, rgba(var(--color-sf-on-surface), 0.12), rgba(var(--color-sf-on-surface), 0.12)), rgba(var(--color-sf-surface));
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-on-surface), 0.12), rgba(var(--color-sf-on-surface), 0.12)), rgba(var(--color-sf-surface));
+}
+.e-split-btn-wrapper.e-vertical .e-split-btn:disabled {
+  border-bottom-color: rgba(var(--color-sf-secondary), 0);
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical:hover .e-split-btn {
+  border-bottom-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+  border-right-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical:hover .e-split-btn.e-inherit, .e-split-btn-wrapper.e-vertical:hover .e-split-btn.e-inherit:disabled {
+  border-color: transparent;
+}
+.e-split-btn-wrapper.e-vertical:hover .e-split-btn:disabled {
+  border-bottom-color: rgba(var(--color-sf-secondary), 0);
+}
+.e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn {
+  border-left-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn.e-inherit, .e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn.e-inherit:focus, .e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn.e-inherit:active, .e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn.e-inherit:disabled {
+  border-color: transparent;
+}
+.e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn:focus {
+  border-left-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn:active {
+  border-left-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical.e-rtl .e-split-btn:disabled {
+  border-left-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical.e-rtl:hover .e-split-btn {
+  border-left-color: linear-gradient(0deg, rgba(var(--color-sf-surface), 1), rgba(var(--color-sf-surface), 1));
+}
+.e-split-btn-wrapper.e-vertical.e-rtl:hover .e-split-btn.e-inherit {
+  border-color: transparent;
+}

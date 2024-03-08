@@ -1,0 +1,226 @@
+import { Base, EmitType } from './base';
+import { AnimationModel } from './animation-model';
+import { INotifyPropertyChanged } from './notify-property-change';
+/**
+ * Animation effect names
+ */
+export declare type Effect = 'FadeIn' | 'FadeOut' | 'FadeZoomIn' | 'FadeZoomOut' | 'FlipLeftDownIn' | 'FlipLeftDownOut' | 'FlipLeftUpIn' | 'FlipLeftUpOut' | 'FlipRightDownIn' | 'FlipRightDownOut' | 'FlipRightUpIn' | 'FlipRightUpOut' | 'FlipXDownIn' | 'FlipXDownOut' | 'FlipXUpIn' | 'FlipXUpOut' | 'FlipYLeftIn' | 'FlipYLeftOut' | 'FlipYRightIn' | 'FlipYRightOut' | 'SlideBottomIn' | 'SlideBottomOut' | 'SlideDown' | 'SlideLeft' | 'SlideLeftIn' | 'SlideLeftOut' | 'SlideRight' | 'SlideRightIn' | 'SlideRightOut' | 'SlideTopIn' | 'SlideTopOut' | 'SlideUp' | 'ZoomIn' | 'ZoomOut';
+/**
+ * The Animation framework provide options to animate the html DOM elements
+ * ```typescript
+ *   let animeObject = new Animation({
+ *      name: 'SlideLeftIn',
+ *      duration: 1000
+ *   });
+ *   animeObject.animate('#anime1');
+ *   animeObject.animate('#anime2', { duration: 500 });
+ * ```
+ */
+export declare class Animation extends Base<HTMLElement> implements INotifyPropertyChanged {
+    /**
+     * Specify the type of animation
+     *
+     * @default : 'FadeIn';
+     */
+    name: Effect;
+    /**
+     * Specify the duration to animate
+     *
+     * @default : 400;
+     */
+    duration: number;
+    /**
+     * Specify the animation timing function
+     *
+     * @default : 'ease';
+     */
+    timingFunction: string;
+    /**
+     * Specify the delay to start animation
+     *
+     * @default : 0;
+     */
+    delay: number;
+    /**
+     * Triggers when animation is in-progress
+     *
+     * @event progress
+     */
+    progress: EmitType<AnimationOptions>;
+    /**
+     * Triggers when the animation is started
+     *
+     * @event begin
+     */
+    begin: EmitType<AnimationOptions>;
+    /**
+     * Triggers when animation is completed
+     *
+     * @event end
+     */
+    end: EmitType<AnimationOptions>;
+    /**
+     * Triggers when animation is failed due to any scripts
+     *
+     * @event fail
+     */
+    fail: EmitType<AnimationOptions>;
+    /**
+     * @private
+     */
+    easing: {
+        [key: string]: string;
+    };
+    constructor(options: AnimationModel);
+    /**
+     * Applies animation to the current element.
+     *
+     * @param {string | HTMLElement} element - Element which needs to be animated.
+     * @param {AnimationModel} options - Overriding default animation settings.
+     * @returns {void} ?
+     */
+    animate(element: string | HTMLElement, options?: AnimationModel): void;
+    /**
+     * Stop the animation effect on animated element.
+     *
+     * @param {HTMLElement} element - Element which needs to be stop the animation.
+     * @param {AnimationOptions} model - Handling the animation model at stop function.
+     * @return {void}
+     */
+    static stop(element: HTMLElement, model?: AnimationOptions): void;
+    /**
+     * Set delay to animation element
+     *
+     * @param {AnimationModel} model ?
+     * @returns {void}
+     */
+    private static delayAnimation;
+    /**
+     * Triggers animation
+     *
+     * @param {AnimationModel} model ?
+     * @returns {void}
+     */
+    private static applyAnimation;
+    /**
+     * Returns Animation Model
+     *
+     * @param {AnimationModel} options ?
+     * @returns {AnimationModel} ?
+     */
+    private getModel;
+    /**
+     * @private
+     * @param {AnimationModel} newProp ?
+     * @param {AnimationModel} oldProp ?
+     * @returns {void} ?
+     */
+    onPropertyChanged(newProp: AnimationModel, oldProp: AnimationModel): void;
+    /**
+     * Returns module name as animation
+     *
+     * @private
+     * @returns {void} ?
+     */
+    getModuleName(): string;
+    /**
+     *
+     * @private
+     * @returns {void} ?
+     */
+    destroy(): void;
+}
+/**
+ * Animation event argument for progress event handler
+ */
+export interface AnimationOptions extends AnimationModel {
+    /**
+     * Get current time-stamp in progress EventHandler
+     */
+    timeStamp?: number;
+    /**
+     * Get current animation element in progress EventHandler
+     */
+    element?: HTMLElement;
+}
+/**
+ * Ripple provides material theme's wave effect when an element is clicked
+ * ```html
+ * <div id='ripple'></div>
+ * <script>
+ *   rippleEffect(document.getElementById('ripple'));
+ * </script>
+ * ```
+ *
+ * @private
+ * @param {HTMLElement} element - Target element
+ * @param {RippleOptions} rippleOptions - Ripple options .
+ * @param {Function} done .
+ * @returns {void} .
+ */
+export declare function rippleEffect(element: HTMLElement, rippleOptions?: RippleOptions, done?: Function): () => void;
+/**
+ * Ripple method arguments to handle ripple effect
+ *
+ * @private
+ */
+export interface RippleOptions {
+    /**
+     * Get selector child elements for ripple effect
+     */
+    selector?: string;
+    /**
+     * Get ignore elements to prevent ripple effect
+     */
+    ignore?: string;
+    /**
+     * Override the enableRipple method
+     */
+    rippleFlag?: boolean;
+    /**
+     * Set ripple effect from center position
+     */
+    isCenterRipple?: boolean;
+    /**
+     * Set ripple duration
+     */
+    duration?: number;
+}
+export declare let isRippleEnabled: boolean;
+/**
+ * Animation Module provides support to enable ripple effect functionality to Essential JS 2 components.
+ *
+ * @param {boolean} isRipple Specifies the boolean value to enable or disable ripple effect.
+ * @returns {boolean} ?
+ */
+export declare function enableRipple(isRipple: boolean): boolean;
+/**
+ * Defines the Modes of Global animation.
+ *
+ * @private
+ */
+export declare let animationMode: string | GlobalAnimationMode;
+/**
+ * This method is used to enable or disable the animation for all components.
+ *
+ * @param {string|GlobalAnimationMode} value - Specifies the value to enable or disable the animation for all components. When set to 'enable', it enables the animation for all components, regardless of the individual component's animation settings. When set to 'disable', it disables the animation for all components, regardless of the individual component's animation settings.
+ * @returns {void}
+ */
+export declare function setGlobalAnimation(value: string | GlobalAnimationMode): void;
+/**
+ * Defines the global animation modes for all components.
+ */
+export declare enum GlobalAnimationMode {
+    /**
+    * Defines the global animation mode as Default. Animation is enabled or disabled based on the component's animation settings.
+    */
+    Default = "Default",
+    /**
+    * Defines the global animation mode as Enable. Enables the animation for all components, regardless of the individual component's animation settings.
+    */
+    Enable = "Enable",
+    /**
+    * Defines the global animation mode as Disable. Disables the animation for all components, regardless of the individual component's animation settings.
+    */
+    Disable = "Disable"
+}

@@ -1,0 +1,114 @@
+.e-fab.e-btn {
+  -ms-flex-align: center;
+      align-items: center;
+  border-radius: 9999px;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0 15px;
+  position: absolute;
+  z-index: 100000;
+}
+.e-fab.e-btn .e-btn-icon {
+  margin-top: 0;
+  font-size: 14px;
+}
+.e-fab.e-btn.e-icon-btn {
+  padding: 0;
+}
+.e-fab.e-btn.e-fab-fixed {
+  position: fixed;
+}
+.e-fab.e-btn.e-fab-top {
+  top: 16px;
+}
+.e-fab.e-btn.e-fab-top.e-fab-middle {
+  top: var(--fabVertDist);
+}
+.e-fab.e-btn.e-fab-bottom {
+  bottom: 16px;
+}
+.e-fab.e-btn.e-fab-bottom.e-fab-middle {
+  bottom: var(--fabVertDist);
+}
+.e-fab.e-btn.e-fab-left {
+  left: 16px;
+}
+.e-fab.e-btn.e-fab-left.e-fab-center {
+  left: var(--fabHorzDist);
+}
+.e-fab.e-btn.e-fab-right {
+  right: 16px;
+}
+.e-fab.e-btn.e-fab-right.e-fab-center {
+  right: var(--fabHorzDist);
+}
+
+.e-fab-hidden {
+  visibility: hidden;
+}
+
+.e-small.e-fab.e-btn,
+.e-small .e-fab.e-btn {
+  border-radius: 9999px;
+  min-height: 32px;
+  min-width: 32px;
+  padding: 0 11px;
+}
+.e-small.e-fab.e-btn.e-icon-btn,
+.e-small .e-fab.e-btn.e-icon-btn {
+  padding: 0;
+}
+.e-small.e-fab.e-btn .e-btn-icon,
+.e-small .e-fab.e-btn .e-btn-icon {
+  font-size: 12px;
+}
+
+.e-bigger.e-fab.e-btn,
+.e-bigger .e-fab.e-btn {
+  border-radius: 9999px;
+  min-height: 52px;
+  min-width: 52px;
+  padding: 0 21px;
+}
+.e-bigger.e-fab.e-btn.e-icon-btn,
+.e-bigger .e-fab.e-btn.e-icon-btn {
+  padding: 0;
+}
+.e-bigger.e-fab.e-btn .e-btn-icon,
+.e-bigger .e-fab.e-btn .e-btn-icon {
+  font-size: 16px;
+}
+
+.e-bigger.e-small.e-fab.e-btn,
+.e-bigger.e-small .e-fab.e-btn,
+.e-bigger .e-small.e-fab.e-btn,
+.e-small .e-bigger.e-fab.e-btn {
+  border-radius: 9999px;
+  min-height: 46px;
+  min-width: 46px;
+  padding: 0 17px;
+}
+.e-bigger.e-small.e-fab.e-btn.e-icon-btn,
+.e-bigger.e-small .e-fab.e-btn.e-icon-btn,
+.e-bigger .e-small.e-fab.e-btn.e-icon-btn,
+.e-small .e-bigger.e-fab.e-btn.e-icon-btn {
+  padding: 0;
+}
+.e-bigger.e-small.e-fab.e-btn .e-btn-icon,
+.e-bigger.e-small .e-fab.e-btn .e-btn-icon,
+.e-bigger .e-small.e-fab.e-btn .e-btn-icon,
+.e-small .e-bigger.e-fab.e-btn .e-btn-icon {
+  font-size: 14px;
+}
+
+.e-fab.e-btn {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.14), 0 1px 18px rgba(0, 0, 0, 0.12);
+}
+.e-fab.e-btn:hover:not(:focus), .e-fab.e-btn:active, .e-fab.e-btn.e-active, .e-fab.e-btn:disabled {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.14), 0 1px 18px rgba(0, 0, 0, 0.12);
+}
+.e-fab.e-btn:focus {
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.14), 0 1px 18px rgba(0, 0, 0, 0.12);
+}

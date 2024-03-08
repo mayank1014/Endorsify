@@ -94,20 +94,12 @@ const StudentRegistration = () => {
           .then((response) => {
             formData["transcriptPhoto"] = response.data.url;
 
-<<<<<<< Updated upstream
-      await axios.post("http://localhost:8000/api/users/register", user);
-      try {
-        const response = await axios.post("http://localhost:8000/api/students/register", formData);
-        if (response.data.error === 1) {
-          await axios.post("http://localhost:8000/api/users/deleteuser", user);
-=======
             const user = {
               email: location.state.email,
               password: location.state.password,
               confirmPassword: location.state.confirmPassword,
               role: "student",
             };
->>>>>>> Stashed changes
 
             formData.email = location.state.email;
 
@@ -118,16 +110,6 @@ const StudentRegistration = () => {
               }
             }
 
-<<<<<<< Updated upstream
-          setTimeout(() => {
-            navigate("/professor/home");
-          }, 500);
-        }
-      } catch (error) {
-        await axios.post("http://localhost:8000/api/users/deleteuser", user);
-        console.log(1)
-        message.error("Something went wrong, Please try again");
-=======
             axios
               .post("http://localhost:8000/api/users/register", user)
               .then((response) => {
@@ -135,7 +117,6 @@ const StudentRegistration = () => {
                   .post("http://localhost:8000/api/students/register", formData)
                   .then((response) => {
                     console.log(response);
->>>>>>> Stashed changes
 
                     if (response.data.error === 1) {
                       axios.post(

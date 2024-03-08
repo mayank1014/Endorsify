@@ -1,0 +1,303 @@
+/*! Carousel component fabric theme definitions and variables */
+.e-carousel .e-previous-icon::before {
+  content: "\e654";
+}
+.e-carousel .e-next-icon::before {
+  content: "\e219";
+}
+.e-carousel .e-play-icon::before {
+  content: "\e327";
+}
+.e-carousel .e-pause-icon::before {
+  content: "\e325";
+}
+.e-carousel.e-rtl .e-previous-icon::before {
+  content: "\e219";
+}
+.e-carousel.e-rtl .e-next-icon::before {
+  content: "\e654";
+}
+
+/*! carousel component styles */
+.e-carousel {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.e-carousel .e-carousel-items,
+.e-carousel .e-carousel-slide-container {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.e-carousel .e-carousel-items.e-swipe-start {
+  cursor: pointer;
+}
+.e-carousel.e-partial .e-carousel-slide-container {
+  padding: 0 100px;
+}
+@media screen and (max-width: 480px) {
+  .e-carousel.e-partial .e-carousel-slide-container {
+    padding: 0 75px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .e-carousel.e-partial .e-carousel-slide-container {
+    padding: 0 50px;
+  }
+}
+.e-carousel .e-carousel-items {
+  width: calc(var(--carousel-items-count) * 100%);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  transition-property: transform;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
+}
+.e-carousel .e-carousel-items .e-carousel-item {
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: calc(100% / var(--carousel-items-count));
+}
+.e-carousel.e-blazor-carousel .e-carousel-items {
+  transform: translateX(calc(-100% / var(--carousel-items-count) * var(--carousel-items-current)));
+  transition: transform;
+}
+.e-carousel.e-blazor-carousel.e-rtl .e-carousel-items {
+  transform: translateX(calc(100% / var(--carousel-items-count) * var(--carousel-items-current)));
+  transition: transform;
+}
+.e-carousel.e-carousel-fade-animation .e-carousel-items.e-fade-in-out {
+  transition-property: none;
+  animation: fade-in-out 0.6s ease-in-out;
+}
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.e-carousel.e-carousel-slide-animation .e-carousel-items.e-slide {
+  transition-duration: 0.6s;
+}
+.e-carousel.e-carousel-custom-animation:not(.e-partial) .e-carousel-item {
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  top: 0;
+}
+.e-carousel.e-carousel-custom-animation:not(.e-partial) .e-carousel-item.e-active {
+  opacity: 1;
+  pointer-events: visible;
+}
+.e-carousel .e-carousel-navigators {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+.e-carousel .e-carousel-navigators .e-play-pause,
+.e-carousel .e-carousel-navigators .e-previous,
+.e-carousel .e-carousel-navigators .e-next {
+  padding: 0.5em;
+  pointer-events: auto;
+}
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn,
+.e-carousel .e-carousel-navigators .e-previous .e-btn,
+.e-carousel .e-carousel-navigators .e-next .e-btn {
+  border: 0;
+  box-shadow: none;
+}
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:hover,
+.e-carousel .e-carousel-navigators .e-previous .e-btn:hover,
+.e-carousel .e-carousel-navigators .e-next .e-btn:hover {
+  border-radius: 50%;
+}
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn.e-rtl,
+.e-carousel .e-carousel-navigators .e-previous .e-btn.e-rtl,
+.e-carousel .e-carousel-navigators .e-next .e-btn.e-rtl {
+  transform: rotate(180deg);
+}
+.e-carousel .e-carousel-navigators .e-play-pause.e-hover-arrows,
+.e-carousel .e-carousel-navigators .e-previous.e-hover-arrows,
+.e-carousel .e-carousel-navigators .e-next.e-hover-arrows {
+  display: none;
+}
+.e-carousel .e-carousel-indicators {
+  -ms-flex-align: center;
+      align-items: center;
+  bottom: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  min-height: 48px;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  pointer-events: auto;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar {
+  padding: 0;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar .e-indicator {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  padding: 6px;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar .e-indicator div {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  height: 12px;
+  transition-duration: 0.6s;
+  transition-property: background-color, border-color;
+  transition-timing-function: ease-in-out;
+  width: 12px;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar .e-indicator .e-ripple-element {
+  display: none;
+}
+.e-carousel .e-carousel-indicators.e-dynamic {
+  min-height: 36px;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars {
+  display: block;
+  overflow: hidden;
+  transition: opacity 0.6s ease-in-out;
+  white-space: nowrap;
+  width: 80px;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar {
+  border-radius: 50%;
+  display: inline-block;
+  height: 8px;
+  left: calc(32px - 16px * var(--carousel-items-current));
+  margin: 0 4px;
+  opacity: 1;
+  position: relative;
+  transform: scale(0.33);
+  transition-duration: 0.6s;
+  transition-property: transform, left;
+  transition-timing-function: ease-in-out;
+  white-space: nowrap;
+  width: 8px;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-active {
+  transform: scale(1);
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-prev, .e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-next {
+  transform: scale(0.66);
+}
+.e-carousel .e-carousel-indicators.e-fraction {
+  min-height: 36px;
+}
+.e-carousel .e-carousel-indicators.e-progress {
+  min-height: 4px;
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars {
+  height: 4px;
+  width: 100%;
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars .e-indicator-bar {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translate3d(0, 0, 0) scaleX(calc(var(--carousel-items-current) / var(--carousel-items-count))) scaleY(1);
+  transition-duration: 0.6s;
+  transform-origin: left top;
+  width: 100%;
+}
+
+/*! carousel component theme */
+.e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled),
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled),
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled) {
+  background-color: transparent;
+}
+.e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled) .e-btn-icon,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled) .e-btn-icon,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled) .e-btn-icon {
+  color: #fff;
+}
+.e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled):active, .e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled):focus, .e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled):hover,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled):active,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled):focus,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled):hover,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled):active,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled):focus,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled):hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator div {
+  background: #fff;
+  border-color: #fff;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:active, .e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:focus, .e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:hover {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:focus-visible {
+  border-color: #000;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar.e-active .e-indicator div {
+  background-color: #0078d6;
+  border-color: #0078d6;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar {
+  background-color: #fff;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-active {
+  background-color: #0078d6;
+}
+.e-carousel .e-carousel-indicators.e-fraction .e-indicator-bars {
+  color: #fff;
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars {
+  background-color: rgba(0, 120, 214, 0.4);
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars .e-indicator-bar {
+  background-color: #0078d6;
+}

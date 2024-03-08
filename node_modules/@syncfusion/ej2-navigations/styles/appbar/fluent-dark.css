@@ -1,0 +1,251 @@
+/*! AppBar component FluentUI theme definitions and variables */
+/*! appbar component styles */
+.e-bigger .e-appbar,
+.e-appbar.e-bigger {
+  height: 56px;
+  font-size: 16px;
+}
+.e-bigger .e-appbar.e-dense,
+.e-appbar.e-bigger.e-dense {
+  height: 48px;
+}
+.e-bigger .e-appbar.e-prominent,
+.e-appbar.e-bigger.e-prominent {
+  height: 112px;
+}
+
+.e-appbar {
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 48px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  position: relative;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 8px;
+  overflow: hidden;
+  font-size: 14px;
+}
+.e-appbar > div:first-child {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.e-appbar.e-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.e-appbar.e-prominent {
+  height: 94px;
+  -ms-flex-align: start;
+      align-items: flex-start;
+}
+.e-appbar.e-prominent > div:first-child {
+  -ms-flex-align: start;
+      align-items: flex-start;
+}
+.e-appbar.e-dense {
+  height: 40px;
+}
+.e-appbar.e-horizontal-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.e-appbar.e-horizontal-bottom.e-sticky {
+  position: fixed;
+  top: auto;
+  max-width: inherit;
+  left: auto;
+  right: auto;
+}
+.e-appbar .e-appbar-separator {
+  height: 24px;
+}
+.e-appbar .e-appbar-spacer {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+}
+.e-appbar .e-btn,
+.e-appbar .e-css.e-btn {
+  border-image: unset;
+}
+
+.e-inherit.e-menu-wrapper.e-scrollable .e-menu,
+.e-inherit.e-menu-container.e-scrollable .e-menu {
+  overflow: hidden;
+}
+
+/*! appbar component theme */
+.e-appbar {
+  box-shadow: 0 1.6px 3.6px rgba(0, 0, 0, 0.13), 0 0.3px 0.9px rgba(0, 0, 0, 0.1);
+}
+.e-appbar.e-light {
+  background: #292827;
+  color: #faf9f8;
+  border: none;
+  border-color: #292827;
+}
+.e-appbar.e-light .e-appbar-separator {
+  border-left: 1px solid #faf9f8;
+}
+.e-appbar.e-light .e-btn.e-inherit:hover, .e-appbar.e-light .e-btn.e-inherit:focus, .e-appbar.e-light .e-btn.e-inherit:active, .e-appbar.e-light .e-btn.e-inherit.e-active,
+.e-appbar.e-light .e-css.e-btn.e-inherit:hover,
+.e-appbar.e-light .e-css.e-btn.e-inherit:focus,
+.e-appbar.e-light .e-css.e-btn.e-inherit:active,
+.e-appbar.e-light .e-css.e-btn.e-inherit.e-active,
+.e-appbar.e-light .e-dropdown-btn.e-inherit:hover,
+.e-appbar.e-light .e-dropdown-btn.e-inherit:focus,
+.e-appbar.e-light .e-dropdown-btn.e-inherit:active,
+.e-appbar.e-light .e-dropdown-btn.e-inherit.e-active,
+.e-appbar.e-light .e-dropdown-btn.e-btn.e-inherit:hover,
+.e-appbar.e-light .e-dropdown-btn.e-btn.e-inherit:focus,
+.e-appbar.e-light .e-dropdown-btn.e-btn.e-inherit:active,
+.e-appbar.e-light .e-dropdown-btn.e-btn.e-inherit.e-active {
+  background: rgba(255, 255, 255, 0.08);
+}
+.e-appbar.e-light .e-menu-wrapper.e-inherit,
+.e-appbar.e-light .e-menu-container.e-inherit {
+  background: #292827;
+  color: #faf9f8;
+  box-shadow: none;
+  border-color: #292827;
+}
+.e-appbar.e-light .e-menu-wrapper.e-inherit .e-menu .e-menu-item.e-selected, .e-appbar.e-light .e-menu-wrapper.e-inherit .e-menu .e-menu-item.e-focused,
+.e-appbar.e-light .e-menu-container.e-inherit .e-menu .e-menu-item.e-selected,
+.e-appbar.e-light .e-menu-container.e-inherit .e-menu .e-menu-item.e-focused {
+  background: rgba(255, 255, 255, 0.08);
+}
+.e-appbar.e-dark {
+  background: #b3b0ad;
+  color: #201f1e;
+  border-color: #b3b0ad;
+}
+.e-appbar.e-dark .e-appbar-separator {
+  border-left: 1px solid #201f1e;
+}
+.e-appbar.e-dark .e-btn.e-inherit:hover, .e-appbar.e-dark .e-btn.e-inherit:focus, .e-appbar.e-dark .e-btn.e-inherit:active, .e-appbar.e-dark .e-btn.e-inherit.e-active,
+.e-appbar.e-dark .e-css.e-btn.e-inherit:hover,
+.e-appbar.e-dark .e-css.e-btn.e-inherit:focus,
+.e-appbar.e-dark .e-css.e-btn.e-inherit:active,
+.e-appbar.e-dark .e-css.e-btn.e-inherit.e-active,
+.e-appbar.e-dark .e-dropdown-btn.e-inherit:hover,
+.e-appbar.e-dark .e-dropdown-btn.e-inherit:focus,
+.e-appbar.e-dark .e-dropdown-btn.e-inherit:active,
+.e-appbar.e-dark .e-dropdown-btn.e-inherit.e-active,
+.e-appbar.e-dark .e-dropdown-btn.e-btn.e-inherit:hover,
+.e-appbar.e-dark .e-dropdown-btn.e-btn.e-inherit:focus,
+.e-appbar.e-dark .e-dropdown-btn.e-btn.e-inherit:active,
+.e-appbar.e-dark .e-dropdown-btn.e-btn.e-inherit.e-active {
+  background: rgba(0, 0, 0, 0.056);
+}
+.e-appbar.e-dark .e-menu-wrapper.e-inherit,
+.e-appbar.e-dark .e-menu-container.e-inherit {
+  background: #b3b0ad;
+  color: #201f1e;
+  border-color: #b3b0ad;
+  box-shadow: none;
+}
+.e-appbar.e-dark .e-menu-wrapper.e-inherit .e-menu .e-menu-item.e-selected, .e-appbar.e-dark .e-menu-wrapper.e-inherit .e-menu .e-menu-item.e-focused,
+.e-appbar.e-dark .e-menu-container.e-inherit .e-menu .e-menu-item.e-selected,
+.e-appbar.e-dark .e-menu-container.e-inherit .e-menu .e-menu-item.e-focused {
+  background: rgba(0, 0, 0, 0.056);
+}
+.e-appbar.e-primary {
+  background: #0078d4;
+  color: #1b1a19;
+  border-color: #0078d4;
+}
+.e-appbar.e-primary .e-appbar-separator {
+  border-left: 1px solid #1b1a19;
+}
+.e-appbar.e-primary .e-menu-wrapper.e-inherit,
+.e-appbar.e-primary .e-menu-container.e-inherit {
+  background: #0078d4;
+  color: #1b1a19;
+  border-color: #0078d4;
+  box-shadow: none;
+}
+.e-appbar.e-inherit {
+  background: inherit;
+  color: inherit;
+  border-color: inherit;
+  border: 1px solid;
+}
+.e-appbar.e-inherit .e-appbar-separator {
+  border-left: 1px solid;
+}
+.e-appbar.e-inherit .e-menu-wrapper.e-inherit,
+.e-appbar.e-inherit .e-menu-container.e-inherit {
+  background: inherit;
+  color: inherit;
+  border-color: inherit;
+  box-shadow: none;
+}
+.e-appbar.e-horizontal-bottom {
+  box-shadow: 0 -1.6px 3.6px rgba(0, 0, 0, 0.13), 0 -0.3px 0.9px rgba(0, 0, 0, 0.1);
+}
+
+.e-light.e-inherit.e-input-group, .e-light.e-inherit.e-input-group.e-control-wrapper, .e-light.e-inherit.e-float-input, .e-light.e-inherit.e-float-input.e-input-group, .e-light.e-inherit.e-float-input.e-control-wrapper, .e-light.e-inherit.e-float-input.e-input-group.e-control-wrapper, .e-light.e-inherit.e-input-group:not(.e-disabled) .e-input-group-icon:hover, .e-light.e-inherit.e-input-group.e-control-wrapper:not(.e-disabled) .e-input-group-icon:hover {
+  background: #292827;
+  color: #faf9f8;
+}
+
+.e-dark.e-inherit.e-input-group, .e-dark.e-inherit.e-input-group.e-control-wrapper, .e-dark.e-inherit.e-float-input, .e-dark.e-inherit.e-float-input.e-input-group, .e-dark.e-inherit.e-float-input.e-control-wrapper, .e-dark.e-inherit.e-float-input.e-input-group.e-control-wrapper, .e-dark.e-inherit.e-input-group:not(.e-disabled) .e-input-group-icon:hover, .e-dark.e-inherit.e-input-group.e-control-wrapper:not(.e-disabled) .e-input-group-icon:hover {
+  background: #b3b0ad;
+  color: #201f1e;
+}
+
+.e-primary.e-inherit.e-input-group, .e-primary.e-inherit.e-input-group.e-control-wrapper, .e-primary.e-inherit.e-float-input, .e-primary.e-inherit.e-float-input.e-input-group, .e-primary.e-inherit.e-float-input.e-control-wrapper, .e-primary.e-inherit.e-float-input.e-input-group.e-control-wrapper, .e-primary.e-inherit.e-input-group:not(.e-disabled) .e-input-group-icon:hover, .e-primary.e-inherit.e-input-group.e-control-wrapper:not(.e-disabled) .e-input-group-icon:hover {
+  background: #0078d4;
+  color: #1b1a19;
+}
+
+.e-inherit.e-input-group,
+.e-inherit.e-input-group.e-control-wrapper,
+.e-inherit.e-float-input,
+.e-inherit.e-float-input.e-input-group,
+.e-inherit.e-float-input.e-control-wrapper,
+.e-inherit.e-float-input.e-input-group.e-control-wrapper,
+.e-inherit.e-input-group:not(.e-disabled) .e-input-group-icon:hover,
+.e-inherit.e-input-group.e-control-wrapper:not(.e-disabled) .e-input-group-icon:hover {
+  color: inherit;
+  background: rgba(0, 0, 0, 0.056);
+}
+
+.e-inherit.e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error),
+.e-inherit.e-input-group.e-control-wrapper.e-input-focus:not(.e-success):not(.e-warning):not(.e-error),
+.e-inherit.e-input-group:not(.e-disabled):active:not(.e-success):not(.e-warning):not(.e-error),
+.e-inherit.e-input-group.e-control-wrapper:not(.e-disabled):active:not(.e-success):not(.e-warning):not(.e-error) {
+  box-shadow: none;
+}
+
+.e-inherit.e-input-group.e-control-wrapper .e-searchinput:-ms-input-placeholder {
+  color: inherit;
+  opacity: 0.8;
+}
+
+.e-inherit.e-input-group.e-control-wrapper .e-searchinput::placeholder {
+  color: inherit;
+  opacity: 0.8;
+}
+
+.e-inherit.e-input-group .e-input-group-icon,
+.e-inherit.e-input-group.e-control-wrapper .e-input-group-icon {
+  border: none;
+  color: inherit;
+}
+
+.e-inherit.e-input-group .e-clear-icon,
+.e-inherit.e-input-group.e-control-wrapper .e-clear-icon {
+  color: inherit;
+}

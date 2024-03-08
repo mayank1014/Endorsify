@@ -1,0 +1,414 @@
+:root {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 103, 80, 164;
+  --color-sf-primary-container: 234, 221, 255;
+  --color-sf-secondary: 98, 91, 113;
+  --color-sf-secondary-container: 232, 222, 248;
+  --color-sf-tertiary: 125, 82, 96;
+  --color-sf-tertiary-container: 255, 216, 228;
+  --color-sf-surface: 255, 255, 255;
+  --color-sf-surface-variant: 231, 224, 236;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 255, 255, 255;
+  --color-sf-on-primary-container: 33, 0, 94;
+  --color-sf-on-secondary: 255, 255, 255;
+  --color-sf-on-secondary-container: 30, 25, 43;
+  --color-sf-on-tertiary: 255, 255, 255;
+  --color-sf-on-tertiary-containe: 55, 11, 30;
+  --color-sf-on-surface: 28, 27, 31;
+  --color-sf-on-surface-variant: 73, 69, 78;
+  --color-sf-on-background: 28, 27, 31;
+  --color-sf-outline: 121, 116, 126;
+  --color-sf-outline-variant: 196, 199, 197;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 103, 80, 164;
+  --color-sf-inverse-surface: 49, 48, 51;
+  --color-sf-inverse-on-surface: 244, 239, 244;
+  --color-sf-inverse-primary: 208, 188, 255;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 179, 38, 30;
+  --color-sf-error-container: 249, 222, 220;
+  --color-sf-on-error: 255, 250, 250;
+  --color-sf-on-error-container: 65, 14, 11;
+  --color-sf-success: 32, 81, 7;
+  --color-sf-success-container: 209, 255, 186;
+  --color-sf-on-success: 244, 255, 239;
+  --color-sf-on-success-container: 13, 39, 0;
+  --color-sf-info: 1, 87, 155;
+  --color-sf-info-container: 233, 245, 255;
+  --color-sf-on-info: 250, 253, 255;
+  --color-sf-on-info-container: 0, 51, 91;
+  --color-sf-warning: 145, 76, 0;
+  --color-sf-warning-container: 254, 236, 222;
+  --color-sf-on-warning: 255, 255, 255;
+  --color-sf-on-warning-container: 47, 21, 0;
+  --color-sf-spreadsheet-gridline: var(--color-sf-surface-variant);
+  --color-sf-shadow-focus-ring1: 0 0 0 1px rgb(255, 255, 255), 0 0 0 3px rgb(0, 0, 0);
+  --color-sf-diagram-palette-background: --color-sf-white;
+  --color-sf-success-text: 255, 255, 255;
+  --color-sf-warning-text: 255, 255, 255;
+  --color-sf-danger-text: 255, 255, 255;
+  --color-sf-info-text: 255, 255, 255;
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary-container);
+  --color-sf-secondary-bg-color: var(--color-sf-surface);
+}
+
+.e-dark-mode {
+  --color-sf-black: 0, 0, 0;
+  --color-sf-white: 255, 255, 255;
+  --color-sf-primary: 208, 188, 255;
+  --color-sf-primary-container: 79, 55, 139;
+  --color-sf-secondary: 204, 194, 220;
+  --color-sf-secondary-container: 74, 68, 88;
+  --color-sf-tertiary: 239, 184, 200;
+  --color-sf-tertiary-container: 99, 59, 72;
+  --color-sf-surface: 28, 27, 31;
+  --color-sf-surface-variant: 28, 27, 31;
+  --color-sf-background: var(--color-sf-surface);
+  --color-sf-on-primary: 55, 30, 115;
+  --color-sf-on-primary-container: 234, 221, 255;
+  --color-sf-on-secondary: 51, 45, 65;
+  --color-sf-on-secondary-container: 232, 222, 248;
+  --color-sf-on-tertiary: 73, 37, 50;
+  --color-sf-on-tertiary-containe: 255, 216, 228;
+  --color-sf-on-surface: 230, 225, 229;
+  --color-sf-on-surface-variant: 202, 196, 208;
+  --color-sf-on-background: 230, 225, 229;
+  --color-sf-outline: 147, 143, 153;
+  --color-sf-outline-variant: 68, 71, 70;
+  --color-sf-shadow: 0, 0, 0;
+  --color-sf-surface-tint-color: 208, 188, 255;
+  --color-sf-inverse-surface: 230, 225, 229;
+  --color-sf-inverse-on-surface: 49, 48, 51;
+  --color-sf-inverse-primary: 103, 80, 164;
+  --color-sf-scrim: 0, 0, 0;
+  --color-sf-error: 242, 184, 181;
+  --color-sf-error-container: 140, 29, 24;
+  --color-sf-on-error: 96, 20, 16;
+  --color-sf-on-error-container: 249, 222, 220;
+  --color-sf-success: 83, 202, 23;
+  --color-sf-success-container: 22, 62, 2;
+  --color-sf-on-success: 13, 39, 0;
+  --color-sf-on-success-container: 183, 250, 150;
+  --color-sf-info: 71, 172, 251;
+  --color-sf-info-container: 0, 67, 120;
+  --color-sf-on-info: 0, 51, 91;
+  --color-sf-on-info-container: 173, 219, 255;
+  --color-sf-warning: 245, 180, 130;
+  --color-sf-warning-container: 123, 65, 0;
+  --color-sf-on-warning: 99, 52, 0;
+  --color-sf-on-warning-container: 255, 220, 193;
+  --color-sf-spreadsheet-gridline: 231, 224, 236;
+  --color-sf-shadow-focus-ring1: 0 0 0 1px #000000, 0 0 0 3px #ffffff;
+  --color-sf-success-text: 0, 0, 0;
+  --color-sf-warning-text: 0, 0, 0;
+  --color-sf-info-text: 0, 0, 0;
+  --color-sf-danger-text: 0, 0, 0;
+  --color-sf-diagram-palette-background: var(--color-sf-inverse-surface);
+  --color-sf-content-text-color-alt2: var(--color-sf-on-secondary);
+}
+
+/*! Carousel component bootstrap5 theme definitions and variables */
+.e-carousel .e-previous-icon::before {
+  content: "\e765";
+}
+.e-carousel .e-next-icon::before {
+  content: "\e748";
+}
+.e-carousel .e-play-icon::before {
+  content: "\e70c";
+}
+.e-carousel .e-pause-icon::before {
+  content: "\e77b";
+}
+.e-carousel.e-rtl .e-previous-icon::before {
+  content: "\e748";
+}
+.e-carousel.e-rtl .e-next-icon::before {
+  content: "\e765";
+}
+
+/*! carousel component styles */
+.e-carousel {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.e-carousel .e-carousel-items,
+.e-carousel .e-carousel-slide-container {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.e-carousel .e-carousel-items.e-swipe-start {
+  cursor: pointer;
+}
+.e-carousel.e-partial .e-carousel-slide-container {
+  padding: 0 100px;
+}
+@media screen and (max-width: 480px) {
+  .e-carousel.e-partial .e-carousel-slide-container {
+    padding: 0 75px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .e-carousel.e-partial .e-carousel-slide-container {
+    padding: 0 50px;
+  }
+}
+.e-carousel .e-carousel-items {
+  width: calc(var(--carousel-items-count) * 100%);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  transition-property: transform;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in-out;
+}
+.e-carousel .e-carousel-items .e-carousel-item {
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: calc(100% / var(--carousel-items-count));
+}
+.e-carousel.e-blazor-carousel .e-carousel-items {
+  transform: translateX(calc(-100% / var(--carousel-items-count) * var(--carousel-items-current)));
+  transition: transform;
+}
+.e-carousel.e-blazor-carousel.e-rtl .e-carousel-items {
+  transform: translateX(calc(100% / var(--carousel-items-count) * var(--carousel-items-current)));
+  transition: transform;
+}
+.e-carousel.e-carousel-fade-animation .e-carousel-items.e-fade-in-out {
+  transition-property: none;
+  animation: fade-in-out 0.6s ease-in-out;
+}
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.e-carousel.e-carousel-slide-animation .e-carousel-items.e-slide {
+  transition-duration: 0.6s;
+}
+.e-carousel.e-carousel-custom-animation:not(.e-partial) .e-carousel-item {
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  top: 0;
+}
+.e-carousel.e-carousel-custom-animation:not(.e-partial) .e-carousel-item.e-active {
+  opacity: 1;
+  pointer-events: visible;
+}
+.e-carousel .e-carousel-navigators {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+.e-carousel .e-carousel-navigators .e-play-pause,
+.e-carousel .e-carousel-navigators .e-previous,
+.e-carousel .e-carousel-navigators .e-next {
+  padding: 0.5em;
+  pointer-events: auto;
+}
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn,
+.e-carousel .e-carousel-navigators .e-previous .e-btn,
+.e-carousel .e-carousel-navigators .e-next .e-btn {
+  border: 0;
+  box-shadow: none;
+}
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:hover,
+.e-carousel .e-carousel-navigators .e-previous .e-btn:hover,
+.e-carousel .e-carousel-navigators .e-next .e-btn:hover {
+  border-radius: 50%;
+}
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn.e-rtl,
+.e-carousel .e-carousel-navigators .e-previous .e-btn.e-rtl,
+.e-carousel .e-carousel-navigators .e-next .e-btn.e-rtl {
+  transform: rotate(180deg);
+}
+.e-carousel .e-carousel-navigators .e-play-pause.e-hover-arrows,
+.e-carousel .e-carousel-navigators .e-previous.e-hover-arrows,
+.e-carousel .e-carousel-navigators .e-next.e-hover-arrows {
+  display: none;
+}
+.e-carousel .e-carousel-indicators {
+  -ms-flex-align: center;
+      align-items: center;
+  bottom: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  min-height: 48px;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  pointer-events: auto;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar {
+  padding: 0;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar .e-indicator {
+  -ms-flex-align: center;
+      align-items: center;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  padding: 8px;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar .e-indicator div {
+  border: 1px solid rgba(var(--color-sf-on-surface), 0.4);
+  border-radius: 50%;
+  height: 12px;
+  transition-duration: 0.6s;
+  transition-property: background-color, border-color;
+  transition-timing-function: ease-in-out;
+  width: 12px;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bars .e-indicator-bar .e-indicator .e-ripple-element {
+  display: none;
+}
+.e-carousel .e-carousel-indicators.e-dynamic {
+  min-height: 36px;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars {
+  display: block;
+  overflow: hidden;
+  transition: opacity 0.6s ease-in-out;
+  white-space: nowrap;
+  width: 80px;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar {
+  border-radius: 50%;
+  display: inline-block;
+  height: 8px;
+  left: calc(32px - 16px * var(--carousel-items-current));
+  margin: 0 4px;
+  opacity: 1;
+  position: relative;
+  transform: scale(0.33);
+  transition-duration: 0.6s;
+  transition-property: transform, left;
+  transition-timing-function: ease-in-out;
+  white-space: nowrap;
+  width: 8px;
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-active {
+  transform: scale(1);
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-prev, .e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-next {
+  transform: scale(0.66);
+}
+.e-carousel .e-carousel-indicators.e-fraction {
+  min-height: 36px;
+}
+.e-carousel .e-carousel-indicators.e-progress {
+  min-height: 4px;
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars {
+  height: 4px;
+  width: 100%;
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars .e-indicator-bar {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translate3d(0, 0, 0) scaleX(calc(var(--carousel-items-current) / var(--carousel-items-count))) scaleY(1);
+  transition-duration: 0.6s;
+  transform-origin: left top;
+  width: 100%;
+}
+
+/*! carousel component theme */
+.e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled),
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled),
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled) {
+  background-color: transparent;
+}
+.e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled) .e-btn-icon,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled) .e-btn-icon,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled) .e-btn-icon {
+  color: rgba(var(--color-sf-on-surface-variant));
+}
+.e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled):active, .e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled):focus, .e-carousel .e-carousel-navigators .e-previous .e-btn:not(:disabled):hover,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled):active,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled):focus,
+.e-carousel .e-carousel-navigators .e-next .e-btn:not(:disabled):hover,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled):active,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled):focus,
+.e-carousel .e-carousel-navigators .e-play-pause .e-btn:not(:disabled):hover {
+  background-color: rgba(var(--color-sf-on-surface), 0.05);
+  outline: none;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator div {
+  background: linear-gradient(0deg, rgba(var(--color-sf-primary), 0.14), rgba(var(--color-sf-primary), 0.14)), rgba(var(--color-sf-surface));
+  border-image: linear-gradient(0deg, rgba(var(--color-sf-primary), 0.14), rgba(var(--color-sf-primary), 0.14));
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:active, .e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:focus, .e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:hover {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar .e-indicator:focus-visible {
+  border-color: rgba(var(--color-sf-on-surface));
+}
+.e-carousel .e-carousel-indicators.e-default .e-indicator-bar.e-active .e-indicator div {
+  background-color: rgba(var(--color-sf-primary));
+  border-color: rgba(var(--color-sf-primary));
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar {
+  background-color: rgba(var(--color-sf-on-surface-variant));
+}
+.e-carousel .e-carousel-indicators.e-dynamic .e-indicator-bars .e-indicator-bar.e-active {
+  background-color: rgba(var(--color-sf-primary));
+}
+.e-carousel .e-carousel-indicators.e-fraction .e-indicator-bars {
+  color: rgba(var(--color-sf-on-surface-variant));
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars {
+  background-color: rgba(var(--color-sf-primary), 0.4);
+}
+.e-carousel .e-carousel-indicators.e-progress .e-indicator-bars .e-indicator-bar {
+  background-color: rgba(var(--color-sf-primary));
+}
