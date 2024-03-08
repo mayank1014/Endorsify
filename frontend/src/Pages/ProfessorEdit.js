@@ -33,46 +33,12 @@ const ProfessorEdit = () => {
     axios
       .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
       .then((response) => {
-<<<<<<< Updated upstream
-        //console.log(response.data);
-=======
->>>>>>> Stashed changes
         setProfessor(response.data);
       })
       .catch((error) => {
         console.error("Error fetching professor details:", error);
       })
   }, []);
-<<<<<<< Updated upstream
-  const profilePhotoInputRef = useRef(null);
-  const signPhotoInputRef = useRef(null);
-
-  // const handleFileInputChange = (event, fieldName) => {
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
-
-  //   reader.onload = (event) => {
-  //     setProfessor({
-  //       ...professor,
-  //       [fieldName]: event.target.result,
-  //     });
-  //   };
-
-  //   reader.readAsDataURL(file);
-  // };
-  const handleFileInputChange = (event, fieldName) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      setProfessor({
-        ...professor,
-        [fieldName]: event.target.result, // This assumes event.target.result is Base64 string, which might not be always true
-      });
-    };
-
-    // Read the file as Data URL (Base64 encoded string)
-=======
   
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
@@ -85,7 +51,6 @@ const ProfessorEdit = () => {
         [fieldName]: reader.result, // Use reader.result as the source of the image
       });
     };
->>>>>>> Stashed changes
     reader.readAsDataURL(file);
   };
 
