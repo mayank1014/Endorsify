@@ -47,7 +47,7 @@ function ChangePassword({ match }) {
   }
 
   return (
-    <DefaultLayout>
+    <div>
       {!user && <Spinner />}
       <Row justify="center mt-5">
         <Col lg={12} sm={24} xs={24} className="p-2">
@@ -79,12 +79,12 @@ function ChangePassword({ match }) {
             </Form.Item>
 
             <div className="text-right">
-              <button className="btn1">Change Password</button>
+              <button className="btn btn-primary">Change Password</button>
             </div>
           </Form>
         </Col>
       </Row>
-    </DefaultLayout>
+    </div>
   );
 }
 

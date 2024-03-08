@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
 import { message } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import "../css/ProfessorRegistration.css";
@@ -16,16 +16,19 @@ const ProfessorRegister = () => {
     teacherId: "",
     gender: "",
     name: "",
-    profilePhoto: "",
-    signPhoto: "",
+    profilePhoto: null,
+    signPhoto: null,
     qualification: "",
-    expertise: [""], // At least one expertise field is mandatory
+    expertise: [""], 
     experience: "",
     portfolioURL: "",
     students: [],
   });
 
   const [allUniversities, setAllUniversities] = useState([]);
+
+  const signPhotoInputRef = useRef(null);
+  const profilePhotoInputRef = useRef(null);
 
   useEffect(() => {
     axios
@@ -38,23 +41,19 @@ const ProfessorRegister = () => {
       });
   }, []);
 
-  const signPhotoInputRef = useRef(null);
-  const profilePhotoInputRef = useRef(null);
-
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
+  
+    // Use FileReader to read the file as data URL
     const reader = new FileReader();
-
-    reader.onload = (event) => {
-      const base64String = event.target.result;
+    reader.onload = () => {
       setFormData({
         ...formData,
-        [fieldName]: base64String,
+        [fieldName]: reader.result, // Use reader.result as the source of the image
       });
     };
-
     reader.readAsDataURL(file);
-  };
+  }; 
 
   const handleChange = (event, fieldName) => {
     setFormData({
@@ -95,79 +94,185 @@ const ProfessorRegister = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Check if at least one expertise field is filled
     if (formData.expertise.length === 0 || formData.expertise.some(field => field.trim() === "")) {
       message.error("Please fill at least one expertise field");
       return;
     }
 
-    try {
-      const user = {
-        email: location.state.email,
-        password: location.state.password,
-        confirmPassword: location.state.confirmPassword,
-        role: "professor",
-      };
+    const profilePhoto = new FormData();
+    const signPhoto = new FormData();
 
-      formData.email = location.state.email;
+    profilePhoto.append("file", formData["profilePhoto"]);
+    profilePhoto.append("upload_preset", "Endorsify");
+    profilePhoto.append("cloud_name", "djhsk7akn");
 
-      for (var i = 0; i < allUniversities.length; i++) {
-        if (allUniversities[i].name === formData.university) {
-          formData.universityId = allUniversities[i]._id;
-          break;
-        }
-      }
+    signPhoto.append("file", formData["signPhoto"]);
+    signPhoto.append("upload_preset", "Endorsify");
+    signPhoto.append("cloud_name", "djhsk7akn");
 
-      const profilePhotoBase64 = formData.profilePhoto.split(",")[1];
-      const signPhotoBase64 = formData.signPhoto.split(",")[1];
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+        profilePhoto
+      )
+      .then((response) => {
+        formData["profilePhoto"] = response.data.url;
 
-      const formDataWithBase64 = {
-        ...formData,
-        profilePhoto: profilePhotoBase64,
-        signPhoto: signPhotoBase64,
-      };
+        axios
+          .post(
+            "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+            signPhoto
+          )
+          .then((response) => {
+            formData["signPhoto"] = response.data.url;
 
-      await axios.post("http://localhost:8000/api/users/register", user);
+            const user = {
+              email: location.state.email,
+              password: location.state.password,
+              confirmPassword: location.state.confirmPassword,
+              role: "student",
+            };
 
-      try {
-        const response = await axios.post("http://localhost:8000/api/professors/register", formDataWithBase64);
+            formData.email = location.state.email;
 
-        // localStorage.setItem("user", JSON.stringify(response.data.user));
+            for (var i = 0; i < allUniversities.length; i++) {
+              if (allUniversities[i].name === formData.university) {
+                formData.universityId = allUniversities[i]._id;
+                break;
+              }
+            }
 
-        if (response.data.error == 1) {
-          await axios.post("http://localhost:8000/api/users/deleteuser", user);
+            axios
+              .post("http://localhost:8000/api/users/register", user)
+              .then((response) => {
+                axios
+                  .post("http://localhost:8000/api/professors/register", formData)
+                  .then((response) => {
+                    console.log(response);
 
-          message.error("User with same College Id already exists");
+                    if (response.data.error === 1) {
+                      axios.post(
+                        "http://localhost:8000/api/users/deleteuser",
+                        user
+                      );
 
-          setTimeout(() => {
-            window.location.href = "/register/professor";
-          }, 500);
-        } else if (response.data.error == 0) {
-          // localStorage.setItem("user", JSON.stringify(response.data.user));
+                      message.error(
+                        "User with the same College ID already exists"
+                      );
 
-          message.success("Registration Successful");
+                      setTimeout(() => {
+                        window.location.href = "/register/professor";
+                      }, 500);
+                    } else if (response.data.error === 0) {
+                      message.success("Registration Successful");
 
-          setTimeout(() => {
-            navigate("/professor/home");
-          }, 500);
-        }
-      } catch (error) {
-        await axios.post("http://localhost:8000/api/users/deleteuser", user);
-        console.log(1)
-        message.error("Something went wrong, Please try again");
+                      setTimeout(() => {
+                        localStorage.setItem("user", JSON.stringify(user));
+                        
+                        navigate("/professor/home");
+                      }, 500);
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
 
-        setTimeout(() => {
-          window.location.href = "/register/professor";
-        }, 500);
-      }
-    } catch (error) {
-      console.log(2)
-      message.error("Something went wrong");
+                    axios.post(
+                      "http://localhost:8000/api/users/deleteuser",
+                      user
+                    );
 
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 500);
-    }
+                    message.error("Something went wrong, Please try again");
+
+                    setTimeout(() => {
+                      window.location.href = "/register/student";
+                    }, 500);
+                  });
+              })
+              .catch((error) => {
+                console.log(error);
+
+                message.error("Something went wrong");
+
+                setTimeout(() => {
+                  window.location.href = "/";
+                }, 500);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // try {
+    //   const user = {
+    //     email: location.state.email,
+    //     password: location.state.password,
+    //     confirmPassword: location.state.confirmPassword,
+    //     role: "professor",
+    //   };
+
+    //   formData.email = location.state.email;
+
+    //   for (var i = 0; i < allUniversities.length; i++) {
+    //     if (allUniversities[i].name === formData.university) {
+    //       formData.universityId = allUniversities[i]._id;
+    //       break;
+    //     }
+    //   }
+
+    //   const profilePhotoBase64 = formData.profilePhoto.split(",")[1];
+    //   const signPhotoBase64 = formData.signPhoto.split(",")[1];
+
+    //   const formDataWithBase64 = {
+    //     ...formData,
+    //     profilePhoto: profilePhotoBase64,
+    //     signPhoto: signPhotoBase64,
+    //   };
+
+    //   await axios.post("http://localhost:8000/api/users/register", user);
+
+    //   try {
+    //     const response = await axios.post("http://localhost:8000/api/professors/register", formDataWithBase64);
+
+    //     // localStorage.setItem("user", JSON.stringify(response.data.user));
+
+    //     if (response.data.error == 1) {
+    //       await axios.post("http://localhost:8000/api/users/deleteuser", user);
+
+    //       message.error("User with same College Id already exists");
+
+    //       setTimeout(() => {
+    //         window.location.href = "/register/professor";
+    //       }, 500);
+    //     } else if (response.data.error == 0) {
+    //       // localStorage.setItem("user", JSON.stringify(response.data.user));
+
+    //       message.success("Registration Successful");
+
+    //       setTimeout(() => {
+    //         navigate("/professor/home");
+    //       }, 500);
+    //     }
+    //   } catch (error) {
+    //     await axios.post("http://localhost:8000/api/users/deleteuser", user);
+    //     console.log(1)
+    //     message.error("Something went wrong, Please try again");
+
+    //     setTimeout(() => {
+    //       window.location.href = "/register/professor";
+    //     }, 500);
+    //   }
+    // } catch (error) {
+    //   console.log(2)
+    //   message.error("Something went wrong");
+
+    //   setTimeout(() => {
+    //     window.location.href = "/";
+    //   }, 500);
+    // }
   };
 
   return (

@@ -18,12 +18,11 @@ router.post("/register", async (req, res) => {
     const student = await Student.findOne({ collegeID: req.body.collegeID, universityId: req.body.universityId }).exec()
 
     if (student) {
-      console.log(student);
       return res.json({ error: 1 });
     } else {
       const newStudent = new Student(req.body);
       await newStudent.save();
-      return res.json({ error: 0, user: newStudent });
+      return res.json({ error: 0 });
     }
   } catch (error) {
     console.log(error);

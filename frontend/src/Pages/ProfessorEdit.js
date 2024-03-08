@@ -7,24 +7,42 @@ import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 const ProfessorEdit = () => {
   const navigate = useNavigate();
+
   const user = localStorage.getItem("user");
+
   const [professor, setProfessor] = useState({
-    profilePhoto: "", // Set default value for profilePhoto
-    signPhoto: "", // Set default value for transcriptPhoto
-    expertise: [], // Set default value for expertise
+    university: "",
+    email: "",
+    teacherId: "",
+    gender: "",
+    name: "",
+    profilePhoto: null,
+    signPhoto: null,
+    qualification: "",
+    expertise: [""], 
+    experience: "",
+    portfolioURL: "",
+    students: [],
   });
+
+  const profilePhotoInputRef = useRef(null);
+  const signPhotoInputRef = useRef(null);
 
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
       .then((response) => {
+<<<<<<< Updated upstream
         //console.log(response.data);
+=======
+>>>>>>> Stashed changes
         setProfessor(response.data);
       })
       .catch((error) => {
         console.error("Error fetching professor details:", error);
       })
   }, []);
+<<<<<<< Updated upstream
   const profilePhotoInputRef = useRef(null);
   const signPhotoInputRef = useRef(null);
 
@@ -53,6 +71,20 @@ const ProfessorEdit = () => {
     };
   
     // Read the file as Data URL (Base64 encoded string)
+=======
+  
+  const handleFileInputChange = (event, fieldName) => {
+    const file = event.target.files[0];
+
+    // Use FileReader to read the file as data URL
+    const reader = new FileReader();
+    reader.onload = () => {
+      setProfessor({
+        ...professor,
+        [fieldName]: reader.result, // Use reader.result as the source of the image
+      });
+    };
+>>>>>>> Stashed changes
     reader.readAsDataURL(file);
   };
 
@@ -94,26 +126,70 @@ const ProfessorEdit = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formDataObject = {};
-    for (const key in professor) {
-      formDataObject[key] = professor[key];
-    }
-    formDataObject["profilePhoto"] = professor.profilePhoto;
-    formDataObject["signPhoto"] = professor.signPhoto;
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/professors/edit",
-        formDataObject
-      );
 
-      message.success("Profile updated successfully");
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:8000/api/professors/edit",
+    //     formDataObject
+    //   );
 
-      setTimeout(() => {
-        navigate("/professor/home");
-      }, 500);
-    } catch (error) {
-      message.error("Something went wrong");
-    }
+    //   message.success("Profile updated successfully");
+
+    //   setTimeout(() => {
+    //     navigate("/professor/home");
+    //   }, 500);
+    // } catch (error) {
+    //   message.error("Something went wrong");
+    // }
+
+    const profilePhoto = new FormData();
+    const signPhoto = new FormData();
+
+    profilePhoto.append("file", professor["profilePhoto"]);
+    profilePhoto.append("upload_preset", "Endorsify");
+    profilePhoto.append("cloud_name", "djhsk7akn");
+
+    signPhoto.append("file", professor["signPhoto"]);
+    signPhoto.append("upload_preset", "Endorsify");
+    signPhoto.append("cloud_name", "djhsk7akn");
+
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+        profilePhoto
+      )
+      .then((response) => {
+        professor["profilePhoto"] = response.data.url;
+
+        axios
+          .post(
+            "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+            signPhoto
+          )
+          .then((response) => {
+            professor["signPhoto"] = response.data.url;
+
+            axios
+              .post("http://localhost:8000/api/professors/edit", professor)
+              .then((response) => {
+                message.success("Profile updated successfully");
+
+                setTimeout(() => {
+                  window.location.href='/professor'
+                  window.location.href='/professor/home'
+                }, 500);
+              })
+              .catch((error) => {
+                message.error("Something went wrong");
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

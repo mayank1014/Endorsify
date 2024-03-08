@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import DefaultLayout from "../components/DefaultLayout";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
@@ -10,37 +9,45 @@ function StudentEdit() {
   const user = localStorage.getItem("user");
 
   const [student, setStudent] = useState({
-    profilePhoto: "", // Set default value for profilePhoto
-    transcriptPhoto: "", // Set default value for transcriptPhoto
+    name: "",
+    passingYear: "",
+    university: "",
+    collegeID: "",
+    branch: "",
+    gender: "",
+    profilePhoto: "",
+    transcriptPhoto: "",
   });
+
+  const profilePhotoInputRef = useRef(null);
+  const transcriptPhotoInputRef = useRef(null);
 
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8000/api/students/getstudent/${JSON.parse(user).email}`
+        `http://localhost:8000/api/students/getstudent/${
+          JSON.parse(user).email
+        }`
       )
       .then((response) => {
         setStudent(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching professor : ", error);
+        console.error("Error fetching student : ", error);
       });
   }, []);
 
-  const profilePhotoInputRef = useRef(null);
-  const transcriptPhotoInputRef = useRef(null);
-
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
 
-    reader.onload = (event) => {
+    // Use FileReader to read the file as data URL
+    const reader = new FileReader();
+    reader.onload = () => {
       setStudent({
         ...student,
-        [fieldName]: event.target.result,
+        [fieldName]: reader.result, // Use reader.result as the source of the image
       });
     };
-
     reader.readAsDataURL(file);
   };
 
@@ -58,29 +65,69 @@ function StudentEdit() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formDataObject = {};
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:8000/api/students/edit",
+    //     student
+    //   );
 
-    for (const key in student) {
-      formDataObject[key] = student[key];
-    }
+    //   message.success("Profile updated successfully");
 
-    formDataObject["profilePhoto"] = student.profilePhoto;
-    formDataObject["transcriptPhoto"] = student.transcriptPhoto ? student.transcriptPhoto : "";
+    //   setTimeout(() => {
+    //     navigate("/student/home");
+    //   }, 500);
+    // } catch (error) {
+    //   message.error("Something went wrong");
+    // }
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/students/edit",
-        formDataObject
-      );
+    const profilePhoto = new FormData();
+    const transcriptPhoto = new FormData();
 
-      message.success("Profile updated successfully");
+    profilePhoto.append("file", student["profilePhoto"]);
+    profilePhoto.append("upload_preset", "Endorsify");
+    profilePhoto.append("cloud_name", "djhsk7akn");
 
-      setTimeout(() => {
-        navigate("/student/home");
-      }, 500);
-    } catch (error) {
-      message.error("Something went wrong");
-    }
+    transcriptPhoto.append("file", student["transcriptPhoto"]);
+    transcriptPhoto.append("upload_preset", "Endorsify");
+    transcriptPhoto.append("cloud_name", "djhsk7akn");
+
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+        profilePhoto
+      )
+      .then((response) => {
+        student["profilePhoto"] = response.data.url;
+
+        axios
+          .post(
+            "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+            transcriptPhoto
+          )
+          .then((response) => {
+            student["transcriptPhoto"] = response.data.url;
+
+            axios
+              .post("http://localhost:8000/api/students/edit", student)
+              .then((response) => {
+                message.success("Profile updated successfully");
+
+                setTimeout(() => {
+                  window.location.href='/student'
+                  window.location.href='/student/home'
+                }, 500);
+              })
+              .catch((error) => {
+                message.error("Something went wrong");
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -109,10 +156,14 @@ function StudentEdit() {
                 onClick={() => handleFileInputClick(profilePhotoInputRef)}
               >
                 {student.profilePhoto ? (
+<<<<<<< Updated upstream
                   <img
                     src={student.profilePhoto}
                     alt="Profile Photo"
                   />
+=======
+                  <img src={student.profilePhoto} alt="Profile Photo" />
+>>>>>>> Stashed changes
                 ) : (
                   <span>Add Profile Photo</span>
                 )}
@@ -192,10 +243,14 @@ function StudentEdit() {
                 onClick={() => handleFileInputClick(transcriptPhotoInputRef)}
               >
                 {student.transcriptPhoto ? (
+<<<<<<< Updated upstream
                   <img
                     src={student.transcriptPhoto}
                     alt="Transcript Photo"
                   />
+=======
+                  <img src={student.transcriptPhoto} alt="Transcript Photo" />
+>>>>>>> Stashed changes
                 ) : (
                   <span>Add Transcript Photo</span>
                 )}
