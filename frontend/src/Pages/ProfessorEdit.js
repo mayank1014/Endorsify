@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
+import NavDefaultLayout from "../components/NavDefaultLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
@@ -62,14 +63,14 @@ const ProfessorEdit = () => {
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-  
+
     reader.onload = (event) => {
       setProfessor({
         ...professor,
         [fieldName]: event.target.result, // This assumes event.target.result is Base64 string, which might not be always true
       });
     };
-  
+
     // Read the file as Data URL (Base64 encoded string)
 =======
   
@@ -193,6 +194,7 @@ const ProfessorEdit = () => {
   };
 
   return (
+    <NavDefaultLayout>
     <div className="ProfessorBox">
       <div className="Professor">
         <form
@@ -304,6 +306,7 @@ const ProfessorEdit = () => {
                       value={field}
                       onChange={(e) => handleExpertiseChange(index, e)}
                       required
+                      style={{ width: '170px' }} // Adjust the width as needed
                     />
                     {index > 0 && (
                       <button
@@ -319,6 +322,7 @@ const ProfessorEdit = () => {
               <button className="btn3" onClick={handleAddExpertiseField}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
+
             </div>
 
             <div className="column">
@@ -347,6 +351,7 @@ const ProfessorEdit = () => {
         </form>
       </div>
     </div>
+    </NavDefaultLayout>
   );
 };
 

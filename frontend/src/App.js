@@ -9,12 +9,8 @@ import UniversityRegister from './Pages/UniversityRegister';
 import Student from './Pages/Student';
 import ProfessorHomePage from './Pages/ProfessorHomePage';
 import UniversityHomePage from './Pages/UniversityHomePage';
-<<<<<<< Updated upstream
 import StudentHomeProfessorProfile from './Pages/StudentHomeProfessorProfile';
 import ProfessorHomeStudentProfile from './Pages/ProfessorHomeStudentProfile';
-=======
-import StudentProfessorProfile from './Pages/StudentProfessorProfile';
->>>>>>> Stashed changes
 import StudentApplyLOR from './Pages/StudentAppyLOR';
 import ChangePassword from './Pages/ChangePassword';
 import StudentEdit from './Pages/StudentEdit';
@@ -51,7 +47,8 @@ function App() {
 
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
-          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentProfile />} />}
+          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentList />} />}
+          {isAuthenticatedUser && <Route path="professor/student/:id" element={<ProfessorHomeStudentProfile />} />}
           <Route path="university/home" element={<UniversityHomePage />} />
         </Routes>
       </BrowserRouter>

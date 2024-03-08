@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row, Form, Input } from "antd";
 import DefaultLayout from "../components/DefaultLayout";
+import NavDefaultLayout from "../components/NavDefaultLayout";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 import { message } from "antd";
@@ -45,9 +46,9 @@ function ChangePassword({ match }) {
       }
     }
   }
-
+  const LayoutComponent = user?.role === "professor" ? NavDefaultLayout : DefaultLayout;
   return (
-    <div>
+    <LayoutComponent>
       {!user && <Spinner />}
       <Row justify="center mt-5">
         <Col lg={12} sm={24} xs={24} className="p-2">
@@ -84,7 +85,7 @@ function ChangePassword({ match }) {
           </Form>
         </Col>
       </Row>
-    </div>
+    </LayoutComponent>
   );
 }
 

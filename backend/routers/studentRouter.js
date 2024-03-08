@@ -1,8 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-const Professor = require("../models/studentSchema");
 const Student = require("../models/studentSchema");
+
+router.get("/getstudent/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const student = await Student.findOne({_id: id}).exec();
+    res.send(student);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
 
 router.get("/getallstudents", async (req, res) => {
   try {

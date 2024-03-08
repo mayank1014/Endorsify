@@ -142,6 +142,22 @@ router.get("/getprofessor/:id", async (req, res) => {
     return res.status(400).json(error);
   }
 });
+router.get("/getstudentbyID/:professorId/:studentId", async (req, res) => {
+  const id = req.params.studentId;
+  const professorId= req.params.professorId;
+  try {
+    const professor = await Professor.findOne({_id: professorId}).exec();
+    if (!professor) {
+      return res.status(404).json({ message: "Professor not found" });
+    }
+    const studentObj = professor.students.find(student => student.studentId === id);
+    res.send(studentObj.studentData);
+  } catch (error) {
+    console.error("Error fetching student:", error);
+    return res.status(400).json(error);
+  }
+
+});
 
 router.post("/register", async (req, res) => {
   try {
