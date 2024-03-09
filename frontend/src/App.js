@@ -8,13 +8,7 @@ import ProfessorRegister from './Pages/ProfessorRegister';
 import UniversityRegister from './Pages/UniversityRegister';
 import Student from './Pages/Student';
 import ProfessorHomePage from './Pages/ProfessorHomePage';
-import UniversityHomePage from './Pages/UniversityHomePage';
-<<<<<<< Updated upstream
-import StudentHomeProfessorProfile from './Pages/StudentHomeProfessorProfile';
 import ProfessorHomeStudentProfile from './Pages/ProfessorHomeStudentProfile';
-=======
-import StudentProfessorProfile from './Pages/StudentProfessorProfile';
->>>>>>> Stashed changes
 import StudentApplyLOR from './Pages/StudentAppyLOR';
 import ChangePassword from './Pages/ChangePassword';
 import StudentEdit from './Pages/StudentEdit';
@@ -59,7 +53,16 @@ function App() {
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
           {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentProfile />} />}
-          <Route path="university/home" element={<UniversityHomePage />} />
+          
+          <Route path="/university" element={<UniversityPage />}>
+            <Route path="students" element={<UniversityStudents />} />
+            <Route path="professors" element={<UniversityProfessors />} />
+            <Route path="edit" element={<UniversityEdit />} />
+            {/* <Route path="lor" element={<StudentApplyLOR />} /> */}
+            <Route path="changepassword" element={<ChangePassword />} />
+            <Route path="subscription" element={<UniversitySubscription />} />
+            <Route path="professors/:id" element={<UniversityProfessorProfile />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
