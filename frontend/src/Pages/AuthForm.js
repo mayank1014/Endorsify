@@ -76,7 +76,7 @@ const AuthForm = () => {
           } else if (response.data.role === "professor") {
             navigate("/professor/home");
           } else if (response.data.role === "university") {
-            navigate("/university/home");
+            navigate("/university/students");
           }
         }, 750);
       } catch (error) {

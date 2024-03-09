@@ -9,14 +9,24 @@ import UniversityRegister from './Pages/UniversityRegister';
 import Student from './Pages/Student';
 import ProfessorHomePage from './Pages/ProfessorHomePage';
 import UniversityHomePage from './Pages/UniversityHomePage';
-import StudentProfessorProfile from './Pages/StudentProfessorProfile';
+<<<<<<< Updated upstream
+import StudentHomeProfessorProfile from './Pages/StudentHomeProfessorProfile';
 import ProfessorHomeStudentProfile from './Pages/ProfessorHomeStudentProfile';
-import ProfessorHomeStudentList from './Pages/ProfessorHomeStudentList';
+=======
+import StudentProfessorProfile from './Pages/StudentProfessorProfile';
+>>>>>>> Stashed changes
 import StudentApplyLOR from './Pages/StudentAppyLOR';
 import ChangePassword from './Pages/ChangePassword';
 import StudentEdit from './Pages/StudentEdit';
 import ProfessorEdit from './Pages/ProfessorEdit';
 import StudentHome from './Pages/StudentHome';
+import StudentProfessorProfile from './Pages/StudentProfessorProfile';
+import UniversityPage from './Pages/University';
+import UniversitySubscription from './Pages/UniversitySubscription';
+import UniversityEdit from './Pages/UniversityEdit';
+import UniversityProfessors from './Pages/UniversityProfessors';
+import UniversityStudents from './Pages/UniversityStudents';
+import UniversityProfessorProfile from './Pages/UniversityProfessorProfile';
 
 function App() {
 
@@ -48,8 +58,7 @@ function App() {
 
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
-          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentList />} />}
-          {isAuthenticatedUser && <Route path="professor/student/:id" element={<ProfessorHomeStudentProfile />} />}
+          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentProfile />} />}
           <Route path="university/home" element={<UniversityHomePage />} />
         </Routes>
       </BrowserRouter>
