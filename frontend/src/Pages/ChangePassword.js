@@ -33,11 +33,13 @@ function ChangePassword({ match }) {
         setTimeout(() => {
           message.success("Password updated successfully");
   
-          if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com" && JSON.parse(localStorage.getItem("user")).role !== "professor")
+          if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com" && JSON.parse(localStorage.getItem("user")).role === "student")
               navigate("/student/home");
           else if(JSON.parse(localStorage.getItem("user")).role === "professor")
               navigate("/professor/home");
-              else 
+          else if(JSON.parse(localStorage.getItem("user")).role === "university")
+              navigate("/university/students");
+          else 
               navigate("/admin");
         }, 500);
       } catch (error) {

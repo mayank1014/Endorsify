@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
-import defaultLogo from '../img/default-logo.jpg';
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { message } from 'antd';
+import React, { useState, useEffect } from "react";
+import defaultLogo from "../img/default-logo.jpg";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd";
 
 const UniversityForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const user = localStorage.getItem("user");
+
   const [formData, setFormData] = useState({
-    uniId: '',
-    email: location.state?.email || '',
+    uniId: "",
+    email: "",
     docxFile: null,
-    name: '',
+    name: "",
     location: {
-      locId: '',
-      city: '',
-      state: '',
-      postalCode: '',
+      locId: "",
+      city: "",
+      state: "",
+      postalCode: "",
     },
     logo: defaultLogo,
-    websiteURL: '',
+    websiteURL: "",
   });
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8000/api/universities/getuniversity/${
+          JSON.parse(user).email
+        }`
+      )
+      .then((response) => {
+        setFormData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching university: ", error);
+      });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,22 +93,15 @@ const UniversityForm = () => {
     e.preventDefault();
 
     const formDataWithCloudinary = new FormData();
-    formDataWithCloudinary.append('file', formData.logo);
-    formDataWithCloudinary.append('upload_preset', 'Endorsify');
-    formDataWithCloudinary.append('cloud_name', 'djhsk7akn');
+    formDataWithCloudinary.append("file", formData.logo);
+    formDataWithCloudinary.append("upload_preset", "Endorsify");
+    formDataWithCloudinary.append("cloud_name", "djhsk7akn");
 
     try {
       const cloudinaryResponse = await axios.post(
-        'https://api.cloudinary.com/v1_1/djhsk7akn/image/upload',
+        "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
         formDataWithCloudinary
       );
-
-      const user = {
-        email: formData.email,
-        password: location.state?.password || '',
-        confirmpassword: location.state?.confirmpassword || '',
-        role: 'university',
-      };
 
       const uniLogoUrl = cloudinaryResponse.data.url;
       const formDataWithCloudinaryUrl = {
@@ -100,71 +110,23 @@ const UniversityForm = () => {
       };
 
       axios
-        .post('http://localhost:8000/api/users/register', user)
+        .post(
+          "http://localhost:8000/api/universities/edit",
+          formDataWithCloudinaryUrl
+        )
         .then((response) => {
-          axios
-            .post(
-              'http://localhost:8000/api/universities/register',
-              formDataWithCloudinaryUrl
-            )
-            .then((response) => {
-              console.log(response);
-
-              if (response.data.error === 1) {
-                axios.post('http://localhost:8000/api/users/deleteuser', user);
-
-                message.error(
-                  'University with the same University ID already exists'
-                );
-
-                setFormData({
-                  uniId: '',
-                  email: location.state?.email || '',
-                  docxFile: null,
-                  name: '',
-                  location: {
-                    locId: '',
-                    city: '',
-                    state: '',
-                    postalCode: '',
-                  },
-                  logo: defaultLogo,
-                  websiteURL: '',
-                });
-
-                return;
-              } else if (response.data.error === 0) {
-                message.success('Registration Successful');
-
-                setTimeout(() => {
-                  localStorage.setItem('user', JSON.stringify(user));
-                  navigate('/university/students');
-                }, 500);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-
-              axios.post('http://localhost:8000/api/users/deleteuser', user);
-
-              message.error('Something went wrong, Please try again');
-
-              setTimeout(() => {
-                window.location.href = '/register/university';
-              }, 500);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-
-          message.error('Something went wrong');
+          message.success("Profile updated successfully");
 
           setTimeout(() => {
-            window.location.href = '/';
+            window.location.href = "/university";
+            window.location.href = "/university/students";
           }, 500);
+        })
+        .catch((error) => {
+          message.error("Something went wrong");
         });
     } catch (error) {
-      message.error('Something went wrong');
+      message.error("Something went wrong");
       console.log(error);
     }
   };
@@ -182,6 +144,7 @@ const UniversityForm = () => {
                     <div className="form-group">
                       <label htmlFor="uniId">University ID:</label>
                       <input
+                        disabled
                         type="text"
                         className="form-control"
                         id="uniId"
@@ -194,6 +157,7 @@ const UniversityForm = () => {
                     <div className="form-group">
                       <label htmlFor="name">University Name:</label>
                       <input
+                        disabled
                         type="text"
                         className="form-control"
                         id="name"

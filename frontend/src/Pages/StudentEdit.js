@@ -156,7 +156,10 @@ function StudentEdit() {
                 onClick={() => handleFileInputClick(profilePhotoInputRef)}
               >
                 {student.profilePhoto ? (
-                  <img src={student.profilePhoto} alt="Profile Photo" />
+                  <img
+                    src={student.profilePhoto}
+                    alt="Profile Photo"
+                  />
                 ) : (
                   <span>Add Profile Photo</span>
                 )}
@@ -236,7 +239,10 @@ function StudentEdit() {
                 onClick={() => handleFileInputClick(transcriptPhotoInputRef)}
               >
                 {student.transcriptPhoto ? (
-                  <img src={student.transcriptPhoto} alt="Transcript Photo" />
+                  <img
+                    src={student.transcriptPhoto}
+                    alt="Transcript Photo"
+                  />
                 ) : (
                   <span>Add Transcript Photo</span>
                 )}

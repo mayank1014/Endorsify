@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
-const PricingComponent = () => {
+const UniversitySubscription = () => {
   return (
     <Card>
       <Card.Header as="h5">Pricing</Card.Header>
@@ -30,4 +30,4 @@ const PricingComponent = () => {
   );
 };
 
-export default PricingComponent;
+export default UniversitySubscription;
