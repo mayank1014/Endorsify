@@ -182,11 +182,8 @@ router.post("/register", async (req, res) => {
 router.post("/studentrequest", async (req, res) => {
   
   try {
-    console.log(req.body)
-
     const professor = await Professor.findOne({ _id: req.body.professorId }).exec()
 
-    // console.log(professor)
 
     if (professor) {
 
@@ -202,7 +199,7 @@ router.post("/studentrequest", async (req, res) => {
         studentData: req.body
       })
 
-      // professor.save();
+      professor.save();
 
       res.send("Applied Successfully")
     } else {

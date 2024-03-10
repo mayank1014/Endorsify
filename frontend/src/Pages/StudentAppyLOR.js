@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import DefaultLayout from "../components/DefaultLayout";
 import axios from "axios";
 import { message } from "antd";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StudentApplyLOR = () => {
+  const navigate = useNavigate();
   const location = useLocation();
 
   const user = localStorage.getItem("user");
@@ -108,7 +109,7 @@ const StudentApplyLOR = () => {
         message.success("Your request for LOR has been sent successfully");
 
         // if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com")
-        //     navigate("/student/home");
+            navigate("/student/home");
         // else
         //     navigate("/admin");
       }, 500);

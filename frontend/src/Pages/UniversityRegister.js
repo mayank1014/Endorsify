@@ -19,7 +19,7 @@ const UniversityForm = () => {
       state: '',
       postalCode: '',
     },
-    logo: defaultLogo,
+    logo: null,
     websiteURL: '',
   });
 
@@ -57,116 +57,120 @@ const UniversityForm = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleLogoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64String = e.target.result;
-        setFormData((prevData) => ({
-          ...prevData,
-          logo: base64String,
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleLogoChange = (event, fieldName) => {
+    const file = event.target.files[0];
+
+    // Use FileReader to read the file as data URL
+    const reader = new FileReader();
+    reader.onload = () => {
+      setFormData({
+        ...formData,
+        logo: reader.result, // Use reader.result as the source of the image
+      });
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formDataWithCloudinary = new FormData();
-    formDataWithCloudinary.append('file', formData.logo);
-    formDataWithCloudinary.append('upload_preset', 'Endorsify');
-    formDataWithCloudinary.append('cloud_name', 'djhsk7akn');
+    formData["password"] = location.state.password;
+    formData["confirmpassword"] = location.state.confirmpassword;
+    
+    navigate("/register/university/subscription", { state: formData });
 
-    try {
-      const cloudinaryResponse = await axios.post(
-        'https://api.cloudinary.com/v1_1/djhsk7akn/image/upload',
-        formDataWithCloudinary
-      );
+    // const formDataWithCloudinary = new FormData();
+    // formDataWithCloudinary.append('file', formData.logo);
+    // formDataWithCloudinary.append('upload_preset', 'Endorsify');
+    // formDataWithCloudinary.append('cloud_name', 'djhsk7akn');
 
-      const user = {
-        email: formData.email,
-        password: location.state?.password || '',
-        confirmpassword: location.state?.confirmpassword || '',
-        role: 'university',
-      };
+    // try {
+    //   const cloudinaryResponse = await axios.post(
+    //     'https://api.cloudinary.com/v1_1/djhsk7akn/image/upload',
+    //     formDataWithCloudinary
+    //   );
 
-      const uniLogoUrl = cloudinaryResponse.data.url;
-      const formDataWithCloudinaryUrl = {
-        ...formData,
-        logo: uniLogoUrl,
-      };
+    //   const user = {
+    //     email: formData.email,
+    //     password: location.state?.password || '',
+    //     confirmpassword: location.state?.confirmpassword || '',
+    //     role: 'university',
+    //   };
 
-      axios
-        .post('http://localhost:8000/api/users/register', user)
-        .then((response) => {
-          axios
-            .post(
-              'http://localhost:8000/api/universities/register',
-              formDataWithCloudinaryUrl
-            )
-            .then((response) => {
-              console.log(response);
+    //   const uniLogoUrl = cloudinaryResponse.data.url;
+    //   const formDataWithCloudinaryUrl = {
+    //     ...formData,
+    //     logo: uniLogoUrl,
+    //   };
 
-              if (response.data.error === 1) {
-                axios.post('http://localhost:8000/api/users/deleteuser', user);
+    //   axios
+    //     .post('http://localhost:8000/api/users/register', user)
+    //     .then((response) => {
+    //       axios
+    //         .post(
+    //           'http://localhost:8000/api/universities/register',
+    //           formDataWithCloudinaryUrl
+    //         )
+    //         .then((response) => {
+    //           console.log(response);
 
-                message.error(
-                  'University with the same University ID already exists'
-                );
+    //           if (response.data.error === 1) {
+    //             axios.post('http://localhost:8000/api/users/deleteuser', user);
 
-                setFormData({
-                  uniId: '',
-                  email: location.state?.email || '',
-                  docxFile: null,
-                  name: '',
-                  location: {
-                    locId: '',
-                    city: '',
-                    state: '',
-                    postalCode: '',
-                  },
-                  logo: defaultLogo,
-                  websiteURL: '',
-                });
+    //             message.error(
+    //               'University with the same University ID already exists'
+    //             );
 
-                return;
-              } else if (response.data.error === 0) {
-                message.success('Registration Successful');
+    //             setFormData({
+    //               uniId: '',
+    //               email: location.state?.email || '',
+    //               docxFile: null,
+    //               name: '',
+    //               location: {
+    //                 locId: '',
+    //                 city: '',
+    //                 state: '',
+    //                 postalCode: '',
+    //               },
+    //               logo: defaultLogo,
+    //               websiteURL: '',
+    //             });
 
-                setTimeout(() => {
-                  localStorage.setItem('user', JSON.stringify(user));
-                  navigate('/university/students');
-                }, 500);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
+    //             return;
+    //           } else if (response.data.error === 0) {
+    //             message.success('Registration Successful');
 
-              axios.post('http://localhost:8000/api/users/deleteuser', user);
+    //             setTimeout(() => {
+    //               localStorage.setItem('user', JSON.stringify(user));
+    //               navigate('/university/home');
+    //             }, 500);
+    //           }
+    //         })
+    //         .catch((error) => {
+    //           console.log(error);
 
-              message.error('Something went wrong, Please try again');
+    //           axios.post('http://localhost:8000/api/users/deleteuser', user);
 
-              setTimeout(() => {
-                window.location.href = '/register/university';
-              }, 500);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
+    //           message.error('Something went wrong, Please try again');
 
-          message.error('Something went wrong');
+    //           setTimeout(() => {
+    //             window.location.href = '/register/university';
+    //           }, 500);
+    //         });
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
 
-          setTimeout(() => {
-            window.location.href = '/';
-          }, 500);
-        });
-    } catch (error) {
-      message.error('Something went wrong');
-      console.log(error);
-    }
+    //       message.error('Something went wrong');
+
+    //       setTimeout(() => {
+    //         window.location.href = '/';
+    //       }, 500);
+    //     });
+    // } catch (error) {
+    //   message.error('Something went wrong');
+    //   console.log(error);
+    // }
   };
 
   return (

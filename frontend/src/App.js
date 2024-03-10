@@ -6,21 +6,24 @@ import Register from './Pages/Register';
 import StudentRegister from './Pages/StudentRegister';
 import ProfessorRegister from './Pages/ProfessorRegister';
 import UniversityRegister from './Pages/UniversityRegister';
-import Student from './Pages/Student';
 import ProfessorHomePage from './Pages/ProfessorHomePage';
 import ProfessorHomeStudentProfile from './Pages/ProfessorHomeStudentProfile';
+import Student from './Pages/Student';
+import StudentProfessorProfile from './Pages/StudentProfessorProfile';
 import StudentApplyLOR from './Pages/StudentAppyLOR';
 import ChangePassword from './Pages/ChangePassword';
 import StudentEdit from './Pages/StudentEdit';
 import ProfessorEdit from './Pages/ProfessorEdit';
 import StudentHome from './Pages/StudentHome';
-import StudentProfessorProfile from './Pages/StudentProfessorProfile';
 import UniversityPage from './Pages/University';
 import UniversitySubscription from './Pages/UniversitySubscription';
 import UniversityEdit from './Pages/UniversityEdit';
 import UniversityProfessors from './Pages/UniversityProfessors';
 import UniversityStudents from './Pages/UniversityStudents';
 import UniversityProfessorProfile from './Pages/UniversityProfessorProfile';
+import Subscription from './Pages/Subscription';
+import Success from './Pages/Success';
+import Cancel from './Pages/Cancel';
 
 function App() {
 
@@ -30,11 +33,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<Cancel />} />
+        
           <Route path="/" element={<AuthForm />} />
           <Route path="register" element={<Register />} />
           <Route path="register/student" element={<StudentRegister />} />
           <Route path="register/professor" element={<ProfessorRegister />} />
           <Route path="register/university" element={<UniversityRegister />} />
+          <Route path="register/university/subscription" element={<Subscription />} />
           
           <Route path="/student" element={<Student />}>
             <Route path="home" element={<StudentHome />} />
@@ -43,12 +51,6 @@ function App() {
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="professor/:id" element={<StudentProfessorProfile />} />
           </Route>
-
-          {/* {/* {isAuthenticatedUser && <Route path="student/home" element={<StudentHomePage />} />}
-          {isAuthenticatedUser && <Route path="student/edit" element={<StudentEdit />} />}
-          {isAuthenticatedUser && <Route path="student/apply" element={<StudentApplyLOR />} />}
-          {isAuthenticatedUser && <Route path="student/professor/:id" element={<StudentHomeProfessorProfile />} />} */}
-          {isAuthenticatedUser && <Route path="/changepassword" element={<ChangePassword />}/>}
 
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}

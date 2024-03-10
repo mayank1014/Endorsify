@@ -12,10 +12,12 @@ const universitySchema = new mongoose.Schema({
   websiteURL: { type: String, required: true },
   docxFile: { type: String, required: true },
   logo: { type: String, required: true },
-  status: { type: String, default: 'Inactive' },
-  paymentId: { type: String },
-  startDate: { type: Date }, 
-  endDate: { type: Date },
+  status: { type: String, required: true },
+  payment: [{
+    transactionId: { type: String },
+    startDate: { type: Date },
+    endDate: { type: Date },
+  }]
 });
 
 const University = mongoose.model('University', universitySchema);

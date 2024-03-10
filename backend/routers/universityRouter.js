@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const University = require("../models/universitySchema");
 
+const stripe = require("stripe")(process.env.SECRET_STRIPE_KEY);
+
 router.get("/getalluniversities", async (req, res) => {
   try {
     const universities = await University.find();
@@ -9,6 +11,11 @@ router.get("/getalluniversities", async (req, res) => {
   } catch (error) {
     return res.status(400).json(error);
   }
+});
+
+router.get("/hello", async (req, res) => {
+  console.log(req.data)
+  res.send();
 });
 
 router.get('/getuniversity/:universityEmail', async (req, res) => {
@@ -28,6 +35,36 @@ router.get('/getuniversity/:universityEmail', async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
+  const lineItem = req.body.items.map((item) => {
+    return {
+      price_data: {
+        currency: "inr",
+        product_data: {
+          name: "Hello",
+        },
+        unit_amount: req.body.items[0].amount * 100,
+      },
+      quantity: 1,
+    };
+  });
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items: lineItem,
+      success_url: "http://localhost:3000/success",
+      cancel_url: "http://localhost:3000/cancel",
+    });
+
+    res.json({ id: session.id });
+  } catch (error) {
+      console.log(error);
+      return res.status(400).json(error);
+  }
+});
+
+router.post("/registeruni", async (req, res) => {
   try {
     const existingUniversity = await University.findOne({ uniId: req.body.uniId });
 
@@ -35,7 +72,6 @@ router.post("/register", async (req, res) => {
       return res.json({ error: 1 });
     } else {
       const newUniversity = new University(req.body);
-      // console.log(newUniversity);
       await newUniversity.save();
       return res.json({ error: 0 });
     }
@@ -43,7 +79,7 @@ router.post("/register", async (req, res) => {
     console.error("Error:", error);
     return res.status(400).json({ error: error.message });
   }
-});
+})
 
 router.post("/edit", async (req, res) => {
   try {

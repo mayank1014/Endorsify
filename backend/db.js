@@ -1,19 +1,18 @@
 const mongoose = require("mongoose");
 
 function connectDB() {
-  mongoose.connect("mongodb+srv://shivam:shivam123@cluster0.jksp5cl.mongodb.net/Endorsify", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  mongoose.connect(
+    "mongodb+srv://shivam:shivam123@cluster0.jksp5cl.mongodb.net/Endorsify"
+  );
 
   const connection = mongoose.connection;
 
   connection.on("connected", () => {
-    console.log("MongoDB connection successful");
+    console.log("MongoDB connection successfull");
   });
 
-  connection.on("error", (err) => {
-    console.log("MongoDB connection error:", err);
+  connection.on("error", () => {
+    console.log("MongoDB connection error");
   });
 }
 
