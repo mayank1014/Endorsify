@@ -31,6 +31,29 @@ router.post("/edit", async (req, res) => {
   }
 });
 
+router.post("/loredit/:professorId/:studentId", async (req, res) => {
+    const professorId= req.params.professorId;
+    const studentId= req.params.studentId;
+  try{
+    const professor = await Professor.findOne({_id: professorId}).exec();
+    if (!professor) {
+      return res.status(404).json({ message: "Professor not found" });
+    }
+    const studentObj = professor.students.find(student => student.studentId === studentId);
+    studentObj.lorStatus="accepted";
+    studentObj.studentData = req.body;
+    await professor.save();
+
+    res.send("LOR updated successfully");
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error);
+  }
+
+});
+
+
+
 router.get("/getprofessors/:email", async (req, res) => {
   const email = req.params.email;
   //console.log(email);
@@ -178,6 +201,25 @@ router.post("/register", async (req, res) => {
     return res.status(400).json(error);
   }
 });
+
+router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
+  const professorId= req.params.professorId;
+  const studentId= req.params.studentId;
+  const lorstatus=req.params.lorstatus;
+  try{
+    const professor = await Professor.findOne({_id: professorId}).exec();
+    if (!professor) {
+      return res.status(404).json({ message: "Professor not found" });
+    }
+    const studentObj = professor.students.find(student => student.studentId === studentId);
+    studentObj.lorStatus=lorstatus;
+    await professor.save();
+    return res.json({ error: 0});
+  }catch{
+    console.log(error)
+    return res.status(400).json(error);
+  }
+})
 
 router.post("/studentrequest", async (req, res) => {
   

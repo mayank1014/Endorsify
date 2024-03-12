@@ -115,17 +115,17 @@ const ProfessorHomeStudentList = () => {
 
   const [allstudents, setAllStudents] = useState([]);
 
-useEffect(() => {
-          axios
-           .get(`http://localhost:8000/api/professors/getStudentsByProfessor/${location.state.professorId}/${location.state.lorStatus}`, {
-          })
-          .then((studentsResponse) => {
-            setAllStudents(studentsResponse.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching students: ", error);
-          });
-      },[]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/professors/getStudentsByProfessor/${location.state.professorId}/${location.state.lorStatus}`, {
+      })
+      .then((studentsResponse) => {
+        setAllStudents(studentsResponse.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching students: ", error);
+      });
+  }, []);
   const handleStudentClick = (studentId) => {
     navigate(`/professor/student/${studentId}`, { state: { professorId: location.state.professorId } });
   };
@@ -263,7 +263,7 @@ useEffect(() => {
                     onClick={() => handleStudentClick(student._id)}
                   >
                     <img
-                      
+
                       src={student.profilePhoto}
                       alt="Student Profile"
                       style={{
