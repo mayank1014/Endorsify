@@ -24,6 +24,7 @@ import UniversityProfessorProfile from './Pages/UniversityProfessorProfile';
 import Subscription from './Pages/Subscription';
 import Success from './Pages/Success';
 import Cancel from './Pages/Cancel';
+import StudentRequests from './Pages/StudentRequests';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="apply" element={<StudentApplyLOR />} />
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="professor/:id" element={<StudentProfessorProfile />} />
+            <Route path="requests" element={<StudentRequests />} />
           </Route>
 
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }

@@ -5,7 +5,7 @@ import Spinner from "../components/Spinner";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FaHome, FaUserEdit, FaKey, FaSignOutAlt } from "react-icons/fa"; // Import the necessary icons
+import { FaHome, FaUserEdit, FaKey, FaSignOutAlt, FaFileAlt } from "react-icons/fa"; // Import the necessary icons
 
 const Student = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -118,6 +118,30 @@ const Student = () => {
                 >
                   <FaHome size={20} style={{ marginRight: "10px" }} />
                   Home
+                </Link>
+              </li>
+              <li className="nav-item" style={{ marginLeft: "-10px" }}>
+                <Link
+                  to="requests"
+                  className="nav-link"
+                  style={{
+                    color: "#DCDCDA",
+                    textDecoration: "none",
+                    padding: "10px 20px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.color = "black";
+                    e.target.style.backgroundColor = "#ffffff";
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.color = "#DCDCDA";
+                    e.target.style.backgroundColor = "transparent";
+                  }}
+                >
+                  <FaFileAlt size={20} style={{ marginRight: "10px" }} />
+                  LOR Requests
                 </Link>
               </li>
               <li className="nav-item" style={{ marginLeft: "-10px" }}>

@@ -50,8 +50,6 @@ function ChangePassword({ match }) {
   }
   const LayoutComponent = user?.role === "professor" ? NavDefaultLayout : DefaultLayout;
   return (
-    <LayoutComponent>
-      {!user && <Spinner />}
       <Row justify="center mt-5">
         <Col lg={12} sm={24} xs={24} className="p-2">
           <Form className="bs1 p-2" layout="vertical" onFinish={onFinish}>
@@ -87,7 +85,6 @@ function ChangePassword({ match }) {
           </Form>
         </Col>
       </Row>
-    </LayoutComponent>
   );
 }
 

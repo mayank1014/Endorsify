@@ -107,11 +107,7 @@ const StudentApplyLOR = () => {
 
       setTimeout(() => {
         message.success("Your request for LOR has been sent successfully");
-
-        // if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com")
             navigate("/student/home");
-        // else
-        //     navigate("/admin");
       }, 500);
     } catch (error) {
       message.success("Something went wrong");
