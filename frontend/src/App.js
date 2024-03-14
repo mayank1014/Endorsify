@@ -25,6 +25,8 @@ import Subscription from './Pages/Subscription';
 import Success from './Pages/Success';
 import Cancel from './Pages/Cancel';
 import StudentRequests from './Pages/StudentRequests';
+import ProfessorHomeStudentList from './Pages/ProfessorHomeStudentList';
+import ProfessorStudentLorUpdate from './Pages/ProfessorStudentLorUpdate';
 
 function App() {
 
@@ -56,7 +58,9 @@ function App() {
 
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
-          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentProfile />} />}
+          {isAuthenticatedUser && <Route path="professor/student/:id" element={<ProfessorHomeStudentProfile />} />}
+          {isAuthenticatedUser && <Route path="professor/student/:id/edit" element={<ProfessorStudentLorUpdate />} />}
+          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentList />} />}
           
           <Route path="/university" element={<UniversityPage />}>
             <Route path="students" element={<UniversityStudents />} />
