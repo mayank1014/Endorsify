@@ -86,4 +86,16 @@ router.post("/edit", async (req, res) => {
   }
 });
 
+router.get("/getallrequests/:email", async (req, res) => {
+  const email = req.params.email;
+
+  try {
+    const student = await Student.findOne({ email: email });
+    console.log(student.teachers)
+    res.json(student.teachers);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 module.exports = router;

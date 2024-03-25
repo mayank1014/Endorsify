@@ -11,16 +11,18 @@ const StudentApplyLOR = () => {
     const user = localStorage.getItem("user");
 
     const [formData, setFormData] = useState({
+        pronoum: "",
+        teachersName: "",
         firstName: "",
         middleName: "",
         lastName: "",
-        purpose: "",
-        institution: "",
+        purposeOfTheLetter: "",
+        targettedInstitution: "",
         subject: "",
         schoolYearAttended: "",
         highSchoolYearAttended: "",
         accomplishments: "",
-        personalityTraits: [],
+        positivePersonalityTraits: [],
         academicSkills: [],
     });
 
@@ -28,7 +30,6 @@ const StudentApplyLOR = () => {
         axios
             .get(`http://localhost:8000/api/professors/getstudentbyID/${location.state.professorId}/${location.state.studentId}`)
             .then((response) => {
-                console.log(response.data);
                 setFormData(response.data);
             })
             .catch((error) => {
@@ -46,7 +47,7 @@ const StudentApplyLOR = () => {
 
     const handleTraitChange = (e) => {
         const { name, checked } = e.target;
-        let updatedTraits = [...formData.personalityTraits];
+        let updatedTraits = [...formData.positivePersonalityTraits];
         if (checked && updatedTraits.length < 6 && !updatedTraits.includes(name)) {
             updatedTraits.push(name);
         } else if (!checked && updatedTraits.includes(name)) {
@@ -54,7 +55,7 @@ const StudentApplyLOR = () => {
         }
         setFormData({
             ...formData,
-            personalityTraits: updatedTraits,
+            positivePersonalityTraits: updatedTraits,
         });
     };
 
@@ -75,10 +76,10 @@ const StudentApplyLOR = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        if (formData.personalityTraits.length < 3) {
+        if (formData.positivePersonalityTraits.length < 3) {
             message.error("Please select at least 3 Positive Personality Traits.");
             return;
-        } else if (formData.personalityTraits.length > 6) {
+        } else if (formData.positivePersonalityTraits.length > 6) {
             message.error("You can select maximum 6 personality traits.");
             return;
         }
@@ -95,14 +96,17 @@ const StudentApplyLOR = () => {
             `http://localhost:8000/api/professors/loredit/${location.state.professorId}/${location.state.studentId}`, formData)
             .then(() => {
 
-                setTimeout(() => {
-                    message.success("LOR Updated");
-
-                    // if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com")
-                    navigate("/professor/home/student", {state:{professorId: location.state.professorId}});
-                    // else
-                    //     navigate("/admin");
-                }, 500);
+                axios.post('http://localhost:8000/api/dummy', formData)
+                .then(() => {
+                    setTimeout(() => {
+                        message.success("LOR Generated Successfully");
+    
+                        // if (JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com")
+                        navigate("/professor/home", {state:{professorId: location.state.professorId}});
+                        // else
+                        //     navigate("/admin");
+                    }, 500);
+                })
             })
             .catch((error) => {
                 message.error("Something went wrong");
@@ -166,36 +170,36 @@ const StudentApplyLOR = () => {
                                     Select Purpose of Letter
                                 </label>
                                 <input
-                                    id="purpose"
-                                    name="purpose"
+                                    id="purposeOfTheLetter"
+                                    name="purposeOfTheLetter"
                                     className="form-control"
-                                    value={formData.purpose}
+                                    value={formData.purposeOfTheLetter}
                                     disabled
                                 />
                             </div>
                             <div className="form-group mb-4">
-                                <label htmlFor="institution" className="mb-2">
+                                <label htmlFor="targettedInstitution" className="mb-2">
                                     Targeted Institution
                                 </label>
                                 <input
-                                    id="institution"
-                                    name="institution"
+                                    id="targettedInstitution"
+                                    name="targettedInstitution"
                                     type="text"
                                     className="form-control"
-                                    value={formData.institution}
+                                    value={formData.targettedInstitution}
                                     disabled
                                 />
                             </div>
                             <div className="form-group mb-4">
-                                <label htmlFor="subject" className="mb-2">
+                                <label htmlFor="classAttended" className="mb-2">
                                     Subject Studied under Professor
                                 </label>
                                 <input
-                                    id="subject"
-                                    name="subject"
+                                    id="classAttended"
+                                    name="classAttended"
                                     type="text"
                                     className="form-control"
-                                    value={formData.subject}
+                                    value={formData.classAttended}
                                     disabled
                                 />
                             </div>
@@ -249,7 +253,7 @@ const StudentApplyLOR = () => {
                                                 id="altruistic"
                                                 name="altruistic"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "altruistic"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -264,7 +268,7 @@ const StudentApplyLOR = () => {
                                                 id="assertive"
                                                 name="assertive"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "assertive"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -279,7 +283,7 @@ const StudentApplyLOR = () => {
                                                 id="amiable"
                                                 name="amiable"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("amiable")}
+                                                checked={formData.positivePersonalityTraits.includes("amiable")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="amiable" className="form-check-label">
@@ -292,7 +296,7 @@ const StudentApplyLOR = () => {
                                                 id="articulate"
                                                 name="articulate"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "articulate"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -307,7 +311,7 @@ const StudentApplyLOR = () => {
                                                 id="brilliant"
                                                 name="brilliant"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "brilliant"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -322,7 +326,7 @@ const StudentApplyLOR = () => {
                                                 id="bright"
                                                 name="bright"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("bright")}
+                                                checked={formData.positivePersonalityTraits.includes("bright")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="bright" className="form-check-label">
@@ -335,7 +339,7 @@ const StudentApplyLOR = () => {
                                                 id="disciplined"
                                                 name="disciplined"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "disciplined"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -350,7 +354,7 @@ const StudentApplyLOR = () => {
                                                 id="dependable"
                                                 name="dependable"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "dependable"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -367,7 +371,7 @@ const StudentApplyLOR = () => {
                                                 id="determined"
                                                 name="determined"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "determined"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -382,7 +386,7 @@ const StudentApplyLOR = () => {
                                                 id="enthusiastic"
                                                 name="enthusiastic"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "enthusiastic"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -400,7 +404,7 @@ const StudentApplyLOR = () => {
                                                 id="flexible"
                                                 name="flexible"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "flexible"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -415,7 +419,7 @@ const StudentApplyLOR = () => {
                                                 id="focused"
                                                 name="focused"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("focused")}
+                                                checked={formData.positivePersonalityTraits.includes("focused")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="focused" className="form-check-label">
@@ -428,7 +432,7 @@ const StudentApplyLOR = () => {
                                                 id="generous"
                                                 name="generous"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "generous"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -443,7 +447,7 @@ const StudentApplyLOR = () => {
                                                 id="honest"
                                                 name="honest"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("honest")}
+                                                checked={formData.positivePersonalityTraits.includes("honest")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="honest" className="form-check-label">
@@ -456,7 +460,7 @@ const StudentApplyLOR = () => {
                                                 id="helpful"
                                                 name="helpful"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("helpful")}
+                                                checked={formData.positivePersonalityTraits.includes("helpful")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="helpful" className="form-check-label">
@@ -469,7 +473,7 @@ const StudentApplyLOR = () => {
                                                 id="intuitive"
                                                 name="intuitive"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "intuitive"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -486,7 +490,7 @@ const StudentApplyLOR = () => {
                                                 id="kind"
                                                 name="kind"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("kind")}
+                                                checked={formData.positivePersonalityTraits.includes("kind")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="kind" className="form-check-label">
@@ -499,7 +503,7 @@ const StudentApplyLOR = () => {
                                                 id="logical"
                                                 name="logical"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("logical")}
+                                                checked={formData.positivePersonalityTraits.includes("logical")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="logical" className="form-check-label">
@@ -512,7 +516,7 @@ const StudentApplyLOR = () => {
                                                 id="mature"
                                                 name="mature"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("mature")}
+                                                checked={formData.positivePersonalityTraits.includes("mature")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="mature" className="form-check-label">
@@ -525,7 +529,7 @@ const StudentApplyLOR = () => {
                                                 id="meticulous"
                                                 name="meticulous"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "meticulous"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -540,7 +544,7 @@ const StudentApplyLOR = () => {
                                                 id="outspoken"
                                                 name="outspoken"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "outspoken"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -555,7 +559,7 @@ const StudentApplyLOR = () => {
                                                 id="open"
                                                 name="open"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("open")}
+                                                checked={formData.positivePersonalityTraits.includes("open")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="open" className="form-check-label">
@@ -568,7 +572,7 @@ const StudentApplyLOR = () => {
                                                 id="resourceful"
                                                 name="resourceful"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "resourceful"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -583,7 +587,7 @@ const StudentApplyLOR = () => {
                                                 id="respectful"
                                                 name="respectful"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "respectful"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -600,7 +604,7 @@ const StudentApplyLOR = () => {
                                                 id="positive"
                                                 name="positive"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "positive"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -615,7 +619,7 @@ const StudentApplyLOR = () => {
                                                 id="self_aware"
                                                 name="self_aware"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "self_aware"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -630,7 +634,7 @@ const StudentApplyLOR = () => {
                                                 id="sucint"
                                                 name="sucint"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("sucint")}
+                                                checked={formData.positivePersonalityTraits.includes("sucint")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="sucint" className="form-check-label">
@@ -643,7 +647,7 @@ const StudentApplyLOR = () => {
                                                 id="secure"
                                                 name="secure"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("secure")}
+                                                checked={formData.positivePersonalityTraits.includes("secure")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="secure" className="form-check-label">
@@ -656,7 +660,7 @@ const StudentApplyLOR = () => {
                                                 id="sympathetic"
                                                 name="sympathetic"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "sympathetic"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -671,7 +675,7 @@ const StudentApplyLOR = () => {
                                                 id="spontaneous"
                                                 name="spontaneous"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "spontaneous"
                                                 )}
                                                 onChange={handleTraitChange}
@@ -686,7 +690,7 @@ const StudentApplyLOR = () => {
                                                 id="sweet"
                                                 name="sweet"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes("sweet")}
+                                                checked={formData.positivePersonalityTraits.includes("sweet")}
                                                 onChange={handleTraitChange}
                                             />
                                             <label htmlFor="sweet" className="form-check-label">
@@ -699,7 +703,7 @@ const StudentApplyLOR = () => {
                                                 id="thorough"
                                                 name="thorough"
                                                 className="form-check-input"
-                                                checked={formData.personalityTraits.includes(
+                                                checked={formData.positivePersonalityTraits.includes(
                                                     "thorough"
                                                 )}
                                                 onChange={handleTraitChange}

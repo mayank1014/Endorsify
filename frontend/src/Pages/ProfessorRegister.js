@@ -130,7 +130,7 @@ const ProfessorRegister = () => {
               email: location.state.email,
               password: location.state.password,
               confirmPassword: location.state.confirmPassword,
-              role: "student",
+              role: "professor",
             };
 
             formData.email = location.state.email;

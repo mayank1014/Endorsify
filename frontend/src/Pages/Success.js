@@ -114,10 +114,16 @@ const Success = () => {
   }
 
   return (
-    <div>
-      <Button onClick={() => {save()}}>Click</Button>
-      <Spinner />
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div style={{ backgroundColor: '#ffffff', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', padding: '20px', textAlign: 'center' }}>
+      <div style={{ fontSize: '48px', color: '#4caf50' }}>&#10004;</div>
+      <h2>Payment Successful</h2>
+      {/* Additional details or confirmation message can go here */}
+      <button style={{ backgroundColor: '#4caf50', color: 'white', border: 'none', padding: '10px 20px', textAlign: 'center', textDecoration: 'none', display: 'inline-block', fontSize: '16px', marginTop: '10px', cursor: 'pointer' }} onClick={() => { save() }}>OK</button>
     </div>
+  </div>
+  
+
   );
 };
 

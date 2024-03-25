@@ -53,7 +53,7 @@ const Subscription = () => {
       <div style={styles.cards}>
         <div style={styles.card}>
           <h3>3 Months</h3>
-          <p>Price: $4000</p>
+          <p>Price: Rs.4000</p>
           <button
             style={styles.button}
             onClick={() => handleSubmit("3_months", 4000)}
@@ -63,7 +63,7 @@ const Subscription = () => {
         </div>
         <div style={styles.card}>
           <h3>1 Year</h3>
-          <p>Price: $10000</p>
+          <p>Price: Rs.10000</p>
           <button
             style={styles.button}
             onClick={() => handleSubmit("1_year", 10000)}

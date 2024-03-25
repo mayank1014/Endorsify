@@ -11,7 +11,13 @@ const studentSchema = new mongoose.Schema({
   branch: {type: String, required:true},
   collegeID: {type: String, required:true},
   university: {type: String, required:true},
-  teachers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }],
+  teachers: [
+    {
+      professorId: { type: String, required: true },
+      lorStatus: { type: String, required: true },
+      professorData: {},
+    },
+  ],
 });
 
 const Student = mongoose.model('Student', studentSchema);

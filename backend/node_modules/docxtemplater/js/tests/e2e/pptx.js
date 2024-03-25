@@ -1,0 +1,145 @@
+"use strict";
+
+var _require = require("../utils.js"),
+  createDoc = _require.createDoc,
+  createDocV4 = _require.createDocV4,
+  shouldBeSame = _require.shouldBeSame,
+  expect = _require.expect,
+  resolveSoon = _require.resolveSoon;
+var rawXMLValue = require("../data/raw-xml-pptx.js");
+describe("Pptx generation", function () {
+  it("should work with title", function () {
+    var doc = createDoc("title-example.pptx");
+    var con = doc.getZip().files["docProps/app.xml"].asText();
+    expect(con).not.to.contain("Edgar");
+    doc.setData({
+      name: "Edgar"
+    }).render();
+    con = doc.getZip().files["docProps/app.xml"].asText();
+    expect(con).to.contain("Edgar");
+  });
+  it("should work with simple pptx", function () {
+    var doc = createDoc("simple-example.pptx");
+    doc.render({
+      name: "Edgar"
+    });
+    expect(doc.getFullText()).to.be.equal("Hello Edgar");
+  });
+  it("should work with table pptx", function () {
+    return this.render({
+      name: "table-example.pptx",
+      data: {
+        users: [{
+          msg: "hello",
+          name: "mary"
+        }, {
+          msg: "hello",
+          name: "john"
+        }]
+      },
+      expectedName: "expected-table-example.pptx"
+    });
+  });
+  it("should work with loop table", function () {
+    var doc = createDocV4("loop-table.pptx");
+    return doc.renderAsync({
+      products: [{
+        name: "Acme",
+        price: 10
+      }, {
+        name: "Ecma",
+        price: 20
+      }]
+    }).then(function () {
+      expect(doc.scopeManagers["ppt/slides/slide1.xml"].resolved).to.matchSnapshot();
+      shouldBeSame({
+        doc: doc,
+        expectedName: "expected-loop-table.pptx"
+      });
+    });
+  });
+  it("should be possible to totally remove a table if data is empty", function () {
+    shouldBeSame({
+      doc: createDocV4("loop-table-no-header.pptx").render(),
+      expectedName: "expected-empty.pptx"
+    });
+  });
+  it("should work with loop pptx", function () {
+    return this.render({
+      name: "loop-example.pptx",
+      data: {
+        users: [{
+          name: "Doe"
+        }, {
+          name: "John"
+        }]
+      },
+      expectedName: "expected-loop-example.pptx",
+      expectedText: " Doe  John "
+    });
+  });
+  it("should work with simple raw pptx", function () {
+    var doc = createDoc("raw-xml-example.pptx");
+    var scope, meta, tag;
+    var calls = 0;
+    doc.setOptions({
+      parser: function parser(t) {
+        tag = t;
+        return {
+          get: function get(s, m) {
+            scope = s;
+            meta = m.meta;
+            calls++;
+            return scope[tag];
+          }
+        };
+      }
+    });
+    doc.setData({
+      raw: rawXMLValue
+    }).render();
+    expect(calls).to.equal(1);
+    expect(scope.raw).to.be.a("string");
+    expect(meta).to.be.an("object");
+    expect(meta.part).to.be.an("object");
+    expect(meta.part.expanded).to.be.an("array");
+    expect(doc.getFullText()).to.be.equal("Hello World");
+    shouldBeSame({
+      doc: doc,
+      expectedName: "expected-raw-xml-example.pptx"
+    });
+  });
+  it("should work with simple raw pptx async", function () {
+    var doc = createDoc("raw-xml-example.pptx");
+    var scope, meta, tag;
+    var calls = 0;
+    doc.setOptions({
+      parser: function parser(t) {
+        tag = t;
+        return {
+          get: function get(s, m) {
+            scope = s;
+            meta = m.meta;
+            calls++;
+            return scope[tag];
+          }
+        };
+      }
+    });
+    doc.compile();
+    return doc.resolveData({
+      raw: resolveSoon(rawXMLValue)
+    }).then(function () {
+      doc.render();
+      expect(calls).to.equal(1);
+      expect(meta).to.be.an("object");
+      expect(meta.part).to.be.an("object");
+      expect(meta.part.expanded).to.be.an("array");
+      expect(doc.getFullText()).to.be.equal("Hello World");
+      shouldBeSame({
+        doc: doc,
+        expectedName: "expected-raw-xml-example.pptx"
+      });
+    });
+  });
+});

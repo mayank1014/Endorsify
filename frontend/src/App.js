@@ -56,6 +56,7 @@ function App() {
             <Route path="requests" element={<StudentRequests />} />
           </Route>
 
+          <Route path="/changepassword" element={<ChangePassword />} />
           {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
           {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
           {isAuthenticatedUser && <Route path="professor/student/:id" element={<ProfessorHomeStudentProfile />} />}

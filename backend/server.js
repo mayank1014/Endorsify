@@ -19,7 +19,14 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({ extended: false }));
 
+/* ------------------- */
+const Docxtemplater = require("docxtemplater");
+const fs = require("fs");
+const path = require("path");
+/* ------------------- */
+
 app.use("/api/dummy", (req, res) => {
+  console.log(req.body)
   const { spawn } = require("child_process");
 
   const pythonScriptPath = "recLetter.py";
@@ -49,6 +56,22 @@ app.use("/api/dummy", (req, res) => {
   });
 
   res.send("Hello");
+});
+
+app.get("/download/docx", (req, res) => {
+  try {
+    // Specify the path to your existing DOCX file
+    const filePath = path.join(__dirname, 'Template.docx'); // Replace 'sample.docx' with your actual filename
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    res.setHeader('Content-Disposition', 'attachment; filename=sample.docx'); // Or use the original filename if desired
+
+    // Send the existing DOCX file content
+    res.sendFile(filePath);
+  } catch (error) {
+    console.error('Error serving DOCX file:', error);
+    res.status(500).send('Error downloading DOCX file');
+  }
 });
 
 app.use("/api/users/", userRouter);

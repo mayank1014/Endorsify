@@ -268,13 +268,13 @@ const ProfessorHomeStudentProfile = () => {
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Branch : </strong> {student.branch}</p>
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>College ID : </strong> {student.collegeID} </p>
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Passing Year : </strong> {student.passingYear} </p>
-                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Purpose: </strong> {proff_student.purpose} </p>
-                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Institution : </strong> {proff_student && proff_student.institution} </p>
-                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Subject : </strong> {proff_student && proff_student.subject} </p>
+                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Purpose: </strong> {proff_student.purposeOfTheLetter} </p>
+                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Institution : </strong> {proff_student && proff_student.targettedInstitution} </p>
+                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Subject : </strong> {proff_student && proff_student.classAttended} </p>
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>School Year Attended : </strong> {proff_student && proff_student.schoolYearAttended} </p>
                           <div>
                             <strong style={{ ...styles.descriptionTitle, marginBottom: "8px" }}>Personality Traits : </strong>
-                            {((proff_student && proff_student.personalityTraits) ?? []).map((expertise, index) => (
+                            {((proff_student && proff_student.positivePersonalityTraits) ?? []).map((expertise, index) => (
                               <Tag key={index} style={styles.expertiseTag}>{expertise}</Tag>
                             ))}
                           </div>

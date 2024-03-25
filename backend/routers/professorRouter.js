@@ -221,31 +221,41 @@ router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
   }
 })
 
-router.post("/studentrequest", async (req, res) => {
-  
+router.post("/studentrequest", async (req, res) => {  
   try {
     const professor = await Professor.findOne({ _id: req.body.professorId }).exec()
+    const student = await Student.findOne({ _id: req.body.studentId }).exec()
 
+    if (professor && student) {
 
-    if (professor) {
-
-      var student = {};
-      student.studentId = req.body.studentId;
+      var stu = {};
+      stu.studentId = req.body.studentId;
+      stu.professorId = req.body.professorId;
 
       delete req.body.studentId;
       delete req.body.professorId;
 
       professor.students.push({
-        studentId: student["studentId"],
+        studentId: stu["studentId"],
         lorStatus: "pending",
         studentData: req.body
       })
 
+      student.teachers.push({
+        professorId: stu["professorId"],
+        lorStatus: "pending",
+        professorData: { 
+          email: professor.email,
+          name: professor.name,
+          profilePhoto: professor.profilePhoto,
+        }
+      })
+
       professor.save();
+      student.save();
 
       res.send("Applied Successfully")
     } else {
-      console.log(error)
       return res.status(400).json(error);
     }  
   } catch (error) {
