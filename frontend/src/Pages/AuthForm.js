@@ -434,7 +434,7 @@ const AuthForm = () => {
                 <div className="submit-button">
                   <input type="submit" value="Log-in Now" />
                 </div>
-                <a href="#" className="forget">
+                <a href="/forgotpassword" className="forget">
                   Forget Password
                 </a>
               </form>

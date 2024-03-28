@@ -93,21 +93,6 @@ const ProfessorEdit = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:8000/api/professors/edit",
-    //     formDataObject
-    //   );
-
-    //   message.success("Profile updated successfully");
-
-    //   setTimeout(() => {
-    //     navigate("/professor/home");
-    //   }, 500);
-    // } catch (error) {
-    //   message.error("Something went wrong");
-    // }
-
     const profilePhoto = new FormData();
     const signPhoto = new FormData();
 

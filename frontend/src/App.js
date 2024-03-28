@@ -29,6 +29,7 @@ import ProfessorHomeStudentList from './Pages/ProfessorHomeStudentList';
 import ProfessorStudentLorUpdate from './Pages/ProfessorStudentLorUpdate';
 import ViewDocs from './Pages/ViewDocs';
 import UploadDocs from './Pages/UploadDocs';
+import ForgotPassword from './Pages/ForgotPassword';
 
 function App() {
 
@@ -44,7 +45,7 @@ function App() {
 
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
-        
+          <Route path="forgotpassword" element={<ForgotPassword />} />
           <Route path="/" element={<AuthForm />} />
           <Route path="register" element={<Register />} />
           <Route path="register/student" element={<StudentRegister />} />
