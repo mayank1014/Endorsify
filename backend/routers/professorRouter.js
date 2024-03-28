@@ -77,7 +77,6 @@ router.get("/getallprofessors", async (req, res) => {
 router.get("/getStudentsByProfessor/:professorId/:lorstatus", async (req, res) => {
   const professorId = req.params.professorId;
   const lorstatus=req.params.lorstatus;
-  console.log(lorstatus);
   try {
     const professor = await Professor.findById(professorId).exec();
     if (!professor) {
@@ -90,7 +89,6 @@ router.get("/getStudentsByProfessor/:professorId/:lorstatus", async (req, res) =
 
     // Fetch students whose IDs are in the studentIds array and have the specified lorstatus
     const students = await Student.find({ _id: { $in: studentIds }}).exec();
-    console.log(students);
     res.send(students);
   } catch (error) {
     console.error("Error fetching students:", error);
@@ -179,17 +177,13 @@ router.get("/getstudentbyID/:professorId/:studentId", async (req, res) => {
     console.error("Error fetching student:", error);
     return res.status(400).json(error);
   }
-
 });
 
 router.post("/register", async (req, res) => {
   try {
     const professor = await Professor.findOne({ teacherId: req.body.teacherId, universityId: req.body.universityId }).exec()
 
-    console.log(professor)
-
     if (professor) {
-      console.log(professor)
       return res.json({ error: 1 });
     } else {
       const newProfessor = new Professor(req.body);

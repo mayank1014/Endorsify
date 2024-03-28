@@ -20,59 +20,73 @@ app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({ extended: false }));
 
 /* ------------------- */
-const Docxtemplater = require("docxtemplater");
-const fs = require("fs");
-const path = require("path");
+// const Docxtemplater = require("docxtemplater");
+// const fs = require("fs");
+// const path = require("path");
 /* ------------------- */
 
+const University = require("./models/universitySchema");
+
 app.use("/api/dummy", (req, res) => {
+
   console.log(req.body)
-  const { spawn } = require("child_process");
 
-  const pythonScriptPath = "recLetter.py";
+  University.findOne({ _id: req.body.uniId })
+  .exec()
+  .then(university => {
+    const { spawn } = require("child_process");
 
-  // Define the JSON object to pass
-  const jsonObject = req.body;
+    const pythonScriptPath = "recLetter.py";
 
-  // Stringify the JSON object
-  const jsonString = JSON.stringify(jsonObject);
+    // Define the JSON object to pass
+    const jsonObject = {
+      ...req.body,
+      "docxFile" : university.docxFile,
+    }
 
-  // Spawn a child process to run the Python script
-  const pythonProcess = spawn("python", [pythonScriptPath, jsonString]);
+    // Stringify the JSON object
+    const jsonString = JSON.stringify(jsonObject);
 
-  // Handle stdout data from the Python script
-  pythonProcess.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-  });
+    // Spawn a child process to run the Python script
+    const pythonProcess = spawn("python", [pythonScriptPath, jsonString]);
 
-  // Handle stderr data from the Python script
-  pythonProcess.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
-  });
+    // Handle stdout data from the Python script
+    pythonProcess.stdout.on("data", (data) => {
+      console.log(`stdout: ${data}`);
+    });
 
-  // Handle completion of the Python script
-  pythonProcess.on("close", (code) => {
-    console.log(`Python script process exited with code ${code}`);
+    // Handle stderr data from the Python script
+    pythonProcess.stderr.on("data", (data) => {
+      console.error(`stderr: ${data}`);
+    });
+
+    // Handle completion of the Python script
+    pythonProcess.on("close", (code) => {
+      console.log(`Python script process exited with code ${code}`);
+    });
+  })
+  .catch(error => {
+    console.error("Error fetching university:", error);
   });
 
   res.send("Hello");
 });
 
-app.get("/download/docx", (req, res) => {
-  try {
-    // Specify the path to your existing DOCX file
-    const filePath = path.join(__dirname, 'Template.docx'); // Replace 'sample.docx' with your actual filename
+// app.get("/download/docx", (req, res) => {
+//   try {
+//     // Specify the path to your existing DOCX file
+//     const filePath = path.join(__dirname, 'Template.docx'); // Replace 'sample.docx' with your actual filename
 
-    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-    res.setHeader('Content-Disposition', 'attachment; filename=sample.docx'); // Or use the original filename if desired
+//     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+//     res.setHeader('Content-Disposition', 'attachment; filename=sample.docx'); // Or use the original filename if desired
 
-    // Send the existing DOCX file content
-    res.sendFile(filePath);
-  } catch (error) {
-    console.error('Error serving DOCX file:', error);
-    res.status(500).send('Error downloading DOCX file');
-  }
-});
+//     // Send the existing DOCX file content
+//     res.sendFile(filePath);
+//   } catch (error) {
+//     console.error('Error serving DOCX file:', error);
+//     res.status(500).send('Error downloading DOCX file');
+//   }
+// });
 
 app.use("/api/users/", userRouter);
 app.use("/api/universities/", universityRouter);

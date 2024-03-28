@@ -7,7 +7,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 const StudentApplyLOR = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.state.studentId);
     const user = localStorage.getItem("user");
 
     const [formData, setFormData] = useState({

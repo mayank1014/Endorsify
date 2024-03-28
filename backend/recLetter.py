@@ -1,4 +1,4 @@
-from Listofthings import PronoumsList,PositivePersonalityTraits,AcademicSkills, Phrase1, Phrase2, Phrase3, Phrase4, Phrase5, LinkingWords
+from Listofthings import PronoumsList, PositivePersonalityTraits, AcademicSkills, Phrase1, Phrase2, Phrase3, Phrase4, Phrase5, LinkingWords
 from openpyxl import Workbook
 from openpyxl import load_workbook
 import sys, getopt
@@ -11,9 +11,12 @@ from docx.shared import Length, Inches, Pt
 import sys
 import json
 
-doc = docx.Document('Template.docx')
+from docx import Document
+from docx2pdf import convert
 
-all_paras = doc.paragraphs
+########################
+import requests 
+from io import BytesIO 
 
 
 
@@ -28,6 +31,18 @@ print("JSON object received by Python script:")
 
 for key, value in json_object.items():
     globals()[key] = value
+    
+
+
+response = requests.get(docxFile)
+docx_bytes = BytesIO(response.content)
+doc = Document(docx_bytes)
+########################
+
+# doc = docx.Document()
+
+all_paras = doc.paragraphs
+
 
 
 
@@ -196,7 +211,14 @@ lastParagraph.add_run("Sincerely,\n\n")
 lastParagraph.add_run(teachersName + "\n")
 lastParagraph.add_run(str(date.today().month) + "/" + str(date.today().day) + "/" + str(date.today().year))
 
-file_name = (firstName + lastName + "-" + str(date.today().month) + "-" + str(date.today().day) + "-" + str(date.today().year) + ".docx")
-doc.save(file_name)
+file_name_docx = (firstName + lastName + "-" + str(date.today().month) + "-" + str(date.today().day) + "-" + str(date.today().year) + ".docx")
+file_name_pdf = (firstName + lastName + "-" + str(date.today().month) + "-" + str(date.today().day) + "-" + str(date.today().year) + ".pdf")
+doc.save(file_name_docx)
 
-print(file_name + " created sucessfully")
+###########################################################
+
+convert(file_name_docx, file_name_pdf)
+
+###########################################################
+print(file_name_docx + " created sucessfully")
+print(file_name_pdf + " created sucessfully")

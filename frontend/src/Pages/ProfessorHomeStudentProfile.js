@@ -164,7 +164,6 @@ const ProfessorHomeStudentProfile = () => {
         axios
           .get(`http://localhost:8000/api/professors/getstudentbyID/${location.state.professorId}/${id}`)
           .then((sturesponse) => {
-            console.log(sturesponse.data);
             setProff_Student(sturesponse.data);
           })
           .catch((error) => {

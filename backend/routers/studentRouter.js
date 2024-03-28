@@ -91,7 +91,6 @@ router.get("/getallrequests/:email", async (req, res) => {
 
   try {
     const student = await Student.findOne({ email: email });
-    console.log(student.teachers)
     res.json(student.teachers);
   } catch (error) {
     return res.status(400).json(error);

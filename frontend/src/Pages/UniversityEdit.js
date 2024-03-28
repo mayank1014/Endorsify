@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import defaultLogo from "../img/default-logo.jpg";
-import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
 
 const UniversityForm = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
 
   const user = localStorage.getItem("user");
 
@@ -92,43 +89,65 @@ const UniversityForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formDataWithCloudinary = new FormData();
-    formDataWithCloudinary.append("file", formData.logo);
-    formDataWithCloudinary.append("upload_preset", "Endorsify");
-    formDataWithCloudinary.append("cloud_name", "djhsk7akn");
+    const universityLogo = new FormData();
+    const universityTemplate = new FormData();
 
-    try {
-      const cloudinaryResponse = await axios.post(
-        "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
-        formDataWithCloudinary
-      );
+    universityLogo.append("file", formData.logo);
+    universityLogo.append("upload_preset", "Endorsify");
+    universityLogo.append("cloud_name", "djhsk7akn");
 
-      const uniLogoUrl = cloudinaryResponse.data.url;
-      const formDataWithCloudinaryUrl = {
-        ...formData,
-        logo: uniLogoUrl,
-      };
+    universityTemplate.append("file", formData.docxFile);
+    universityTemplate.append("upload_preset", "Endorsify");
+    universityTemplate.append("cloud_name", "djhsk7akn");
 
-      axios
-        .post(
-          "http://localhost:8000/api/universities/edit",
-          formDataWithCloudinaryUrl
-        )
-        .then((response) => {
-          message.success("Profile updated successfully");
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/djhsk7akn/raw/upload",
+        universityTemplate
+      )
+      .then((response) => {
+        const formDataWithCloudinaryUrl1 = {
+          ...formData,
+          docxFile: response.data.url,
+        };
 
-          setTimeout(() => {
-            window.location.href = "/university";
-            window.location.href = "/university/students";
-          }, 500);
-        })
-        .catch((error) => {
-          message.error("Something went wrong");
-        });
-    } catch (error) {
-      message.error("Something went wrong");
-      console.log(error);
-    }
+        axios
+          .post(
+            "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+            universityLogo
+          )
+          .then((response) => {
+            const formDataWithCloudinaryUrl2 = {
+              ...formDataWithCloudinaryUrl1,
+              logo: response.data.url,
+            };
+
+            axios
+              .post(
+                "http://localhost:8000/api/universities/edit",
+                formDataWithCloudinaryUrl2
+              )
+              .then((response) => {
+                message.success("Profile updated successfully");
+
+                setTimeout(() => {
+                  window.location.href = "/university";
+                  window.location.href = "/university/students";
+                }, 500);
+              })
+              .catch((error) => {
+                message.error("Something went wrong");
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+            message.error("Something went wrong");
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        message.error("Something went wrong");
+      });
   };
 
   return (
@@ -157,7 +176,6 @@ const UniversityForm = () => {
                     <div className="form-group">
                       <label htmlFor="name">University Name:</label>
                       <input
-                        disabled
                         type="text"
                         className="form-control"
                         id="name"

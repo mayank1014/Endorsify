@@ -39,6 +39,7 @@ const StudentApplyLOR = () => {
     accomplishments: "",
     positivePersonalityTraits: [],
     academicSkills: [],
+    uniId: "",
   });
 
   const handleInputChange = (e) => {
@@ -101,6 +102,7 @@ const StudentApplyLOR = () => {
       formData["professorId"] = location.state._id;
       formData["pronoum"] = student.gender;
       formData["teachersName"] = location.state.name;
+      formData["uniId"] = location.state.universityId;
 
       axios.post(
         "http://localhost:8000/api/professors/studentrequest",

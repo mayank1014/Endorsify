@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Modal } from "react-bootstrap";
+import Spinner from "../components/Spinner";
 
 const UniversityStudents = () => {
     const [students, setStudents] = useState([]);
@@ -42,6 +43,8 @@ const UniversityStudents = () => {
   
     return (
       <>
+        {students.length==0 && <Spinner />}
+        {students.length>0 && <>
         <table className="table table-bordered">
           <thead>
             <tr>
@@ -94,6 +97,8 @@ const UniversityStudents = () => {
             </Button>
           </Modal.Footer>
         </Modal>
+        </>
+        }
       </>
     );
   };

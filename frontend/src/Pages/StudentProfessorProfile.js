@@ -20,11 +20,7 @@ const StudentProfessorProfile = () => {
       .catch((error) => {
         console.error("Error fetching professor : ", error);
       });
-  }, [id]);
-
-  const convertBase64ToImage = (base64String) => {
-    return `data:image/jpeg;base64,${base64String}`;
-  };
+  }, [id]); 
 
   const formatPortfolioURL = (url) => {
     if (url && (url.startsWith("http://") || url.startsWith("https://"))) {

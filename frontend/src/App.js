@@ -27,6 +27,8 @@ import Cancel from './Pages/Cancel';
 import StudentRequests from './Pages/StudentRequests';
 import ProfessorHomeStudentList from './Pages/ProfessorHomeStudentList';
 import ProfessorStudentLorUpdate from './Pages/ProfessorStudentLorUpdate';
+import ViewDocs from './Pages/ViewDocs';
+import UploadDocs from './Pages/UploadDocs';
 
 function App() {
 
@@ -36,6 +38,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          
+          {/* <Route path="/" element={<ViewDocs />} />
+          <Route path="/u" element={<UploadDocs />} /> */}
 
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
