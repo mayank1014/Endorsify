@@ -41,7 +41,6 @@ router.post("/register", async (req, res) => {
 
 router.get("/getstudent/:email", async (req, res) => {
   const email = req.params.email;
-
   try {
     const student = await Student.findOne({ email: email });
     res.send(student);

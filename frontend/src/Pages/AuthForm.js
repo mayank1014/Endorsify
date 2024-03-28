@@ -379,102 +379,103 @@ const AuthForm = () => {
         `}
       </style>
       <div className="auth-container">
-      <div className="container">
-        <div className="signInUp">
-          {/* Sign-in Part */}
-          <div className={`box signin ${formActive ? "" : "active"}`}>
-            <h2>Empowering Your Success</h2>
-            <p>
-              Endorsify – Your Trusted Companion for Crafting Stellar Letters of
-              Recommendation. Your Gateway to Professional Excellence!
-            </p>
-            <h2>Already have an account ?</h2>
-            <button className="signinBtn" onClick={handleSignIn}>
-              Sign in
-            </button>
+        <div className="container">
+          <div className="signInUp">
+            {/* Sign-in Part */}
+            <div className={`box signin ${formActive ? "" : "active"}`}>
+              <h2>Empowering Your Success</h2>
+              <p>
+                Endorsify – Your Trusted Companion for Crafting Stellar Letters of
+                Recommendation. Your Gateway to Professional Excellence!
+              </p>
+              <h2>Already have an account ?</h2>
+              <button className="signinBtn" onClick={handleSignIn}>
+                Sign in
+              </button>
+            </div>
+
+            {/* Sign-up Part */}
+            <div className={`box signup ${formActive ? "active" : ""}`}>
+              <h2>Empowering Your Success</h2>
+              <p>
+                Endorsify – Your Trusted Companion for Crafting Stellar Letters of
+                Recommendation. Your Gateway to Professional Excellence!
+              </p>
+              <h2>Don't have an account ?</h2>
+              <button className="signupBtn" onClick={handleSignUp}>
+                Sign-up Now
+              </button>
+            </div>
           </div>
 
-          {/* Sign-up Part */}
-          <div className={`box signup ${formActive ? "active" : ""}`}>
-            <h2>Empowering Your Success</h2>
-            <p>
-              Endorsify – Your Trusted Companion for Crafting Stellar Letters of
-              Recommendation. Your Gateway to Professional Excellence!
-            </p>
-            <h2>Don't have an account ?</h2>
-            <button className="signupBtn" onClick={handleSignUp}>
-              Sign-up Now
-            </button>
-          </div>
-        </div>
+          {/* Sign-in Form */}
+          <div className={`form-box ${formActive ? "active" : ""}`}>
+            <div className="form signinForm">
+              <img src={Logo} alt="Logo" />
+              <form onSubmit={handleFormSubmit}>
+              <a href="http://localhost:8000/auth/google" className="google">
+  <i className="fab fa-google-plus-g"></i>Login with Google
+</a>
 
-        {/* Sign-in Form */}
-        <div className={`form-box ${formActive ? "active" : ""}`}>
-          <div className="form signinForm">
-            <img src={Logo} alt="Logo" />
-            <form onSubmit={handleFormSubmit}>
-              <a href="#" className="google">
-                <i className="fab fa-google-plus-g"></i>Login with Google
-              </a>
-              <input
-                type="text"
-                name="email"
-                placeholder="Please Enter email"
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Please Enter Password"
-                onChange={handleChange}
-                required
-              />
-              <div className="submit-button">
-                <input type="submit" value="Log-in Now" />
-              </div>
-              <a href="#" className="forget">
-                Forget Password
-              </a>
-            </form>
-          </div>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Please Enter email"
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Please Enter Password"
+                  onChange={handleChange}
+                  required
+                />
+                <div className="submit-button">
+                  <input type="submit" value="Log-in Now" />
+                </div>
+                <a href="#" className="forget">
+                  Forget Password
+                </a>
+              </form>
+            </div>
 
-          {/* Sign-up Form */}
-          <div className="form signupForm">
-            <img src={Logo} alt="Logo" />
-            <form onSubmit={handleFormSubmit}>
-              <a href="#" className="facebook">
-                <i className="fab fa-facebook-f"></i>SignUp with Google
-              </a>
-              <input
-                type="text"
-                name="email"
-                placeholder="Email Address"
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                onChange={handleChange}
-                required
-              />
-              <div className="submit-button">
-                <input type="submit" value="Register Now" />
-              </div>
-            </form>
+            {/* Sign-up Form */}
+            <div className="form signupForm">
+              <img src={Logo} alt="Logo" />
+              <form onSubmit={handleFormSubmit}>
+                <a href="http://localhost:8000/auth/google" className="google">
+                  <i className="fab fa-google-plus-g"></i>SignUp with Google
+                </a>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Email Address"
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  onChange={handleChange}
+                  required
+                />
+                <div className="submit-button">
+                  <input type="submit" value="Register Now" />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

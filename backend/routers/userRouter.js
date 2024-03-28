@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const app = express();
 const User = require("../models/userSchema");
 
 router.get("/getallusers", async (req, res) => {
@@ -81,5 +81,6 @@ router.post("/deleteuser", async (req, res) => {
 router.post("/hello", async (req, res) => {
   res.send("Hello");
 });
+
 
 module.exports = router;

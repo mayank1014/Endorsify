@@ -3,16 +3,21 @@ import axios from "axios";
 import Spinner from "../components/Spinner";
 import { useNavigate } from "react-router-dom";
 import { Row, Col } from "antd";
+import { useCookies } from 'react-cookie';
 
 const StudentHome = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [cookies] = useCookies(['users']);
   const navigate = useNavigate();
-
+  if (!localStorage.getItem("user")) {
+    localStorage.setItem("user", JSON.stringify(cookies.users));
+  }
+  const user = JSON.parse(localStorage.getItem("user") );
   const [student, setStudent] = useState(null);
   const [allProfessors, setAllProfessors] = useState([]);
 
   useEffect(() => {
-    axios
+    if (user && user.email){
+     axios
       .get(`http://localhost:8000/api/students/getstudent/${user.email}`)
       .then((response) => {
         setStudent(response.data);
@@ -31,7 +36,7 @@ const StudentHome = () => {
       .catch((error) => {
         console.error("Error fetching student : ", error);
       });
-  }, []);
+  }}, [user]);
 
   const handleProfessorClick = (professorId) => {
     navigate(`/student/professor/${professorId}`);

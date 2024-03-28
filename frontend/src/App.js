@@ -62,11 +62,11 @@ function App() {
           </Route>
 
           <Route path="/changepassword" element={<ChangePassword />} />
-          {isAuthenticatedUser && <Route path="professor/home" element={<ProfessorHomePage />} /> }
-          {isAuthenticatedUser && <Route path="professor/edit" element={<ProfessorEdit />} />}
-          {isAuthenticatedUser && <Route path="professor/student/:id" element={<ProfessorHomeStudentProfile />} />}
-          {isAuthenticatedUser && <Route path="professor/student/:id/edit" element={<ProfessorStudentLorUpdate />} />}
-          {isAuthenticatedUser && <Route path="professor/home/student" element={<ProfessorHomeStudentList />} />}
+         <Route path="/professor/home" element={<ProfessorHomePage />} /> 
+           <Route path="professor/edit" element={<ProfessorEdit />} />
+         <Route path="professor/student/:id" element={<ProfessorHomeStudentProfile />} />
+          <Route path="professor/student/:id/edit" element={<ProfessorStudentLorUpdate />} />
+         <Route path="professor/home/student" element={<ProfessorHomeStudentList />} />
           
           <Route path="/university" element={<UniversityPage />}>
             <Route path="students" element={<UniversityStudents />} />

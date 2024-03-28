@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
     "@syncfusion/ej2-react-documenteditor": "^24.2.9",
+    "express-session": "^1.18.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth2": "^0.2.0",
     "react-icons": "^5.0.1"
   }
 }

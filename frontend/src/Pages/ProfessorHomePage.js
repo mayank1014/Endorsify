@@ -234,37 +234,31 @@ import { Row, Col } from "antd";
 import Spinner from "../components/Spinner";
 import { Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 const ProfessorHomePage = () => {
-    const user = localStorage.getItem("user");
-    const [professor, setProfessor] = useState(null); // Initialize professor state with null
+  const [cookies] = useCookies(['users']);
+  const navigate = useNavigate();
+  if (!localStorage.getItem("user")) {
+    localStorage.setItem("user", JSON.stringify(cookies.users));
+  }
+  const user = JSON.parse(localStorage.getItem("user") );
+    const [professor, setProfessor] = useState(null); 
     const location = useLocation();
-    const navigate = useNavigate();
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
+        if (user && user.email){
+            axios
+             .get(`http://localhost:8000/api/professors/getprofessors/${user.email}`)
             .then((professorResponse) => {
-                // const professorName = professorResponse.data.name;
-                // console.log(professorName);
                 setProfessor(professorResponse.data);
             })
             .catch((error) => {
                 console.error("Error fetching professor details:", error);
             });
-    }, [user]); // Add user to the dependency array
+        }
+    }, [user]);
 
-    // const handleChange = (arg) => {
-    //     if(arg === 'accepted') {
-    //         navigate('/professor/accepted', { state : location.state })
-    //     }
-    //     else if(arg === 'pending') {
-    //         navigate('/professor/pending', { state : location.state })
-    //     }
-    //     else if(arg === 'rejected') {
-    //         navigate('/professor/rejected', { state : location.state })
-    //     }
-    // }
     const handleHomeClick = () => {
         navigate("/professor/home");
     };

@@ -4,6 +4,7 @@ import { Row, Col } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import {
     FaUniversity,
     FaEdit,
@@ -16,6 +17,10 @@ import {
   
 
   const UniversityPage = () => {
+    const [cookies] = useCookies(['users']);
+  if (!localStorage.getItem("user")) {
+    localStorage.setItem("user", JSON.stringify(cookies.users));
+  }
     const user = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
   
