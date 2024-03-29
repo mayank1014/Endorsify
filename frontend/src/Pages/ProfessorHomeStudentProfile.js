@@ -164,7 +164,7 @@ const ProfessorHomeStudentProfile = () => {
         axios
           .get(`http://localhost:8000/api/professors/getstudentbyID/${location.state.professorId}/${id}`)
           .then((sturesponse) => {
-            setProff_Student(sturesponse.data);
+            setProff_Student(sturesponse.data.studentData);
           })
           .catch((error) => {
             console.error("Error fetching Student : ", error);
@@ -176,15 +176,14 @@ const ProfessorHomeStudentProfile = () => {
   }, [id]);
 
   const handleChange = (status) => {
-    console.log(id);
     if (status === "accepted") {
-      navigate(`/professor/student/${location.state.professorId}/edit`, { state: ({studentId: id,professorId: location.state.professorId }) })
+      navigate(`/professor/student/${location.state.professorId}/edit`, { state: ({studentId: id, professorId: location.state.professorId }) })
     }
     else {
       axios
         .get(`http://localhost:8000/api/professors/updatestatus/${location.state.professorId}/${id}/${status}`)
         .then(() => {
-          navigate("/professor/home/student", { state: {professorId: location.state.professorId }});
+          navigate("/professor/home");
         })
         .catch((error) => {
           console.error("Something went wrong : ", error);

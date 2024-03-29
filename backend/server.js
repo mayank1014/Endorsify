@@ -102,11 +102,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const University = require("./models/universitySchema");
+const Student = require("./models/studentSchema");
 // const pythonPath = '/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12';
 
 app.use("/api/dummy", (req, res) => {
-
-  console.log(req.body)
 
   University.findOne({ _id: req.body.uniId })
   .exec()
@@ -146,7 +145,7 @@ app.use("/api/dummy", (req, res) => {
     console.error("Error fetching university:", error);
   });
 
-  res.send("Hello");
+  res.send("LOR Generated Successfully");
 });
 
 // app.get("/download/docx", (req, res) => {

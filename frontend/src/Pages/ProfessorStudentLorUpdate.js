@@ -31,20 +31,20 @@ const StudentApplyLOR = () => {
         `http://localhost:8000/api/professors/getstudentbyID/${location.state.professorId}/${location.state.studentId}`
       )
       .then((response) => {
-        setFormData(response.data);
+        setFormData(response.data.studentData);
       })
       .catch((error) => {
         console.error("Error fetching LOR Details : ", error);
       });
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
 
   const handleTraitChange = (e) => {
     const { name, checked } = e.target;
@@ -76,7 +76,7 @@ const StudentApplyLOR = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
     if (formData.positivePersonalityTraits.length < 3) {
       message.error("Please select at least 3 Positive Personality Traits.");
       return;
@@ -99,6 +99,9 @@ const StudentApplyLOR = () => {
         formData
       )
       .then(() => {
+        // formData["studentId"] = location.state.studentId
+        // formData["professorId"] = location.state.professorId
+        
         axios.post("http://localhost:8000/api/dummy", formData).then(() => {
           setTimeout(() => {
             message.success("LOR Generated Successfully");

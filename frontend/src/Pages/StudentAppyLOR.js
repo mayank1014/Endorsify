@@ -38,7 +38,6 @@ const StudentApplyLOR = () => {
     accomplishments: "",
     positivePersonalityTraits: [],
     academicSkills: [],
-    uniId: "",
   });
 
   const handleInputChange = (e) => {

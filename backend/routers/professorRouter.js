@@ -32,8 +32,8 @@ router.post("/edit", async (req, res) => {
 });
 
 router.post("/loredit/:professorId/:studentId", async (req, res) => {
-    const professorId= req.params.professorId;
-    const studentId= req.params.studentId;
+    const professorId = req.params.professorId;
+    const studentId = req.params.studentId;
   try{
     const professor = await Professor.findOne({_id: professorId}).exec();
     if (!professor) {
@@ -44,6 +44,21 @@ router.post("/loredit/:professorId/:studentId", async (req, res) => {
     studentObj.studentData = req.body;
     await professor.save();
 
+    Student.findOne({ _id: req.params.studentId })
+    .exec()
+    .then(student => {
+      console.log(professorId)
+      console.log(student)
+      for (let i = 0; i < student.teachers.length; i++) {
+        if (student.teachers[i].professorId == professorId) {
+          student.teachers[i].lorStatus = "accepted";
+          break;
+        }
+      }
+
+      student.save();
+    })
+
     res.send("LOR updated successfully");
   } catch (error) {
     console.log(error)
@@ -52,11 +67,9 @@ router.post("/loredit/:professorId/:studentId", async (req, res) => {
 
 });
 
-
-
 router.get("/getprofessors/:email", async (req, res) => {
   const email = req.params.email;
-  //console.log(email);
+ 
   try {
     const professor = await Professor.findOne({ email: email }).exec();
     res.send(professor);
@@ -172,7 +185,7 @@ router.get("/getstudentbyID/:professorId/:studentId", async (req, res) => {
       return res.status(404).json({ message: "Professor not found" });
     }
     const studentObj = professor.students.find(student => student.studentId === id);
-    res.send(studentObj.studentData);
+    res.send(studentObj);
   } catch (error) {
     console.error("Error fetching student:", error);
     return res.status(400).json(error);
@@ -197,9 +210,9 @@ router.post("/register", async (req, res) => {
 });
 
 router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
-  const professorId= req.params.professorId;
-  const studentId= req.params.studentId;
-  const lorstatus=req.params.lorstatus;
+  const professorId = req.params.professorId;
+  const studentId = req.params.studentId;
+  const lorstatus =req.params.lorstatus;
   try{
     const professor = await Professor.findOne({_id: professorId}).exec();
     if (!professor) {
@@ -208,6 +221,20 @@ router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
     const studentObj = professor.students.find(student => student.studentId === studentId);
     studentObj.lorStatus=lorstatus;
     await professor.save();
+
+    Student.findOne({ _id: req.params.studentId })
+    .exec()
+    .then(student => {
+      for (let i = 0; i < student.teachers.length; i++) {
+        if (student.teachers[i].professorId == professorId) {
+          student.teachers[i].lorStatus = lorstatus;
+          break;
+        }
+      }
+
+      student.save();
+    })
+
     return res.json({ error: 0});
   }catch{
     console.log(error)
@@ -216,8 +243,6 @@ router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
 })
 
 router.post("/studentrequest", async (req, res) => {  
-  console.log(req.body)
-
   try {
     const professor = await Professor.findOne({ _id: req.body.professorId }).exec()
     const student = await Student.findOne({ _id: req.body.studentId }).exec()

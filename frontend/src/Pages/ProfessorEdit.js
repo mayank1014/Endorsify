@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import SignatureCanvas from "react-signature-canvas";
 
 const ProfessorEdit = () => {
   const navigate = useNavigate();
@@ -19,35 +20,40 @@ const ProfessorEdit = () => {
     profilePhoto: null,
     signPhoto: null,
     qualification: "",
-    expertise: [""], 
+    expertise: [""],
     experience: "",
     portfolioURL: "",
     students: [],
+    workingAs: "",
   });
 
   const profilePhotoInputRef = useRef(null);
-  const signPhotoInputRef = useRef(null);
+  const signatureCanvas = useRef(null);
+  const [isSignatureEmpty, setIsSignatureEmpty] = useState(true);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/professors/getprofessors/${JSON.parse(user).email}`)
+      .get(
+        `http://localhost:8000/api/professors/getprofessors/${
+          JSON.parse(user).email
+        }`
+      )
       .then((response) => {
         setProfessor(response.data);
       })
       .catch((error) => {
         console.error("Error fetching professor details:", error);
-      })
+      });
   }, []);
-  
+
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
 
-    // Use FileReader to read the file as data URL
     const reader = new FileReader();
     reader.onload = () => {
       setProfessor({
         ...professor,
-        [fieldName]: reader.result, // Use reader.result as the source of the image
+        [fieldName]: reader.result,
       });
     };
     reader.readAsDataURL(file);
@@ -92,6 +98,23 @@ const ProfessorEdit = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (
+      professor.expertise.length === 0 ||
+      professor.expertise.some((field) => field.trim() === "")
+    ) {
+      message.error("Please fill at least one expertise field");
+      return;
+    }
+
+    if (!professor.workingAs.trim()) {
+      message.error("Please enter your working designation");
+      return;
+    }
+
+    const signatureDataUrl = signatureCanvas.current
+      .getTrimmedCanvas()
+      .toDataURL("image/png");
+
     const profilePhoto = new FormData();
     const signPhoto = new FormData();
 
@@ -99,206 +122,233 @@ const ProfessorEdit = () => {
     profilePhoto.append("upload_preset", "Endorsify");
     profilePhoto.append("cloud_name", "djhsk7akn");
 
-    signPhoto.append("file", professor["signPhoto"]);
+    signPhoto.append("file", signatureDataUrl);
     signPhoto.append("upload_preset", "Endorsify");
     signPhoto.append("cloud_name", "djhsk7akn");
 
-    axios
-      .post(
-        "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
-        profilePhoto
-      )
-      .then((response) => {
-        professor["profilePhoto"] = response.data.url;
+    console.log(isSignatureEmpty)
 
+    if(!isSignatureEmpty)
+    {
+      axios
+        .post(
+          "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+          profilePhoto
+        )
+        .then((response) => {
+          professor["profilePhoto"] = response.data.url;
+
+          axios
+            .post(
+              "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+              signPhoto
+            )
+            .then((response) => {
+              professor["signPhoto"] = response.data.url;
+
+              axios
+                .post("http://localhost:8000/api/professors/edit", professor)
+                .then((response) => {
+                  message.success("Profile updated successfully");
+
+                  setTimeout(() => {
+                    window.location.href = "/professor";
+                    window.location.href = "/professor/home";
+                  }, 500);
+                })
+                .catch((error) => {
+                  message.error("Something went wrong");
+                });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+      else 
+      {
         axios
-          .post(
-            "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
-            signPhoto
-          )
-          .then((response) => {
-            professor["signPhoto"] = response.data.url;
+        .post(
+          "https://api.cloudinary.com/v1_1/djhsk7akn/image/upload",
+          profilePhoto
+        )
+        .then((response) => {
+          professor["profilePhoto"] = response.data.url;
 
-            axios
-              .post("http://localhost:8000/api/professors/edit", professor)
-              .then((response) => {
-                message.success("Profile updated successfully");
+          axios
+            .post("http://localhost:8000/api/professors/edit", professor)
+            .then((response) => {
+              message.success("Profile updated successfully");
 
-                setTimeout(() => {
-                  window.location.href='/professor'
-                  window.location.href='/professor/home'
-                }, 500);
-              })
-              .catch((error) => {
-                message.error("Something went wrong");
-              });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+              setTimeout(() => {
+                window.location.href = "/professor";
+                window.location.href = "/professor/home";
+              }, 500);
+            })
+            .catch((error) => {
+              message.error("Something went wrong");
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+  };
+
+  const clearSignature = () => {
+    signatureCanvas.current.clear();
+    setIsSignatureEmpty(true);
+  };
+
+  const handleBeginDrawing = () => {
+    setIsSignatureEmpty(false);
   };
 
   return (
-    <div className="ProfessorBox">
-      <div className="Professor">
-        <form
-          className="professor-profile-form"
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-        >
-          <div className="header">Professor Profile</div>
-          <div className="form-row">
+    <NavDefaultLayout>
+      <div className="ProfessorBox">
+        <div className="Professor">
+          <div className="professor-profile-form">
+            <div className="header">Professor Profile</div>
+            <div className="form-row">
+              <div className="column">
+                <label htmlFor="profilePhoto">Profile Photo:</label>
+                <br />
+                <input
+                  type="file"
+                  name="profilePhoto"
+                  style={{ display: "none" }}
+                  onChange={(e) => handleFileInputChange(e, "profilePhoto")}
+                  ref={profilePhotoInputRef}
+                />
+                <div
+                  className="circle"
+                  onClick={() => handleFileInputClick(profilePhotoInputRef)}
+                >
+                  {professor.profilePhoto ? (
+                    <img src={professor.profilePhoto} alt="Profile Photo" />
+                  ) : (
+                    <span>Add Profile Photo</span>
+                  )}
+                </div>
+              </div>
+
+              <div className="column">
+                <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={professor.name || ""}
+                  onChange={(e) => handleChange(e, "name")}
+                />
+                <label htmlFor="teacherId">Professor ID:</label>
+                <input
+                  type="text"
+                  name="teacherId"
+                  value={professor.teacherId || ""}
+                  disabled
+                />
+                <label htmlFor="university">University:</label>
+                <input
+                  name="university"
+                  value={professor.university || ""}
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="column">
+                <label htmlFor="experience">Experience:</label>
+                <input
+                  type="text"
+                  name="experience"
+                  value={professor.experience || ""}
+                  onChange={(e) => handleChange(e, "experience")}
+                />
+              </div>
+
+              <div className="column">
+                <label htmlFor="gender">Gender:</label>
+                <input name="gender" value={professor.gender} disabled />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="column">
+                <label htmlFor="qualification">Qualification:</label>
+                <textarea
+                  name="qualification"
+                  value={professor.qualification}
+                  onChange={(e) => handleChange(e, "qualification")}
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="column">
+                <label htmlFor="portfolioURL">Portfolio URL:</label>
+                <input
+                  type="text"
+                  name="portfolioURL"
+                  value={professor.portfolioURL}
+                  onChange={(e) => handleChange(e, "portfolioURL")}
+                />
+              </div>
+            </div>
+
             <div className="column">
-              <label htmlFor="profilePhoto">Profile Photo:</label>
-              <br />
-              <input
-                type="file"
-                name="profilePhoto"
-                style={{ display: "none" }}
-                onChange={(e) => handleFileInputChange(e, "profilePhoto")}
-                ref={profilePhotoInputRef}
-              />
+              <label htmlFor="signPhoto">Digital Signature</label>
               <div
-                className="circle"
-                onClick={() => handleFileInputClick(profilePhotoInputRef)}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
               >
-                {professor.profilePhoto ? (
-                  <img src={professor.profilePhoto} alt="Profile Photo" />
-                ) : (
-                  <span>Add Profile Photo</span>
+                <div
+                  style={{
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                    maxWidth: "400px",
+                    marginRight: "20px",
+                  }}
+                >
+                  <SignatureCanvas
+                    ref={signatureCanvas}
+                    penColor="black"
+                    canvasProps={{
+                      width: 400,
+                      height: 200,
+                      className: "signature-canvas",
+                      onMouseDown: handleBeginDrawing,
+                    }}
+                  />
+                  <button onClick={clearSignature}>Clear Signature</button>
+                </div>
+                {/* Display the signature image */}
+                {professor.signPhoto && (
+                  <img
+                    src={professor.signPhoto}
+                    alt="Digital Signature"
+                    style={{ marginLeft: "20px", maxWidth: "100%", height: "auto" }}
+                  />
                 )}
               </div>
             </div>
 
-            <div className="column">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={professor.name || ""}
-                onChange={(e) => handleChange(e, "name")}
-              />
-              <label htmlFor="teacherId">Professor ID:</label>
-              <input
-                type="text"
-                name="teacherId"
-                value={professor.teacherId || ""}
-                disabled
-              />
-              <label htmlFor="university">University:</label>
-              <input
-                name="university"
-                value={professor.university || ""}
-                disabled
-              />
-            </div>
+            <br />
+            <br />
+            <button onClick={handleSubmit} className="psubmitbtn">
+              Submit
+            </button>
           </div>
-
-          <div className="form-row">
-            <div className="column">
-              <label htmlFor="experience">Experience:</label>
-              <input
-                type="text"
-                name="experience"
-                value={professor.experience || ""}
-                onChange={(e) => handleChange(e, "experience")}
-              />
-            </div>
-
-            <div className="column">
-              <label htmlFor="gender">Gender:</label>
-              <input
-                name="gender"
-                value={professor.gender}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="column">
-              <label htmlFor="qualification">Qualification:</label>
-              <textarea
-                name="qualification"
-                value={professor.qualification}
-                onChange={(e) => handleChange(e, "qualification")}
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="column">
-              <label htmlFor="portfolioURL">Portfolio URL:</label>
-              <input
-                type="text"
-                name="portfolioURL"
-                value={professor.portfolioURL}
-                onChange={(e) => handleChange(e, "portfolioURL")}
-              />
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="column">
-              <label htmlFor="expertise">Subject Expertise:</label>
-              <div className="alignment">
-                {professor.expertise.map((field, index) => (
-                  <div key={index} className="form-demo">
-                    <input
-                      type="text"
-                      name={`expertise[${index}]`}
-                      value={field}
-                      onChange={(e) => handleExpertiseChange(index, e)}
-                      required
-                      style={{ width: '170px' }} // Adjust the width as needed
-                    />
-                    {index > 0 && (
-                      <button
-                        className="btn3"
-                        onClick={() => handleRemoveExpertiseField(index)}
-                      >
-                        <FontAwesomeIcon icon={faMinus} />
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <button className="btn3" onClick={handleAddExpertiseField}>
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
-
-            </div>
-
-            <div className="column">
-              <label htmlFor="signPhoto">Sign Photo:</label>
-              <br />
-              <input
-                type="file"
-                name="signPhoto"
-                style={{ display: "none" }}
-                onChange={(e) => handleFileInputChange(e, "signPhoto")}
-                ref={signPhotoInputRef}
-              />
-              <div className="square-box" onClick={() => handleFileInputClick(signPhotoInputRef)}>
-                {professor.signPhoto ? (
-                  <img src={professor.signPhoto} alt="Sign Photo" />
-                ) : (
-                  <span>Add Sign Photo</span>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <button className="psubmitbtn" type="submit">
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
-    </div>
+    </NavDefaultLayout>
   );
 };
 
