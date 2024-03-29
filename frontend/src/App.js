@@ -27,21 +27,21 @@ import Cancel from './Pages/Cancel';
 import StudentRequests from './Pages/StudentRequests';
 import ProfessorHomeStudentList from './Pages/ProfessorHomeStudentList';
 import ProfessorStudentLorUpdate from './Pages/ProfessorStudentLorUpdate';
-import ViewDocs from './Pages/ViewDocs';
-import UploadDocs from './Pages/UploadDocs';
 import ForgotPassword from './Pages/ForgotPassword';
+import Professor from './Pages/Professor';
+import { useCookies } from 'react-cookie';
 
 function App() {
-
-  const isAuthenticatedUser = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com";
-
+  const [cookies] = useCookies(['users']);
+  if (!localStorage.getItem("user")) {
+    localStorage.setItem("user", JSON.stringify(cookies.users));
+  }
+  const isAuthenticatedUser = (localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com") ;
+  console.log("is"+isAuthenticatedUser);
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          
-          {/* <Route path="/" element={<ViewDocs />} />
-          <Route path="/u" element={<UploadDocs />} /> */}
 
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
@@ -62,12 +62,20 @@ function App() {
             <Route path="requests" element={<StudentRequests />} />
           </Route>
 
-          <Route path="/changepassword" element={<ChangePassword />} />
+          <Route path="/professor" element={<Professor />}>
+            <Route path="home" element={<ProfessorHomePage />} />
+            <Route path="edit" element={<ProfessorEdit />} />
+            <Route path="student/:id" element={<ProfessorHomeStudentProfile />} />
+            <Route path="changepassword" element={<ChangePassword />} />
+            <Route path="student/:id/edit" element={<ProfessorStudentLorUpdate />} />
+            <Route path="home/student" element={<ProfessorHomeStudentList />} />
+          </Route>
+          {/* <Route path="/changepassword" element={<ChangePassword />} />
          <Route path="/professor/home" element={<ProfessorHomePage />} /> 
-           <Route path="professor/edit" element={<ProfessorEdit />} />
+          <Route path="professor/edit" element={<ProfessorEdit />} />
          <Route path="professor/student/:id" element={<ProfessorHomeStudentProfile />} />
           <Route path="professor/student/:id/edit" element={<ProfessorStudentLorUpdate />} />
-         <Route path="professor/home/student" element={<ProfessorHomeStudentList />} />
+         <Route path="professor/home/student" element={<ProfessorHomeStudentList />} /> */}
           
           <Route path="/university" element={<UniversityPage />}>
             <Route path="students" element={<UniversityStudents />} />

@@ -1,66 +1,51 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Row, Col } from "antd";
+import Spinner from "../components/Spinner";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaHome, FaUserEdit, FaKey, FaSignOutAlt, FaFileAlt } from "react-icons/fa"; // Import the necessary icons
 
-const Student = () => {
+const Professor = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
-  const [student, setStudent] = useState(null);
+  const [professor, setProfessor] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/students/getstudent/${user.email}`)
+      .get(`http://localhost:8000/api/professors/getprofessors/${user.email}`)
       .then((response) => {
-        setStudent(response.data);
+        setProfessor(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching student : ", error);
+        console.error("Error fetching professor : ", error);
       });
   }, []);
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div style={{ display: "flex", height: "100vh" }}>
       {/* Left Sidebar */}
       <div
         style={{
-          backgroundColor: "#343a40", // Background color for the sidebar
+          backgroundColor: "#343a40",
           padding: "20px",
           width: "250px",
-          position: "fixed", // Make the sidebar fixed
-          top: 0, // Align the sidebar to the top
-          bottom: 0, // Align the sidebar to the bottom
           display: "flex",
           flexDirection: "column",
-          overflowY: "auto", // Allow scrolling within the sidebar
+          overflow: "hidden",
         }}
       >
         <div style={{ marginBottom: "20px" }}>
-          <h2
-            style={{
-              color: "#DCDCDA",
-              fontWeight: "bold",
-              fontSize: "24px",
-              textAlign: "center", // Center the Endorsify text
-            }}
-          >
-            <Link
-              style={{
-                color: "#DCDCDA",
-                textDecoration: "none",
-              }}
-            >
-              Endorsify
-            </Link>
+          <h2 style={{ color: "#DCDCDA", fontWeight: "bold", fontSize: "24px", textAlign: "center" }}>
+            <Link style={{ color: "#DCDCDA", textDecoration: "none" }}>Endorsify</Link>
           </h2>
-          {student && (
+          {professor && (
             <div style={{ textAlign: "center", marginTop: "7vh" }}>
               <img
-                src={student.profilePhoto}
-                alt="Student Profile"
+                src={professor.profilePhoto}
+                alt="professor Profile"
                 style={{
                   width: "8vw",
                   height: "8vw",
@@ -69,24 +54,8 @@ const Student = () => {
                   marginBottom: "10px",
                 }}
               />
-              <p
-                style={{
-                  color: "#DCDCDA",
-                  fontSize: "16px",
-                  marginBottom: "3px",
-                }}
-              >
-                {student.name}
-              </p>
-              <p
-                style={{
-                  color: "#DCDCDA",
-                  fontSize: "12px",
-                  fontWeight: "lighter",
-                }}
-              >
-                {student.email}
-              </p>
+              <p style={{ color: "#DCDCDA", fontSize: "16px", marginBottom: "3px" }}>{professor.name}</p>
+              <p style={{ color: "#DCDCDA", fontSize: "12px", fontWeight: "lighter" }}>{professor.email}</p>
             </div>
           )}
         </div>
@@ -107,22 +76,6 @@ const Student = () => {
                 >
                   <FaHome size={20} style={{ marginRight: "10px" }} />
                   Home
-                </Link>
-              </li>
-              <li className="nav-item" style={{ marginLeft: "-10px" }}>
-                <Link
-                  to="requests"
-                  className="nav-link"
-                  style={{
-                    color: "#DCDCDA",
-                    textDecoration: "none",
-                    padding: "10px 20px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <FaFileAlt size={20} style={{ marginRight: "10px" }} />
-                  LOR Requests
                 </Link>
               </li>
               <li className="nav-item" style={{ marginLeft: "-10px" }}>
@@ -188,16 +141,16 @@ const Student = () => {
       <div
         className="content"
         style={{
-          marginLeft: "250px", // Adjust the content's left margin to make space for the fixed sidebar
           padding: "20px",
           flex: "1",
           overflowY: "auto",
         }}
       >
+        {/* Content Area */}
         <Outlet />
       </div>
     </div>
   );
 };
 
-export default Student;
+export default Professor;

@@ -248,7 +248,6 @@ const ProfessorHomeStudentProfile = () => {
   return (
     <div>
       {!showTranscriptModal && (
-        <NavDefaultLayout>
           <div style={styles.professorProfile}>
             {!student && <Spinner />}
             {student && (
@@ -298,7 +297,6 @@ const ProfessorHomeStudentProfile = () => {
 
             </div>
           </div>
-        </NavDefaultLayout>
       )}
       {/* Transcript Modal */}
       <Modal

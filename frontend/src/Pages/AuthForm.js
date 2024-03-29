@@ -3,6 +3,10 @@ import axios from "axios";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import Logo from "../img/logo.png";
+import { Icon } from 'react-icons-kit';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
+import { eye } from 'react-icons-kit/feather/eye'
+
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -33,7 +37,7 @@ const AuthForm = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     if (formActive) {
       try {
         const response = await axios.post(
@@ -44,7 +48,7 @@ const AuthForm = () => {
         if (response.data.error === 1) {
           message.error("Password and Confirm Password are not same");
         } else if (response.data.error === 2) {
-          message.error("User already exist");
+          message.error("User already exists");
 
           setTimeout(() => {
             window.location.href = "/";
@@ -87,6 +91,37 @@ const AuthForm = () => {
         }, 1000);
       }
     }
+  };
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [typeConfirmPassword, setTypeConfirmPassword] = useState('password');
+  const [type, setType] = useState('password');
+  const [icon, setIcon] = useState(eyeOff);
+  const [iconConfirmPassword, setIconConfirmPassword] = useState(eyeOff);
+  const handleInputChange = (e) => {
+    setPassword(e.target.value);
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleInputChangeConfirm = (e) => {
+    setConfirmPassword(e.target.value);
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleTogglePassword = () => {
+    setType(type === 'password' ? 'text' : 'password');
+    setIcon(type === 'password' ? eye : eyeOff);
+  };
+  const handleToggleConfirmPassword = () => {
+    setTypeConfirmPassword(typeConfirmPassword === 'password' ? 'text' : 'password');
+    setIconConfirmPassword(typeConfirmPassword === 'password' ? eye : eyeOff);
   };
 
   return (
@@ -376,6 +411,18 @@ const AuthForm = () => {
           .ayush:hover {
             background-color: white;
           }          
+          .password-input {
+            position: relative;
+            display: flex;
+            align-items: center;
+          }
+          
+          .password-toggle {
+            position: absolute;
+            right: 10px;
+            top:10px;
+            cursor: pointer;
+          }
         `}
       </style>
       <div className="auth-container">
@@ -413,24 +460,30 @@ const AuthForm = () => {
             <div className="form signinForm">
               <img src={Logo} alt="Logo" />
               <form onSubmit={handleFormSubmit}>
-              <a href="http://localhost:8000/auth/google" className="google">
-  <i className="fab fa-google-plus-g"></i>Login with Google
-</a>
+                <a href="http://localhost:8000/auth/google" className="google">
+                  <i className="fab fa-google-plus-g"></i>Login with Google
+                </a>
 
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   placeholder="Please Enter email"
                   onChange={handleChange}
                   required
                 />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Please Enter Password"
-                  onChange={handleChange}
-                  required
-                />
+                <div className="password-input">
+                  <input
+                    type={type}
+                    name="password"
+                    placeholder="Please Enter Password"
+                    onChange={handleChange}
+                    required
+                  />
+                  <span className="password-toggle" onClick={handleTogglePassword}>
+                    <Icon icon={icon} size={20} />
+                  </span>
+                </div>
+
                 <div className="submit-button">
                   <input type="submit" value="Log-in Now" />
                 </div>
@@ -448,26 +501,41 @@ const AuthForm = () => {
                   <i className="fab fa-google-plus-g"></i>SignUp with Google
                 </a>
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   placeholder="Email Address"
                   onChange={handleChange}
                   required
                 />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                  required
-                />
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
-                  onChange={handleChange}
-                  required
-                />
+                <div className="password-input">
+                  <input
+                    type={type}
+                    id="psw"
+                    name="password"
+                    placeholder="Enter Password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    value={password}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <span className="password-toggle" onClick={handleTogglePassword}>
+                    <Icon icon={icon} size={20} />
+                  </span>
+                </div>
+                <div className="password-input">
+                  <input
+                    type={typeConfirmPassword}
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={handleInputChangeConfirm}
+                    required
+                  />
+                  <span className="password-toggle" onClick={handleToggleConfirmPassword}>
+                    <Icon icon={iconConfirmPassword} size={20} />
+                  </span>
+                </div>
                 <div className="submit-button">
                   <input type="submit" value="Register Now" />
                 </div>

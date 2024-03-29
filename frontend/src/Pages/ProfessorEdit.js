@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-import NavDefaultLayout from "../components/NavDefaultLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
@@ -144,7 +143,6 @@ const ProfessorEdit = () => {
   };
 
   return (
-    <NavDefaultLayout>
     <div className="ProfessorBox">
       <div className="Professor">
         <form
@@ -301,7 +299,6 @@ const ProfessorEdit = () => {
         </form>
       </div>
     </div>
-    </NavDefaultLayout>
   );
 };
 
