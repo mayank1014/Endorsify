@@ -1,23 +1,15 @@
-from Listofthings import PronoumsList, PositivePersonalityTraits, AcademicSkills, Phrase1, Phrase2, Phrase3, Phrase4, Phrase5, LinkingWords
-from openpyxl import Workbook
-from openpyxl import load_workbook
-import sys, getopt
-import os
+from Listofthings import PronounsList, PositivePersonalityTraits, AcademicSkills, Phrase1, Phrase2, Phrase3, Phrase4, Phrase5, LinkingWords
+import sys
 import random
 import datetime
 from datetime import date
-import docx
-from docx.shared import Length, Inches, Pt
 import sys
 import json
-
 from docx import Document
 from docx2pdf import convert
-
-########################
 import requests 
 from io import BytesIO 
-
+from docx.shared import Inches
 
 
 # Access command-line argument containing the JSON string
@@ -37,42 +29,43 @@ for key, value in json_object.items():
 response = requests.get(docxFile)
 docx_bytes = BytesIO(response.content)
 doc = Document(docx_bytes)
-########################
+
+
 
 # doc = docx.Document()
+
+
 
 all_paras = doc.paragraphs
 
 
 
-
-pronoumLocalList = PronoumsList.get(pronoum) 
-#he
-subjective = pronoumLocalList[0] 
-#him
-objective = pronoumLocalList[1] 
-#his
-possessive = pronoumLocalList[2] 
-
+pronounLocalList = PronounsList.get(pronoun) 
+# he
+subjective = pronounLocalList[0] 
+# him
+objective = pronounLocalList[1] 
+# his
+possessive = pronounLocalList[2] 
 
 
 
-###########################
-#Time teacher know students
-###########################
+############################
+# Time teacher know students
+############################
 
 yearsAttended = schoolYearAttended.split('/') 
 start_date = datetime.datetime(int(yearsAttended[0]), 8, 15) 
 num_months = (date.today().year - start_date.year) * 12 + (date.today().month - start_date.month) 
 
-if targettedInstitution == " ": 
-        targettedInstitution = "your"
+if targetedInstitution == " ": 
+        targetedInstitution = "your"
 else :
-    targettedInstitution = "the " + targettedInstitution
+    targetedInstitution = "the " + targetedInstitution
 
 
 
-#Ramdomizing Academic Skills and Positive traits
+# Ramdomizing Academic Skills and Positive traits
 
 academicSkillsFinal = []
 
@@ -86,7 +79,7 @@ acadSkill3 = random.choice(academicSkills)
 academicSkills.remove(acadSkill3)
 academicSkillsFinal.append(acadSkill3)
 
-if len(academicSkills)>0:
+if len(academicSkills) > 0:
     acadSkill4 = random.choice(academicSkills)
     academicSkills.remove(acadSkill4)
     academicSkillsFinal.append(acadSkill4)
@@ -134,34 +127,28 @@ _space = " "
 # # paragraph_format.first_line_indent = Inches(-0.25)
 # paragraph_format.line_spacing_rule = Pt(10)
 
-################
-#1st Paragraph
-################
+###############
+# 1st Paragraph
+###############
 
 doc.add_paragraph("To whom it may concern,\n")
 
-#print(random.choice(Phrase1) + firstName + _space + lastName + " to the " + targettedInstitution + _space)
+_1st_paragraph = doc.add_paragraph ("\t" + random.choice(Phrase1) + firstName + _space + middleName + _space + lastName + " to " + targetedInstitution + _space + purposeOfTheLetter + ". " + random.choice(Phrase2) + _space + objective.lower() + _space + "in my classroom. " + firstName + " was a " + highSchoolYearAttended + " in my " + classAttended + " class in " + schoolYearAttended + ". ")
 
-#_1st_P = str(random.choice(Phrase1) + firstName + _space + lastName + " to the " + targettedInstitution + _space + purposeOfTheLetter + ". " + random.choice(Phrase2) + _space + objective.lower() + _space + "in my classroom. "+ firstName + " was a " + highSchoolYearAttended + " in my " + classAttended + " class in " + schoolYearAttended + ". ")
-                #"It is with pleasure that I recommend "                        "I was fortunate to have" "him"
-_1st_paragrapth = doc.add_paragraph (random.choice(Phrase1) + firstName + _space + lastName + " to " + targettedInstitution + _space + purposeOfTheLetter + ". " + random.choice(Phrase2) + _space + objective.lower() + _space + "in my classroom. "+ firstName + " was a " + highSchoolYearAttended + " in my " + classAttended + " class in " + schoolYearAttended + ". ")
-#_1st_paragrapth = doc.add_paragraph (_1st_P)
-if(num_months < 12) : _1st_paragrapth.add_run( "Although I have only taught " + firstName + _space + "for " + str(int(num_months)) + " months, I can already see ")
-if(num_months > 12 and num_months < 24) : _1st_paragrapth.add_run("I have known " + firstName + _space + "for over an year, and " + subjective.lower() + " made an impression in me due to ")
-if(num_months > 24) : _1st_paragrapth.add_run("I have known " + firstName + _space + "for more than " + str(int(num_months/12)) + " years, and " + subjective.lower() + " made an impression in me due to ")
+if(num_months <= 12) : _1st_paragraph.add_run("Although I have only taught " + firstName + _space + "for " + str(int(num_months)) + " months, I can already see ")
+if(num_months > 12 and num_months <= 24) : _1st_paragraph.add_run("I have known " + firstName + _space + "for over an year, and " + subjective.lower() + " made an impression in me due to ")
+if(num_months > 24) : _1st_paragraph.add_run("I have known " + firstName + _space + "for more than " + str(int(num_months/12)) + " years, and " + subjective.lower() + " made an impression in me due to ")
 
-#print(possessive.lower() + _space + positivePersonalityTraits[0] + _space + "and also " + positivePersonalityTraits[1] + " personality.", end="", flush=True)
-_1st_paragrapth.add_run(possessive.lower() + _space + random.choice(academicSkillsFinal) + _space + "and also " +  random.choice(positivePersonalityTraitFinal) + " personality. ",)
+_1st_paragraph.add_run(possessive.lower() + _space + random.choice(academicSkillsFinal) + _space + "and also " +  random.choice(positivePersonalityTraitFinal) + " personality. ")
 
-#"I want to illustrate a little more about ",         #Him/Her
-_1st_paragrapth.add_run(random.choice(Phrase3) +  objective.lower() + " in this letter, and why " + subjective.lower() +  " deserves to be considered in your instituition.")
+_1st_paragraph.add_run(random.choice(Phrase3) +  objective.lower() + " in this letter, and why " + subjective.lower() +  " deserves to be considered in your institution.")
+
+doc.add_paragraph("")
 
 
-doc.add_paragraph("\n")
-
-################
-#2nd Paragraph
-################
+###############
+# 2nd Paragraph
+###############
 
 acadSkillA = random.choice(academicSkillsFinal)
 academicSkillsFinal.remove(acadSkillA)
@@ -172,20 +159,15 @@ academicSkillsFinal.remove(acadSkillB)
 acadSkillC = random.choice(academicSkillsFinal)
 academicSkillsFinal.remove(acadSkillC)
 
-# acadSkillD = random.choice(academicSkillsFinal)
-# academicSkillsFinal.remove(acadSkillD)
+doc.add_paragraph("\t" + "While in class, I have observed some remarkable academic skills. " + firstName + _space + AcademicSkills[acadSkillA] + ". " + subjective  + " also " + AcademicSkills[acadSkillB]
+    + random.choice(Phrase5) + subjective.lower() + _space + AcademicSkills[acadSkillC] + ".")
 
-
-doc.add_paragraph("While in class I have observed some remarkable academic skills. " + firstName + _space + AcademicSkills[acadSkillA] + ". " + subjective  + " also " + AcademicSkills[acadSkillB]
-+ random.choice(Phrase5) + subjective.lower() + _space + AcademicSkills[acadSkillC] + ".")#+ random.choice(LinkingWords) + subjective.lower() + _space  + AcademicSkills[acadSkillD] + ".")
-
-doc.add_paragraph("\n")
+doc.add_paragraph("")
 
 
 ################
 #3rd Paragraph
 ################
-
 
 personalTraitA = random.choice(positivePersonalityTraitFinal)
 positivePersonalityTraitFinal.remove(personalTraitA)
@@ -196,29 +178,41 @@ positivePersonalityTraitFinal.remove(personalTraitB)
 personalTraitC = random.choice(positivePersonalityTraitFinal)
 positivePersonalityTraitFinal.remove(personalTraitC)
 
-# personalTraitD = random.choice(positivePersonalityTraitFinal)
-# positivePersonalityTraitFinal.remove(personalTraitD)
+doc.add_paragraph("\t" + "Besides all " + possessive.lower() + " Academic work, " + firstName + _space + "is a very " + personalTraitA + " student. " + subjective + _space +  PositivePersonalityTraits[personalTraitB] + ". " + subjective  + " also " + PositivePersonalityTraits[personalTrait2]
++ random.choice(Phrase5) + subjective.lower() + _space + PositivePersonalityTraits[personalTraitC]+ ".")
+
+doc.add_paragraph("")
 
 
-doc.add_paragraph("Besides all " + possessive.lower() + " Academic work, " + firstName + _space + "is a very "+ personalTraitA + " student. " + subjective + _space +  PositivePersonalityTraits[personalTraitB] + ". " + subjective  + " also " + PositivePersonalityTraits[personalTrait2]
-+ random.choice(Phrase5) + subjective.lower() + _space + PositivePersonalityTraits[personalTraitC]+ ".")#+ random.choice(LinkingWords) + subjective.lower() + _space  + PositivePersonalityTraits[personalTraitD] + ".")
-
-doc.add_paragraph("\n")
-
-lastParagraph = doc.add_paragraph("Please, contact me if you have any questions.\n")
-lastParagraph.add_run("Sincerely,\n\n")
+lastParagraph = doc.add_paragraph("\nPlease, contact me if you have any questions.\n")
+lastParagraph.add_run("\nSincerely, \n")
 
 lastParagraph.add_run(teachersName + "\n")
 lastParagraph.add_run(str(date.today().month) + "/" + str(date.today().day) + "/" + str(date.today().year))
 
+############################################################
+
+doc.add_paragraph("\n")
+
+response = requests.get(signature)
+signature_image = BytesIO(response.content)
+
+doc.add_picture(signature_image, width=Inches(1.0), height=Inches(0.8))
+doc.add_paragraph(workingAs)
+doc.add_paragraph("( " + professorEmail + " )")
+
+############################################################
+
 file_name_docx = (firstName + lastName + "-" + str(date.today().month) + "-" + str(date.today().day) + "-" + str(date.today().year) + ".docx")
 file_name_pdf = (firstName + lastName + "-" + str(date.today().month) + "-" + str(date.today().day) + "-" + str(date.today().year) + ".pdf")
+
 doc.save(file_name_docx)
 
-###########################################################
+######################################
 
 convert(file_name_docx, file_name_pdf)
 
-###########################################################
+######################################
+
 print(file_name_docx + " created sucessfully")
 print(file_name_pdf + " created sucessfully")

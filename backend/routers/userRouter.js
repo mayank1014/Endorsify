@@ -33,7 +33,6 @@ router.post("/login", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    console.log(req.body)
     const newUser = new User(req.body);
     await newUser.save();
     return res.send("Successfully Registered");

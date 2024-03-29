@@ -267,10 +267,10 @@ const ProfessorHomeStudentProfile = () => {
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Branch : </strong> {student.branch}</p>
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>College ID : </strong> {student.collegeID} </p>
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Passing Year : </strong> {student.passingYear} </p>
-                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Purpose: </strong> {proff_student.purposeOfTheLetter} </p>
-                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Institution : </strong> {proff_student && proff_student.targettedInstitution} </p>
+                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Purpose of the Letter: </strong> {proff_student.purposeOfTheLetter} </p>
+                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Targeted Institution : </strong> {proff_student && proff_student.targetedInstitution} </p>
                           <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Subject : </strong> {proff_student && proff_student.classAttended} </p>
-                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>School Year Attended : </strong> {proff_student && proff_student.schoolYearAttended} </p>
+                          <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>University Year Attended : </strong> {proff_student && proff_student.schoolYearAttended} </p>
                           <div>
                             <strong style={{ ...styles.descriptionTitle, marginBottom: "8px" }}>Personality Traits : </strong>
                             {((proff_student && proff_student.positivePersonalityTraits) ?? []).map((expertise, index) => (

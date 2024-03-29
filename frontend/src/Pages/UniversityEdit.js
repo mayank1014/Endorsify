@@ -252,7 +252,6 @@ const UniversityForm = () => {
                         name="docxFile"
                         onChange={handleFileChange}
                         accept=".docx"
-                        required
                       />
                       <label htmlFor="logo">University Logo:</label>
                       <input

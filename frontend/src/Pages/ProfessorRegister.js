@@ -4,6 +4,7 @@ import { message } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import SignatureCanvas from "react-signature-canvas";
 import "../css/ProfessorRegistration.css";
 
 const ProfessorRegister = () => {
@@ -19,16 +20,18 @@ const ProfessorRegister = () => {
     profilePhoto: null,
     signPhoto: null,
     qualification: "",
-    expertise: [""], 
+    expertise: [""],
     experience: "",
     portfolioURL: "",
     students: [],
+    workingAs: "", 
   });
 
   const [allUniversities, setAllUniversities] = useState([]);
 
-  const signPhotoInputRef = useRef(null);
   const profilePhotoInputRef = useRef(null);
+  const signatureCanvas = useRef(null);
+  const [isSignatureEmpty, setIsSignatureEmpty] = useState(true); 
 
   useEffect(() => {
     axios
@@ -43,17 +46,16 @@ const ProfessorRegister = () => {
 
   const handleFileInputChange = (event, fieldName) => {
     const file = event.target.files[0];
-  
-    // Use FileReader to read the file as data URL
+
     const reader = new FileReader();
     reader.onload = () => {
       setFormData({
         ...formData,
-        [fieldName]: reader.result, // Use reader.result as the source of the image
+        [fieldName]: reader.result,
       });
     };
     reader.readAsDataURL(file);
-  }; 
+  };
 
   const handleChange = (event, fieldName) => {
     setFormData({
@@ -94,10 +96,22 @@ const ProfessorRegister = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (formData.expertise.length === 0 || formData.expertise.some(field => field.trim() === "")) {
+    if (
+      formData.expertise.length === 0 ||
+      formData.expertise.some((field) => field.trim() === "")
+    ) {
       message.error("Please fill at least one expertise field");
       return;
     }
+
+    if (!formData.workingAs.trim()) {
+      message.error("Please enter your working designation");
+      return;
+    }
+
+    const signatureDataUrl = signatureCanvas.current
+      .getTrimmedCanvas()
+      .toDataURL("image/png");
 
     const profilePhoto = new FormData();
     const signPhoto = new FormData();
@@ -106,7 +120,7 @@ const ProfessorRegister = () => {
     profilePhoto.append("upload_preset", "Endorsify");
     profilePhoto.append("cloud_name", "djhsk7akn");
 
-    signPhoto.append("file", formData["signPhoto"]);
+    signPhoto.append("file", signatureDataUrl);
     signPhoto.append("upload_preset", "Endorsify");
     signPhoto.append("cloud_name", "djhsk7akn");
 
@@ -146,10 +160,11 @@ const ProfessorRegister = () => {
               .post("http://localhost:8000/api/users/register", user)
               .then((response) => {
                 axios
-                  .post("http://localhost:8000/api/professors/register", formData)
+                  .post(
+                    "http://localhost:8000/api/professors/register",
+                    formData
+                  )
                   .then((response) => {
-                    console.log(response);
-
                     if (response.data.error === 1) {
                       axios.post(
                         "http://localhost:8000/api/users/deleteuser",
@@ -168,7 +183,7 @@ const ProfessorRegister = () => {
 
                       setTimeout(() => {
                         localStorage.setItem("user", JSON.stringify(user));
-                        
+
                         navigate("/professor/home");
                       }, 500);
                     }
@@ -205,85 +220,24 @@ const ProfessorRegister = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
 
-    // try {
-    //   const user = {
-    //     email: location.state.email,
-    //     password: location.state.password,
-    //     confirmPassword: location.state.confirmPassword,
-    //     role: "professor",
-    //   };
+  const clearSignature = () => {
+    signatureCanvas.current.clear();
+    setIsSignatureEmpty(true);
+  };
 
-    //   formData.email = location.state.email;
-
-    //   for (var i = 0; i < allUniversities.length; i++) {
-    //     if (allUniversities[i].name === formData.university) {
-    //       formData.universityId = allUniversities[i]._id;
-    //       break;
-    //     }
-    //   }
-
-    //   const profilePhotoBase64 = formData.profilePhoto.split(",")[1];
-    //   const signPhotoBase64 = formData.signPhoto.split(",")[1];
-
-    //   const formDataWithBase64 = {
-    //     ...formData,
-    //     profilePhoto: profilePhotoBase64,
-    //     signPhoto: signPhotoBase64,
-    //   };
-
-    //   await axios.post("http://localhost:8000/api/users/register", user);
-
-    //   try {
-    //     const response = await axios.post("http://localhost:8000/api/professors/register", formDataWithBase64);
-
-    //     // localStorage.setItem("user", JSON.stringify(response.data.user));
-
-    //     if (response.data.error == 1) {
-    //       await axios.post("http://localhost:8000/api/users/deleteuser", user);
-
-    //       message.error("User with same College Id already exists");
-
-    //       setTimeout(() => {
-    //         window.location.href = "/register/professor";
-    //       }, 500);
-    //     } else if (response.data.error == 0) {
-    //       // localStorage.setItem("user", JSON.stringify(response.data.user));
-
-    //       message.success("Registration Successful");
-
-    //       setTimeout(() => {
-    //         navigate("/professor/home");
-    //       }, 500);
-    //     }
-    //   } catch (error) {
-    //     await axios.post("http://localhost:8000/api/users/deleteuser", user);
-    //     console.log(1)
-    //     message.error("Something went wrong, Please try again");
-
-    //     setTimeout(() => {
-    //       window.location.href = "/register/professor";
-    //     }, 500);
-    //   }
-    // } catch (error) {
-    //   console.log(2)
-    //   message.error("Something went wrong");
-
-    //   setTimeout(() => {
-    //     window.location.href = "/";
-    //   }, 500);
-    // }
+  const handleBeginDrawing = () => {
+    setIsSignatureEmpty(false);
   };
 
   return (
     <div className="ProfessorBox">
       <div className="Professor">
-        <form
+        <div
           className="professor-profile-form"
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
         >
-          <div className="header">Professor Profile</div>
+          <div className="header">Professor Registration</div>
           <div className="form-row">
             <div className="column">
               <label htmlFor="profilePhoto">Profile Photo:</label>
@@ -415,31 +369,48 @@ const ProfessorRegister = () => {
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
-
-            <div className="column">
-              <label htmlFor="signPhoto">Sign Photo:</label>
-              <br />
+            <div style={{marginRight: "120px"}}>
+              <label htmlFor="workingAs">Working As:</label>
               <input
-                type="file"
-                name="signPhoto"
-                style={{ display: "none" }}
-                onChange={(e) => handleFileInputChange(e, "signPhoto")}
-                ref={signPhotoInputRef}
+                type="text"
+                name="workingAs"
+                value={formData.workingAs}
+                onChange={(e) => handleChange(e, "workingAs")}
+                placeholder="e.g. Assistant Professor/H.O.D etc."
+                style={{width: "280px"}}
               />
-              <div className="square-box" onClick={() => handleFileInputClick(signPhotoInputRef)}>
-                {formData.signPhoto ? (
-                  <img src={formData.signPhoto} alt="Sign Photo" />
-                ) : (
-                  <span>Add Sign Photo</span>
-                )}
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="column">
+              <label htmlFor="signPhoto">Digital Signature</label>
+              <div
+                style={{
+                  border: "1px solid #ccc",
+                  padding: "10px",
+                  maxWidth: "400px",
+                }}
+              >
+                <SignatureCanvas
+                  ref={signatureCanvas}
+                  penColor="black"
+                  canvasProps={{
+                    width: 400,
+                    height: 200,
+                    className: "signature-canvas",
+                    onMouseDown: handleBeginDrawing,
+                  }}
+                />
+                <button onClick={clearSignature}>Clear Signature</button>
               </div>
             </div>
           </div>
 
-          <button className="psubmitbtn" type="submit">
+          <br />
+          <button onClick={handleSubmit} disabled={isSignatureEmpty} className="psubmitbtn">
             Submit
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

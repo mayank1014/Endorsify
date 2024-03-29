@@ -216,6 +216,8 @@ router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
 })
 
 router.post("/studentrequest", async (req, res) => {  
+  console.log(req.body)
+
   try {
     const professor = await Professor.findOne({ _id: req.body.professorId }).exec()
     const student = await Student.findOne({ _id: req.body.studentId }).exec()

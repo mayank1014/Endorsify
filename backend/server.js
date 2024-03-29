@@ -186,12 +186,6 @@ app.use(express.json());
 // app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({ extended: false }));
 
-/* ------------------- */
-// const Docxtemplater = require("docxtemplater");
-// const fs = require("fs");
-// const path = require("path");
-/* ------------------- */
-
 const University = require("./models/universitySchema");
 // const pythonPath = '/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12';
 
@@ -206,9 +200,9 @@ app.use("/api/dummy", (req, res) => {
 
     const pythonScriptPath = "recLetter.py";
 
-    // Define the JSON object to pass
     const jsonObject = {
       ...req.body,
+      "uniName" : university.name,
       "docxFile" : university.docxFile,
     }
 

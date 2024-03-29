@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DefaultLayout from "../components/DefaultLayout";
 import axios from "axios";
 import { message } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -32,7 +31,7 @@ const StudentApplyLOR = () => {
     middleName: "",
     lastName: "",
     purposeOfTheLetter: "",
-    targettedInstitution: "",
+    targetedInstitution: "",
     classAttended: "",
     schoolYearAttended: "",
     highSchoolYearAttended: "",
@@ -100,8 +99,11 @@ const StudentApplyLOR = () => {
     try {
       formData["studentId"] = student._id;
       formData["professorId"] = location.state._id;
-      formData["pronoum"] = student.gender;
+      formData["pronoun"] = student.gender;
       formData["teachersName"] = location.state.name;
+      formData["professorEmail"] = location.state.email;
+      formData["workingAs"] = location.state.workingAs;
+      formData["signature"] = location.state.signPhoto;
       formData["uniId"] = location.state.universityId;
 
       axios.post(
@@ -189,24 +191,24 @@ const StudentApplyLOR = () => {
                   required
                 >
                   <option value="">Select</option>
-                  <option value="summer_program">Summer Program</option>
-                  <option value="college">College</option>
-                  <option value="university">University</option>
-                  <option value="scholarship_program">
+                  <option value="Summer Program">Summer Program</option>
+                  <option value="College">College</option>
+                  <option value="University">University</option>
+                  <option value="Scholarship Program">
                     Scholarship Program
                   </option>
                 </select>
               </div>
               <div className="form-group mb-4">
-                <label htmlFor="targettedInstitution" className="mb-2">
+                <label htmlFor="targetedInstitution" className="mb-2">
                   Targeted Institution
                 </label>
                 <input
-                  id="targettedInstitution"
-                  name="targettedInstitution"
+                  id="targetedInstitution"
+                  name="targetedInstitution"
                   type="text"
                   className="form-control"
-                  value={formData.targettedInstitution}
+                  value={formData.targetedInstitution}
                   onChange={handleInputChange}
                   placeholder="Enter Targeted Institution"
                   required
@@ -270,13 +272,13 @@ const StudentApplyLOR = () => {
                   required
                 >
                   <option value="">Select</option>
-                  <option value="student_of_the_year">
+                  <option value="Student of the year">
                     Student of the year
                   </option>
-                  <option value="one_of_the_best_student">
+                  <option value="One of the best student">
                     One of the best student
                   </option>
-                  <option value="none">None</option>
+                  <option value="None">None</option>
                 </select>
               </div>
               <div className="form-group mb-4">
@@ -288,116 +290,116 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="altruistic"
-                        name="altruistic"
+                        id="Altruistic"
+                        name="Altruistic"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "altruistic"
+                          "Altruistic"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="altruistic" className="form-check-label">
+                      <label htmlFor="Altruistic" className="form-check-label">
                         Altruistic
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="assertive"
-                        name="assertive"
+                        id="Assertive"
+                        name="Assertive"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "assertive"
+                          "Assertive"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="assertive" className="form-check-label">
+                      <label htmlFor="Assertive" className="form-check-label">
                         Assertive
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="amiable"
-                        name="amiable"
+                        id="Amiable"
+                        name="Amiable"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("amiable")}
+                        checked={formData.positivePersonalityTraits.includes("Amiable")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="amiable" className="form-check-label">
+                      <label htmlFor="Amiable" className="form-check-label">
                         Amiable
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="articulate"
-                        name="articulate"
+                        id="Articulate"
+                        name="Articulate"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "articulate"
+                          "Articulate"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="articulate" className="form-check-label">
+                      <label htmlFor="Articulate" className="form-check-label">
                         Articulate
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="brilliant"
-                        name="brilliant"
+                        id="Brilliant"
+                        name="Brilliant"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "brilliant"
+                          "Brilliant"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="brilliant" className="form-check-label">
+                      <label htmlFor="Brilliant" className="form-check-label">
                         Brilliant
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="bright"
-                        name="bright"
+                        id="Bright"
+                        name="Bright"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("bright")}
+                        checked={formData.positivePersonalityTraits.includes("Bright")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="bright" className="form-check-label">
+                      <label htmlFor="Bright" className="form-check-label">
                         Bright
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="disciplined"
-                        name="disciplined"
+                        id="Disciplined"
+                        name="Disciplined"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "disciplined"
+                          "Disciplined"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="disciplined" className="form-check-label">
+                      <label htmlFor="Disciplined" className="form-check-label">
                         Disciplined
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="dependable"
-                        name="dependable"
+                        id="Dependable"
+                        name="Dependable"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "dependable"
+                          "Dependable"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="dependable" className="form-check-label">
+                      <label htmlFor="Dependable" className="form-check-label">
                         Dependable
                       </label>
                     </div>
@@ -406,31 +408,31 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="determined"
-                        name="determined"
+                        id="Determined"
+                        name="Determined"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "determined"
+                          "Determined"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="determined" className="form-check-label">
+                      <label htmlFor="Determined" className="form-check-label">
                         Determined
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="enthusiastic"
-                        name="enthusiastic"
+                        id="Enthusiastic"
+                        name="Enthusiastic"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "enthusiastic"
+                          "Enthusiastic"
                         )}
                         onChange={handleTraitChange}
                       />
                       <label
-                        htmlFor="enthusiastic"
+                        htmlFor="Enthusiastic"
                         className="form-check-label"
                       >
                         Enthusiastic
@@ -439,84 +441,84 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="flexible"
-                        name="flexible"
+                        id="Flexible"
+                        name="Flexible"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "flexible"
+                          "Flexible"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="flexible" className="form-check-label">
+                      <label htmlFor="Flexible" className="form-check-label">
                         Flexible
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="focused"
-                        name="focused"
+                        id="Focused"
+                        name="Focused"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("focused")}
+                        checked={formData.positivePersonalityTraits.includes("Focused")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="focused" className="form-check-label">
+                      <label htmlFor="Focused" className="form-check-label">
                         Focused
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="generous"
-                        name="generous"
+                        id="Generous"
+                        name="Generous"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "generous"
+                          "Generous"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="generous" className="form-check-label">
+                      <label htmlFor="Generous" className="form-check-label">
                         Generous
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="honest"
-                        name="honest"
+                        id="Honest"
+                        name="Honest"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("honest")}
+                        checked={formData.positivePersonalityTraits.includes("Honest")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="honest" className="form-check-label">
+                      <label htmlFor="Honest" className="form-check-label">
                         Honest
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="helpful"
-                        name="helpful"
+                        id="Helpful"
+                        name="Helpful"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("helpful")}
+                        checked={formData.positivePersonalityTraits.includes("Helpful")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="helpful" className="form-check-label">
+                      <label htmlFor="Helpful" className="form-check-label">
                         Helpful
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="intuitive"
-                        name="intuitive"
+                        id="Intuitive"
+                        name="Intuitive"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "intuitive"
+                          "Intuitive"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="intuitive" className="form-check-label">
+                      <label htmlFor="Intuitive" className="form-check-label">
                         Intuitive
                       </label>
                     </div>
@@ -525,112 +527,112 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="kind"
-                        name="kind"
+                        id="Kind"
+                        name="Kind"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("kind")}
+                        checked={formData.positivePersonalityTraits.includes("Kind")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="kind" className="form-check-label">
+                      <label htmlFor="Kind" className="form-check-label">
                         Kind
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="logical"
-                        name="logical"
+                        id="Logical"
+                        name="Logical"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("logical")}
+                        checked={formData.positivePersonalityTraits.includes("Logical")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="logical" className="form-check-label">
+                      <label htmlFor="Logical" className="form-check-label">
                         Logical
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="mature"
-                        name="mature"
+                        id="Mature"
+                        name="Mature"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("mature")}
+                        checked={formData.positivePersonalityTraits.includes("Mature")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="mature" className="form-check-label">
+                      <label htmlFor="Mature" className="form-check-label">
                         Mature
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="meticulous"
-                        name="meticulous"
+                        id="Meticulous"
+                        name="Meticulous"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "meticulous"
+                          "Meticulous"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="meticulous" className="form-check-label">
+                      <label htmlFor="Meticulous" className="form-check-label">
                         Meticulous
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="outspoken"
-                        name="outspoken"
+                        id="Outspoken"
+                        name="Outspoken"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "outspoken"
+                          "Outspoken"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="outspoken" className="form-check-label">
+                      <label htmlFor="Outspoken" className="form-check-label">
                         Outspoken
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="open"
-                        name="open"
+                        id="Open"
+                        name="Open"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("open")}
+                        checked={formData.positivePersonalityTraits.includes("Open")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="open" className="form-check-label">
+                      <label htmlFor="Open" className="form-check-label">
                         Open
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="resourceful"
-                        name="resourceful"
+                        id="Resourceful"
+                        name="Resourceful"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "resourceful"
+                          "Resourceful"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="resourceful" className="form-check-label">
+                      <label htmlFor="Resourceful" className="form-check-label">
                         Resourceful
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="respectful"
-                        name="respectful"
+                        id="Respectful"
+                        name="Respectful"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "respectful"
+                          "Respectful"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="respectful" className="form-check-label">
+                      <label htmlFor="Respectful" className="form-check-label">
                         Respectful
                       </label>
                     </div>
@@ -639,114 +641,114 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="positive"
-                        name="positive"
+                        id="Positive"
+                        name="Positive"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "positive"
+                          "Positive"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="positive" className="form-check-label">
+                      <label htmlFor="Positive" className="form-check-label">
                         Positive
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="self_aware"
-                        name="self_aware"
+                        id="Self aware"
+                        name="Self aware"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "self_aware"
+                          "Self aware"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="self_aware" className="form-check-label">
+                      <label htmlFor="Self aware" className="form-check-label">
                         Self aware
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="sucint"
-                        name="sucint"
+                        id="Succinct"
+                        name="Succinct"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("sucint")}
+                        checked={formData.positivePersonalityTraits.includes("Succinct")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="sucint" className="form-check-label">
-                        Sucint
+                      <label htmlFor="Succinct" className="form-check-label">
+                        Succinct
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="secure"
-                        name="secure"
+                        id="Secure"
+                        name="Secure"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("secure")}
+                        checked={formData.positivePersonalityTraits.includes("Secure")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="secure" className="form-check-label">
+                      <label htmlFor="Secure" className="form-check-label">
                         Secure
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="sympathetic"
-                        name="sympathetic"
+                        id="Sympathetic"
+                        name="Sympathetic"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "sympathetic"
+                          "Sympathetic"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="sympathetic" className="form-check-label">
+                      <label htmlFor="Sympathetic" className="form-check-label">
                         Sympathetic
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="spontaneous"
-                        name="spontaneous"
+                        id="Spontaneous"
+                        name="Spontaneous"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "spontaneous"
+                          "Spontaneous"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="spontaneous" className="form-check-label">
+                      <label htmlFor="Spontaneous" className="form-check-label">
                         Spontaneous
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="sweet"
-                        name="sweet"
+                        id="Sweet"
+                        name="Sweet"
                         className="form-check-input"
-                        checked={formData.positivePersonalityTraits.includes("sweet")}
+                        checked={formData.positivePersonalityTraits.includes("Sweet")}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="sweet" className="form-check-label">
+                      <label htmlFor="Sweet" className="form-check-label">
                         Sweet
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="thorough"
-                        name="thorough"
+                        id="Thorough"
+                        name="Thorough"
                         className="form-check-input"
                         checked={formData.positivePersonalityTraits.includes(
-                          "thorough"
+                          "Thorough"
                         )}
                         onChange={handleTraitChange}
                       />
-                      <label htmlFor="thorough" className="form-check-label">
+                      <label htmlFor="Thorough" className="form-check-label">
                         Thorough
                       </label>
                     </div>
@@ -762,16 +764,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="academic_integrity"
-                        name="academic_integrity"
+                        id="Academic Integrity"
+                        name="Academic Integrity"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "academic_integrity"
+                          "Academic Integrity"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="academic_integrity"
+                        htmlFor="Academic Integrity"
                         className="form-check-label"
                       >
                         Academic Integrity
@@ -780,16 +782,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="academic_brilliant"
-                        name="academic_brilliant"
+                        id="Academic Brilliant"
+                        name="Academic Brilliant"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "academic_brilliant"
+                          "Academic Brilliant"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="academic_brilliant"
+                        htmlFor="Academic Brilliant"
                         className="form-check-label"
                       >
                         Academic Brilliant
@@ -798,16 +800,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="disciplined_work_habits"
-                        name="disciplined_work_habits"
+                        id="Disciplined Work Habits"
+                        name="Disciplined Work Habits"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "disciplined_work_habits"
+                          "Disciplined Work Habits"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="disciplined_work_habits"
+                        htmlFor="Disciplined Work Habits"
                         className="form-check-label"
                       >
                         Disciplined Work Habits
@@ -818,16 +820,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="participation"
-                        name="participation"
+                        id="Participation"
+                        name="Participation"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "participation"
+                          "Participation"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="participation"
+                        htmlFor="Participation"
                         className="form-check-label"
                       >
                         Participation
@@ -836,16 +838,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="problem_solving_skills"
-                        name="problem_solving_skills"
+                        id="Problem Solving Skills"
+                        name="Problem Solving Skills"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "problem_solving_skills"
+                          "Problem Solving Skills"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="problem_solving_skills"
+                        htmlFor="Problem Solving Skills"
                         className="form-check-label"
                       >
                         Problem Solving Skills
@@ -854,16 +856,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="self_motivated"
-                        name="self_motivated"
+                        id="Self Motivated"
+                        name="Self Motivated"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "self_motivated"
+                          "Self Motivated"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="self_motivated"
+                        htmlFor="Self Motivated"
                         className="form-check-label"
                       >
                         Self Motivated
@@ -872,13 +874,13 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="teamwork"
-                        name="teamwork"
+                        id="Teamwork"
+                        name="Teamwork"
                         className="form-check-input"
-                        checked={formData.academicSkills.includes("teamwork")}
+                        checked={formData.academicSkills.includes("Teamwork")}
                         onChange={handleAcademicSkillChange}
                       />
-                      <label htmlFor="teamwork" className="form-check-label">
+                      <label htmlFor="Teamwork" className="form-check-label">
                         Teamwork
                       </label>
                     </div>
@@ -887,16 +889,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="leadership_skills"
-                        name="leadership_skills"
+                        id="Leadership Skills"
+                        name="Leadership Skills"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "leadership_skills"
+                          "Leadership Skills"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="leadership_skills"
+                        htmlFor="Leadership Skills"
                         className="form-check-label"
                       >
                         Leadership Skills
@@ -905,16 +907,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="hard_working"
-                        name="hard_working"
+                        id="Hard Working"
+                        name="Hard Working"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "hard_working"
+                          "Hard Working"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="hard_working"
+                        htmlFor="Hard Working"
                         className="form-check-label"
                       >
                         Hard Working
@@ -923,16 +925,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="adaptability_to_new_environment"
-                        name="adaptability_to_new_environment"
+                        id="Adaptability to new Environment"
+                        name="Adaptability to new Environment"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "adaptability_to_new_environment"
+                          "Adaptability to new Environment"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="adaptability_to_new_environment"
+                        htmlFor="Adaptability to new Environment"
                         className="form-check-label"
                       >
                         Adaptability to new Environment
@@ -941,13 +943,13 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="creative"
-                        name="creative"
+                        id="Creative"
+                        name="Creative"
                         className="form-check-input"
-                        checked={formData.academicSkills.includes("creative")}
+                        checked={formData.academicSkills.includes("Creative")}
                         onChange={handleAcademicSkillChange}
                       />
-                      <label htmlFor="creative" className="form-check-label">
+                      <label htmlFor="Creative" className="form-check-label">
                         Creative
                       </label>
                     </div>
@@ -956,16 +958,16 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="logical_thinking"
-                        name="logical_thinking"
+                        id="Logical Thinking"
+                        name="Logical Thinking"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "logical_thinking"
+                          "Logical Thinking"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="logical_thinking"
+                        htmlFor="Logical Thinking"
                         className="form-check-label"
                       >
                         Logical Thinking
@@ -974,34 +976,34 @@ const StudentApplyLOR = () => {
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="great_personality_skills"
-                        name="great_personality_skills"
+                        id="Great Presentation Skills"
+                        name="Great Presentation Skills"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "great_personality_skills"
+                          "Great Presentation Skills"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="great_personality_skills"
+                        htmlFor="Great Presentation Skills"
                         className="form-check-label"
                       >
-                        Great Personality Skills
+                        Great Presentation Skills
                       </label>
                     </div>
                     <div className="form-check">
                       <input
                         type="checkbox"
-                        id="high_achiever"
-                        name="high_achiever"
+                        id="High Achiever"
+                        name="High Achiever"
                         className="form-check-input"
                         checked={formData.academicSkills.includes(
-                          "high_achiever"
+                          "High Achiever"
                         )}
                         onChange={handleAcademicSkillChange}
                       />
                       <label
-                        htmlFor="high_achiever"
+                        htmlFor="High Achiever"
                         className="form-check-label"
                       >
                         High Achiever
