@@ -208,7 +208,6 @@ const ProfessorEdit = () => {
   };
 
   return (
-    <NavDefaultLayout>
       <div className="ProfessorBox">
         <div className="Professor">
           <div className="professor-profile-form">
@@ -348,7 +347,6 @@ const ProfessorEdit = () => {
           </div>
         </div>
       </div>
-    </NavDefaultLayout>
   );
 };
 
