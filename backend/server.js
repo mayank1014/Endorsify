@@ -3,6 +3,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const User=require('./models/userSchema')
 const Document = require('./models/documentSchema')
+const Professor = require('./models/professorSchema')
+const University = require("./models/universitySchema");
+const Student = require("./models/studentSchema");
+
 require("dotenv").config();
 
 const app = express();
@@ -102,112 +106,107 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(express.json());
 // app.use(cors({ origin: "*" }));
 app.use(express.urlencoded({ extended: false }));
-
-const University = require("./models/universitySchema");
-const Student = require("./models/studentSchema");
 // const pythonPath = '/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12';
 
-app.use("/api/dummy", (req, res) => {
+app.use("/api/dummy", async (req, res) => {
+  try {
+    const student = await Student.findOne({ _id: req.body.studentId }).exec();
+    const university = await University.findOne({ _id: req.body.uniId }).exec();
 
-  Student.findOne({_id : req.body.studentId}).exec().then(student=>{
+    if (!student || !university) {
+      throw new Error("Student or University not found");
+    }
 
-  University.findOne({ _id: req.body.uniId })
-    .exec()
-    .then(university => {
-      if (!university) {
-        throw new Error("University not found");
-      }
+    const { spawn } = require("child_process");
+    const pythonScriptPath = "recLetter.py";
 
-      const { spawn } = require("child_process");
-      const pythonScriptPath = "recLetter.py";
+    const jsonObject = {
+      ...req.body,
+      studentEmail: student.email,
+      universityEmail: university.email,
+      uniName: university.name,
+      docxFile: university.docxFile,
+    };
 
-      const jsonObject = {
-        ...req.body,
-        studentEmail : student.email,
-        universityEmail: university.email,
-        uniName: university.name,
-        docxFile: university.docxFile,
-      };
+    // Stringify the JSON object
+    const jsonString = JSON.stringify(jsonObject);
 
-      // Stringify the JSON object
-      const jsonString = JSON.stringify(jsonObject);
+    // Initialize a variable to store stdout data
+    let pythonOutput = "";
 
-      // Initialize a variable to store stdout data
-      let pythonOutput = "";
+    // Spawn a child process to run the Python script
+    const pythonProcess = spawn("python", [pythonScriptPath, jsonString]);
 
-      // Spawn a child process to run the Python script
-      const pythonProcess = spawn("python", [pythonScriptPath, jsonString]);
-
-      // Handle stdout data from the Python script
-      pythonProcess.stdout.on("data", data => {
-        pythonOutput += data.toString(); // Accumulate stdout data
-      });
-
-      // Handle stderr data from the Python script
-      pythonProcess.stderr.on("data", data => {
-        console.error(`stderr: ${data}`);
-      });
-
-      // Handle completion of the Python script
-      pythonProcess.on("close", code => {
-        console.log(`Python script process exited with code ${code}`);
-        try {
-          // Extract the URL from the stdout data
-          const url = pythonOutput.trim(); // Remove leading/trailing whitespace
-          console.log(url);
-
-          const newDocument = new Document({
-            filename: (jsonObject.firstName + " " + jsonObject.middleName + " " + jsonObject.lastName),
-            uploadDate: new Date(),
-            docxFile: url,
-            studentEmail: jsonObject.studentEmail,
-            universityEmail: jsonObject.universityEmail,
-            professorEmail: jsonObject.professorEmail,
-          });
-
-          newDocument.save()
-            .then(savedDocument => {
-              console.log("Document saved:", savedDocument);
-            })
-            .catch(error => {
-              console.error("Error saving document:", error);
-              res.status(500).json({ error: "Error saving document" });
-            });
-        } catch (error) {
-          console.error("Error extracting URL:", error);
-          res.status(500).send("Error extracting URL");
-        }
-      });
-    })
-    .catch(error => {
-      console.error("Error fetching university:", error);
-      res.status(500).json({ error: "Error fetching university" });
+    // Handle stdout data from the Python script
+    pythonProcess.stdout.on("data", (data) => {
+      pythonOutput += data.toString(); // Accumulate stdout data
     });
-  })
+
+    // Handle stderr data from the Python script
+    pythonProcess.stderr.on("data", (data) => {
+      console.error(`stderr: ${data}`);
+    });
+
+    // Handle completion of the Python script
+    pythonProcess.on("close", async (code) => {
+      console.log(`Python script process exited with code ${code}`);
+      try {
+        // Extract the URL from the stdout data
+        const url = pythonOutput.trim(); // Remove leading/trailing whitespace
+        console.log(url);
+
+        const newDocument = new Document({
+          filename: jsonObject.firstName + " " + jsonObject.middleName + " " + jsonObject.lastName,
+          uploadDate: new Date(),
+          docxFile: url,
+          studentEmail: jsonObject.studentEmail,
+          universityEmail: jsonObject.universityEmail,
+          professorEmail: jsonObject.professorEmail,
+        });
+
+        await newDocument.save();
+
+        const professorId = jsonObject.professorId;
+        const studentId = jsonObject.studentId;
+
+        const professor = await Professor.findOne({ _id: professorId }).exec();
+        if (!professor) {
+          console.log("Not Found p")
+        }
+        const studentIndex = professor.students.findIndex((student) => student.studentId === studentId);
+          if (studentIndex === -1) {
+            console.log("Student not found in professor's students");
+          }
+          professor.students[studentIndex].docx = url;
+          await professor.save(); 
+
+          const student = await Student.findOne({ _id: studentId }).exec();
+          if (!student) {
+            console.log("Not Found Student")
+          }
+          const professorIndex = student.teachers.findIndex((teacher) => teacher.professorId === professorId);
+            if (professorIndex === -1) {
+              console.log("Professor not found in student's professors");
+            }
+            student.teachers[professorIndex].docx = url;
+            console.log(student)
+            await student.save(); 
+
+      } catch (error) {
+        console.error("Error handling Python script output:", error);
+      }
+    });
+  } catch (error) {
+    console.error("Error processing request:", error);
+    res.status(500).json({ error: "Error processing request" });
+  }
   res.send("LOR Generated Successfully");
 });
-
-// app.get("/download/docx", (req, res) => {
-//   try {
-//     // Specify the path to your existing DOCX file
-//     const filePath = path.join(__dirname, 'Template.docx'); // Replace 'sample.docx' with your actual filename
-
-//     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-//     res.setHeader('Content-Disposition', 'attachment; filename=sample.docx'); // Or use the original filename if desired
-
-//     // Send the existing DOCX file content
-//     res.sendFile(filePath);
-//   } catch (error) {
-//     console.error('Error serving DOCX file:', error);
-//     res.status(500).send('Error downloading DOCX file');
-//   }
-// });
 
 app.use("/api/users/", userRouter);
 app.use("/api/universities/", universityRouter);
 app.use("/api/professors/", professorRouter);
 app.use("/api/students/", studentRouter);
 app.use("/api/documents/", documentRouter);
-
 
 app.listen(port, () => console.log(`Node JS server started on port ${port}`));

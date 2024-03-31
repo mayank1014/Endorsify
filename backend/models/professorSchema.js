@@ -18,6 +18,7 @@ const professorSchema = new mongoose.Schema({
     {
       studentId: { type: String, required: true },
       lorStatus: { type: String, required: true },
+      docx: {type: String},
       studentData: {},
     },
   ],
