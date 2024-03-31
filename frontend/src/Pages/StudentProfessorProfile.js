@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Card, Row, Col, Tag, Button } from "antd";
-import { useParams, Link } from "react-router-dom";
-import DefaultLayout from "../components/DefaultLayout";
+import { useParams, useLocation } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { useNavigate } from "react-router-dom";
 
 const StudentProfessorProfile = () => {
   const { id } = useParams();
   const [professor, setProfessor] = useState({});
-  const navigate = useNavigate()
+  const [lorStatus, setLorStatus] = useState(""); 
+  const [documentUrl, setUrl] = useState(""); 
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     axios
@@ -22,17 +24,34 @@ const StudentProfessorProfile = () => {
       });
   }, [id]); 
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/students/getlor/${location.state.studentId}/${location.state.professorId}`)
+      .then((response) => {
+        setLorStatus(response.data.lorStatus);
+        setUrl(response.data.docx);
+      })
+      .catch((error) => {
+        console.error("Error fetching LOR status:", error);
+      });
+  }, [location.state.studentId, location.state.professorId]);
+
   const formatPortfolioURL = (url) => {
     if (url && (url.startsWith("http://") || url.startsWith("https://"))) {
       return url;
     } else {
-      return url ? `http://${url}` : ""; // Returning an empty string if url is undefined or null
+      return url ? `http://${url}` : "";
     }
   };  
 
   const handleChange = () => {
-    navigate("/student/apply", {state: professor})
-  }
+    navigate("/student/apply", { state: professor });
+  };
+
+  const handleView = () => {
+    console.log(documentUrl)
+    navigate("/viewdocx", { state: { documentUrl } }); // Corrected the function name
+  };
 
   const styles = {
     professorProfile: {
@@ -45,11 +64,11 @@ const StudentProfessorProfile = () => {
       transition: "box-shadow 0.3s ease",
     },
     profilePic: {
-      width: "150px", // Adjust the size of the profile picture here
-      height: "150px", // Adjust the size of the profile picture here
-      borderRadius: "50%", // Make the profile picture rounded
-      margin: "0 auto", // Center the profile picture
-      display: "block", // Ensure the profile picture is displayed as a block element
+      width: "150px",
+      height: "150px",
+      borderRadius: "50%",
+      margin: "0 auto",
+      display: "block",
       marginTop: "20px",
     },
     descriptionTitle: {
@@ -99,9 +118,17 @@ const StudentProfessorProfile = () => {
           </Row>
         )}
 
-        <div style={styles.applyButton}>
-            <Button type="primary" onClick={handleChange}>Apply for LOR</Button>
-        </div>
+        {lorStatus === "pending" && (
+          <div style={styles.applyButton}>
+              <Button type="primary" onClick={handleChange}>Apply for LOR</Button>
+          </div>
+        )} 
+
+        {lorStatus === "accepted" && (
+          <div style={styles.applyButton}>
+              <Button type="primary" onClick={handleView}> View LOR</Button>
+          </div>
+        )}                 
       </div>
     </div>
   );

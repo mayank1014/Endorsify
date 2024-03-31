@@ -49,6 +49,17 @@ const ProfessorHomeStudentProfile = () => {
     }
   };
 
+  const view = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/professors/getlor/${location.state.professorId}/${id}`);
+      const documentUrl = response.data; 
+      navigate('/viewdocx', { state: { documentUrl } });
+    } catch (error) {
+      console.error("Error fetching document URL:", error);
+      // Handle error if needed
+    }
+  }
+
   const handleTranscriptClick = () => {
     setShowTranscriptModal(true);
     setTranscriptImage(student.transcriptPhoto);
@@ -148,11 +159,18 @@ const ProfessorHomeStudentProfile = () => {
               </Row>
             )}
 
-            <div style={{ marginTop: "20px", marginLeft: "570px" }}>
-              <Button type="primary" style={{ marginRight: '10px' }} onClick={() => handleChange("accepted")}>Accept</Button>
-              <Button type="primary" onClick={() => handleChange("rejected")}>Reject</Button>
+            {location.state.lorStatus === "pending" && (
+              <div style={{ marginTop: "20px", marginLeft: "570px" }}>
+                <Button type="primary" style={{ marginRight: '10px' }} onClick={() => handleChange("accepted")}>Accept</Button>
+                <Button type="primary" onClick={() => handleChange("rejected")}>Reject</Button>
+              </div>
+            )}
 
-            </div>
+            {location.state.lorStatus === "accepted" && (
+              <div style={{ marginTop: "20px", marginLeft: "570px" }}>
+                <Button type="primary" onClick={() => view()}>View LOR</Button>
+              </div>
+            )}
           </div>
       )}
       {/* Transcript Modal */}

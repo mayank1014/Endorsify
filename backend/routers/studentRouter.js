@@ -60,6 +60,23 @@ router.get("/getallstudents/:universityId", async (req, res) => {
   }
 });
 
+router.get("/getlor/:studentId/:professorId", async (req, res) => {
+  const studentId = req.params.studentId;
+  const professorId= req.params.professorId;
+  try {
+    const student = await Student.findOne({_id: studentId}).exec();
+    if (!student) {
+      return res.status(404).json({ message: "Professor not found" });
+    }
+    const professorObj = student.teachers.find(teacher => teacher.professorId === professorId);
+    const { docx, lorStatus } = professorObj;
+    res.json({ docx, lorStatus });
+  } catch (error) {
+    console.error("Error fetching student:", error);
+    return res.status(400).json(error);
+  }
+});
+
 router.post("/edit", async (req, res) => {
   try {
     var student = await Student.findOne({ email: req.body.email }).exec();

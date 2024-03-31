@@ -178,6 +178,7 @@ app.use("/api/dummy", async (req, res) => {
             console.log("Student not found in professor's students");
           }
           professor.students[studentIndex].docx = url;
+          professor.students[studentIndex].lorStatus = "accepted";
           await professor.save(); 
 
           const student = await Student.findOne({ _id: studentId }).exec();
@@ -189,6 +190,7 @@ app.use("/api/dummy", async (req, res) => {
               console.log("Professor not found in student's professors");
             }
             student.teachers[professorIndex].docx = url;
+            student.teachers[professorIndex].lorStatus = "accepted";
             console.log(student)
             await student.save(); 
 

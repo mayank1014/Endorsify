@@ -39,7 +39,7 @@ const StudentHome = () => {
   }}, [user]);
 
   const handleProfessorClick = (professorId) => {
-    navigate(`/student/professor/${professorId}`);
+    navigate(`/student/professor/${professorId}`, {state : {professorId : professorId, studentId : student._id}});
   };
 
   return (
