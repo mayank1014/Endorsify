@@ -30,6 +30,8 @@ import ProfessorStudentLorUpdate from './Pages/ProfessorStudentLorUpdate';
 import ForgotPassword from './Pages/ForgotPassword';
 import Professor from './Pages/Professor';
 import { useCookies } from 'react-cookie';
+import UniversityLOR from './Pages/UniversityLOR';
+import ViewDocs from './Pages/ViewDocs';
 
 function App() {
   const [cookies] = useCookies(['users']);
@@ -85,7 +87,9 @@ function App() {
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="subscription" element={<UniversitySubscription />} />
             <Route path="professors/:id" element={<UniversityProfessorProfile />} />
+            <Route path="lors" element={<UniversityLOR />} />
           </Route>
+          <Route path="viewdocx" element={<ViewDocs />} />
         </Routes>
       </BrowserRouter>
     </div>

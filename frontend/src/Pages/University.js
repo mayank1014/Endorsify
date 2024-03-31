@@ -188,7 +188,7 @@ import {
                 </li>
                 <li className="nav-item" style={{ marginLeft: "-10px" }}>
                   <Link
-                    to="lor"
+                    to="lors"
                     className="nav-link"
                     style={{
                       color: "#DCDCDA",

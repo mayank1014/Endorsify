@@ -93,7 +93,8 @@ app.get('/auth/google',
 const userRouter = require("./routers/userRouter");
 const universityRouter = require("./routers/universityRouter");
 const professorRouter = require("./routers/professorRouter");
-const StudentRouter = require("./routers/studentRouter");
+const studentRouter = require("./routers/studentRouter");
+const documentRouter = require("./routers/documentRouter");
 
 app.use(bodyParser.json({ limit: "50mb" }));
 
@@ -205,6 +206,8 @@ app.use("/api/dummy", (req, res) => {
 app.use("/api/users/", userRouter);
 app.use("/api/universities/", universityRouter);
 app.use("/api/professors/", professorRouter);
-app.use("/api/students/", StudentRouter);
+app.use("/api/students/", studentRouter);
+app.use("/api/documents/", documentRouter);
+
 
 app.listen(port, () => console.log(`Node JS server started on port ${port}`));
