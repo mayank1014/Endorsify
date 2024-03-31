@@ -99,8 +99,8 @@ const StudentApplyLOR = () => {
         formData
       )
       .then(() => {
-        // formData["studentId"] = location.state.studentId
-        // formData["professorId"] = location.state.professorId
+        formData["studentId"] = location.state.studentId
+        formData["professorId"] = location.state.professorId
         
         axios.post("http://localhost:8000/api/dummy", formData).then(() => {
           setTimeout(() => {

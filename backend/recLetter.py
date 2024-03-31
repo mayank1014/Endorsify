@@ -1,12 +1,14 @@
 from Listofthings import PronounsList, PositivePersonalityTraits, AcademicSkills, Phrase1, Phrase2, Phrase3, Phrase4, Phrase5, LinkingWords
 import sys
+import os
+import json
 import random
 import datetime
 from datetime import date
 import sys
 import json
+import cloudinary.uploader
 from docx import Document
-from docx2pdf import convert
 import requests 
 from io import BytesIO 
 from docx.shared import Inches
@@ -19,8 +21,6 @@ json_string = sys.argv[1]
 json_object = json.loads(json_string)
 
 # Access the JSON object's properties
-print("JSON object received by Python script:")
-
 for key, value in json_object.items():
     globals()[key] = value
     
@@ -204,15 +204,22 @@ doc.add_paragraph("( " + professorEmail + " )")
 ############################################################
 
 file_name_docx = (firstName + lastName + "-" + str(date.today().month) + "-" + str(date.today().day) + "-" + str(date.today().year) + ".docx")
-file_name_pdf = (firstName + lastName + "-" + str(date.today().month) + "-" + str(date.today().day) + "-" + str(date.today().year) + ".pdf")
 
 doc.save(file_name_docx)
 
-######################################
+# Set your Cloudinary credentials
+cloudinary.config(
+    cloud_name="dvkcyhb6q",
+    api_key="612183198313841",
+    api_secret="I7N0gitYtpNXxf85G9oT9gPe_O4"
+)
 
-convert(file_name_docx, file_name_pdf)
+# Upload the document to Cloudinary
+docx_upload_result = cloudinary.uploader.upload(file_name_docx, resource_type="raw")
+docx_url = docx_upload_result["url"]
 
-######################################
+# Remove the local DOCX file
+os.remove(file_name_docx)
 
-print(file_name_docx + " created sucessfully")
-print(file_name_pdf + " created sucessfully")
+# Send the URL in the response
+print(docx_url)

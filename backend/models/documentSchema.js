@@ -4,10 +4,10 @@ const { GridFSBucket } = require('mongodb');
 const documentSchema = new mongoose.Schema({
     filename: String,
     uploadDate: Date,
-    docxFile: { data: Buffer, contentType: String },
-    studentEmail: { type: String, ref: 'User', required: true },
-    universityEmail: { type: String, ref: 'User', required: true },
-    teacherEmail: { type: String, ref: 'User', required: true },
+    docxFile: String,
+    studentEmail: { type: String, required: true },
+    universityEmail: { type: String, required: true },
+    professorEmail: { type: String, required: true },
   });
 
 // documentSchema.virtual('docxFile').get(function () {

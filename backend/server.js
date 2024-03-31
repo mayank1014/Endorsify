@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const User=require('./models/userSchema')
+const Document = require('./models/documentSchema')
 require("dotenv").config();
 
 const app = express();
@@ -107,44 +108,81 @@ const Student = require("./models/studentSchema");
 
 app.use("/api/dummy", (req, res) => {
 
+  Student.findOne({_id : req.body.studentId}).exec().then(student=>{
+
   University.findOne({ _id: req.body.uniId })
-  .exec()
-  .then(university => {
-    const { spawn } = require("child_process");
+    .exec()
+    .then(university => {
+      if (!university) {
+        throw new Error("University not found");
+      }
 
-    const pythonScriptPath = "recLetter.py";
+      const { spawn } = require("child_process");
+      const pythonScriptPath = "recLetter.py";
 
-    const jsonObject = {
-      ...req.body,
-      "uniName" : university.name,
-      "docxFile" : university.docxFile,
-    }
+      const jsonObject = {
+        ...req.body,
+        studentEmail : student.email,
+        universityEmail: university.email,
+        uniName: university.name,
+        docxFile: university.docxFile,
+      };
 
-    // Stringify the JSON object
-    const jsonString = JSON.stringify(jsonObject);
+      // Stringify the JSON object
+      const jsonString = JSON.stringify(jsonObject);
 
-    // Spawn a child process to run the Python script
-    const pythonProcess = spawn("python", [pythonScriptPath, jsonString]);
+      // Initialize a variable to store stdout data
+      let pythonOutput = "";
 
-    // Handle stdout data from the Python script
-    pythonProcess.stdout.on("data", (data) => {
-      console.log(`stdout: ${data}`);
-    });
+      // Spawn a child process to run the Python script
+      const pythonProcess = spawn("python", [pythonScriptPath, jsonString]);
 
-    // Handle stderr data from the Python script
-    pythonProcess.stderr.on("data", (data) => {
-      console.error(`stderr: ${data}`);
-    });
+      // Handle stdout data from the Python script
+      pythonProcess.stdout.on("data", data => {
+        pythonOutput += data.toString(); // Accumulate stdout data
+      });
 
-    // Handle completion of the Python script
-    pythonProcess.on("close", (code) => {
-      console.log(`Python script process exited with code ${code}`);
+      // Handle stderr data from the Python script
+      pythonProcess.stderr.on("data", data => {
+        console.error(`stderr: ${data}`);
+      });
+
+      // Handle completion of the Python script
+      pythonProcess.on("close", code => {
+        console.log(`Python script process exited with code ${code}`);
+        try {
+          // Extract the URL from the stdout data
+          const url = pythonOutput.trim(); // Remove leading/trailing whitespace
+          console.log(url);
+
+          const newDocument = new Document({
+            filename: (jsonObject.firstName + " " + jsonObject.middleName + " " + jsonObject.lastName),
+            uploadDate: new Date(),
+            docxFile: url,
+            studentEmail: jsonObject.studentEmail,
+            universityEmail: jsonObject.universityEmail,
+            professorEmail: jsonObject.professorEmail,
+          });
+
+          newDocument.save()
+            .then(savedDocument => {
+              console.log("Document saved:", savedDocument);
+            })
+            .catch(error => {
+              console.error("Error saving document:", error);
+              res.status(500).json({ error: "Error saving document" });
+            });
+        } catch (error) {
+          console.error("Error extracting URL:", error);
+          res.status(500).send("Error extracting URL");
+        }
+      });
+    })
+    .catch(error => {
+      console.error("Error fetching university:", error);
+      res.status(500).json({ error: "Error fetching university" });
     });
   })
-  .catch(error => {
-    console.error("Error fetching university:", error);
-  });
-
   res.send("LOR Generated Successfully");
 });
 
