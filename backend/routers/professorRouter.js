@@ -87,6 +87,7 @@ router.get("/getallprofessors", async (req, res) => {
 });
 
 router.get("/getStudentsByProfessor/:professorId/:lorstatus", async (req, res) => {
+  console.log(req.params.lorstatus);
   const professorId = req.params.professorId;
   const lorstatus=req.params.lorstatus;
   try {
@@ -224,10 +225,11 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
+router.get("/updatestatus/:professorId/:studentId/:lorstatus/:text", async(req,res)=>{
   const professorId = req.params.professorId;
   const studentId = req.params.studentId;
   const lorstatus =req.params.lorstatus;
+  const reason=req.params.text;
   try{
     const professor = await Professor.findOne({_id: professorId}).exec();
     if (!professor) {
@@ -235,6 +237,7 @@ router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
     }
     const studentObj = professor.students.find(student => student.studentId === studentId);
     studentObj.lorStatus=lorstatus;
+    studentObj.rejectReason=reason;
     await professor.save();
 
     Student.findOne({ _id: req.params.studentId })
@@ -243,14 +246,13 @@ router.get("/updatestatus/:professorId/:studentId/:lorstatus", async(req,res)=>{
       for (let i = 0; i < student.teachers.length; i++) {
         if (student.teachers[i].professorId == professorId) {
           student.teachers[i].lorStatus = lorstatus;
+          student.teachers[i].rejectReason=reason;
           break;
         }
       }
-
       student.save();
+      res.send("FeedBack Sent Succesfully");
     })
-
-    return res.json({ error: 0});
   }catch{
     console.log(error)
     return res.status(400).json(error);

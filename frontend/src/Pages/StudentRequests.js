@@ -9,6 +9,7 @@ const StudentRequests = () => {
         axios.get(`http://localhost:8000/api/students/getallrequests/${user.email}`)
             .then(response => {
                 setRequests(response.data);
+                console.log(response.data)
             })
             .catch(error => {
                 console.log(error);
@@ -24,8 +25,11 @@ const StudentRequests = () => {
                         <p style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px" }}>{request.professorData.name}</p>
                         <p style={{ fontSize: "16px", marginBottom: "5px" }}>Email: {request.professorData.email}</p>
                         <p style={{ fontSize: "16px", marginBottom: "0" }}>Status: {request.lorStatus}</p>
-                        {request.status === 'accepted' && (
+                        {request.lorStatus === 'accepted' && (
                             <button className="view-lor-btn" style={{ marginTop: "10px" }}>View LOR</button>
+                        )}
+                         {request.lorStatus === 'rejected' && (
+                           <p style={{ fontSize: "16px", marginBottom: "5px" }}> Reason:{request.rejectReason}</p>
                         )}
                     </div>
                 </div>

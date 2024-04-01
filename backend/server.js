@@ -135,7 +135,7 @@ app.use("/api/dummy", async (req, res) => {
     let pythonOutput = "";
 
     // Spawn a child process to run the Python script
-    const pythonProcess = spawn("python", [pythonScriptPath, jsonString]);
+    const pythonProcess = spawn("/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12", [pythonScriptPath, jsonString]);
 
     // Handle stdout data from the Python script
     pythonProcess.stdout.on("data", (data) => {

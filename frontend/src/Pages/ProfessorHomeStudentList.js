@@ -19,6 +19,7 @@ const ProfessorHomeStudentList = () => {
       })
       .then((studentsResponse) => {
         setAllStudents(studentsResponse.data);
+        console.log(location.state.lorStatus);
       })
       .catch((error) => {
         console.error("Error fetching students: ", error);

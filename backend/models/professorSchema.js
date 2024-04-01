@@ -18,6 +18,7 @@ const professorSchema = new mongoose.Schema({
     {
       studentId: { type: String, required: true },
       lorStatus: { type: String, required: true },
+      rejectReason:{ type: String, default:""},
       docx: {type: String},
       studentData: {},
     },

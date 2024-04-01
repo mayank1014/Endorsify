@@ -83,7 +83,6 @@ function App() {
             <Route path="students" element={<UniversityStudents />} />
             <Route path="professors" element={<UniversityProfessors />} />
             <Route path="edit" element={<UniversityEdit />} />
-            {/* <Route path="lor" element={<StudentApplyLOR />} /> */}
             <Route path="changepassword" element={<ChangePassword />} />
             <Route path="subscription" element={<UniversitySubscription />} />
             <Route path="professors/:id" element={<UniversityProfessorProfile />} />
