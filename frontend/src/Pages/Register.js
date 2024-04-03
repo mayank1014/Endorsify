@@ -7,19 +7,19 @@
 //     const location = useLocation();
 //     const navigate = useNavigate();
 
-//     const handleChange = (arg) => {
-//         if(arg === 'student') {
-//           console.log(location.state);
-//             navigate('/register/student', { state : location.state })
-//         }
-//         else if(arg === 'professor') {
-//           console.log(location.state);
-//             navigate('/register/professor', { state : location.state })
-//         }
-//         else if(arg === 'university') {
-//           console.log(location.state);
-//             navigate('/register/university', { state : location.state })
-//         }
+    // const handleChange = (arg) => {
+    //     if(arg === 'student') {
+    //       console.log(location.state);
+    //         navigate('/register/student', { state : location.state })
+    //     }
+    //     else if(arg === 'professor') {
+    //       console.log(location.state);
+    //         navigate('/register/professor', { state : location.state })
+    //     }
+    //     else if(arg === 'university') {
+    //       console.log(location.state);
+    //         navigate('/register/university', { state : location.state })
+    //     }
 //     }
 
 //   return (
@@ -55,24 +55,29 @@ import { useLocation, useNavigate } from "react-router-dom";
 import '../css/Register.css'; 
 
 const Register = () => {
+
     const location = useLocation();
     const navigate = useNavigate();
 
     const handleChange = (arg) => {
         const searchParams = new URLSearchParams(location.search);
         const email = searchParams.get('email');
-        console.log(email);
-        if(arg === 'student') {
-          navigate('/register/student', { state: { email } });
+        // console.log(email);
+        // console.log(location.state.email);
+        if(!location.state){
+          location.state=email;
         }
-        else if(arg === 'professor') {
-          navigate('/register/professor', { state: { email } });
-        }
-        else if(arg === 'university') {
-          navigate('/register/university', { state: { email } });
-        }
-    }
-
+        console.log(location.state);
+          if(arg === 'student') {
+              navigate('/register/student', { state : location.state })
+          }
+          else if(arg === 'professor') {
+              navigate('/register/professor', { state : location.state })
+          }
+          else if(arg === 'university') {
+              navigate('/register/university', { state : location.state })
+          }
+  }
   return (
     <div className="home-page">
       <div className="welcome-section">

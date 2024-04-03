@@ -73,6 +73,7 @@ function ChangePassword({ match }) {
               name="password"
               label="New Password"
               rules={[{ required: true }]}
+              
             >
               <Input />
             </Form.Item>

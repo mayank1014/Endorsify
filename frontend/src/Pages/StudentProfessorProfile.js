@@ -104,7 +104,7 @@ const StudentProfessorProfile = () => {
                   <h2 style={{ marginBottom: "20px" }}>{professor.name}</h2>
                   <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Email : </strong> {professor.email}</p>
                   <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Qualification : </strong> {professor.qualification}</p>
-                  <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Experience : </strong> {professor.experience} years</p>
+                  <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Experience : </strong> {professor.experience}</p>
                   <p style={styles.descriptionText}><strong style={styles.descriptionTitle}>Portfolio URL : </strong> <a href={formatPortfolioURL(professor.portfolioURL)}>{professor.portfolioURL}</a></p>
                   <div>
                     <strong style={{ ...styles.descriptionTitle, marginBottom: "8px" }}>Expertise : </strong>
@@ -118,7 +118,10 @@ const StudentProfessorProfile = () => {
           </Row>
         )}
 
-        {lorStatus === "pending" && (
+<div style={styles.applyButton}>
+              <Button type="primary" onClick={handleChange}>Apply for LOR</Button>
+          </div>
+        {/* {lorStatus === "pending" && (
           <div style={styles.applyButton}>
               <Button type="primary" onClick={handleChange}>Apply for LOR</Button>
           </div>
@@ -128,7 +131,7 @@ const StudentProfessorProfile = () => {
           <div style={styles.applyButton}>
               <Button type="primary" onClick={handleView}> View LOR</Button>
           </div>
-        )}                 
+        )}                  */}
       </div>
     </div>
   );

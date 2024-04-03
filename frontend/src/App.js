@@ -34,12 +34,12 @@ import UniversityLOR from './Pages/UniversityLOR';
 import ViewDocs from './Pages/ViewDocs';
 
 function App() {
-  const [cookies] = useCookies(['users']);
-  if (!localStorage.getItem("user")) {
-    localStorage.setItem("user", JSON.stringify(cookies.users));
-  }
-  const isAuthenticatedUser = (localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com") ;
-  console.log("is"+isAuthenticatedUser);
+  // const [cookies] = useCookies(['users']);
+  // if (!localStorage.getItem("user")) {
+  //   localStorage.setItem("user", JSON.stringify(cookies.users));
+  // }
+  // const isAuthenticatedUser = (localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).username !== "admin@gmail.com") ;
+  // console.log("is"+isAuthenticatedUser);
   return (
     <div className="App">
       <BrowserRouter>

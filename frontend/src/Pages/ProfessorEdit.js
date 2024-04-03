@@ -298,6 +298,36 @@ const ProfessorEdit = () => {
                 />
               </div>
             </div>
+            {/* <div className="form-row"> */}
+            <div className="column">
+              <label htmlFor="expertise">Subject Expertise:</label>
+              <div className="alignment">
+                {professor.expertise.map((field, index) => (
+                  <div key={index} className="form-demo">
+                    <input
+                      type="text"
+                      name={`expertise[${index}]`}
+                      value={field}
+                      onChange={(e) => handleExpertiseChange(index, e)}
+                      required
+                      style={{ width: '170px' }} // Adjust the width as needed
+                    />
+                    {index > 0 && (
+                      <button
+                        className="btn3"
+                        onClick={() => handleRemoveExpertiseField(index)}
+                      >
+                        <FontAwesomeIcon icon={faMinus} />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button className="btn3" onClick={handleAddExpertiseField}>
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+
+            </div>
 
             <div className="column">
               <label htmlFor="signPhoto">Digital Signature</label>

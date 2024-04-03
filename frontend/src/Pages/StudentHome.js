@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 const StudentHome = () => {
   const [cookies] = useCookies(['users']);
   const navigate = useNavigate();
+  console.log(localStorage.getItem("user"));
   if (!localStorage.getItem("user")) {
     localStorage.setItem("user", JSON.stringify(cookies.users));
   }

@@ -140,14 +140,21 @@ const ProfessorRegister = () => {
           .then((response) => {
             formData["signPhoto"] = response.data.url;
 
-            const user = {
-              email: location.state.email,
-              password: location.state.password,
-              confirmPassword: location.state.confirmPassword,
-              role: "professor",
-            };
+            const user = {};
+            if (typeof location.state === "string") {
+              console.log(location.state);
+              // If location.state is a string (presumably an email ID)
+              user.email = location.state;
+              user.role = "professor";
+            } else if (typeof location.state === "object") {
+              // If location.state is an object
+              user.email = location.state.email;
+              user.password = location.state.password;
+              user.confirmPassword = location.state.confirmPassword;
+              user.role = "professor";
+            }
 
-            formData.email = location.state.email;
+            formData.email = user.email;
 
             for (var i = 0; i < allUniversities.length; i++) {
               if (allUniversities[i].name === formData.university) {
